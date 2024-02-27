@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这个主要是登录页面后端项目，包括一些基础的搭建工作一、项目分层 这个就是最常见的，这张图来自于阿里规范  终端显示层：Vue  开放接口：给其他公司调用  请求处理层：web层    123456789101112131415163. 【参考】分层领域模型规约：• DO（Data Object）：此对象与数据库表结构一一对应，通过 DAO 层向上传输数据源对象。这个do对应的就是项目中的model">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dlyk-part2-front-2">
+<meta property="og:url" content="http://example.com/2024/02/21/dlyk-part2-front-2/index.html">
+<meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="这个主要是登录页面后端项目，包括一些基础的搭建工作一、项目分层 这个就是最常见的，这张图来自于阿里规范  终端显示层：Vue  开放接口：给其他公司调用  请求处理层：web层    123456789101112131415163. 【参考】分层领域模型规约：• DO（Data Object）：此对象与数据库表结构一一对应，通过 DAO 层向上传输数据源对象。这个do对应的就是项目中的model">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222121622494.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222130745201.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222130603666.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222132938591.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222133207911.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222133807376.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222134110834.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222134241729.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222134902977.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222135129842.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222135527190.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222135713974.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222135807457.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222140250334.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222140327393.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222142026445.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222142430458.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222152059742.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222152137062.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222152456724.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222152604580.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222152626036.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222154805491.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222203338737.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222203608653.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222203942321.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222204459230.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222205748168.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222210454177.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222211409570.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222212744356.png">
+<meta property="og:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222213354364.png">
+<meta property="article:published_time" content="2024-02-21T06:51:41.000Z">
+<meta property="article:modified_time" content="2024-02-23T11:31:28.483Z">
+<meta property="article:author" content="lolo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog_images/dlyk-part2-front-2/image-20240222121622494.png">
+
+
+<link rel="canonical" href="http://example.com/2024/02/21/dlyk-part2-front-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/02/21/dlyk-part2-front-2/","path":"2024/02/21/dlyk-part2-front-2/","title":"dlyk-part2-front-2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>dlyk-part2-front-2 | Loloooo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Loloooo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%99%E4%B8%AA%E4%B8%BB%E8%A6%81%E6%98%AF%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%EF%BC%8C%E5%8C%85%E6%8B%AC%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9A%84%E6%90%AD%E5%BB%BA%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">这个主要是登录页面后端项目，包括一些基础的搭建工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">一、项目分层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#step1%EF%BC%9A%E6%8C%89%E7%85%A7%E4%B8%8A%E5%9B%BE%E6%9E%84%E5%BB%BA%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">step1：按照上图构建文件目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#step2%EF%BC%9A%E5%90%8E%E7%AB%AF%E7%99%BB%E5%BD%95%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">step2：后端登录代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%88%9B%E5%BB%BAUserService%E5%B1%82"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">（1）创建UserService层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89extends-UserDetailsService"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">（2）extends UserDetailsService</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%86%99%EF%BC%882%EF%BC%89%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">（3）写（2）接口的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E6%94%B9%E5%86%99return%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">（4）改写return的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.0.6.1.</span> <span class="nav-text">1. 准备工作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%BC%96%E5%86%99%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.0.6.2.</span> <span class="nav-text">2. 编写实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E7%94%9F%E6%88%90jwt-%EF%BC%8C%E5%BF%BD%E7%95%A5%EF%BC%8C%E5%85%A8%E9%83%A8-JsonIgnore"><span class="nav-number">1.1.0.6.3.</span> <span class="nav-text">3.生成jwt ，忽略，全部+@JsonIgnore</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%AE%8C%E6%88%90-%E5%88%B0UserServiceImpl-java%E5%A4%84%EF%BC%8Creturn-tUser"><span class="nav-number">1.1.0.6.4.</span> <span class="nav-text">4.完成 到UserServiceImpl.java处，return tUser</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E5%86%99%E4%B8%80%E4%B8%AA%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">1.1.0.6.5.</span> <span class="nav-text">5.写一个配置类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E5%AE%8C%E6%88%90%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.0.6.6.</span> <span class="nav-text">6.完成最简单的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-%E7%94%A8Apifox%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F"><span class="nav-number">1.1.0.6.7.</span> <span class="nav-text">7.用Apifox验证是否成功</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9"><span class="nav-number">1.1.0.6.8.</span> <span class="nav-text">8. 一些错误需要修改</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#a-%E5%AF%86%E7%A0%81%E5%8A%A0%E5%AF%86%E4%BA%86%E3%80%82%E6%89%80%E4%BB%A5%E9%9C%80%E8%A6%81%E6%B3%A8%E5%85%A5%E4%B8%80%E4%B8%AA-SecurityConfig"><span class="nav-number">1.1.0.6.8.1.</span> <span class="nav-text">a.密码加密了。所以需要注入一个&#x2F;&#x2F;SecurityConfig</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#b-%E9%9C%80%E8%A6%81%E6%8E%92%E9%99%A4%E4%B8%80%E4%B8%8Blist%E4%B8%BA%E7%A9%BA%E7%9A%84%E9%97%AE%E9%A2%98-TUser-java"><span class="nav-number">1.1.0.6.8.2.</span> <span class="nav-text">b. 需要排除一下list为空的问题&#x2F;&#x2F;TUser.java</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-%E5%89%8D%E5%90%8E%E7%AB%AF%E8%81%94%E9%80%9A%E2%80%93-%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.0.6.9.</span> <span class="nav-text">9.前后端联通–&gt;解决跨域问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-axios%E8%AF%B7%E6%B1%82%E5%90%8E%E8%BF%94%E5%9B%9E%E7%9A%84%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.0.6.10.</span> <span class="nav-text">10.axios请求后返回的响应对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-%E4%BF%AE%E6%94%B9%E5%89%8D%E7%AB%AF%E6%8E%A5%E5%88%B0%E5%90%8E%E7%AB%AF%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E5%90%8E%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">11.修改前端接到后端返回数据后的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#a-%E5%88%9B%E5%BB%BA%E8%BF%94%E5%9B%9E%E7%9A%84util-%E5%9B%A0%E4%B8%BA%E5%90%8E%E7%BB%AD%E5%8F%AF%E8%83%BD%E5%BE%88%E5%A4%9A%E5%9C%B0%E6%96%B9%E9%83%BD%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.0.7.0.1.</span> <span class="nav-text">a.创建返回的util&#x2F;&#x2F;因为后续可能很多地方都需要使用</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#b-%E4%BF%AE%E6%94%B9%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E5%90%8E%E8%BF%94%E5%9B%9E%E7%9A%84%E6%B6%88%E6%81%AF"><span class="nav-number">1.1.0.7.0.2.</span> <span class="nav-text">b.修改登录成功后返回的消息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E5%90%8E%E8%B7%B3%E8%BD%AC%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%BB%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">12.登录成功后跳转系统的主页面</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#a-%E8%B7%B3%E8%BD%AC%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.1.0.8.1.</span> <span class="nav-text">a.跳转页面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#b-%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1"><span class="nav-number">1.1.0.8.2.</span> <span class="nav-text">b.添加路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#c-%E5%9C%A8%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1%E6%97%B6%E5%AF%BC%E5%85%A5%E8%B7%AF%E7%94%B1%EF%BC%9A"><span class="nav-number">1.1.0.8.3.</span> <span class="nav-text">c. 在使用路由时导入路由：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#d-%E5%9C%A8main-js%E4%B8%AD%E4%BD%BF%E7%94%A8%E8%B7%AF%E7%94%B1"><span class="nav-number">1.1.0.8.4.</span> <span class="nav-text">d.在main.js中使用路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#e-%E4%BD%BF%E7%94%A8%E6%A0%87%E7%AD%BE%E6%B8%B2%E6%9F%93%E8%B7%AF%E7%94%B1%E5%9C%B0%E5%9D%80%E6%89%80%E5%AF%B9%E5%BA%94%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6%EF%BC%9B"><span class="nav-number">1.1.0.8.5.</span> <span class="nav-text">e. 使用&lt;router-view&#x2F;&gt;标签渲染路由地址所对应的页面组件；</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lolo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/21/dlyk-part2-front-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="dlyk-part2-front-2 | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          dlyk-part2-front-2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-21 14:51:41" itemprop="dateCreated datePublished" datetime="2024-02-21T14:51:41+08:00">2024-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 19:31:28" itemprop="dateModified" datetime="2024-02-23T19:31:28+08:00">2024-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">Java项目</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/%E5%8A%A8%E5%8A%9B%E4%BA%91%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">动力云客</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="这个主要是登录页面后端项目，包括一些基础的搭建工作"><a href="#这个主要是登录页面后端项目，包括一些基础的搭建工作" class="headerlink" title="这个主要是登录页面后端项目，包括一些基础的搭建工作"></a>这个主要是登录页面后端项目，包括一些基础的搭建工作</h1><h2 id="一、项目分层"><a href="#一、项目分层" class="headerlink" title="一、项目分层"></a>一、项目分层</h2><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222121622494.png" alt="image-20240222121622494"></p>
+<p>这个就是最常见的，这张图来自于阿里规范</p>
+<ol>
+<li><p>终端显示层：Vue</p>
+</li>
+<li><p>开放接口：给其他公司调用</p>
+</li>
+<li><p>请求处理层：web层</p>
+</li>
+</ol>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222130745201.png" alt="image-20240222130745201"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">3. 【参考】分层领域模型规约：</span><br><span class="line">• DO（Data Object）：此对象与数据库表结构一一对应，通过 DAO 层向上传输数据源对象。</span><br><span class="line">这个do对应的就是项目中的model</span><br><span class="line"></span><br><span class="line">• DTO（Data Transfer Object）：数据传输对象，Service 或 Manager 向外传输的对象。</span><br><span class="line">相当于是service和manager层，但是在项目中没有使用</span><br><span class="line"></span><br><span class="line">• BO（Business Object）：业务对象，可以由 Service 层输出的封装业务逻辑的对象。</span><br><span class="line">没有使用</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">• Query：数据查询对象，各层接收上层的查询请求。注意超过 2 个参数的查询封装，禁止使用 Map 类来传输。</span><br><span class="line">controller -&gt;service-&gt;manager-&gt;DO 传参数，这个参数是用query来封装的</span><br><span class="line"></span><br><span class="line">• VO（View Object）：显示层对象，通常是 Web 向模板渲染引擎层传输的对象。</span><br><span class="line">等价于result的我们的R对象</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="step1：按照上图构建文件目录"><a href="#step1：按照上图构建文件目录" class="headerlink" title="step1：按照上图构建文件目录"></a>step1：按照上图构建文件目录</h4><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222130603666.png" alt="image-20240222130603666"></p>
+<p>在result里面加入封装的代码</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222132938591.png" alt="image-20240222132938591"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode.result;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Builder;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 统一封装web层向前端页面返回的结果</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Builder</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">R</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//表示返回的结果码，比如200成功，500失败</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> code;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//表示返回的结果信息，比如 用户登录状态失效了，请求参数格式有误.......</span></span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//表示返回的结果数据，数据可能是一个对象，也可以是一个List集合.....</span></span><br><span class="line">    <span class="keyword">private</span> Object data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> R <span class="title function_">OK</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.builder()</span><br><span class="line">                .code(CodeEnum.OK.getCode())</span><br><span class="line">                .msg(CodeEnum.OK.getMsg())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> R <span class="title function_">OK</span><span class="params">(<span class="type">int</span> code, String msg)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.builder()</span><br><span class="line">                .code(code)</span><br><span class="line">                .msg(msg)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> R <span class="title function_">OK</span><span class="params">(Object data)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.builder()</span><br><span class="line">                .code(CodeEnum.OK.getCode())</span><br><span class="line">                .msg(CodeEnum.OK.getMsg())</span><br><span class="line">                .data(data)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> R <span class="title function_">OK</span><span class="params">(CodeEnum codeEnum)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.builder()</span><br><span class="line">                .code(CodeEnum.OK.getCode())</span><br><span class="line">                .msg(codeEnum.getMsg())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> R <span class="title function_">FAIL</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.builder()</span><br><span class="line">                .code(CodeEnum.FAIL.getCode())</span><br><span class="line">                .msg(CodeEnum.FAIL.getMsg())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> R <span class="title function_">FAIL</span><span class="params">(String msg)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.builder()</span><br><span class="line">                .code(CodeEnum.FAIL.getCode())</span><br><span class="line">                .msg(msg)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> R <span class="title function_">FAIL</span><span class="params">(CodeEnum codeEnum)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> R.builder()</span><br><span class="line">                .code(codeEnum.getCode())</span><br><span class="line">                .msg(codeEnum.getMsg())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222133207911.png" alt="image-20240222133207911"></p>
+<p>传参数是统统都用query来传输</p>
+<h4 id="step2：后端登录代码实现"><a href="#step2：后端登录代码实现" class="headerlink" title="step2：后端登录代码实现"></a>step2：后端登录代码实现</h4><p>后台提供一个spring security的接口</p>
+<h4 id="（1）创建UserService层"><a href="#（1）创建UserService层" class="headerlink" title="（1）创建UserService层"></a>（1）创建UserService层</h4><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222133807376.png" alt="image-20240222133807376"></p>
+<h4 id="（2）extends-UserDetailsService"><a href="#（2）extends-UserDetailsService" class="headerlink" title="（2）extends UserDetailsService"></a>（2）extends UserDetailsService</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span> <span class="keyword">extends</span> <span class="title class_">UserDetailsService</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>UserDetailsService 里面有关于数据库查找的一些相关的内容</p>
+<h4 id="（3）写（2）接口的实现"><a href="#（3）写（2）接口的实现" class="headerlink" title="（3）写（2）接口的实现"></a>（3）写（2）接口的实现</h4><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222134110834.png" alt="image-20240222134110834"></p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222134241729.png" alt="image-20240222134241729"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.service.UserService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UserDetails;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.userdetails.UsernameNotFoundException;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDetails <span class="title function_">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>注入 Mapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> TUserMapper tUserMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UserDetails <span class="title function_">loadUserByUsername</span><span class="params">(String username)</span> <span class="keyword">throws</span> UsernameNotFoundException &#123;</span><br><span class="line">        <span class="type">TUser</span> <span class="variable">tUser</span> <span class="operator">=</span> tUserMapper.selectByLoginAct(username);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (tUser == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">UsernameNotFoundException</span>(<span class="string">&quot;登录账号不存在！&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//        按照username查找对象，返回一个TUser对象</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;selectByLoginAct没有实现&#x3D;&#x3D;，所以需要去实现一下</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222134902977.png" alt="image-20240222134902977"></p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222135129842.png" alt="image-20240222135129842"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByLoginAct&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;java.lang.String&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;BaseResultMap&quot;</span>&gt;</span></span><br><span class="line">  select</span><br><span class="line">  <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">&quot;Base_Column_List&quot;</span> /&gt;</span></span><br><span class="line">  from t_user</span><br><span class="line">  where login_act = #&#123;username,jdbcType=VARCHAR&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;这样就完成了，相当于定义一个函数（这个函数要进行的是一些sql命令），然后去xml中实现这个函数&#x3D;&#x3D;</p>
+<h4 id="（4）改写return的内容"><a href="#（4）改写return的内容" class="headerlink" title="（4）改写return的内容"></a>（4）改写return的内容</h4><blockquote>
+<p>关于UserDeitails接口，详见</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_22078107/article/details/106654924">【详解】Spring Security的GrantedAuthority（已授予的权限）_org.springframework.security.core.grantedauthority-CSDN博客</a></p>
+</blockquote>
+<p>&#x3D;&#x3D;getAuthorities()方法将返回此用户的所拥有的权限。这个集合将用于用户的访问控制，也就是Authorization。&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;<strong>所谓权限，就是一个字符串。一般不会重复。</strong>&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;<strong>所谓权限检查，就是查看用户权限列表中是否含有匹配的字符串。</strong>&#x3D;&#x3D;</p>
+<p>之后学习Spring Security</p>
+<h5 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h5><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222135527190.png" alt="image-20240222135527190"></p>
+<p>这个return按理来说是需要返回一个UserDetails的对象，但是现在是只有一个函数返回的tUser 的对象，所以我们需要去TUser.java处去实现这个接口。如下图所示：</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222135713974.png" alt="image-20240222135713974"></p>
+<p>注意，在UserDetails这个接口中存在7个方法，所以我们需要在TUser中把这7个方法全部都实现了。</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222135807457.png" alt="image-20240222135807457"></p>
+<p>在TUser.java处 快捷键alt+insert，把所有的接口函数导入一下</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222140250334.png" alt="image-20240222140250334"></p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222140327393.png" alt="image-20240222140327393"></p>
+<h5 id="2-编写实现"><a href="#2-编写实现" class="headerlink" title="2. 编写实现"></a>2. 编写实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    *********************************实现UserDetails的七个方法**************************************************</span></span><br><span class="line"><span class="comment">//    这个是角色list</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; permissionList;</span><br><span class="line"><span class="comment">//    权限标识符list</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; roleList;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Collection&lt;? <span class="keyword">extends</span> <span class="title class_">GrantedAuthority</span>&gt; getAuthorities() &#123;</span><br><span class="line"><span class="comment">//        先定义一个list 用来返回得到的角色对象</span></span><br><span class="line">        List&lt;GrantedAuthority&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得角色list,forEach遍历，遍历得到list的每个对象是role，然后将这个role add到list中</span></span><br><span class="line">        <span class="built_in">this</span>.getRoleList().forEach(role -&gt;&#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> <span class="title class_">SimpleGrantedAuthority</span>(role));</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="comment">//获得权限标识符</span></span><br><span class="line">        <span class="built_in">this</span>.getPermissionList().forEach(permission -&gt;&#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> <span class="title class_">SimpleGrantedAuthority</span>(permission));</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPassword</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getPassword();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getUsername</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getUsername();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonExpired</span><span class="params">()</span> &#123;</span><br><span class="line"><span class="comment">//        这个是账号有无过期，这是这个项目的数据库表的设计 ，数据库里个字段，保证可行就是没有过期</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getAccountNoExpired()==<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAccountNonLocked</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getAccountNoLocked()==<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isCredentialsNonExpired</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getCredentialsNoExpired()==<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEnabled</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.getAccountEnabled()==<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-生成jwt-，忽略，全部-JsonIgnore"><a href="#3-生成jwt-，忽略，全部-JsonIgnore" class="headerlink" title="3.生成jwt ，忽略，全部+@JsonIgnore"></a>3.生成jwt ，忽略，全部+@JsonIgnore</h5><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222142026445.png" alt="image-20240222142026445"></p>
+<p>不把返回值字段当成js字段</p>
+<h5 id="4-完成-到UserServiceImpl-java处，return-tUser"><a href="#4-完成-到UserServiceImpl-java处，return-tUser" class="headerlink" title="4.完成 到UserServiceImpl.java处，return tUser"></a>4.完成 到UserServiceImpl.java处，return tUser</h5><h5 id="5-写一个配置类"><a href="#5-写一个配置类" class="headerlink" title="5.写一个配置类"></a>5.写一个配置类</h5><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222142430458.png" alt="image-20240222142430458"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> SecurityFilterChain <span class="title function_">securityFilterChain</span><span class="params">(HttpSecurity httpSecurity, CorsConfigurationSource configurationSource)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//禁用跨站请求伪造</span></span><br><span class="line">        <span class="keyword">return</span> httpSecurity</span><br><span class="line"><span class="comment">//                链式编程，这边是要做一个登录</span></span><br><span class="line">                .formLogin( (formLogin) -&gt; &#123;</span><br><span class="line">                    formLogin.loginProcessingUrl(Constants.LOGIN_URI) <span class="comment">//登录处理地址，不需要写Controller</span></span><br><span class="line">                            .usernameParameter(<span class="string">&quot;loginAct&quot;</span>)</span><br><span class="line">                            .passwordParameter(<span class="string">&quot;loginPwd&quot;</span>)</span><br><span class="line"><span class="comment">//                            以上是登录，如果登录成功了，就要返回一个结果</span></span><br><span class="line">                            .successHandler(myAuthenticationSuccessHandler)</span><br><span class="line"><span class="comment">//                            如果失败了也要返回结果</span></span><br><span class="line">                            .failureHandler(myAuthenticationFailureHandler);</span><br><span class="line">                &#125;)</span><br><span class="line"><span class="comment">//                以上的handle是直接用的别的，之后如需要详细了解，再研究</span></span><br><span class="line"><span class="comment">//需要对于请求拦截</span></span><br><span class="line">                .authorizeHttpRequests( (authorize) -&gt; &#123;</span><br><span class="line">                    authorize.requestMatchers(<span class="string">&quot;/api/login&quot;</span>).permitAll()</span><br><span class="line">                            .anyRequest().authenticated(); <span class="comment">//其它任何请求都需要登录后才能访问</span></span><br><span class="line">                &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;里面用到了一些handler的一些文件，直接用的，需要进一步学习&#x3D;&#x3D;</p>
+<p>因为用到了这些，所以需要注入一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> MyAuthenticationFailureHandler myAuthenticationFailureHandler;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> MyLogoutSuccessHandler myLogoutSuccessHandler;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Resource</span></span><br><span class="line"><span class="keyword">private</span> MyAccessDeniedHandler myAccessDeniedHandler;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>因为是外面复制进来的，所以需要改写一下：</p>
+<p>（在com.bjpowernode目录下创建package util，在里面加入JSONUtils工具类、ResponseUtils。）</p>
+<p><strong>MyAuthenticationSuccessHandler</strong>：</p>
+<blockquote>
+<p>就是成功后需要做什么事情</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Component</span><br><span class="line">public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHandler &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException &#123;</span><br><span class="line">        //通过request、response，得到authentication 登录成功后的用户信息</span><br><span class="line">        // 登录成功，执行该方法，在该方法中返回json给前端，就行了</span><br><span class="line">        TUser tUser = (TUser) authentication.getPrincipal();</span><br><span class="line"></span><br><span class="line">        //登录成功，用户信息返回前台</span><br><span class="line">        R result = R.OK(tUser);</span><br><span class="line"></span><br><span class="line">        //把R对象转成json</span><br><span class="line">        String resultJSON = JSONUtils.toJSON(result);</span><br><span class="line"></span><br><span class="line">        //把R以json返回给前端</span><br><span class="line">        ResponseUtils.write(response, resultJSON);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-完成最简单的实现"><a href="#6-完成最简单的实现" class="headerlink" title="6.完成最简单的实现"></a>6.完成最简单的实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> SecurityFilterChain <span class="title function_">securityFilterChain</span><span class="params">(HttpSecurity httpSecurity, CorsConfigurationSource configurationSource)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//禁用跨站请求伪造</span></span><br><span class="line">        <span class="keyword">return</span> httpSecurity</span><br><span class="line"><span class="comment">//                链式编程，这边是要做一个登录</span></span><br><span class="line">                .formLogin( (formLogin) -&gt; &#123;</span><br><span class="line">                    formLogin.loginProcessingUrl(<span class="string">&quot;/api/login&quot;</span>) <span class="comment">//登录处理地址，不需要写Controller</span></span><br><span class="line">                            .usernameParameter(<span class="string">&quot;loginAct&quot;</span>)</span><br><span class="line">                            .passwordParameter(<span class="string">&quot;loginPwd&quot;</span>)</span><br><span class="line"><span class="comment">//                            以上是登录，如果登录成功了，就要返回一个结果</span></span><br><span class="line">                            .successHandler(myAuthenticationSuccessHandler)</span><br><span class="line"><span class="comment">//                            如果失败了也要返回结果</span></span><br><span class="line">                            .failureHandler(myAuthenticationFailureHandler);</span><br><span class="line">                &#125;)</span><br><span class="line"><span class="comment">//                以上的handle是直接用的别的，之后如需要详细了解，再研究</span></span><br><span class="line"><span class="comment">//需要对于请求拦截</span></span><br><span class="line">                .authorizeHttpRequests( (authorize) -&gt; &#123;</span><br><span class="line">                    authorize.requestMatchers(<span class="string">&quot;/api/login&quot;</span>).permitAll()</span><br><span class="line">                            .anyRequest().authenticated(); <span class="comment">//其它任何请求都需要登录后才能访问</span></span><br><span class="line">                &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-用Apifox验证是否成功"><a href="#7-用Apifox验证是否成功" class="headerlink" title="7.用Apifox验证是否成功"></a>7.用Apifox验证是否成功</h5><p> 使用网页版，如下操作</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222152059742.png" alt="image-20240222152059742"></p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222152137062.png" alt="image-20240222152137062"></p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222152456724.png" alt="image-20240222152456724"></p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222152604580.png" alt="image-20240222152604580"></p>
+<p>最后选择开发环境</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222152626036.png" alt="image-20240222152626036"></p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222154805491.png" alt="image-20240222154805491"></p>
+<h5 id="8-一些错误需要修改"><a href="#8-一些错误需要修改" class="headerlink" title="8. 一些错误需要修改"></a>8. 一些错误需要修改</h5><h6 id="a-密码加密了。所以需要注入一个-SecurityConfig"><a href="#a-密码加密了。所以需要注入一个-SecurityConfig" class="headerlink" title="a.密码加密了。所以需要注入一个&#x2F;&#x2F;SecurityConfig"></a>a.密码加密了。所以需要注入一个&#x2F;&#x2F;SecurityConfig</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span> <span class="comment">//There is no PasswordEncoder mapped for the id &quot;null&quot;</span></span><br><span class="line"><span class="keyword">public</span> PasswordEncoder <span class="title function_">passwordEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>细的需要再学习一下java se—</p>
+<h6 id="b-需要排除一下list为空的问题-TUser-java"><a href="#b-需要排除一下list为空的问题-TUser-java" class="headerlink" title="b. 需要排除一下list为空的问题&#x2F;&#x2F;TUser.java"></a>b. 需要排除一下list为空的问题&#x2F;&#x2F;TUser.java</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@JsonIgnore</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Collection&lt;? <span class="keyword">extends</span> <span class="title class_">GrantedAuthority</span>&gt; getAuthorities() &#123;</span><br><span class="line"><span class="comment">//        先定义一个list 用来返回得到的角色对象</span></span><br><span class="line">        List&lt;GrantedAuthority&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得角色list,forEach遍历，遍历得到list的每个对象是role，然后将这个role add到list中</span></span><br><span class="line">        <span class="keyword">if</span>(!ObjectUtils.isEmpty(<span class="built_in">this</span>.getRoleList()))&#123;</span><br><span class="line">            <span class="built_in">this</span>.getRoleList().forEach(role -&gt;&#123;</span><br><span class="line">                list.add(<span class="keyword">new</span> <span class="title class_">SimpleGrantedAuthority</span>(role));</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得权限标识符</span></span><br><span class="line">        <span class="keyword">if</span>(!ObjectUtils.isEmpty(<span class="built_in">this</span>.getPermissionList()))&#123;</span><br><span class="line">            <span class="built_in">this</span>.getPermissionList().forEach(permission -&gt;&#123;</span><br><span class="line">                list.add(<span class="keyword">new</span> <span class="title class_">SimpleGrantedAuthority</span>(permission));</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="9-前后端联通–-解决跨域问题"><a href="#9-前后端联通–-解决跨域问题" class="headerlink" title="9.前后端联通–&gt;解决跨域问题"></a>9.前后端联通–&gt;解决跨域问题</h5><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222203338737.png" alt="image-20240222203338737"></p>
+<p>此时启动前后端系统，输入账号密码会出现这个错误，这个cors错误叫做跨域错误 </p>
+<blockquote>
+<p>跨域报错：Access to XMLHttpRequest at ‘<a target="_blank" rel="noopener" href="http://localhost:8089/api/login">http://localhost:8089/api/login</a>‘ from origin ‘<a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a>‘ has been blocked by CORS policy；</p>
+<p>跨域：</p>
+<p>源头：<a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a> 目的地：<a target="_blank" rel="noopener" href="http://localhost:8080/api">http://localhost:8089/api</a>&#x2F;login</p>
+<p>1、协议不同， <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>   <a target="_blank" rel="noopener" href="http://localhost:8080/">https://localhost:8080</a></p>
+<p>2、域名不同， <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>   <a target="_blank" rel="noopener" href="http://localhost:8080/">http://dlyk.bjpowernode.com:8080</a></p>
+<p>3、端口不同  <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>   <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8082</a></p>
+<p>三个里面只要有任何一个不同就是跨域；</p>
+</blockquote>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222203608653.png" alt="image-20240222203608653"></p>
+<p><strong>&#x3D;&#x3D;如何解决！&#x3D;&#x3D;</strong></p>
+<p>在<img src="/../blog_images/dlyk-part2-front-2/image-20240222203942321.png" alt="image-20240222203942321"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">securityFilterChain这个函数里面</span><br><span class="line">//支持跨域请求</span><br><span class="line">.cors( (cors) -&gt; &#123;</span><br><span class="line">    cors.configurationSource(configurationSource);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="keyword">public</span> CorsConfigurationSource <span class="title function_">configurationSource</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">CorsConfiguration</span> <span class="variable">configuration</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">CorsConfiguration</span>();</span><br><span class="line">    configuration.setAllowedOrigins(Arrays.asList(<span class="string">&quot;*&quot;</span>)); <span class="comment">//允许任何来源，http://localhost:8081</span></span><br><span class="line">    configuration.setAllowedMethods(Arrays.asList(<span class="string">&quot;*&quot;</span>)); <span class="comment">//允许任何请求方法，post、get、put、delete</span></span><br><span class="line">    configuration.setAllowedHeaders(Arrays.asList(<span class="string">&quot;*&quot;</span>)); <span class="comment">//允许任何的请求头</span></span><br><span class="line"></span><br><span class="line">    <span class="type">UrlBasedCorsConfigurationSource</span> <span class="variable">source</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UrlBasedCorsConfigurationSource</span>();</span><br><span class="line">    source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>, configuration);</span><br><span class="line">    <span class="keyword">return</span> source;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>ctrl+h 看接口的几个实现</p>
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222204459230.png" alt="image-20240222204459230"></p>
+<h5 id="10-axios请求后返回的响应对象"><a href="#10-axios请求后返回的响应对象" class="headerlink" title="10.axios请求后返回的响应对象"></a>10.axios请求后返回的响应对象</h5><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222205748168.png" alt="image-20240222205748168"></p>
+<p> 其中data就是后端springboot响应返回的那个R对象；</p>
+<h4 id="11-修改前端接到后端返回数据后的操作"><a href="#11-修改前端接到后端返回数据后的操作" class="headerlink" title="11.修改前端接到后端返回数据后的操作"></a>11.修改前端接到后端返回数据后的操作</h4><h6 id="a-创建返回的util-因为后续可能很多地方都需要使用"><a href="#a-创建返回的util-因为后续可能很多地方都需要使用" class="headerlink" title="a.创建返回的util&#x2F;&#x2F;因为后续可能很多地方都需要使用"></a>a.创建返回的util&#x2F;&#x2F;因为后续可能很多地方都需要使用</h6><p><img src="/../blog_images/dlyk-part2-front-2/image-20240222210454177.png" alt="image-20240222210454177"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">messageTip</span>(<span class="params">msg, type</span>) &#123;</span><br><span class="line">    <span class="title class_">ElMessage</span>(&#123;</span><br><span class="line">        <span class="attr">showClose</span>: <span class="literal">true</span>, <span class="comment">//是否显示关闭按钮</span></span><br><span class="line">        <span class="attr">center</span>: <span class="literal">true</span>, <span class="comment">//文字是否居中</span></span><br><span class="line">        <span class="attr">duration</span>: <span class="number">3000</span>, <span class="comment">//显示时间，单位为毫秒</span></span><br><span class="line">        <span class="attr">message</span>: msg, <span class="comment">//提示的消息内容</span></span><br><span class="line">        <span class="attr">type</span>: type, <span class="comment">//消息类型：&#x27;success&#x27; | &#x27;warning&#x27; | &#x27;info&#x27; | &#x27;error&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="b-修改登录成功后返回的消息"><a href="#b-修改登录成功后返回的消息" class="headerlink" title="b.修改登录成功后返回的消息"></a>b.修改登录成功后返回的消息</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">//这个是loginvView.vue</span><br><span class="line">//比如一些消息提醒等</span><br><span class="line">methods: &#123;</span><br><span class="line">  //登录函数</span><br><span class="line">  login() &#123;</span><br><span class="line">    //提交前验证输入框的合法性</span><br><span class="line">    this.$refs.loginRefForm.validate( (isValid) =&gt; &#123;</span><br><span class="line">      //isValid是验证后的结果，如果是true表示验证通过，否则未通过</span><br><span class="line">      if (isValid) &#123;</span><br><span class="line">        //验证通过，可以提交登录</span><br><span class="line">        //这是个js对象，可用来传输数据，用键值对传输对象</span><br><span class="line">        let formData = new FormData();</span><br><span class="line">        formData.append(&quot;loginAct&quot;, this.user.loginAct);</span><br><span class="line">        formData.append(&quot;loginPwd&quot;, this.user.loginPwd);</span><br><span class="line">        formData.append(&quot;rememberMe&quot;, this.user.rememberMe);</span><br><span class="line"></span><br><span class="line">        doPost(&quot;/api/login&quot;, formData).then( (resp) =&gt; &#123;</span><br><span class="line">          //用了==&gt;才能使用this这个变量</span><br><span class="line">          console.log(resp);</span><br><span class="line">          if (resp.data.code === 200) &#123;</span><br><span class="line">            //登录成功，提示一下</span><br><span class="line">            messageTip(&quot;登录成功&quot;, &quot;success&quot;);</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">            //登录失败，也提示一下</span><br><span class="line">            messageTip(&quot;登录失败&quot;, &quot;error&quot;);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  //免登录（自动登录）</span><br><span class="line">  freeLogin() &#123;</span><br><span class="line">    let token = window.localStorage.getItem(getTokenName());</span><br><span class="line">    if (token) &#123; //表示token有值，token不是空，token存在</span><br><span class="line">      doGet(&quot;/api/login/free&quot;, &#123;&#125;).then(resp =&gt; &#123;</span><br><span class="line">        if (resp.data.code === 200)  &#123;</span><br><span class="line">          //token验证通过了，那么可以免登录</span><br><span class="line">          window.location.href = &quot;/dashboard&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="12-登录成功后跳转系统的主页面"><a href="#12-登录成功后跳转系统的主页面" class="headerlink" title="12.登录成功后跳转系统的主页面"></a>12.登录成功后跳转系统的主页面</h4><h5 id="a-跳转页面"><a href="#a-跳转页面" class="headerlink" title="a.跳转页面"></a>a.跳转页面</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.location.href = &quot;/dashboard&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222211409570.png" alt="image-20240222211409570"></p>
+<h5 id="b-添加路由"><a href="#b-添加路由" class="headerlink" title="b.添加路由"></a>b.添加路由</h5><p>路由：就是vue访问的路径；</p>
+<p>比如: &#x2F;</p>
+<p>比如：&#x2F;dashboard</p>
+<p>1、用npm命令安装路由</p>
+<p>npm install vue-router –save</p>
+<p>2、在src下面新建一个router文件夹，在router文件夹下新建一个router.js文件，在router.js文件里面写入以下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从vue-router这个依赖库中导入createRouter()函数, createWebHistory()函数</span></span><br><span class="line"><span class="keyword">import</span> &#123; createRouter, createWebHistory &#125; <span class="keyword">from</span> <span class="string">&quot;vue-router&quot;</span>;</span><br><span class="line"><span class="comment">//定义一个变量</span></span><br><span class="line"><span class="keyword">let</span> router = <span class="title function_">createRouter</span>(&#123;</span><br><span class="line">    <span class="comment">//路由的历史，可以实现一些前进后退</span></span><br><span class="line">    <span class="attr">history</span>:<span class="title function_">createWebHistory</span>(),</span><br><span class="line">    <span class="comment">//p配置路由，里面可以配置多个路由，</span></span><br><span class="line">    <span class="comment">//路由就是vue访问的路径</span></span><br><span class="line">    <span class="attr">routes</span>:[</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//路由的路径</span></span><br><span class="line">            <span class="attr">path</span>:<span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">            <span class="comment">//路由路径所对应的页面</span></span><br><span class="line">            component : <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;../view/LoginView.vue&#x27;</span>),</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">path</span>:<span class="string">&#x27;/dashboard&#x27;</span>,</span><br><span class="line">            <span class="comment">//路由路径所对应的页面</span></span><br><span class="line">            component : <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;../view/dashboard.vue&#x27;</span>),</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//这个是导出路由，导出之后才能用</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222212744356.png" alt="image-20240222212744356"></p>
+<h5 id="c-在使用路由时导入路由："><a href="#c-在使用路由时导入路由：" class="headerlink" title="c. 在使用路由时导入路由："></a>c. 在使用路由时导入路由：</h5><p>在main.js中导入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> router from <span class="string">&#x27;./router/router.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="d-在main-js中使用路由"><a href="#d-在main-js中使用路由" class="headerlink" title="d.在main.js中使用路由"></a>d.在main.js中使用路由</h5><p>app.use(router);</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp这个是一个函数</span></span><br><span class="line"><span class="comment">//import &#x27;./style.css&#x27;</span></span><br><span class="line"><span class="comment">//import App from &#x27;./App.vue&#x27;//从一个单文件组件中导入根组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ElementPlus</span> <span class="keyword">from</span> <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"><span class="comment">//从router.js导入组件</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router/router.js&#x27;</span></span><br><span class="line"><span class="keyword">import</span> loginView <span class="keyword">from</span> <span class="string">&quot;./view/LoginView.vue&quot;</span>;</span><br><span class="line"><span class="title function_">createApp</span>(loginView).<span class="title function_">use</span>(<span class="title class_">ElementPlus</span>).<span class="title function_">use</span>(router).<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>)<span class="comment">//创建一个vue对象//挂载到页面的#app这个id下</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="e-使用标签渲染路由地址所对应的页面组件；"><a href="#e-使用标签渲染路由地址所对应的页面组件；" class="headerlink" title="e. 使用&lt;router-view&#x2F;&gt;标签渲染路由地址所对应的页面组件；"></a>e. 使用&lt;router-view&#x2F;&gt;标签渲染路由地址所对应的页面组件；</h5><p>和上面的区别是导入了App ，且createApp(App)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp这个是一个函数</span></span><br><span class="line"><span class="comment">//import &#x27;./style.css&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span><span class="comment">//从一个单文件组件中导入根组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ElementPlus</span> <span class="keyword">from</span> <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"><span class="comment">//从router.js导入组件</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router/router.js&#x27;</span></span><br><span class="line"><span class="keyword">import</span> loginView <span class="keyword">from</span> <span class="string">&quot;./view/LoginView.vue&quot;</span>;</span><br><span class="line"><span class="title function_">createApp</span>(<span class="title class_">App</span>).<span class="title function_">use</span>(<span class="title class_">ElementPlus</span>).<span class="title function_">use</span>(router).<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>)<span class="comment">//创建一个vue对象//挂载到页面的#app这个id下</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/dlyk-part2-front-2/image-20240222213354364.png" alt="image-20240222213354364"></p>
+<p>如果访问&#x2F;. ，那么就渲染LoginView.vue,如果是&#x2F;dashBoard，那么就渲染dashboard.vue</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/18/dlyk-part2-front-1/" rel="prev" title="dlyk-part2-front-1">
+                  <i class="fa fa-angle-left"></i> dlyk-part2-front-1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/02/21/Redis-%E8%AE%B0%E5%BD%95/" rel="next" title="Redis-记录">
+                  Redis-记录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lolo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="数组数组概述①什么是数组？1.在Java中，数组是一种用于存储多个相同数据类型元素的容器。 2.例如一个存储整数的数组：int[] nums &#x3D; {100, 200, 300}; 3.例如一个存储字符串的数组：String[] names &#x3D; {“jack”,“lucy”,“lisi”}; 4.数组是一种引用数据类型，隐式继承Object。因此数组也可以调用Object类中的方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础部分3">
+<meta property="og:url" content="http://example.com/2024/02/26/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/index.html">
+<meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="数组数组概述①什么是数组？1.在Java中，数组是一种用于存储多个相同数据类型元素的容器。 2.例如一个存储整数的数组：int[] nums &#x3D; {100, 200, 300}; 3.例如一个存储字符串的数组：String[] names &#x3D; {“jack”,“lucy”,“lisi”}; 4.数组是一种引用数据类型，隐式继承Object。因此数组也可以调用Object类中的方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227110419147.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227111451718.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227111729307.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227112624635.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227112947509.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122020670.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122031704.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122037930.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122045388.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122051856.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122056862.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227123624933.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227123922794.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227133137828.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227133302806.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227140425131.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227140431623.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227141452414.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227141713987.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227143030302.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227152502694.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227152745145.png">
+<meta property="article:published_time" content="2024-02-26T11:42:11.000Z">
+<meta property="article:modified_time" content="2024-02-27T07:29:09.112Z">
+<meta property="article:author" content="lolo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227110419147.png">
+
+
+<link rel="canonical" href="http://example.com/2024/02/26/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/02/26/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/","path":"2024/02/26/Java基础部分3/","title":"Java基础部分3"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java基础部分3 | Loloooo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Loloooo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">数组概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E7%BB%84%EF%BC%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">①什么是数组？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%9F"><span class="nav-number">1.1.2.</span> <span class="nav-text">②数组的分类？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A2Java%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E5%85%83%E7%B4%A0%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="nav-number">1.1.3.</span> <span class="nav-text">③Java数组存储元素的特点？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0%E6%95%B0%E7%BB%84%E4%BC%98%E7%82%B9%EF%BC%9F"><span class="nav-number">1.1.4.</span> <span class="nav-text">①数组优点？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1%E6%95%B0%E7%BB%84%E7%BC%BA%E7%82%B9%EF%BC%9F"><span class="nav-number">1.1.5.</span> <span class="nav-text">②数组缺点？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">一维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E6%98%AF%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E3%80%82%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%8C%E4%B8%89%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84%E6%98%AF%E9%9D%9E%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%E3%80%82"><span class="nav-number">1.2.1.</span> <span class="nav-text">①一维数组是线性结构。二维数组，三维数组，多维数组是非线性结构。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1%E5%A6%82%E4%BD%95%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%9F"><span class="nav-number">1.2.2.</span> <span class="nav-text">②如何静态初始化一维数组？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A2%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AE%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%9F"><span class="nav-number">1.2.3.</span> <span class="nav-text">③如何访问数组中的元素？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A3%E5%A6%82%E4%BD%95%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84%EF%BC%9F"><span class="nav-number">1.2.4.</span> <span class="nav-text">④如何遍历数组？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A4%E5%A6%82%E4%BD%95%E5%8A%A8%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%9F"><span class="nav-number">1.2.5.</span> <span class="nav-text">⑤如何动态初始化一维数组？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A5%E6%96%B9%E6%B3%95%E5%9C%A8%E8%B0%83%E7%94%A8%E6%97%B6%E5%A6%82%E4%BD%95%E7%BB%99%E6%96%B9%E6%B3%95%E4%BC%A0%E4%B8%80%E4%B8%AA%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1%EF%BC%9F"><span class="nav-number">1.2.6.</span> <span class="nav-text">⑥方法在调用时如何给方法传一个数组对象？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A6%E5%BD%93%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E5%AD%98%E5%82%A8%E5%BC%95%E7%94%A8%E6%97%B6%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%BE%EF%BC%9F"><span class="nav-number">1.2.7.</span> <span class="nav-text">⑦当一维数组中存储引用时的内存图？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A7%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%EF%BC%9F"><span class="nav-number">1.2.8.</span> <span class="nav-text">⑧如何获取数组中的最大值？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A8%E5%A6%82%E6%9E%9C%E7%9F%A5%E9%81%93%E5%80%BC%EF%BC%8C%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E5%80%BC%E6%89%BE%E5%AE%83%E7%9A%84%E4%B8%8B%E6%A0%87%EF%BC%9F"><span class="nav-number">1.2.9.</span> <span class="nav-text">⑨如果知道值，如何通过值找它的下标？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A9%E5%A6%82%E4%BD%95%E5%B0%86%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E5%8F%8D%E8%BD%AC%EF%BC%9F"><span class="nav-number">1.2.10.</span> <span class="nav-text">⑩如何将数组中的所有元素反转？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E6%95%B0%E7%BB%84%E3%80%82"><span class="nav-number">1.2.10.1.</span> <span class="nav-text">第一种方式：创建一个新的数组。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9A%E9%A6%96%E5%B0%BE%E4%BA%A4%E6%8D%A2%E3%80%82"><span class="nav-number">1.2.10.2.</span> <span class="nav-text">第二种方式：首尾交换。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%BE%E5%85%B3%E4%BA%8Emain%E6%96%B9%E6%B3%95%E7%9A%84%E5%BD%A2%E5%8F%82args%EF%BC%9F"><span class="nav-number">1.2.11.</span> <span class="nav-text">⑾关于main方法的形参args？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%BF%E5%85%B3%E4%BA%8E%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%AF%E5%8F%98%E9%95%BF%E5%BA%A6%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="nav-number">1.2.12.</span> <span class="nav-text">⑿关于方法的可变长度参数？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%92%80%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E6%89%A9%E5%AE%B9"><span class="nav-number">1.2.13.</span> <span class="nav-text">⒀一维数组的扩容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">1.3.</span> <span class="nav-text">二维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E6%98%AF%E4%B8%80%E4%B8%AA%E7%89%B9%E6%AE%8A%E7%9A%84%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%8C%E7%89%B9%E6%AE%8A%E5%9C%A8%EF%BC%9A%E8%BF%99%E4%B8%AA%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E6%AF%8F%E4%B8%AA%E5%85%83%E7%B4%A0%E6%98%AF%E4%B8%80%E4%B8%AA%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%EF%BC%88%E7%9B%B8%E5%BD%93%E4%BA%8E%E5%AD%98%E7%9A%84%E8%BF%98%E6%98%AF%E4%B8%80%E4%B8%AA%E5%9C%B0%E5%9D%80%EF%BC%8C%E6%98%AF%E4%B8%80%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E9%A6%96%E4%BD%8D%E5%9C%B0%E5%9D%80%EF%BC%89%E3%80%82"><span class="nav-number">1.3.1.</span> <span class="nav-text">①二维数组是一个特殊的一维数组，特殊在：这个一维数组中每个元素是一个一维数组（相当于存的还是一个地址，是一维数组的首位地址）。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E9%9D%99%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.2.</span> <span class="nav-text">②二维数组的静态初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A2%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%8A%A8%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96-%E7%AD%89%E9%95%BF"><span class="nav-number">1.3.3.</span> <span class="nav-text">③二维数组的动态初始化(等长)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A3%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%8A%A8%E6%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E4%B8%8D%E7%AD%89%E9%95%BF%EF%BC%89"><span class="nav-number">1.3.4.</span> <span class="nav-text">④二维数组的动态初始化（不等长）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A4%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">1.3.5.</span> <span class="nav-text">⑤二维数组中元素的访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A5%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E9%81%8D%E5%8E%86"><span class="nav-number">1.3.6.</span> <span class="nav-text">⑥二维数组中元素的遍历</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA%E7%9A%84Debug"><span class="nav-number">1.4.</span> <span class="nav-text">IDEA的Debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">1.5.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%EF%BC%9F"><span class="nav-number">1.5.1.</span> <span class="nav-text">①什么是单元测试，为什么要进行单元测试？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1%E5%81%9A%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E9%9C%80%E8%A6%81%E5%BC%95%E5%85%A5JUnit%E6%A1%86%E6%9E%B6%EF%BC%8CJUnit%E6%A1%86%E6%9E%B6%E5%9C%A8JDK%E4%B8%AD%E6%B2%A1%E6%9C%89%EF%BC%8C%E9%9C%80%E8%A6%81%E9%A2%9D%E5%A4%96%E5%BC%95%E5%85%A5%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%BC%95%E5%85%A5JUnit%E6%A1%86%E6%9E%B6%E7%9A%84class%E6%96%87%E4%BB%B6%EF%BC%88jar%E5%8C%85%EF%BC%89"><span class="nav-number">1.5.2.</span> <span class="nav-text">②做单元测试需要引入JUnit框架，JUnit框架在JDK中没有，需要额外引入，也就是引入JUnit框架的class文件（jar包）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A2%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%B1%BB%EF%BC%88%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%EF%BC%89%E6%80%8E%E4%B9%88%E5%86%99%EF%BC%9F"><span class="nav-number">1.5.3.</span> <span class="nav-text">③单元测试类（测试用例）怎么写？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A3%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E6%80%8E%E4%B9%88%E5%86%99%EF%BC%9F"><span class="nav-number">1.5.4.</span> <span class="nav-text">④单元测试方法怎么写？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A4%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%9F%E6%9C%9B%E5%80%BC%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E9%99%85%E5%80%BC%EF%BC%9F"><span class="nav-number">1.5.5.</span> <span class="nav-text">⑤什么是期望值，什么是实际值？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A5%E5%B8%B8%E8%A7%81%E6%B3%A8%E8%A7%A3%EF%BC%9A"><span class="nav-number">1.5.6.</span> <span class="nav-text">⑥常见注解：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A6%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%B8%AD%E4%BD%BF%E7%94%A8Scanner%E5%A4%B1%E6%95%88%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">1.5.7.</span> <span class="nav-text">⑦单元测试中使用Scanner失效怎么办？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Arrays%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">1.7.</span> <span class="nav-text">Arrays工具类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8Exception"><span class="nav-number">2.</span> <span class="nav-text">异常Exception</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">异常概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%82%E5%B8%B8%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%EF%BC%9F"><span class="nav-number">2.1.1.</span> <span class="nav-text">①什么是异常？有什么用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1%E5%BC%82%E5%B8%B8%E5%9C%A8Java%E4%B8%AD%E4%BB%A5%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%AD%98%E5%9C%A8%E3%80%82"><span class="nav-number">2.1.2.</span> <span class="nav-text">②异常在Java中以类和对象的形式存在。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E7%BB%A7%E6%89%BF%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">异常继承结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0%E6%89%80%E6%9C%89%E7%9A%84%E5%BC%82%E5%B8%B8%E5%92%8C%E9%94%99%E8%AF%AF%E9%83%BD%E6%98%AF%E5%8F%AF%E6%8A%9B%E5%87%BA%E7%9A%84%E3%80%82%E9%83%BD%E7%BB%A7%E6%89%BF%E4%BA%86Throwable%E7%B1%BB%E3%80%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">①所有的异常和错误都是可抛出的。都继承了Throwable类。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1Error%E6%98%AF%E6%97%A0%E6%B3%95%E5%A4%84%E7%90%86%E7%9A%84%EF%BC%8C%E5%87%BA%E7%8E%B0%E5%90%8E%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AA%E7%BB%93%E6%9E%9C%EF%BC%9AJVM%E7%BB%88%E6%AD%A2%E3%80%82"><span class="nav-number">2.2.2.</span> <span class="nav-text">②Error是无法处理的，出现后只有一个结果：JVM终止。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A2Exception%E6%98%AF%E5%8F%AF%E4%BB%A5%E5%A4%84%E7%90%86%E7%9A%84%E3%80%82"><span class="nav-number">2.2.3.</span> <span class="nav-text">③Exception是可以处理的。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A3Exception%E7%9A%84%E5%88%86%E7%B1%BB%EF%BC%9A"><span class="nav-number">2.2.4.</span> <span class="nav-text">④Exception的分类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A4%E7%BC%96%E8%AF%91%E6%97%B6%E5%BC%82%E5%B8%B8%E5%92%8C%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="nav-number">2.2.5.</span> <span class="nav-text">⑤编译时异常和运行时异常区别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="nav-number">2.3.</span> <span class="nav-text">自定义异常</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#step1%EF%BC%9A%E7%BB%A7%E6%89%BFException%EF%BC%88%E7%BC%96%E8%AF%91%E6%97%B6%E5%BC%82%E5%B8%B8%EF%BC%89-RuntimeException"><span class="nav-number">2.3.1.</span> <span class="nav-text">step1：继承Exception（编译时异常）&#x2F;RuntimeException</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#step2-%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E6%97%A0%E5%8F%82%E6%95%B0%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%EF%BC%8C%E5%86%8D%E6%8F%90%E4%BE%9B%E4%B8%80%E4%B8%AA%E5%B8%A6String-msg%E5%8F%82%E6%95%B0%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%EF%BC%8C%E5%9C%A8%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E4%B8%AD%E8%B0%83%E7%94%A8%E7%88%B6%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E3%80%82"><span class="nav-number">2.3.2.</span> <span class="nav-text">step2:   提供一个无参数构造方法，再提供一个带String msg参数的构造方法，在构造方法中调用父类的构造方法。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E7%9A%84%E5%A4%84%E7%90%86%E5%8C%85%E6%8B%AC%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="nav-number">2.4.</span> <span class="nav-text">异常的处理包括两种方式：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%A3%B0%E6%98%8E%E5%BC%82%E5%B8%B8%EF%BC%9A%E7%B1%BB%E4%BC%BC%E4%BA%8E%E6%8E%A8%E5%8D%B8%E8%B4%A3%E4%BB%BB%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.声明异常：类似于推卸责任的处理方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%8D%95%E6%8D%89%E5%BC%82%E5%B8%B8%EF%BC%9A%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%A4%84%E7%90%86%E6%8D%95%E6%8D%89%E5%BC%82%E5%B8%B8%EF%BC%88%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%A4%84%E7%90%86%E5%BC%82%E5%B8%B8-try%E2%80%A6catch%E2%80%A6%E5%85%B3%E9%94%AE%E5%AD%97-%EF%BC%89"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.捕捉异常：真正的处理捕捉异常（真正的处理异常 (try…catch…关键字)）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%9C%A8%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B4%E4%B8%AA%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%BA%94%E8%AF%A5%E6%98%AF%EF%BC%9A%E5%A3%B0%E6%98%8E%E5%92%8C%E6%8D%95%E6%8D%89%E8%81%94%E5%90%88%E4%BD%BF%E7%94%A8%E3%80%82"><span class="nav-number">2.4.3.</span> <span class="nav-text">异常在处理的整个过程中应该是：声明和捕捉联合使用。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%8D%95%E6%8D%89%EF%BC%9F%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E5%A3%B0%E6%98%8E%EF%BC%9F"><span class="nav-number">2.4.4.</span> <span class="nav-text">什么时候捕捉？什么时候声明？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.4.5.</span> <span class="nav-text">异常的常用方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finally%E8%AF%AD%E5%8F%A5%E5%9D%97"><span class="nav-number">2.5.</span> <span class="nav-text">finally语句块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#finally%E8%AF%AD%E5%8F%A5%E5%9D%97%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%A0%81%E6%98%AF%E4%B8%80%E5%AE%9A%E4%BC%9A%E6%89%A7%E8%A1%8C%E7%9A%84%E3%80%82"><span class="nav-number">2.5.1.</span> <span class="nav-text">finally语句块中的代码是一定会执行的。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finally%E8%AF%AD%E5%8F%A5%E5%9D%97%E4%B8%8D%E8%83%BD%E5%8D%95%E7%8B%AC%E4%BD%BF%E7%94%A8%EF%BC%8C%E8%87%B3%E5%B0%91%E9%9C%80%E8%A6%81%E9%85%8D%E5%90%88try%E8%AF%AD%E5%8F%A5%E5%9D%97%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="nav-number">2.5.2.</span> <span class="nav-text">finally语句块不能单独使用，至少需要配合try语句块一起使用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E5%B8%B8%E5%9C%A8finally%E8%AF%AD%E5%8F%A5%E5%9D%97%E4%B8%AD%E5%AE%8C%E6%88%90%E8%B5%84%E6%BA%90%E7%9A%84%E9%87%8A%E6%94%BE"><span class="nav-number">2.5.3.</span> <span class="nav-text">通常在finally语句块中完成资源的释放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#final%E3%80%81finally%E3%80%81finalize%E5%88%86%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.5.4.</span> <span class="nav-text">final、finally、finalize分别是什么？</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lolo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/26/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java基础部分3 | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java基础部分3
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-26 19:42:11" itemprop="dateCreated datePublished" datetime="2024-02-26T19:42:11+08:00">2024-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-27 15:29:09" itemprop="dateModified" datetime="2024-02-27T15:29:09+08:00">2024-02-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">Java体系知识</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="数组概述"><a href="#数组概述" class="headerlink" title="数组概述"></a>数组概述</h3><h4 id="①什么是数组？"><a href="#①什么是数组？" class="headerlink" title="①什么是数组？"></a>①什么是数组？</h4><p>1.在Java中，数组是一种用于存储多个相同数据类型元素的容器。</p>
+<p>2.例如一个存储整数的数组：int[] nums &#x3D; {100, 200, 300};</p>
+<p>3.例如一个存储字符串的数组：String[] names &#x3D; {“jack”,“lucy”,“lisi”};</p>
+<p>4.数组是一种引用数据类型，隐式继承Object。因此数组也可以调用Object类中的方法。</p>
+<p>5.数组对象存储在堆内存中。</p>
+<h4 id="②数组的分类？"><a href="#②数组的分类？" class="headerlink" title="②数组的分类？"></a>②数组的分类？</h4><p>1.根据维数进行分类：一维数组，二维数组，三维数组，多维数组。</p>
+<p>2.根据数组中存储的元素类型分类：基本类型数组，引用类型数组。</p>
+<p>3.根据数组初始化方式不同分类：静态数组，动态数组。</p>
+<h4 id="③Java数组存储元素的特点？"><a href="#③Java数组存储元素的特点？" class="headerlink" title="③Java数组存储元素的特点？"></a>③Java数组存储元素的特点？</h4><p>1.数组长度一旦确定不可变。</p>
+<p>2.数组中元素数据类型一致，每个元素占用空间大小相同。</p>
+<p>3.数组中每个元素在空间存储上，内存地址是连续的。</p>
+<p>4.每个元素有索引，首元素索引0，以1递增。</p>
+<p>5.以首元素的内存地址作为数组对象在堆内存中的地址。</p>
+<p>6.所有数组对象都有length属性用来获取数组元素个数。末尾元素下标：length-1</p>
+<h4 id="①数组优点？"><a href="#①数组优点？" class="headerlink" title="①数组优点？"></a>①数组优点？</h4><p><strong>1.根据下标查询某个元素的效率极高。</strong>数组中有100个元素和有100万个元素，查询效率相同。时间复杂度O(1)。也就是说在数组中根据下标查询某个元素时，不管数组的长短，耗费时间是固定不变的。</p>
+<p> 原因：<strong>知道首元素内存地址，元素在空间存储上内存地址又是连续的</strong>，每个元素占用空间大小相同，只要知道下标，就可以通过数学表达式计算出来要查找元素的内存地址。直接通过内存地址定位元素。</p>
+<h4 id="②数组缺点？"><a href="#②数组缺点？" class="headerlink" title="②数组缺点？"></a>②数组缺点？</h4><p><strong>1.随机增删元素的效率较低。因为随机增删元素时，为了保证数组中元素的内存地址连续，就需要涉及到后续元素的位移问题。时间复杂度O(n)。O(n)表示的是线性阶，随着问题规模n的不断增大，时间复杂度不断增大，算法的执行效率越低。（不过需要注意的是：对数组末尾元素的增删效率是不受影响的。）</strong></p>
+<p><strong>2.无法存储大量数据，因为很难在内存上找到非常大的一块连续的内存。</strong></p>
+<h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><h4 id="①一维数组是线性结构。二维数组，三维数组，多维数组是非线性结构。"><a href="#①一维数组是线性结构。二维数组，三维数组，多维数组是非线性结构。" class="headerlink" title="①一维数组是线性结构。二维数组，三维数组，多维数组是非线性结构。"></a>①一维数组是线性结构。二维数组，三维数组，多维数组是非线性结构。</h4><h4 id="②如何静态初始化一维数组？"><a href="#②如何静态初始化一维数组？" class="headerlink" title="②如何静态初始化一维数组？"></a>②如何静态初始化一维数组？</h4><p>1.第一种：int[] arr &#x3D; {55,67,22}; 或者 int arr[] &#x3D; {55,67,22};</p>
+<p>2.第二种：int[] arr &#x3D; new int[]{55,67,22};</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Animal[] animals = &#123;a1,a2,<span class="keyword">new</span> <span class="title class_">Animal</span>()&#125;;</span><br><span class="line"><span class="comment">//静态初始化</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="③如何访问数组中的元素？"><a href="#③如何访问数组中的元素？" class="headerlink" title="③如何访问数组中的元素？"></a>③如何访问数组中的元素？</h4><p>1.通过下标来访问。</p>
+<p>2.注意ArrayIndexOutOfBoundsException异常的发生。</p>
+<h4 id="④如何遍历数组？"><a href="#④如何遍历数组？" class="headerlink" title="④如何遍历数组？"></a>④如何遍历数组？</h4><p>1.普通for循环遍历</p>
+<p>2.for-each遍历（优点是代码简洁。缺点是没有下标。）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; citys.length;i++)&#123;</span><br><span class="line">	System.out.println(citys[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//for each</span></span><br><span class="line"><span class="keyword">for</span>(String name:names)&#123;</span><br><span class="line">	System.out.println(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="⑤如何动态初始化一维数组？"><a href="#⑤如何动态初始化一维数组？" class="headerlink" title="⑤如何动态初始化一维数组？"></a>⑤如何动态初始化一维数组？</h4><blockquote>
+<p>在创建数组的时候，不确定具体存储那些数据，但是确定长度（就是开辟空间）</p>
+<p>数据类型[] 变量名 &#x3D; new 数据类型[长度]</p>
+</blockquote>
+<p>1.int[] arr &#x3D; new int[4];</p>
+<p>2.Object[] objs &#x3D; new Object[5];</p>
+<p>3.数组动态初始化的时候，确定长度，并且数组中每个元素采用默认值。</p>
+<h4 id="⑥方法在调用时如何给方法传一个数组对象？"><a href="#⑥方法在调用时如何给方法传一个数组对象？" class="headerlink" title="⑥方法在调用时如何给方法传一个数组对象？"></a>⑥方法在调用时如何给方法传一个数组对象？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">display</span><span class="params">(<span class="type">int</span>[] arr)</span>&#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="type">int</span> i : arr)&#123;</span><br><span class="line">           System.out.println(i);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="type">int</span>[] a = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">   display(a);</span><br><span class="line">display(&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;)<span class="comment">//error</span></span><br><span class="line">   display(<span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;);<span class="comment">//静态初始化</span></span><br><span class="line">display(<span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>]);<span class="comment">//动态初始化</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="⑦当一维数组中存储引用时的内存图？"><a href="#⑦当一维数组中存储引用时的内存图？" class="headerlink" title="⑦当一维数组中存储引用时的内存图？"></a>⑦当一维数组中存储引用时的内存图？</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Animals[] animals = new Animals[5];</span><br><span class="line"></span><br><span class="line">Object[] test = &#123;new Bird(),new Cat()&#125;</span><br><span class="line">public class Animal &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227110419147.png" alt="image-20240227110419147"></p>
+<blockquote>
+<p>数组中存储的每个元素的空间大小都是一样的，所以空间是不可能一样的，所以是不可能存储引用对象的，所以是存储的是引用（对象在堆内存中的地址）</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227111451718.png" alt="image-20240227111451718"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227111729307.png" alt="image-20240227111729307"></p>
+<h4 id="⑧如何获取数组中的最大值？"><a href="#⑧如何获取数组中的最大值？" class="headerlink" title="⑧如何获取数组中的最大值？"></a>⑧如何获取数组中的最大值？</h4><p>​	假设首元素是最大的，然后遍历数组中所有元素，只要有更大的，就将其作为最大值。</p>
+<p>​	思考：找出最大值的下标怎么做？</p>
+<h4 id="⑨如果知道值，如何通过值找它的下标？"><a href="#⑨如果知道值，如何通过值找它的下标？" class="headerlink" title="⑨如果知道值，如何通过值找它的下标？"></a>⑨如果知道值，如何通过值找它的下标？</h4><h4 id="⑩如何将数组中的所有元素反转？"><a href="#⑩如何将数组中的所有元素反转？" class="headerlink" title="⑩如何将数组中的所有元素反转？"></a>⑩如何将数组中的所有元素反转？</h4><h5 id="第一种方式：创建一个新的数组。"><a href="#第一种方式：创建一个新的数组。" class="headerlink" title="第一种方式：创建一个新的数组。"></a>第一种方式：创建一个新的数组。</h5><p>就是倒着遍历第一个，然后赋值过去</p>
+<h5 id="第二种方式：首尾交换。"><a href="#第二种方式：首尾交换。" class="headerlink" title="第二种方式：首尾交换。"></a>第二种方式：首尾交换。</h5><p>就是第一个和倒数第一个交换，以此类推</p>
+<h4 id="⑾关于main方法的形参args？"><a href="#⑾关于main方法的形参args？" class="headerlink" title="⑾关于main方法的形参args？"></a>⑾关于main方法的形参args？</h4><p>​	接收命令行参数，</p>
+<p>​	JVM 负责调用这个类名.main()方法的</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227112624635.png" alt="image-20240227112624635"></p>
+<blockquote>
+<p>JVM会把以上字符串以“空格”进行拆分，生成一个新的数组对象</p>
+<p>最后这个数组对象是String[] args &#x3D; {“abc”,”def”,”xyz”}</p>
+</blockquote>
+<p>​	在DOS命令窗口中怎么传？在IDEA中怎么传？</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227112947509.png" alt="image-20240227112947509"></p>
+<h4 id="⑿关于方法的可变长度参数？"><a href="#⑿关于方法的可变长度参数？" class="headerlink" title="⑿关于方法的可变长度参数？"></a>⑿关于方法的可变长度参数？</h4><p>​	可变长参数只能出现在形参列表中的最后一个位置。</p>
+<p>​	可变长参数可以当做数组来处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">mi</span><span class="params">(<span class="type">int</span>... nums)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> m0; i &lt; nums;i++)&#123;</span><br><span class="line">		System.out.println(nums[i])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="⒀一维数组的扩容"><a href="#⒀一维数组的扩容" class="headerlink" title="⒀一维数组的扩容"></a>⒀一维数组的扩容</h4><p>①数组长度一旦确定不可变。</p>
+<p>②那数组应该如何扩容？</p>
+<p>​		<strong>&#x3D;&#x3D;只能创建一个更大的数组将原数组中的数据全部拷贝到新数组中&#x3D;&#x3D;</strong></p>
+<p>​		<strong>&#x3D;&#x3D;可以使用System.arraycopy()方法完成数组的拷贝。&#x3D;&#x3D;</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.arraycopy(src,srcpos:<span class="number">0</span>,dest,destpos:<span class="number">0</span>,src.length)<span class="comment">//注意越界问题</span></span><br></pre></td></tr></table></figure>
+
+<p>③数组扩容会影响程序的执行效率，因此尽可能预测数据量，创建一个接近数量的数组，减少扩容次数。</p>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><h4 id="①二维数组是一个特殊的一维数组，特殊在：这个一维数组中每个元素是一个一维数组（相当于存的还是一个地址，是一维数组的首位地址）。"><a href="#①二维数组是一个特殊的一维数组，特殊在：这个一维数组中每个元素是一个一维数组（相当于存的还是一个地址，是一维数组的首位地址）。" class="headerlink" title="①二维数组是一个特殊的一维数组，特殊在：这个一维数组中每个元素是一个一维数组（相当于存的还是一个地址，是一维数组的首位地址）。"></a>①二维数组是一个特殊的一维数组，特殊在：这个一维数组中每个元素是一个一维数组（相当于存的还是一个地址，是一维数组的首位地址）。</h4><h4 id="②二维数组的静态初始化"><a href="#②二维数组的静态初始化" class="headerlink" title="②二维数组的静态初始化"></a>②二维数组的静态初始化</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[][] arr = <span class="keyword">new</span> <span class="title class_">int</span>[][]&#123;&#123;&#125;,&#123;&#125;,&#123;&#125;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>[][] arr = &#123;&#123;&#125;,&#123;&#125;,&#123;&#125;&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="③二维数组的动态初始化-等长"><a href="#③二维数组的动态初始化-等长" class="headerlink" title="③二维数组的动态初始化(等长)"></a>③二维数组的动态初始化(等长)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[][] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>][<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<h4 id="④二维数组的动态初始化（不等长）"><a href="#④二维数组的动态初始化（不等长）" class="headerlink" title="④二维数组的动态初始化（不等长）"></a>④二维数组的动态初始化（不等长）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[][] arr = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>][];</span><br></pre></td></tr></table></figure>
+
+<h4 id="⑤二维数组中元素的访问"><a href="#⑤二维数组中元素的访问" class="headerlink" title="⑤二维数组中元素的访问"></a>⑤二维数组中元素的访问</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">第一个元素：arr[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">最后一个元素：arr[arr.length-<span class="number">1</span>][arr[arr.length-<span class="number">1</span>].length-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="⑥二维数组中元素的遍历"><a href="#⑥二维数组中元素的遍历" class="headerlink" title="⑥二维数组中元素的遍历"></a>⑥二维数组中元素的遍历</h4><h3 id="IDEA的Debug"><a href="#IDEA的Debug" class="headerlink" title="IDEA的Debug"></a>IDEA的Debug</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122020670.png" alt="image-20240227122020670"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122031704.png" alt="image-20240227122031704"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122037930.png" alt="image-20240227122037930"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122045388.png" alt="image-20240227122045388"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122051856.png" alt="image-20240227122051856"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227122056862.png" alt="image-20240227122056862"></p>
+<h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227123624933.png" alt="image-20240227123624933"></p>
+<h4 id="①什么是单元测试，为什么要进行单元测试？"><a href="#①什么是单元测试，为什么要进行单元测试？" class="headerlink" title="①什么是单元测试，为什么要进行单元测试？"></a>①什么是单元测试，为什么要进行单元测试？</h4><p>1.一个项目是巨大的，只有保证你写的每一块都是正确的，最后整个项目才能正常运行。这里所谓的每一块就是一个单元。</p>
+<h4 id="②做单元测试需要引入JUnit框架，JUnit框架在JDK中没有，需要额外引入，也就是引入JUnit框架的class文件（jar包）"><a href="#②做单元测试需要引入JUnit框架，JUnit框架在JDK中没有，需要额外引入，也就是引入JUnit框架的class文件（jar包）" class="headerlink" title="②做单元测试需要引入JUnit框架，JUnit框架在JDK中没有，需要额外引入，也就是引入JUnit框架的class文件（jar包）"></a>②做单元测试需要引入JUnit框架，JUnit框架在JDK中没有，需要额外引入，也就是引入JUnit框架的class文件（jar包）</h4><p>step1：文件目录下新建lib文件夹；</p>
+<p>step2：将三个jar包复制进去，</p>
+<p>step3：全选右键，Add as library</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227123922794.png" alt="image-20240227123922794"></p>
+<h4 id="③单元测试类（测试用例）怎么写？"><a href="#③单元测试类（测试用例）怎么写？" class="headerlink" title="③单元测试类（测试用例）怎么写？"></a>③单元测试类（测试用例）怎么写？</h4><p>1.单元测试类名：XxxTest</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227133137828.png" alt="image-20240227133137828"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227133302806.png" alt="image-20240227133302806"></p>
+<h4 id="④单元测试方法怎么写？"><a href="#④单元测试方法怎么写？" class="headerlink" title="④单元测试方法怎么写？"></a>④单元测试方法怎么写？</h4><p>1.单元测试方法需要使用@Test注解标注。</p>
+<p>2.单元测试方法返回值类型必须是void</p>
+<p>3.单元测试方法形参个数为0 </p>
+<p>4.建议单元测试方法名：testXxx</p>
+<h4 id="⑤什么是期望值，什么是实际值？"><a href="#⑤什么是期望值，什么是实际值？" class="headerlink" title="⑤什么是期望值，什么是实际值？"></a>⑤什么是期望值，什么是实际值？</h4><p>1.期望值就是在程序执行之前，你觉得正确的输出结果应该是多少</p>
+<p>2.实际值就是程序在实际运行之后得到的结果</p>
+<h4 id="⑥常见注解："><a href="#⑥常见注解：" class="headerlink" title="⑥常见注解："></a>⑥常见注解：</h4><p>1.@BeforeAll @AfterAll 主要用于在测试开始之前&#x2F;之后执行必要的代码。被标注的方法需要是静态的。</p>
+<p>2.@BeforeEach @AfterEach 主要用于在每个测试方法执行前&#x2F;后执行必要的代码。</p>
+<h4 id="⑦单元测试中使用Scanner失效怎么办？"><a href="#⑦单元测试中使用Scanner失效怎么办？" class="headerlink" title="⑦单元测试中使用Scanner失效怎么办？"></a>⑦单元测试中使用Scanner失效怎么办？</h4><p>1.选中导航栏的“Help”，然后选中“Edit Custom VM Options…”，接着在“IDEA64.exe.vmoptions”文件中添加内容“-Deditable.java.test.console&#x3D;true”，最后在重启IDEA即可解决</p>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>跳过</p>
+<h3 id="Arrays工具类"><a href="#Arrays工具类" class="headerlink" title="Arrays工具类"></a>Arrays工具类</h3><blockquote>
+<p>java.util</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Arrays.toString()方法：将数组转换成字符串</span><br><span class="line"></span><br><span class="line">这个和Object.toString不同，</span><br><span class="line"><span class="comment">/*************************************************/</span></span><br><span class="line">Object.toString()</span><br><span class="line">Arrays.toString(att)<span class="comment">//很显然，这个是一个静态数组</span></span><br><span class="line"><span class="comment">/*************************************************/</span></span><br><span class="line">    </span><br><span class="line">Arrays.deepToString()方法：可以将二维数组转换成字符串</span><br><span class="line"></span><br><span class="line">Arrays.equals(<span class="type">int</span>[] arr1, <span class="type">int</span>[] arr2)方法：判断两个数组是否相等</span><br><span class="line"></span><br><span class="line">Arrays.equals(Object[] arr1, Object[] arr2)方法</span><br><span class="line"></span><br><span class="line">Arrays.deepEquals(Object[] arr1, Object[] arr2)方法：判断两个二维数组是否相等</span><br><span class="line"></span><br><span class="line">Arrays.sort(<span class="type">int</span>[] arr)方法：基于快速排序算法，适合小型数据量排序。</span><br><span class="line"></span><br><span class="line">Arrays.sort(String[] arr)方法</span><br><span class="line"></span><br><span class="line">Arrays.parallelSort(<span class="type">int</span>[] arr)方法：基于分治的归并排序算法，支持多核CPU排序，适合大数据量排序。<span class="comment">//多个线程</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">binarySearch</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> elt)</span>方法：二分法查找 </span><br><span class="line"></span><br><span class="line">Arrays.fill(<span class="type">int</span>[] arr, <span class="type">int</span> data)方法：填充数组</span><br><span class="line"></span><br><span class="line">Arrays.fill(<span class="type">int</span>[] a, <span class="type">int</span> fromIndex, <span class="type">int</span> toIndex, <span class="type">int</span> val)方法</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>[] Arrays.copyOf(<span class="type">int</span>[] original, <span class="type">int</span> newLength)方法：数组拷贝</span><br><span class="line">    <span class="type">int</span>[] arr = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">	<span class="type">int</span>[] arr2 = Arrays.copyOf(arr,newLength:<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//拷贝一个范围内的数组，to不包含</span></span><br><span class="line"><span class="type">int</span>[] Arrays.copyOfRange(<span class="type">int</span>[] original, <span class="type">int</span> from, <span class="type">int</span> to)</span><br><span class="line">    </span><br><span class="line">Arrays.asList(T... data)方法：将一组数据转换成List集合。    </span><br></pre></td></tr></table></figure>
+
+<h2 id="异常Exception"><a href="#异常Exception" class="headerlink" title="异常Exception"></a>异常Exception</h2><h3 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h3><h4 id="①什么是异常？有什么用？"><a href="#①什么是异常？有什么用？" class="headerlink" title="①什么是异常？有什么用？"></a>①什么是异常？有什么用？</h4><p>1.Java中的异常是指程序运行时出现了错误或异常情况，导致程序无法继续正常执行的现象。例如，数组下标越界、空指针异常、类型转换异常等都属于异常情况。</p>
+<p>2.Java提供了异常处理机制，即在程序中对可能出现的异常情况进行捕捉和处理。异常机制可以帮助程序员更好地管理程序的错误和异常情况，避免程序崩溃或出现不可预测的行为。</p>
+<p>3.没有异常机制的话，程序中就可能会出现一些难以调试和预测的异常行为，可能导致程序崩溃，甚至可能造成数据损失或损害用户利益。因此，异常机制是一项非常重要的功能，是编写可靠程序的基础。</p>
+<h4 id="②异常在Java中以类和对象的形式存在。"><a href="#②异常在Java中以类和对象的形式存在。" class="headerlink" title="②异常在Java中以类和对象的形式存在。"></a>②异常在Java中以类和对象的形式存在。</h4><p>1.现实生活中也有异常，比如地震，火灾就是异常。也可以提取出类和对象，例如：</p>
+<p>1.地震是类：512大地震、唐山大地震就是对象。</p>
+<p>2.空指针异常是类：发生在第52行的空指针异常、发生在第100行的空指针异常就是对象。</p>
+<p>2.也就是说：在第52行和第100行发生空指针异常的时候，底层一定分别new了一个NullPointerException对象。在程序中异常是如何发生的？</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227140425131.png" alt="image-20240227140425131"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227140431623.png" alt="image-20240227140431623"></p>
+<h3 id="异常继承结构"><a href="#异常继承结构" class="headerlink" title="异常继承结构"></a>异常继承结构</h3><h4 id="①所有的异常和错误都是可抛出的。都继承了Throwable类。"><a href="#①所有的异常和错误都是可抛出的。都继承了Throwable类。" class="headerlink" title="①所有的异常和错误都是可抛出的。都继承了Throwable类。"></a>①所有的异常和错误都是可抛出的。都继承了Throwable类。</h4><h4 id="②Error是无法处理的，出现后只有一个结果：JVM终止。"><a href="#②Error是无法处理的，出现后只有一个结果：JVM终止。" class="headerlink" title="②Error是无法处理的，出现后只有一个结果：JVM终止。"></a>②Error是无法处理的，出现后只有一个结果：JVM终止。</h4><h4 id="③Exception是可以处理的。"><a href="#③Exception是可以处理的。" class="headerlink" title="③Exception是可以处理的。"></a>③Exception是可以处理的。</h4><h4 id="④Exception的分类："><a href="#④Exception的分类：" class="headerlink" title="④Exception的分类："></a>④Exception的分类：</h4><p>1.所有的RuntimeException的子类：运行时异常&#x2F;未检查异常(UncheckedException)&#x2F;非受控异常</p>
+<p>2.Exception的子类（除RuntimeException之外）：编译时异常&#x2F;检查异常(CheckedException)&#x2F;受控异常</p>
+<h4 id="⑤编译时异常和运行时异常区别："><a href="#⑤编译时异常和运行时异常区别：" class="headerlink" title="⑤编译时异常和运行时异常区别："></a>⑤编译时异常和运行时异常区别：</h4><ul>
+<li>1.编译时异常特点：在编译阶段必须提前处理，如果不处理编译器报错。</li>
+<li>2.运行时异常特点：在编译阶段可以选择处理，也可以不处理，没有硬性要求。</li>
+<li>3.编译时异常一般是由外部环境或外在条件引起的，如网络故障、磁盘空间不足、文件找不到等</li>
+<li>4.运行时异常一般是由程序员的错误引起的，并且不需要强制进行异常处理</li>
+</ul>
+<p>注意：编译时异常并不是在编译阶段发生的异常，所有的异常发生都是在运行阶段的，因为每个异常发生都是会new异常对象的，new异常对象只能在运行阶段完成。那为什么叫做编译时异常呢？这是因为这种异常必须在编译阶段提前预处理，如果不处理编译器报错，因此而得名编译时异常。</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227141452414.png" alt="image-20240227141452414"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227141713987.png" alt="image-20240227141713987"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">NullPointerException</span> <span class="variable">e</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br><span class="line"><span class="keyword">throw</span> e;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NullPointerException</span>();</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><h4 id="step1：继承Exception（编译时异常）-RuntimeException"><a href="#step1：继承Exception（编译时异常）-RuntimeException" class="headerlink" title="step1：继承Exception（编译时异常）&#x2F;RuntimeException"></a>step1：继承Exception（编译时异常）&#x2F;RuntimeException</h4><h4 id="step2-提供一个无参数构造方法，再提供一个带String-msg参数的构造方法，在构造方法中调用父类的构造方法。"><a href="#step2-提供一个无参数构造方法，再提供一个带String-msg参数的构造方法，在构造方法中调用父类的构造方法。" class="headerlink" title="step2:   提供一个无参数构造方法，再提供一个带String msg参数的构造方法，在构造方法中调用父类的构造方法。"></a>step2:   提供一个无参数构造方法，再提供一个带String msg参数的构造方法，在构造方法中调用父类的构造方法。</h4><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227143030302.png" alt="image-20240227143030302"></p>
+<h3 id="异常的处理包括两种方式："><a href="#异常的处理包括两种方式：" class="headerlink" title="异常的处理包括两种方式："></a>异常的处理包括两种方式：</h3><h4 id="1-声明异常：类似于推卸责任的处理方式"><a href="#1-声明异常：类似于推卸责任的处理方式" class="headerlink" title="1.声明异常：类似于推卸责任的处理方式"></a>1.声明异常：类似于推卸责任的处理方式</h4><p>在方法定义时使用throws关键字声明异常，**&#x3D;&#x3D;告知调用者，调用这个方法可能会出现异常&#x3D;&#x3D;**。这种处理方式的态度是：如果出现了异常则会抛给调用者来处理。</p>
+<p>如果一个异常发生后希望调用者来处理的，使用声明异常（俗话说：交给上级处理）</p>
+<p><strong>&#x3D;&#x3D;注意这里是throws，然后在后面需要throw e的时候是没有s的&#x3D;&#x3D;</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">m</span><span class="params">()</span> <span class="keyword">throws</span> AException, BException... &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果Exception和Exception都继承了Exception，那么也可以这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">m</span><span class="params">()</span> <span class="keyword">throws</span> XException&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>&#x3D;&#x3D;调用者在调用m()方法时，编译器会检测到该方法上用throws声明了异常，表示可能会抛出异常，编译器会继续检测该异常是否为编译时异常，如果为编译时异常则必须在编译阶段进行处理，如果不处理编译器就会报错。&#x3D;&#x3D;</strong></p>
+<p><strong>如果所有位置都采用throws，包括main方法的处理态度也是throws，如果运行时出现了异常，最终异常是抛给了main方法的调用者（JVM），JVM则会终止程序的执行。</strong>&#x3D;&#x3D;<strong>因此为了保证程序在出现异常后不被中断，至少main方法不要再使用throws进行声明了。</strong>&#x3D;&#x3D;</p>
+<p>发生异常后，在发生异常的位置上，往下的代码是不会执行的，除非进行了异常的捕捉。</p>
+<h4 id="2-捕捉异常：真正的处理捕捉异常（真正的处理异常-try…catch…关键字-）"><a href="#2-捕捉异常：真正的处理捕捉异常（真正的处理异常-try…catch…关键字-）" class="headerlink" title="2.捕捉异常：真正的处理捕捉异常（真正的处理异常 (try…catch…关键字)）"></a>2.捕捉异常：真正的处理捕捉异常（真正的处理异常 (try…catch…关键字)）</h4><p>在可能出现异常的代码上使用try..catch进行捕捉处理。这种处理方式的态度是：把异常抓住。其它方法如果调用这个方法，对于调用者来说是不知道这个异常发生的。因为这个异常被抓住并处理掉了。</p>
+<p>如果一个异常发生后，不需要调用者知道，也不需要调用者来处理，选择使用捕捉方式处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"><span class="comment">// 尝试执行可能会出现异常的代码</span></span><br><span class="line"><span class="comment">// try块中的代码如果执行出现异常，出现异常的位置往下的代码是不会执行的，直接进入catch块执行</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(AException e)&#123;</span><br><span class="line"><span class="comment">// 如果捕捉到AException类型的异常，在这里处理</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(BException e)&#123;</span><br><span class="line"><span class="comment">// 如果捕捉到BException类型的异常，在这里处理</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(XException e)&#123;</span><br><span class="line"><span class="comment">// 如果捕捉到XException类型的异常，在这里处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 当try..catch..将所有发生的异常捕捉后，这里的代码是会继续往下执行的。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"><span class="comment">// 尝试执行可能会出现异常的代码</span></span><br><span class="line"><span class="comment">// try块中的代码如果执行出现异常，出现异常的位置往下的代码是不会执行的，直接进入catch块执行</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(AException e|BException e2)&#123;</span><br><span class="line"><span class="comment">// 如果捕捉到AException类型的异常，在这里处理</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(XException e)&#123;</span><br><span class="line"><span class="comment">// </span></span><br></pre></td></tr></table></figure>
+
+<p>catch可以写多个。并且遵循自上而下，从小到大。</p>
+<p>因为，如果最大的在上面，后面的小的异常都不会抛出了，就会导致异常抛出的不够精确</p>
+<h4 id="异常在处理的整个过程中应该是：声明和捕捉联合使用。"><a href="#异常在处理的整个过程中应该是：声明和捕捉联合使用。" class="headerlink" title="异常在处理的整个过程中应该是：声明和捕捉联合使用。"></a>异常在处理的整个过程中应该是：声明和捕捉联合使用。</h4><h4 id="什么时候捕捉？什么时候声明？"><a href="#什么时候捕捉？什么时候声明？" class="headerlink" title="什么时候捕捉？什么时候声明？"></a>什么时候捕捉？什么时候声明？</h4><p>如果**&#x3D;&#x3D;异常发生后需要调用者来处理的，需要调用者知道的，则采用声明方式。&#x3D;&#x3D;**否则采用捕捉。</p>
+<h4 id="异常的常用方法"><a href="#异常的常用方法" class="headerlink" title="异常的常用方法"></a>异常的常用方法</h4><p> 获取异常的简单描述信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">	exception.getMessage();</span><br><span class="line">	</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"><span class="comment">// 尝试执行可能会出现异常的代码</span></span><br><span class="line"><span class="comment">// try块中的代码如果执行出现异常，出现异常的位置往下的代码是不会执行的，直接进入catch块执行</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(AException e)&#123;</span><br><span class="line"><span class="comment">// 如果捕捉到AException类型的异常，在这里处理</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(BException e)&#123;</span><br><span class="line"><span class="comment">// 如果捕捉到BException类型的异常，在这里处理</span></span><br><span class="line">&#125;<span class="keyword">catch</span>(XException e)&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">message</span> <span class="operator">=</span> e.getMessage();</span><br><span class="line">    System.out.println(message);</span><br><span class="line"><span class="comment">// 如果捕捉到XException类型的异常，在这里处理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<pre><code>         获取的message是通过构造方法创建异常对象时传递过去的message。
+</code></pre>
+<p> 打印异常堆栈信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exception.printStackTrace();</span><br></pre></td></tr></table></figure>
+
+<p> 要会看异常的堆栈信息：</p>
+<p>​			异常信息的打印是符合栈数据结构的。</p>
+<p>​			看异常信息主要看最开始的描述信息。看栈顶信息。</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227152502694.png" alt="image-20240227152502694"></p>
+<h3 id="finally语句块"><a href="#finally语句块" class="headerlink" title="finally语句块"></a>finally语句块</h3><h4 id="finally语句块中的代码是一定会执行的。"><a href="#finally语句块中的代码是一定会执行的。" class="headerlink" title="finally语句块中的代码是一定会执行的。"></a>finally语句块中的代码是一定会执行的。</h4><h4 id="finally语句块不能单独使用，至少需要配合try语句块一起使用："><a href="#finally语句块不能单独使用，至少需要配合try语句块一起使用：" class="headerlink" title="finally语句块不能单独使用，至少需要配合try语句块一起使用："></a>finally语句块不能单独使用，至少需要配合try语句块一起使用：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>...<span class="keyword">finally</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>...<span class="keyword">catch</span>...<span class="keyword">finally</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="通常在finally语句块中完成资源的释放"><a href="#通常在finally语句块中完成资源的释放" class="headerlink" title="通常在finally语句块中完成资源的释放"></a>通常在finally语句块中完成资源的释放</h4><p>资源释放的工作比较重要，如果资源没有释放会一直占用内存。</p>
+<p>为了保证资源的关闭，也就是说：不管程序是否出现异常，关闭资源的代码一定要保证执行。</p>
+<p>因此在finally语句块中通常进行资源的释放。</p>
+<h4 id="final、finally、finalize分别是什么？"><a href="#final、finally、finalize分别是什么？" class="headerlink" title="final、finally、finalize分别是什么？"></a>final、finally、finalize分别是什么？</h4><p>final是一个关键字，修饰的类无法继承，修饰的方法无法覆盖，修饰的变量不能修改。</p>
+<p>finally是一个关键字，和try一起使用，finally语句块中的代码一定会执行。\</p>
+<p>finalize是一个标识符，它是Object类中的一个方法名。</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227152745145.png" alt="image-20240227152745145"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/23/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%862/" rel="prev" title="Java基础部分2">
+                  <i class="fa fa-angle-left"></i> Java基础部分2
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lolo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

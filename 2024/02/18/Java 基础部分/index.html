@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Java 基础部分P18一、基础知识细节 编译java代码 ： javac HelloWorld.java  main方法是JVM规定的，程序就是从这个位置执行的，程序的入口  public class 和class的区别   P19 public class和class的区别 一个java源文件中可以生成多个源文件 ；  编译后，一个class对应生成一个class字节码文件      如果一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Loloooo">
+<meta property="og:url" content="http://example.com/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/index.html">
+<meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="Java 基础部分P18一、基础知识细节 编译java代码 ： javac HelloWorld.java  main方法是JVM规定的，程序就是从这个位置执行的，程序的入口  public class 和class的区别   P19 public class和class的区别 一个java源文件中可以生成多个源文件 ；  编译后，一个class对应生成一个class字节码文件      如果一个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/02/18/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111209337.png">
+<meta property="og:image" content="http://example.com/2024/02/18/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111722726.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113100144.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113232992.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113303115.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124717592.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124824008.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223125508845.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134152096.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134219863.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142425166.png">
+<meta property="og:image" content="http://example.com/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142930629.png">
+<meta property="article:published_time" content="2024-02-17T16:54:17.342Z">
+<meta property="article:modified_time" content="2024-02-23T11:29:33.081Z">
+<meta property="article:author" content="lolo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/02/18/blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111209337.png">
+
+
+<link rel="canonical" href="http://example.com/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/","path":"2024/02/18/Java 基础部分/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Loloooo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Loloooo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">Java 基础部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#P18"><span class="nav-number">1.1.</span> <span class="nav-text">P18</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%BB%86%E8%8A%82"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、基础知识细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P19-public-class%E5%92%8Cclass%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.2.</span> <span class="nav-text">P19 public class和class的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">JAVA基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">1.3.1.</span> <span class="nav-text">一、标识符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%8F%AF%E4%BB%A5%E6%A0%87%E8%AF%86%E4%BB%80%E4%B9%88"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">标识符可以标识什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">标识符命名规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">标识符命名规范</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.3.2.</span> <span class="nav-text">二、关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E5%85%B3%E9%94%AE%E5%AD%97%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">Java关键字有哪些</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="nav-number">1.3.3.</span> <span class="nav-text">三、字面量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Java中有哪些字面量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">加号运算符 +</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.4.</span> <span class="nav-text">四、变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%88%86%E7%B1%BB"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">变量分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.5.</span> <span class="nav-text">五、数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%95%B4%E6%95%B0%E5%9E%8B%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">1.整数型详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%87%AA%E5%8A%A8%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.3.5.2.</span> <span class="nav-text">2.自动类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.3.5.3.</span> <span class="nav-text">3.强制类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-byte"><span class="nav-number">1.3.5.4.</span> <span class="nav-text">4.byte</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BF%90%E7%AE%97"><span class="nav-number">1.3.5.5.</span> <span class="nav-text">5.数据类型运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#a-%E5%9C%A8Java%E4%B8%AD%EF%BC%8C%E5%A4%9A%E7%A7%8D%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%B7%B7%E5%90%88%E8%BF%90%E7%AE%97%E6%97%B6%EF%BC%8C%E5%90%84%E8%87%AA%E5%85%88%E8%BD%AC%E6%8D%A2%E6%88%90%E5%AE%B9%E9%87%8F%E6%9C%80%E5%A4%A7%E7%9A%84%E7%B1%BB%E5%9E%8B%EF%BC%8C%E5%86%8D%E5%81%9A%E8%BF%90%E7%AE%97"><span class="nav-number">1.3.5.5.1.</span> <span class="nav-text">a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#b-byte%E5%92%8Cshort%E6%B7%B7%E5%90%88%E8%BF%90%E7%AE%97%EF%BC%88byte-byte%E3%80%81short-short%EF%BC%89%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%90%84%E8%87%AA%E5%85%88%E8%BD%AC%E6%8D%A2%E6%88%90int%E5%86%8D%E5%81%9A%E8%BF%90%E7%AE%97%EF%BC%8C%E6%9C%80%E5%90%8E%E7%9A%84%E7%BB%93%E6%9E%9C%E6%98%AFint%EF%BC%8C%E4%B8%8D%E8%83%BD%E7%94%A8short"><span class="nav-number">1.3.5.5.2.</span> <span class="nav-text">b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#c-byte-a-10-3-%E8%BF%99%E4%B8%AA%E6%98%AF%E5%9C%A8%E7%BC%96%E8%AF%91%E7%9A%84%E6%97%B6%E5%80%99%E5%B0%B1%E5%BE%97%E5%88%B0%E7%BB%93%E6%9E%9C%E4%BA%86"><span class="nav-number">1.3.5.5.3.</span> <span class="nav-text">c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#d-byte-a-10-byte-b-3-byte-c-a-b-%E8%BF%99%E4%B8%AA%E6%98%AF%E8%BF%90%E8%A1%8C%E7%9A%84%E6%97%B6%E5%80%99%E6%89%8D%E5%BE%97%E5%88%B0%E7%BB%93%E6%9E%9C%E7%9A%84%E3%80%82"><span class="nav-number">1.3.5.5.4.</span> <span class="nav-text">d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="nav-number">1.3.6.</span> <span class="nav-text">6.浮点型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0Java%E4%B8%AD%EF%BC%8C%E6%B5%AE%E7%82%B9%E5%9E%8B%E5%AD%97%E9%9D%A2%E9%87%8F%E9%BB%98%E8%AE%A4%E8%A2%AB%E5%BD%93%E5%81%9Adouble%E7%B1%BB%E5%9E%8B%EF%BC%8C%E5%A6%82%E6%9E%9C%E8%A6%81%E5%BD%93%E5%81%9Afloat%E7%B1%BB%E5%9E%8B%EF%BC%8C%E9%9C%80%E8%A6%81%E5%9C%A8%E6%95%B0%E5%AD%97%E5%90%8E%E9%9D%A2%E6%B7%BB%E5%8A%A0-F-%E6%88%96-f%E3%80%82"><span class="nav-number">1.3.6.1.</span> <span class="nav-text">①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加 F 或 f。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1%E5%8F%A6%E5%A4%96%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E4%BB%A5%E4%B8%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E7%9C%8B%E5%88%B0%EF%BC%8Cdouble%E7%B2%BE%E5%BA%A6%E9%AB%98%E4%BA%8Efloat%EF%BC%9A"><span class="nav-number">1.3.6.2.</span> <span class="nav-text">②另外，可以通过以下程序的输出结果看到，double精度高于float：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A2%E6%B5%AE%E7%82%B9%E5%9E%8B%E6%95%B0%E6%8D%AE%E4%B8%A4%E7%A7%8D%E8%A1%A8%E7%A4%BA%E5%BD%A2%E5%BC%8F"><span class="nav-number">1.3.6.3.</span> <span class="nav-text">③浮点型数据两种表示形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A4%E6%B5%AE%E7%82%B9%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.6.4.</span> <span class="nav-text">⑤浮点型数据存储原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E5%AD%97%E7%AC%A6%E5%9E%8B"><span class="nav-number">1.3.7.</span> <span class="nav-text">7.字符型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">1.3.7.1.</span> <span class="nav-text">字符编码</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lolo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-18 00:54:17" itemprop="dateCreated datePublished" datetime="2024-02-18T00:54:17+08:00">2024-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-02-23 19:29:33" itemprop="dateModified" datetime="2024-02-23T19:29:33+08:00">2024-02-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
+<li><p>编译java代码 ： javac HelloWorld.java</p>
+</li>
+<li><p>main方法是JVM规定的，程序就是从这个位置执行的，程序的入口</p>
+</li>
+<li><p>public class 和class的区别</p>
+</li>
+</ol>
+<h2 id="P19-public-class和class的区别"><a href="#P19-public-class和class的区别" class="headerlink" title="P19 public class和class的区别"></a>P19 public class和class的区别</h2><ol>
+<li><p>一个java源文件中可以生成多个源文件 ；</p>
+</li>
+<li><p>编译后，一个class对应生成一个class字节码文件</p>
+</li>
+</ol>
+<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111209337.png" alt="image-20240223111209337" style="zoom:50%;" />
+
+<ol start="3">
+<li><p>如果一个类是public的，那么这个类名要和文件名保持一致，如果不一致就会报错。</p>
+</li>
+<li><p>一个java文件里，public class可以没有，如果有也只能有一个。</p>
+</li>
+<li><p>每个类里面都可以写入口main函数 ，执行只需要 java 类名</p>
+<blockquote>
+<p>在实际的开发中，入口只能有一个</p>
+</blockquote>
+</li>
+</ol>
+<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111722726.png" alt="image-20240223111722726" style="zoom:50%;" />
+
+<h2 id="JAVA基础语法"><a href="#JAVA基础语法" class="headerlink" title="JAVA基础语法"></a>JAVA基础语法</h2><h3 id="一、标识符"><a href="#一、标识符" class="headerlink" title="一、标识符"></a>一、标识符</h3><blockquote>
+<p>凡是有权利自己起名的都是标识符，比如类名等</p>
+</blockquote>
+<p>①在Java中，标识符是用来给变量、方法、类和包等命名的字符序列。</p>
+<p>②标识符的长度没有限制，但是建议使用有意义的、简洁的标识符，以提高代码的可读性和可维护性。</p>
+<h4 id="标识符可以标识什么"><a href="#标识符可以标识什么" class="headerlink" title="标识符可以标识什么"></a><strong>标识符可以标识什么</strong></h4><p>①变量名</p>
+<p>②方法名</p>
+<p>③类名、接口名、枚举名、注解名</p>
+<p>④包名</p>
+<p>⑤常量名</p>
+<p>⑥……</p>
+<h4 id="标识符命名规则"><a href="#标识符命名规则" class="headerlink" title="标识符命名规则"></a>标识符命名规则</h4><p>①标识符可以由字母、数字、下划线(_)和美元符号($)组成，不能含有其他符号。（java支持全球所有语言，所以这里的 字母 指的是任何一个国家的文字都可以）</p>
+<p>②标识符不能以数字开头。</p>
+<p>③标识符不能是Java中的关键字，如public、class、void等。</p>
+<p>④标识符是区分大小写的，即Foo和foo是两个不同的标识符。</p>
+<p>⑤标识符的长度没有限制，但是Java建议使用有意义的、简短的标识符。</p>
+<h4 id="标识符命名规范"><a href="#标识符命名规范" class="headerlink" title="标识符命名规范"></a><strong>标识符命名规范</strong></h4><p>①见名知意</p>
+<p>②驼峰式命名方式</p>
+<p>③类名、接口名、枚举、注解：首字母大写，后面每个单词首字母大写。（StudentService，UserService）</p>
+<p>④变量名和方法名：首字母小写，后面每个单词首字母大写。（doSome，doOther）</p>
+<p>⑤常量名：全部大写，每个单词用下划线连接。（LOGIN_SUCCESS，SYSTEM_ERROR）</p>
+<p>⑥包名：全部小写    </p>
+<h3 id="二、关键字"><a href="#二、关键字" class="headerlink" title="二、关键字"></a>二、关键字</h3><blockquote>
+<p>Java关键字是Java编程语言中预定义的具有特殊含义的单词，这些单词不能被用作标识符，而是在语法中有特定的用法和限制。</p>
+</blockquote>
+<h4 id="Java关键字有哪些"><a href="#Java关键字有哪些" class="headerlink" title="Java关键字有哪些"></a>Java关键字有哪些</h4><p>①Java关键字都是小写的。</p>
+<p>②abstract, assert, boolean, break, byte, case, catch, char, class, continue, default, do, double, else, enum, extends, final, finally, float, for, if, implements, import, instanceof, int, interface, long, native, new, package, private, protected, public, return, short, static, strictfp, super, switch, synchronized, this, throw, throws, transient, try, void, volatile, while（50）</p>
+<p>③Java保留字：goto，const(虽然没有在java中用到，但是不能用)</p>
+<h3 id="三、字面量"><a href="#三、字面量" class="headerlink" title="三、字面量"></a>三、字面量</h3><blockquote>
+<p>①字面量指的是在程序中直接使用的数据，字面量是Java中最基本的表达式，不需要进行计算或转换，直接使用即可。</p>
+<p>就是数据</p>
+</blockquote>
+<h4 id="Java中有哪些字面量"><a href="#Java中有哪些字面量" class="headerlink" title="Java中有哪些字面量"></a>Java中有哪些字面量</h4><p>①整数型：10、-5、0、100</p>
+<p>②浮点型：3.14、-0.5、1.0</p>
+<p>③布尔型：true、false</p>
+<p>④字符型：’a’、’b’、’c’、’1’、’2’、’国’</p>
+<p>⑤字符串型：”Hello”、”World”、”Java”、”你好呀”</p>
+<h4 id="加号运算符"><a href="#加号运算符" class="headerlink" title="加号运算符 +"></a>加号运算符 +</h4><p>①作用1：求和（当加号两边都是数字时进行求和运算）</p>
+<p>②作用2：字符串拼接（当加号&#x3D;&#x3D;两边有任意一边是字符串类型&#x3D;&#x3D;时会进行字符串拼接，结果还是一个字符串）</p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113100144.png" alt="image-20240223113100144"></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113232992.png" alt="image-20240223113232992"></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113303115.png" alt="image-20240223113303115"></p>
+<h3 id="四、变量"><a href="#四、变量" class="headerlink" title="四、变量"></a>四、变量</h3><p><strong>①变量是内存当中的一块空间。是计算机中存储数据最基本的单元。</strong></p>
+<p><strong>②变量三要素：</strong></p>
+<ul>
+<li>l数据类型（决定空间大小）【int, double, String】</li>
+<li>l变量名（只要是合法的标识符即可）</li>
+<li>l变量值（变量中具体存储的数据）</li>
+</ul>
+<p><strong>③变量的声明、赋值、访问</strong></p>
+<ul>
+<li>lint i; &#x2F;&#x2F; 声明一个整数型的变量，起名i</li>
+<li>li &#x3D; 100; &#x2F;&#x2F; 给变量i赋值100</li>
+<li>lSystem.out.println(i); &#x2F;&#x2F; 访问i变量：读操作</li>
+<li>li &#x3D; 200; &#x2F;&#x2F; 访问i变量：改操作【给变量i重新赋值200】</li>
+</ul>
+<p>生命周期就是从内存开辟到内存释放</p>
+<h4 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h4><p><strong>①局部变量</strong></p>
+<p>在方法体里面定义的变量</p>
+<p><strong>②成员变量</strong></p>
+<p>在类里面，不是在方法体里面定义的；</p>
+<p>&#x3D;&#x3D;对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。&#x3D;&#x3D;0.false，null</p>
+<ol>
+<li><p>静态变量</p>
+<p>​	&#x2F;&#x2F;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> a；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实例变量</p>
+</li>
+</ol>
+<h3 id="五、数据类型"><a href="#五、数据类型" class="headerlink" title="五、数据类型"></a>五、数据类型</h3><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124717592.png" alt="image-20240223124717592"></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124824008.png" alt="image-20240223124824008"></p>
+<p>关于默认值：Java语言中变量必须先声明，再赋值，才能使用。对于局部变量来说必须手动赋值，而对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。</p>
+<h4 id="1-整数型详解"><a href="#1-整数型详解" class="headerlink" title="1.整数型详解"></a>1.整数型详解</h4><ol>
+<li>整数型字面量一般默认是int，所以在定义long的时候，需要在字面量的后面加上“L&#x2F;l”</li>
+</ol>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223125508845.png" alt="image-20240223125508845"></p>
+<h4 id="2-自动类型转换"><a href="#2-自动类型转换" class="headerlink" title="2.自动类型转换"></a>2.自动类型转换</h4><p>小容量的可以转大的，在Java中，对于基本数据类型来说，<strong>小容量是可以直接赋值给大容量的，这被称为自动类型转换。</strong></p>
+<p><strong>&#x3D;&#x3D;<em>byte &lt; short &lt; int &lt; long &lt; float &lt; double</em>&#x3D;&#x3D;</strong></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134152096.png" alt="image-20240223134152096"></p>
+<h4 id="3-强制类型转换"><a href="#3-强制类型转换" class="headerlink" title="3.强制类型转换"></a>3.强制类型转换</h4><blockquote>
+<p>需要大容量转小容量</p>
+</blockquote>
+<p><strong>①Java中大容量是无法直接转换成小容量的。</strong>因为这种操作可能会导致精度损失，所以这种行为交给了程序员来决定，当然这种后果自然是程序员自己去承担。因此在代码中需要程序员自己亲手加上强制类型转换符，程序才能编译通过</p>
+<p><strong>②强制类型转换时，底层二进制是如何变化的？原则：砍掉左侧多余的二进制。</strong></p>
+<p><strong>③强制类型转换时，精度可能会损失，也可能不会损失，这要看具体的数据是否真正的超出了强转后的类型的取值范围</strong>。如下图：水可能溢出，也可能不会溢出，这要看真实存放的水有多少</p>
+<p>④请推算结果：byte b &#x3D; (byte)150;</p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134219863.png" alt="image-20240223134219863"></p>
+<h4 id="4-byte"><a href="#4-byte" class="headerlink" title="4.byte"></a>4.byte</h4><p><strong>当整数字面量没有超出byte的范围</strong></p>
+<p><strong>①在Java中有这样一个规定，</strong>&#x3D;&#x3D;当整数型字面量没有超出byte的范围：可以直接赋值给byte类型的变量。&#x3D;&#x3D;</p>
+<p><strong>byte b &#x3D; 127</strong>; &#x2F;&#x2F; 这是允许的</p>
+<p>很显然，这是一种编译优化。同时也是为了方便程序员写代码。</p>
+<p><strong>②如果超出了范围</strong>，例如：</p>
+<p>byte b &#x3D; 128; &#x2F;&#x2F; 编译报错</p>
+<p>这样就会报错，需要做强制类型转换，例如：</p>
+<p>byte b &#x3D; (byte)128;</p>
+<p>它的执行结果你知道吗？可以尝试推算一下</p>
+<p><strong>③在整数类型中，除了byte有这个待遇之外，short同样也是支持的。</strong>也就是说：如果整数型字面量没有超出short取值范围时，也是支持直接赋值的。</p>
+<h4 id="5-数据类型运算"><a href="#5-数据类型运算" class="headerlink" title="5.数据类型运算"></a>5.数据类型运算</h4><p><strong>两个int类型做运算：</strong>两个int类型的数据做运算，最终的结果还是int类型</p>
+<p><strong>多种数据类型混合运算：</strong></p>
+<h5 id="a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"><a href="#a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算" class="headerlink" title="a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"></a>a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算</h5><p>byte a &#x3D; 100;</p>
+<p>int b &#x3D; 200;</p>
+<p>long c &#x3D; 300L;</p>
+<p>long d &#x3D; a + b + c;</p>
+<p>你可以测试一下，如果d变量是int类型则编译器会报错</p>
+<h5 id="b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"><a href="#b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short" class="headerlink" title="b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"></a>b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short</h5><h5 id="c-byte-a-10-3-这个是在编译的时候就得到结果了"><a href="#c-byte-a-10-3-这个是在编译的时候就得到结果了" class="headerlink" title="c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了"></a>c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了</h5><p>编译后的class文件中直接就是byte a &#x3D; 3</p>
+<h5 id="d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。"><a href="#d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。" class="headerlink" title="d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。"></a>d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。</h5><p>编译的阶段只能知道a&#x2F;b的结果是int类型，不知道最后的结果是多少。</p>
+<h3 id="6-浮点型"><a href="#6-浮点型" class="headerlink" title="6.浮点型"></a>6.浮点型</h3><p><strong>浮点型字面量默认被当做double</strong></p>
+<h4 id="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。"><a href="#①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。" class="headerlink" title="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加 F 或 f。"></a><strong>①Java中，浮点型字面量默认被当做double类型</strong>，如果要当做float类型，需要在数字后面添加 F 或 f。</h4><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142425166.png" alt="image-20240223142425166"></p>
+<p>&#x3D;&#x3D;float f &#x3D; 3.0; &#x2F;&#x2F; 编译报错&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;报错原因是：3.0默认被当做double类型，大容量无法直接赋值给小容量。如何修改：&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;float f &#x3D; 3.0F;&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;float f &#x3D; （double）3.14;&#x3D;&#x3D;这个是强制类型转换</p>
+<h4 id="②另外，可以通过以下程序的输出结果看到，double精度高于float："><a href="#②另外，可以通过以下程序的输出结果看到，double精度高于float：" class="headerlink" title="②另外，可以通过以下程序的输出结果看到，double精度高于float："></a><strong>②另外，可以通过以下程序的输出结果看到，double精度高于float：</strong></h4><p>double d &#x3D; 1.5656856894;</p>
+<p>System.out.println(d);</p>
+<p>float f &#x3D; 1.5656856894F;</p>
+<p>System.out.println(f);</p>
+<h4 id="③浮点型数据两种表示形式"><a href="#③浮点型数据两种表示形式" class="headerlink" title="③浮点型数据两种表示形式"></a>③浮点型数据两种表示形式</h4><p> <strong>第一种形式：十进制</strong></p>
+<p>double x &#x3D; 1.23;</p>
+<p>double y &#x3D; 0.23;</p>
+<p>double z &#x3D; .23;</p>
+<p> <strong>第二种形式：科学计数法</strong></p>
+<p>double x &#x3D; 0.123E2; &#x2F;&#x2F; 0.123 * 10的平方</p>
+<p>double y &#x3D; 123.34E-2; &#x2F;&#x2F; 123.34 &#x2F; 10的平方</p>
+<h4 id="⑤浮点型数据存储原理"><a href="#⑤浮点型数据存储原理" class="headerlink" title="⑤浮点型数据存储原理"></a>⑤<strong>浮点型数据存储原理</strong></h4><blockquote>
+<p>①符号位：0表示整数。1表示负数。</p>
+<p>②指数位：比如小数0.123E30，其中30就是指数。表示0.123 * 10的30次幂。所以也有把指数位叫做偏移量的。最大偏移量127。</p>
+<p>③尾数位：浮点数的小数部分的有效数字。例如：0.00123，那么尾数位存储123对应的二进制。</p>
+<p>④从浮点型数据存储原理上可以看到，二进制中的指数位决定了数字呈指数级增大。因此float虽然是4个字节，但却可以表示比long更大的数值。因此float容量比long的容量大。</p>
+</blockquote>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142930629.png" alt="image-20240223142930629"></p>
+<p>①一旦有浮点型数据参与运算得出的结果，一定不要使用“&#x3D;&#x3D;”与其它数字进行“相等比较”</p>
+<blockquote>
+<p>浮点型数据在计算机底层计算的是近似值，</p>
+</blockquote>
+<h3 id="7-字符型"><a href="#7-字符型" class="headerlink" title="7.字符型"></a>7.字符型</h3><p>①占用两个字节，0~65535，和short容量相同，但char可以取更大的整数</p>
+<p>②单个字符，使用单引号括起来，不能是多个字符</p>
+<p>③可以保存一个汉字                       </p>
+<p>④char c &#x3D; ‘’; 这是不允许的</p>
+<p>⑤char c &#x3D; ‘\u0000’; 这表示一个空字符，也是char的默认值。\u0000是一个Unicode码。</p>
+<p>⑥空字符与空格字符是不同的。空字符表示什么也没有。空格字符表示一个空格。****</p>
+<h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>乱码产生的原因在于，在编码和解码的时候没有用同一个码表</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/18/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/" rel="prev" title="">
+                  <i class="fa fa-angle-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/02/18/dlyk-part1/" rel="next" title="dlyk_part1">
+                  dlyk_part1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lolo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

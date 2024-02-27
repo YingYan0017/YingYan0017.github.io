@@ -218,7 +218,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-27 15:29:09" itemprop="dateModified" datetime="2024-02-27T15:29:09+08:00">2024-02-27</time>
+      <time title="修改时间：2024-02-27 22:29:15" itemprop="dateModified" datetime="2024-02-27T22:29:15+08:00">2024-02-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -415,7 +415,181 @@
 <p>finally是一个关键字，和try一起使用，finally语句块中的代码一定会执行。\</p>
 <p>finalize是一个标识符，它是Object类中的一个方法名。</p>
 <p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227152745145.png" alt="image-20240227152745145"></p>
+<blockquote>
+<p>innotnull</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227153843258.png" alt="image-20240227153843258"></p>
+<h4 id="面试经典题"><a href="#面试经典题" class="headerlink" title="面试经典题"></a>面试经典题</h4><h5 id="1"><a href="#1" class="headerlink" title="1."></a>1.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227154130653.png" alt="image-20240227154130653"></h5><blockquote>
+<p>i为多少? 答:100</p>
+<p>原因: </p>
+<p>两个原则,(1)程序是自上而下执行的,(2)finally肯定是要执行的</p>
+<p>所以,i返回的是100,但是会新建一个临时变量去执行i++</p>
+<p>执行流程是先用一个临时变量做i++;然后做return,所以如果是return true;返回的就是true</p>
+</blockquote>
+<h5 id="2"><a href="#2" class="headerlink" title="2."></a>2.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227213044733.png" alt="image-20240227213044733"></h5><blockquote>
+<p>false:从上往下,finally一定会在最后执行</p>
+</blockquote>
+<h5 id="3"><a href="#3" class="headerlink" title="3."></a>3.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227213351296.png" alt="image-20240227213351296"></h5><blockquote>
+<p>执行下一个</p>
+<p>原则:就近原则(从继承关系的角度上讲)</p>
+<p>null引用类型,距离String更近,String是Object的子类</p>
+</blockquote>
+<h5 id="4"><a href="#4" class="headerlink" title="4."></a>4.<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227213539958.png" alt="image-20240227213539958" style="zoom:200%;" /></h5><h5 id="5"><a href="#5" class="headerlink" title="5."></a>5.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227214002828.png" alt="image-20240227214002828"></h5><blockquote>
+<p>常理来说:a&#x3D;&#x3D;10;</p>
+<p>因为static块是在类加载的时候运行的,最先运行的,按照顺序运行的.</p>
+<p>在创建static int a的时候,(method这个方法还没有运行到???运行到了吗),b还没有赋值,默认值0.所以a没有被这个方法成功赋值,此外,由于静态变量即使不赋值也会赋值默认值,所以赋值了0</p>
+</blockquote>
+<h5 id="6"><a href="#6" class="headerlink" title="6."></a>6.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227214340480.png" alt="image-20240227214340480"></h5><blockquote>
+<p>代码的执行顺序</p>
+<p>我答:答不出来一点</p>
+<p>答案:</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227215936922.png" alt="image-20240227215936922"></p>
+</blockquote>
+<p>所以static不是一定要在这个B使用之前就跑了,就想B的静态代码就是最后跑的,但是此刻已经实现了new B()</p>
+<h3 id="方法覆盖与异常"><a href="#方法覆盖与异常" class="headerlink" title="方法覆盖与异常"></a>方法覆盖与异常</h3><p>方法重写之后，不能比父类方法抛出更多的异常，可以更少。</p>
+<p>就比如父类抛的是一个RuntimeExceptipn ,子类不能抛Exception</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227154550203.png" alt="image-20240227154550203"></p>
+<h2 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h2><h3 id="String类-注意-引用数据类型"><a href="#String类-注意-引用数据类型" class="headerlink" title="String类(注意:引用数据类型)"></a>String类(注意:引用数据类型)</h3><h4 id="String初识"><a href="#String初识" class="headerlink" title="String初识"></a>String初识</h4><blockquote>
+<p>String类是无法继承的;</p>
+<p>jdk9 之后引入了一种字符串压缩机制</p>
+</blockquote>
+<h5 id="Java中的String属于引用数据类型，代表字符串。"><a href="#Java中的String属于引用数据类型，代表字符串。" class="headerlink" title="Java中的String属于引用数据类型，代表字符串。"></a>Java中的String属于引用数据类型，代表字符串。</h5><h5 id="Java专门在-堆-中为字符串准备了一个-字符串常量池-。-JDK8"><a href="#Java专门在-堆-中为字符串准备了一个-字符串常量池-。-JDK8" class="headerlink" title="Java专门在&#x3D;&#x3D;堆&#x3D;&#x3D;中为字符串准备了一个&#x3D;&#x3D;字符串常量池&#x3D;&#x3D;。(JDK8)"></a>Java专门在&#x3D;&#x3D;堆&#x3D;&#x3D;中为字符串准备了一个&#x3D;&#x3D;字符串常量池&#x3D;&#x3D;。(JDK8)</h5><blockquote>
+<p>因为字符串使用比较频繁，放在字符串常量池中省去了对象的创建过程，从而提高程序的执行效率。（常量池属于一种缓存技术，缓存技术是提高程序执行效率的重要手段。）</p>
+</blockquote>
+<p>在编译阶段,就会把” “起来的字符串全部创建到字符串常量池里面(必须要有一份),然后用的时候直接拿</p>
+<p>JVM在启动的时候,会进行一系列的初始化,其中就包括字符串常量池的初始化会在类加载的过程中就初始化出来了,程序在真正运行中,是不用创建字符串对象的&#x2F;&#x2F; <em>一种缓存技术</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> “hello”; </span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> “hello”;</span><br><span class="line">System.out.println(s1 == s2); <span class="comment">// true 说明s1和s2指向了字符串常量池中的同一个字符串对象。</span></span><br><span class="line">注意：字符串字面量在编译的时候就已经确定了将其放到字符串常量池中。JVM启动时会立即程序中带有双引号的字符串全部放入字符串常量池。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h5 id="Java8之后字符串常量池在堆中。Java8之前字符串常量池在永久代。"><a href="#Java8之后字符串常量池在堆中。Java8之前字符串常量池在永久代。" class="headerlink" title="Java8之后字符串常量池在堆中。Java8之前字符串常量池在永久代。"></a>Java8之后字符串常量池在堆中。Java8之前字符串常量池在永久代。</h5><h5 id="字符串字面量一旦创建是不可变的。（底层String源码中有一个属性：private-final-byte-value-）"><a href="#字符串字面量一旦创建是不可变的。（底层String源码中有一个属性：private-final-byte-value-）" class="headerlink" title="字符串字面量一旦创建是不可变的。（底层String源码中有一个属性：private final byte[] value;）"></a>字符串字面量一旦创建是不可变的。（底层String源码中有一个属性：private final byte[] value;）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> “hello”; 其中“hello”存储在字符串常量池中。</span><br></pre></td></tr></table></figure>
+
+<p>“hello”不可变。不能变成“hello123”。如果进行字符串拼接，必然创建新的字符串对象。<br>是 “hello”不可变，不是s不可变，s可以指向其它的字符串对象：s &#x3D; “xyz”;</p>
+<blockquote>
+<p>从底层源码看,底层String源码中有一个属性：private final byte[] value;底层是个byte[]数组,数组长度不可变,所以长度不可变,</p>
+<p>此外,这个数组是用private final修饰的,所以这个变量不可以被访问和继承修改</p>
+<p>所以String的字面量一旦创建不可变</p>
+<p>StringBuilder是可变的字符串数组,它的底层是byte[] value,所以可以改变,可以创建一个更大的数组,然后这个value就可以指向新的数组</p>
+</blockquote>
+<h4 id="String的拼接"><a href="#String的拼接" class="headerlink" title="String的拼接"></a>String的拼接</h4><h5 id="①动态拼接之后的新字符串不会自动放到字符串常量池中："><a href="#①动态拼接之后的新字符串不会自动放到字符串常量池中：" class="headerlink" title="①动态拼接之后的新字符串不会自动放到字符串常量池中："></a>①动态拼接之后的新字符串不会自动放到字符串常量池中：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> “abc”;</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> “def”;</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span><span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> s1 + s2;</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span><span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> “abcdef”;</span><br></pre></td></tr></table></figure>
+
+<p><strong>&#x3D;&#x3D;5.System.out.println(s3 &#x3D;&#x3D; s4); &#x2F;&#x2F; false 说明拼接后的字符串并没有放到字符串常量池&#x3D;&#x3D;</strong></p>
+<p>&#x3D;&#x3D;<strong>6.以上程序中字符串常量中有三个： “abc” “def” “abcdef”</strong>&#x3D;&#x3D; </p>
+<p>&#x3D;&#x3D;<strong>7.以上程序中除了字符串常量池的字符串之外，在堆中还有一个字符串对象 “abcdef”</strong>&#x3D;&#x3D;</p>
+<h5 id="②两个字符串字面量拼接会做编译阶段的优化，在编译阶段就会进行字符串的拼接。"><a href="#②两个字符串字面量拼接会做编译阶段的优化，在编译阶段就会进行字符串的拼接。" class="headerlink" title="②两个字符串字面量拼接会做编译阶段的优化，在编译阶段就会进行字符串的拼接。"></a>②两个字符串字面量拼接会做编译阶段的优化，在编译阶段就会进行字符串的拼接。</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> “aaa” + “bbb”;</span><br></pre></td></tr></table></figure>
+
+<p>以上程序会在编译阶段进行拼接，因此以上程序在字符串常量池中只有一个： “aaabbb”</p>
+<blockquote>
+<p>常量池可以改变吗?</p>
+<p>可以,语句:s3.intern()</p>
+<p>但是我们不能去删除常量池中的内容,系统自己有一些调整的操作</p>
+<p>此时,s4和s5都在字符串常量池中</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227193208940.png" alt="image-20240227193208940"></p>
+<h4 id="String类常用的构造方法有以下几种："><a href="#String类常用的构造方法有以下几种：" class="headerlink" title="String类常用的构造方法有以下几种："></a>String类常用的构造方法有以下几种：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">String(<span class="type">char</span>[] value)：<span class="comment">//根据字符数组创建一个新的字符串对象。</span></span><br><span class="line">String(<span class="type">char</span>[] value, <span class="type">int</span> offset, <span class="type">int</span> count)：<span class="comment">//根据字符数组的指定部分创建一个新的字符串对象。</span></span><br><span class="line">String(<span class="type">byte</span>[] bytes)：<span class="comment">//根据字节数组创建一个新的字符串对象，默认使用平台默认的字符集进行解码。</span></span><br><span class="line">String(<span class="type">byte</span>[] bytes, <span class="type">int</span> offset, <span class="type">int</span> length)：<span class="comment">//根据字节数组的指定部分创建一个新的字符串对象，默认使用平台默认的字符集进行解码。</span></span><br><span class="line">String(<span class="type">byte</span>[] bytes, Charset charset)：</span><br><span class="line"><span class="comment">//根据字节数组和指定的字符集创建一个新的字符串对象。</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">String</span>(bytes, Charset.defaultCharset());</span><br><span class="line">String(<span class="type">byte</span>[] bytes, String charsetName)：</span><br><span class="line"><span class="comment">//根据字节数组和指定的字符集名称创建一个新的字符串对象。</span></span><br><span class="line"><span class="comment">//这是一个解码的过程。你需要提前知道“byte[] bytes”是通过哪个编码方式进行编码得到的。</span></span><br><span class="line"><span class="comment">//如果通过GBK的方式进行编码得到的“byte[] bytes”，调用以上构造方法时采用UTF-8的方式进行解码。就会出现乱码。</span></span><br><span class="line">String(String original)：</span><br><span class="line"><span class="comment">//通过复制现有字符串创建一个新的字符串对象。</span></span><br><span class="line"><span class="comment">//这个方法被@IntrinsicCandidate标注，这个注解的作用是告诉编译器,该方法或构造函数是一个内在的候选方法,可以被优化和替换为更高效的代码。因此它是不建议使用的。</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">String</span>(“hello”); 这个代码会让常量池中有一个 “hello”，并且在堆中也有有一个String对象。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>[] chars = <span class="keyword">new</span> <span class="title class_">char</span>[](<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>,<span class="string">&#x27;d&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;g&#x27;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(chars);</span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(chars,offset=<span class="number">1</span>,count=<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">byte</span>[] bytes = &#123;<span class="number">99</span>,<span class="number">98</span>,<span class="number">99</span>,<span class="number">100</span>&#125;</span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(bytes);<span class="comment">//这是一个解码的过程,也是采用的平台默认的字符集.</span></span><br><span class="line"></span><br><span class="line"><span class="type">byte</span>[] bs2 = <span class="string">&quot;sssssfda&quot;</span>.getBytes(Charset.defaultCharset());</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">s6</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(bs2,Charset.defaultCharset());</span><br><span class="line"><span class="type">String</span> <span class="variable">s7</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(bs2,StanderCharsets.UTF_8);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227195325953.png" alt="image-20240227195325953"></p>
+<blockquote>
+<p>这样会乱码</p>
+</blockquote>
+<h4 id="String的常用方法"><a href="#String的常用方法" class="headerlink" title="String的常用方法"></a>String的常用方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="title function_">charAt</span><span class="params">(<span class="type">int</span> index)</span>; <span class="comment">//返回索引处的char值</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">length</span><span class="params">()</span>; <span class="comment">//获取字符串长度</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span>; <span class="comment">//判断字符串是否为空字符串，如果length()是0就是空字符串。//</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object anObject)</span>; <span class="comment">//判断两个字符串是否相等。</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">equalsIgnoreCase</span><span class="params">(String anotherString)</span>; <span class="comment">//判断两个字符串是否相等，忽略大小写。</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(CharSequence s)</span>; <span class="comment">//判断当前字符串中是否包含某个子字符串</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">startsWith</span><span class="params">(String prefix)</span>; <span class="comment">//判断当前字符串是否以某个字符串开头</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">endsWith</span><span class="params">(String suffix)</span>; <span class="comment">//判断当前字符串是否以某个字符串结尾</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(String anotherString)</span>; <span class="comment">//两个字符串按照字典顺序比较大小</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">compareToIgnoreCase</span><span class="params">(String str)</span>; <span class="comment">//两个字符串按照字典顺序比较大小，比较时忽略大小写</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(String str)</span>;<span class="comment">// 获取当前字符串中str字符串的第一次出现处的下标。</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(String str, <span class="type">int</span> fromIndex)</span>; <span class="comment">//从当前字符串的fromIndex下标开始往右搜索，获取当前字符串中str字符串的第一次出现处的下标。</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">lastIndexOf</span><span class="params">(String str)</span>; <span class="comment">//获取当前字符串中str字符串的最后一次出现处的下标。</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">lastIndexOf</span><span class="params">(String str, <span class="type">int</span> fromIndex)</span>; <span class="comment">//从当前字符串的fromIndex下标开始往左搜索，获取当前字符串中str字符串的最后一次出现处的下标。</span></span><br><span class="line"></span><br><span class="line">String <span class="title function_">stripLeading</span><span class="params">()</span>; 去除前空白</span><br><span class="line">String <span class="title function_">stripTrailing</span><span class="params">()</span>; 去除后空白</span><br><span class="line">String <span class="title function_">toString</span><span class="params">()</span>;</span><br><span class="line">String <span class="title function_">intern</span><span class="params">()</span>; 获取字符串常量池中的字符串，如果常量池中没有，则将字符串加入常量池并返回。</span><br><span class="line"><span class="type">byte</span>[] bytes = &#123;<span class="number">97</span>,<span class="number">98</span>,<span class="number">99</span>,<span class="number">100</span>&#125;; <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(bytes);</span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> s.intern(); <span class="comment">// 将字符串 “abcd”放入字符串常量池并返回常量池中的字符串 “abcd”</span></span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">join</span><span class="params">(CharSequence d, CharSequence... elements)</span>; <span class="comment">//将多个字符串以某个分隔符连接（Java8新增）</span></span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">join</span><span class="params">(CharSequence delimiter, Iterable&lt;? extends CharSequence&gt; elements)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">boolean</span> b)</span>; <span class="comment">//以下所有的静态方法valueOf作用是将非字符串类型的数据转换为字符串形式。</span></span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">char</span> c)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">char</span>[] data)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">char</span>[] data, <span class="type">int</span> offset, <span class="type">int</span> count)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">double</span> d)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">float</span> f)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">int</span> i)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(<span class="type">long</span> l)</span>;</span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">valueOf</span><span class="params">(Object obj)</span>;</span><br><span class="line"><span class="type">byte</span>[] getBytes(); <span class="comment">//将字符串转换成字节数组。其实就是对字符串进行编码。默认按照系统默认字符集。</span></span><br><span class="line"><span class="type">byte</span>[] getBytes(String charsetName); <span class="comment">//将字符串按照指定字符集的方式进行编码。</span></span><br><span class="line"><span class="type">byte</span>[] getBytes(Charset charset);</span><br><span class="line"><span class="type">char</span>[] toCharArray(); <span class="comment">//将字符串转换字符数组。</span></span><br><span class="line">String <span class="title function_">toLowerCase</span><span class="params">()</span>; <span class="comment">//转小写</span></span><br><span class="line">String <span class="title function_">toUpperCase</span><span class="params">()</span>; <span class="comment">//转大写</span></span><br><span class="line">String <span class="title function_">concat</span><span class="params">(String str)</span>; <span class="comment">//进行字符串的拼接操作。和 + 的区别？</span></span><br><span class="line"><span class="comment">//+ 既可以进行求和，也可以进行字符串的拼接，底层拼接时会创建StringBuilder对象进行拼接。+ 拼接null时不会出现空指针异常。</span></span><br><span class="line"><span class="comment">//concat方法参数只能时字符串类型，拼接时不会创建StringBuilder对象，拼接完成后返回一个新的String对象。拼接null会出现空指针异常。</span></span><br><span class="line"><span class="comment">//+ 使用较多。如果进行大量字符串拼接，这两个都不合适。</span></span><br><span class="line">String <span class="title function_">substring</span><span class="params">(<span class="type">int</span> beginIndex)</span>; <span class="comment">//从指定下标beginIndex开始截取子字符串</span></span><br><span class="line">String <span class="title function_">substring</span><span class="params">(<span class="type">int</span> beginIndex, <span class="type">int</span> endIndex)</span>;</span><br><span class="line">String <span class="title function_">trim</span><span class="params">()</span>; <span class="comment">//去除字符串前后空白（只能去除ASCII码中的空格和制表符）</span></span><br><span class="line">String <span class="title function_">strip</span><span class="params">()</span>; <span class="comment">//去除字符串前后空白（支持所有的编码形式的空白，可以将全角空格去除，\u3000是全角空格，Java11新增）</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227202458188.png" alt="image-20240227202458188"></p>
+<p>前&gt;后;负</p>
+<p>前&lt;后;正</p>
+<p>相等;0</p>
+<blockquote>
+<p>右键 show Diagram</p>
+</blockquote>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><p>①正则表达式（regular expression），简称为regex或regexp，是一种用于描述特定模式的表达式。它可以匹配、查找、替换文本中与该模式匹配的内容，被广泛应用于各种文本处理和匹配相关的应用中。</p>
+<p>②正则表达式的应用:</p>
+<blockquote>
+<p>1.验证输入内容的格式是否正确。例如，邮箱，手机号，密码等</p>
+<p>2.在文本编辑器中进行搜索和替换。例如，在代码编辑器中查找指定字符串或替换错误的代码成为正确的代码块</p>
+<p>3.数据挖掘和信息提取。正则表达式可以从HTML、XML、JSON等格式的数据中提取所需的信息</p>
+<p>4.用于编写脚本语言，如awk，grep和sed</p>
+<p>5.服务器端编程。正则表达式在处理数据和字符串时具有高效的性能，可以在开发Web应用程序时被广泛应用</p>
+</blockquote>
+<p>③正则表达式和Java语言的关系？</p>
+<p>Java语言中可以使用正则表达式。C语言以及其它大部分编程语言都是支持正则表达式的。</p>
+<h4 id="String的正则表达式相关的方法："><a href="#String的正则表达式相关的方法：" class="headerlink" title="&#x3D;&#x3D;String的正则表达式相关的方法：&#x3D;&#x3D;"></a>&#x3D;&#x3D;String的正则表达式相关的方法：&#x3D;&#x3D;</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">replace</span><span class="params">(CharSequence target, CharSequence replacement)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将当前字符串中所有的target替换成replacement，返回一个新的字符串。</span></span><br><span class="line"></span><br><span class="line">String <span class="title function_">replaceAll</span><span class="params">(String regex, String replacement)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将当前字符串中所有符合正则表达式的regex替换成replacement。</span></span><br><span class="line"></span><br><span class="line">String[] split(String regex);</span><br><span class="line"></span><br><span class="line"><span class="comment">//将当前字符串以某个正则表达式表示的子字符串进行分割，返回一个字符串数组。</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">matches</span><span class="params">(String regex)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判断当前字符串是否符合正则表达式regex。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="String的面试题"><a href="#String的面试题" class="headerlink" title="String的面试题"></a>String的面试题</h4><h5 id="1-1"><a href="#1-1" class="headerlink" title="1."></a>1.</h5><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227204034015.png" alt="image-20240227204034015" style="zoom:150%;" />
+
+<blockquote>
+<p>false;</p>
+<p>true</p>
+</blockquote>
+<h5 id="2-1"><a href="#2-1" class="headerlink" title="2."></a>2.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227204118497.png" alt="image-20240227204118497"></h5><blockquote>
+<p>true;因为这种拼接会在编译阶段完成，编译器优化策略</p>
+<p>true</p>
+</blockquote>
+<h5 id="3-1"><a href="#3-1" class="headerlink" title="3."></a>3.<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227204222677.png" alt="image-20240227204222677" style="zoom:200%;" /></h5><blockquote>
+<p>false:yin_yang:这个和上面那个不一样，上面那个是字面量相加，是可以在编译阶段实现，这个是变量，不在编译阶段实现，是存放在堆里的字符串变量；</p>
+<p>如果s3.intern（），那就是一样了</p>
+<p>true</p>
+</blockquote>
+<h5 id="4-1"><a href="#4-1" class="headerlink" title="4."></a>4.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227204622761.png" alt="image-20240227204622761"></h5><blockquote>
+<p>3个对象，a一个b一个，s一个，放在字符串常量区里</p>
+</blockquote>
+<h5 id="5-1"><a href="#5-1" class="headerlink" title="5."></a>5.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227204749867.png" alt="image-20240227204749867"></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字符串常量池中一个&quot;a&quot;</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;a&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串常量池中一个&quot;b&quot;,堆中一个s2</span></span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;b&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//s3--&gt;堆中两个，一个StringBuilder(在拼接的时候自动创建的)，一个string(StringBuilder调用toString转换的)</span></span><br><span class="line"><span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> s1+s2</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-1"><a href="#6-1" class="headerlink" title="6."></a>6.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227210701818.png" alt="image-20240227210701818"></h5><blockquote>
+<p>字符串常量区：“a”,”b”</p>
+<p>堆：new的a一个，new的b一个，拼接生成的StringBuilder一个，调用toString生成的一个String一个</p>
+<p>一共6个对象</p>
+</blockquote>
+<h5 id="7"><a href="#7" class="headerlink" title="7."></a>7.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227210824500.png" alt="image-20240227210824500"></h5><blockquote>
+<p>答案：不会出现异常，底层会默认调用valueOf，将非字符串类型的数据转换为字符串形式。结果null</p>
+</blockquote>
+<h5 id="8"><a href="#8" class="headerlink" title="8."></a>8.<img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227211247488.png" alt="image-20240227211247488"></h5><blockquote>
+<p>没有final的话，false，s3不在字符串常量池里</p>
+<p>&#x2F;&#x2F;&#x2F;*********************</p>
+<p>true</p>
+<p>final修饰后，s2不可变，就是个常量，所以这个拼接是在编译时候完成的，没有创建StringBuilder对象</p>
+<p>所以是true</p>
+</blockquote>
+<h5 id="9"><a href="#9" class="headerlink" title="9."></a>9.<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227211841286.png" alt="image-20240227211841286" style="zoom: 67%;" /></h5><blockquote>
+<p>false;</p>
+<p>因为getB()是一个方法，只能在运行阶段，不能在编译阶段，所以虽然s2是个常量，但是他不在字符串常量区，在堆里面。</p>
+<p>所以s3这个拼接操作也是在运行时候执行的，地址不一样，所以是false</p>
+</blockquote>
+<h5 id="10"><a href="#10" class="headerlink" title="10."></a>10.<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227212157813.png" alt="image-20240227212157813" style="zoom:67%;" /></h5><blockquote>
+<p>false</p>
+<p>equals 的前提，两种类型要一样，这俩类型不一样</p>
+</blockquote>
+<h3 id="StringBuffer与StringBuilder"><a href="#StringBuffer与StringBuilder" class="headerlink" title="StringBuffer与StringBuilder"></a>StringBuffer与StringBuilder</h3><h4 id="StringBuffer和StringBuilder：可变长度字符串"><a href="#StringBuffer和StringBuilder：可变长度字符串" class="headerlink" title="StringBuffer和StringBuilder：可变长度字符串"></a>StringBuffer和StringBuilder：可变长度字符串</h4><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227220453859.png" alt="image-20240227220453859" style="zoom: 25%;" />
+
+<ul>
+<li><p><strong>使用情况：这两个类是专门为频繁进行字符串拼接而准备</strong>。</p>
+</li>
+<li><p><strong>二者差别：</strong>StringBuffer先出现的，Java5的时候新增了StringBuilder。StringBuffer是线程安全的。在不需要考虑线程安全问题的情况下优先选择StringBuilder，效率较高一些。</p>
+</li>
+<li><p><strong>底层:</strong>       	是 byte[] 数组，并且这个 byte[] 数组没有被final修饰，这说明如果byte[]数组满了，可以创建一个更大的新数组来达到扩容，然后它可以重新指向这个新的数组对象。</p>
+</li>
+<li><p><strong>优化策略：</strong>&#x3D;&#x3D;创建StringBuilder对象时，预估计字符串的长度，给定一个合适的初始化容量，减少底层数组的扩容。&#x3D;&#x3D;</p>
+</li>
+<li><p>StringBuilder默认初始化容量：16</p>
+</li>
+<li><p>StringBuilder一次扩容多少？可以通过Debug跟踪一下append方法。扩容策略是：从当前容量开始，**&#x3D;&#x3D;每次扩容为原来的2倍再加上2&#x3D;&#x3D;**</p>
+</li>
+</ul>
+<blockquote>
+<p>原来是i，扩容后就是2i+2，如果是默认的，就开始2*16+2 ，然后2*（2+16）+2</p>
+<p>如果拼接的字符串很大，大于了预期增长值，就会增大到拼接的字符串长度</p>
+<p>假如是初始化len:50的字符串：</p>
+<p>l16+minCapacity(34)&#x3D;&#x3D;50</p>
+<p>34&gt;16+2,所以扩容大小为34</p>
+</blockquote>
+<p>count 目前真实的存储数量</p>
+<h4 id="StringBuffer和StringBuilder构造方法"><a href="#StringBuffer和StringBuilder构造方法" class="headerlink" title="StringBuffer和StringBuilder构造方法"></a>StringBuffer和StringBuilder构造方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder() <span class="comment">//构造一个字符串生成器，其中不包含任何字符，初始容量为16个字符。</span></span><br><span class="line"></span><br><span class="line">StringBuilder(<span class="type">int</span> capacity) <span class="comment">//构造一个字符串生成器，其中不包含任何字符，并且具有由容量参数指定的初始容量。</span></span><br><span class="line"></span><br><span class="line">StringBuilder(String str)<span class="comment">// 构造初始化为指定字符串内容的字符串生成器</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240227222910252.png" alt="image-20240227222910252"></p>
+<h4 id="StringBuffer和StringBuilder常用方法"><a href="#StringBuffer和StringBuilder常用方法" class="headerlink" title="StringBuffer和StringBuilder常用方法"></a>StringBuffer和StringBuilder常用方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder <span class="title function_">append</span><span class="params">(Type data)</span>;</span><br><span class="line"></span><br><span class="line">StringBuilder <span class="title function_">delete</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span>;</span><br><span class="line"></span><br><span class="line">StringBuilder <span class="title function_">deleteCharAt</span><span class="params">(<span class="type">int</span> index)</span>;</span><br><span class="line"></span><br><span class="line">StringBuilder <span class="title function_">insert</span><span class="params">(<span class="type">int</span> offset, String str)</span>;</span><br><span class="line"></span><br><span class="line">StringBuilder <span class="title function_">replace</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end, String str)</span></span><br><span class="line"></span><br><span class="line">StringBuilder <span class="title function_">reverse</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setCharAt</span><span class="params">(<span class="type">int</span> index, <span class="type">char</span> ch)</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setLength</span><span class="params">(<span class="type">int</span> newLength)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> <span class="title function_">charAt</span><span class="params">(<span class="type">int</span> index)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(String str)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(String str, <span class="type">int</span> fromIndex)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">lastIndexOf</span><span class="params">(String str)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">lastIndexOf</span><span class="params">(String str, <span class="type">int</span> fromIndex)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">length</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">String <span class="title function_">substring</span><span class="params">(<span class="type">int</span> start)</span>;</span><br><span class="line"></span><br><span class="line">String <span class="title function_">substring</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span> end)</span>;</span><br><span class="line"></span><br><span class="line">String <span class="title function_">toString</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h3><h3 id="大数字00"><a href="#大数字00" class="headerlink" title="大数字00"></a>大数字00</h3><h3 id="日期处理"><a href="#日期处理" class="headerlink" title="日期处理"></a>日期处理</h3><h3 id="Java8的新日期API"><a href="#Java8的新日期API" class="headerlink" title="Java8的新日期API"></a>Java8的新日期API</h3><h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3>
       
     </div>
 
@@ -477,7 +651,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-26 19:43:34" itemprop="dateModified" datetime="2024-02-26T19:43:34+08:00">2024-02-26</time>
+      <time title="修改时间：2024-02-27 21:38:07" itemprop="dateModified" datetime="2024-02-27T21:38:07+08:00">2024-02-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -612,7 +786,10 @@
 <p>②通过当前构造方法去调用本类中其他的构造方法。</p>
 <p>③作用是：代码复用。</p>
 <p>实例方法只可以引用.</p>
-<h3 id="7-static关键字"><a href="#7-static关键字" class="headerlink" title="7.static关键字"></a>7.static关键字</h3><p>①static是一个关键字，翻译为：静态的。</p>
+<h3 id="7-static关键字"><a href="#7-static关键字" class="headerlink" title="7.static关键字"></a>7.static关键字</h3><blockquote>
+<p>final变量不能修改,static变量可以在这个类里头修改</p>
+</blockquote>
+<p>①static是一个关键字，翻译为：静态的。</p>
 <p><strong>②static修饰的变量叫做静态变量。</strong>当所有对象的某个属性的值是相同的，建议将该属性定义为静态变量，来节省内存的开销。</p>
 <p>③静态变量在类加载时初始化，存储在堆中。</p>
 <p><strong>④static修饰的方法叫做静态方法。</strong></p>

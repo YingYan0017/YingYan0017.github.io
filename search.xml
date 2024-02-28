@@ -2,15 +2,6 @@
 <search>
   <entry>
     <title></title>
-    <url>/2024/02/18/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/</url>
-    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015738084.png" alt="image-20240218015738084"></p>
-<p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015750388.png" alt="image-20240218015750388"></p>
-<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
-<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
     <url>/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
     <content><![CDATA[<h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
 <li><p>编译java代码 ： javac HelloWorld.java</p>
@@ -183,6 +174,15 @@
 <p>⑤char c &#x3D; ‘\u0000’; 这表示一个空字符，也是char的默认值。\u0000是一个Unicode码。</p>
 <p>⑥空字符与空格字符是不同的。空字符表示什么也没有。空格字符表示一个空格。****</p>
 <h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>乱码产生的原因在于，在编码和解码的时候没有用同一个码表</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2024/02/18/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/</url>
+    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015738084.png" alt="image-20240218015738084"></p>
+<p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015750388.png" alt="image-20240218015750388"></p>
+<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
+<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
 ]]></content>
   </entry>
   <entry>
@@ -768,21 +768,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Java基础部分4-集合</title>
-    <url>/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/</url>
-    <content><![CDATA[<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h2><h3 id="①什么是集合，有什么用？"><a href="#①什么是集合，有什么用？" class="headerlink" title="①什么是集合，有什么用？"></a>①什么是集合，有什么用？</h3><p>1.集合是一种容器，用来组织和管理数据的。非常重要。</p>
-<p><strong>2.Java的集合框架对应的这套类库其实就是对各种数据结构的实现。</strong></p>
-<p>3.每一个集合类底层采用的数据结构不同，例如ArrayList集合底层采用了数组，LinkedList集合底层采用了双向链表，HashMap集合底层采用了哈希表，TreeMap集合底层采用了红黑树。</p>
-<p>4.我们不用写数据结构的实现了。直接用就行了。但我们需要知道的是在哪种场合下选择哪一个集合效率是最高的。</p>
-<h3 id="②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。"><a href="#②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。" class="headerlink" title="②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。"></a>②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。</h3><h3 id="③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。"><a href="#③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。" class="headerlink" title="③默认情况下，&#x3D;&#x3D;如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;"></a>③默认情况下，&#x3D;&#x3D;<strong>如果不使用泛型的话</strong>，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;</h3><h3 id="④Java集合框架相关的类都在-java-util-包下。"><a href="#④Java集合框架相关的类都在-java-util-包下。" class="headerlink" title="④Java集合框架相关的类都在 java.util 包下。"></a>④Java集合框架相关的类都在 java.util 包下。</h3><h3 id="⑤Java集合框架分为两部分："><a href="#⑤Java集合框架分为两部分：" class="headerlink" title="⑤Java集合框架分为两部分："></a>⑤Java集合框架分为两部分：</h3><p>1.Collection结构：元素以单个形式存储。</p>
-<p>2.Map结构：元素以键值对的映射关系存储。</p>
-<h2 id="Collection继承结构"><a href="#Collection继承结构" class="headerlink" title="Collection继承结构"></a>Collection继承结构</h2><h2 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h2><h2 id="SequencedCollection接口"><a href="#SequencedCollection接口" class="headerlink" title="SequencedCollection接口"></a>SequencedCollection接口</h2><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h2 id="迭代时删除元素"><a href="#迭代时删除元素" class="headerlink" title="迭代时删除元素"></a>迭代时删除元素</h2><h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h2 id="链表存储结构"><a href="#链表存储结构" class="headerlink" title="链表存储结构"></a>链表存储结构</h2><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><h2 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h2><h2 id="队列数据结构"><a href="#队列数据结构" class="headerlink" title="队列数据结构"></a>队列数据结构</h2><h2 id="Map继承结构"><a href="#Map继承结构" class="headerlink" title="Map继承结构"></a>Map继承结构</h2><h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2>]]></content>
-      <categories>
-        <category>Java体系知识</category>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java基础部分3</title>
     <url>/2024/02/26/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/</url>
     <content><![CDATA[<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="数组概述"><a href="#数组概述" class="headerlink" title="数组概述"></a>数组概述</h3><h4 id="①什么是数组？"><a href="#①什么是数组？" class="headerlink" title="①什么是数组？"></a>①什么是数组？</h4><p>1.在Java中，数组是一种用于存储多个相同数据类型元素的容器。</p>
@@ -1333,6 +1318,81 @@
 <h4 id="Java中的java-util-UUID类提供对UUID的支持"><a href="#Java中的java-util-UUID类提供对UUID的支持" class="headerlink" title="Java中的java.util.UUID类提供对UUID的支持"></a>Java中的java.util.UUID类提供对UUID的支持</h4><p>①生成UUID：static UUID randomUUID();</p>
 <p>②将UUID转换为字符串：String toString();</p>
 ]]></content>
+      <categories>
+        <category>Java体系知识</category>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java基础部分4-集合</title>
+    <url>/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h2><h3 id="①什么是集合，有什么用？"><a href="#①什么是集合，有什么用？" class="headerlink" title="①什么是集合，有什么用？"></a>①什么是集合，有什么用？</h3><p>1.集合是一种容器，用来组织和管理数据的。非常重要。</p>
+<p><strong>2.Java的集合框架对应的这套类库其实就是对各种数据结构的实现。</strong></p>
+<p>3.每一个集合类底层采用的数据结构不同，例如ArrayList集合底层采用了数组，LinkedList集合底层采用了双向链表，HashMap集合底层采用了哈希表，TreeMap集合底层采用了红黑树。</p>
+<p>4.我们不用写数据结构的实现了。直接用就行了。但我们需要知道的是在哪种场合下选择哪一个集合效率是最高的。</p>
+<h3 id="②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。"><a href="#②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。" class="headerlink" title="②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。"></a>②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。</h3><h3 id="③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。"><a href="#③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。" class="headerlink" title="③默认情况下，&#x3D;&#x3D;如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;"></a>③默认情况下，&#x3D;&#x3D;<strong>如果不使用泛型的话</strong>，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CollectionTest01</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Collection</span> <span class="variable">collection</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        collection.add(<span class="number">1</span>);</span><br><span class="line">        collection.add(<span class="keyword">new</span> <span class="title class_">Object</span>());</span><br><span class="line">        collection.add(<span class="string">&quot;A&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="④Java集合框架相关的类都在-java-util-包下。"><a href="#④Java集合框架相关的类都在-java-util-包下。" class="headerlink" title="④Java集合框架相关的类都在 java.util 包下。"></a>④Java集合框架相关的类都在 java.util 包下。</h3><h3 id="⑤Java集合框架分为两部分："><a href="#⑤Java集合框架分为两部分：" class="headerlink" title="⑤Java集合框架分为两部分："></a>⑤Java集合框架分为两部分：</h3><p>1.Collection结构：元素以单个形式存储。</p>
+<p>2.Map结构：元素以键值对的映射关系存储。</p>
+<h2 id="Collection继承结构"><a href="#Collection继承结构" class="headerlink" title="Collection继承结构"></a>Collection继承结构</h2><blockquote>
+<p>Collection接口是一个所有以单个方式存储元素的所有集合的<strong>超级接口</strong>，所有的以单个方式存储元素的这些集合都继承了Collection接口 </p>
+<p>Collection接口继承了iterable接口，所以都是可以遍历的，接口返回值iterator</p>
+<p>Collection和iterator，依赖关系。</p>
+<p>List重复，set不可以重复</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228161736123.png" alt="image-20240228161736123"></p>
+<p>①<strong>SequencedCollection</strong>和<strong>SequencedSet</strong>接口都是Java21新增的接口。</p>
+<p>②图中蓝色的是实现类。其它的都是接口。</p>
+<p>③6个实现类中只有<strong>HashSet是无序集合</strong>。剩下的都是<strong>有序集合</strong>。</p>
+<blockquote>
+<p>1.有序集合：集合中存储的元素**&#x3D;&#x3D;有下标&#x3D;&#x3D;<strong>或者集合中存储的元素是</strong>可排序的**。</p>
+<p>2.无序集合：集合中存储的元素**&#x3D;&#x3D;没有下标&#x3D;&#x3D;<strong>并且集合中存储的元素也</strong>没有排序**。</p>
+</blockquote>
+<p>④每个集合实现类对应的数据结构如下：</p>
+<blockquote>
+<p>1.LinkedList:双向链表（不是队列数据结构，但使用它可以模拟队列）</p>
+<p>2.ArrayList：数组</p>
+<p>3.Vector：数组（线程安全的）</p>
+<p>4.HashSet：哈希表</p>
+<p>5.LinkedHashSet：双向链表和哈希表结合体</p>
+<p>6.TreeSet：红黑树</p>
+</blockquote>
+<p>&#x3D;&#x3D;<strong>⑤List集合中存储的元素可重复。Set集合中存储的元素不可重复。</strong>&#x3D;&#x3D;</p>
+<h2 id="Collection接口（超级接口）"><a href="#Collection接口（超级接口）" class="headerlink" title="Collection接口（超级接口）"></a>Collection接口（超级接口）</h2><h3 id="Collection接口的通用方法"><a href="#Collection接口的通用方法" class="headerlink" title="Collection接口的通用方法"></a>Collection接口的通用方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>; <span class="comment">//向集合中添加元素</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">size</span><span class="params">()</span>; <span class="comment">//获取集合中元素个数</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">addAll</span><span class="params">(Collection c)</span>; <span class="comment">//将参数集合中所有元素全部加入当前集合</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span>; <span class="comment">//判断集合中是否包含对象o</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">remove</span><span class="params">(Object o)</span>; <span class="comment">//从集合中删除对象o</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span>; <span class="comment">//清空集合</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span>; <span class="comment">//判断集合中元素个数是否为0</span></span><br><span class="line"></span><br><span class="line">Object[] toArray(); <span class="comment">//将集合转换成一维数组</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Collection的遍历（集合的通用遍历方式）"><a href="#Collection的遍历（集合的通用遍历方式）" class="headerlink" title="Collection的遍历（集合的通用遍历方式）"></a>Collection的遍历（集合的通用遍历方式）</h3><p>①第一步：获取当前集合依赖的迭代器对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line"><span class="comment">//获取到迭代器之后，迭代器中有一个光标cursor，这个光标起初默认指向集合的第一个位置</span></span><br></pre></td></tr></table></figure>
+
+<p>②第二步：编写循环，循环条件是：当前光标指向的位置是否存在元素。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(it.hasNext())&#123;&#125;</span><br><span class="line"><span class="comment">//boolean has = it.hasNext();</span></span><br><span class="line"><span class="comment">//has-&gt;true,表示光标指向的位置有数据；</span></span><br><span class="line"><span class="comment">//has-&gt;false,表示光标指向的位置没有数据。</span></span><br></pre></td></tr></table></figure>
+
+<p>③第三步：如果有，将光标指向的当前元素返回，并且将光标向下移动一位。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> it.next();</span><br><span class="line"><span class="comment">//做了两件事情，</span></span><br><span class="line"><span class="comment">//1：取出当前光标只向位置的元素</span></span><br><span class="line"><span class="comment">//2：将光标向下移动一位</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228210734004.png" alt="image-20240228210734004"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();it.hasNext();)&#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> it.next();</span><br><span class="line">    System.out.println(obj);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span> (i.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj2</span> <span class="operator">=</span> i.next();<span class="comment">//这里存在隐式的多态</span></span><br><span class="line">            System.out.println(obj2);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SequencedCollection接口-有序集合"><a href="#SequencedCollection接口-有序集合" class="headerlink" title="SequencedCollection接口**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**"></a>SequencedCollection接口**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**</h2><p>所有的**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**都实现了SequencedCollection接口</p>
+<h3 id="①SequencedCollection接口是Java21版本新增的。"><a href="#①SequencedCollection接口是Java21版本新增的。" class="headerlink" title="①SequencedCollection接口是Java21版本新增的。"></a>①SequencedCollection接口是Java21版本新增的。</h3><h3 id="②SequencedCollection接口-（有序集合）-中的方法："><a href="#②SequencedCollection接口-（有序集合）-中的方法：" class="headerlink" title="②SequencedCollection接口&#x3D;&#x3D;（有序集合）&#x3D;&#x3D;中的方法："></a>②SequencedCollection接口&#x3D;&#x3D;（有序集合）&#x3D;&#x3D;中的方法：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(Object o)</span>：<span class="comment">//向头部添加</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(Object o)</span>：<span class="comment">//向末尾添加</span></span><br><span class="line">Object <span class="title function_">removeFirst</span><span class="params">()</span>：<span class="comment">//删除头部</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">removeLast</span><span class="params">()</span>：<span class="comment">//删除末尾</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">getFirst</span><span class="params">()</span>：<span class="comment">//获取头部节点</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">getLast</span><span class="params">()</span>：<span class="comment">//获取末尾节点</span></span><br><span class="line"></span><br><span class="line">SequencedCollection <span class="title function_">reversed</span><span class="params">()</span>; <span class="comment">//反转集合中的元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet-Stack-都可以调用这个接口中的方法。"><a href="#③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet-Stack-都可以调用这个接口中的方法。" class="headerlink" title="&#x3D;&#x3D;③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet,Stack 都可以调用这个接口中的方法。&#x3D;&#x3D;"></a>&#x3D;&#x3D;③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet,Stack 都可以调用这个接口中的方法。&#x3D;&#x3D;</h3><h2 id="泛型-编译阶段的功能"><a href="#泛型-编译阶段的功能" class="headerlink" title="泛型(编译阶段的功能)"></a>泛型(编译阶段的功能)</h2><h3 id="①泛型是Java5的新特性，属于编译阶段的功能。"><a href="#①泛型是Java5的新特性，属于编译阶段的功能。" class="headerlink" title="①泛型是Java5的新特性，属于编译阶段的功能。"></a>①泛型是Java5的新特性，属于编译阶段的功能。</h3><h3 id="②泛型可以让开发者在编写代码时指定集合中存储的数据类型"><a href="#②泛型可以让开发者在编写代码时指定集合中存储的数据类型" class="headerlink" title="②泛型可以让开发者在编写代码时指定集合中存储的数据类型"></a>②泛型可以让开发者在编写代码时指定集合中存储的数据类型</h3><h3 id="③泛型作用："><a href="#③泛型作用：" class="headerlink" title="③泛型作用："></a>③泛型作用：</h3><p>1.类型安全：指定了集合中元素的类型之后，**&#x3D;&#x3D;编译器会在编译时进行类型检查&#x3D;&#x3D;<strong>，</strong>如果尝试将错误类型的元素添加到集合中<strong>，</strong>就会在编译时报错，避免了在运行时出现类型错误的问题。**</p>
+<p>2.代码简洁：使用泛型可以简化代码，避免了繁琐的类型转换操作。比如，在没有泛型的时候，需要使用 Object 类型来保存集合中的元素，并在使用时&#x3D;&#x3D;强制类型转换成实际类型&#x3D;&#x3D;（向下转型），而有了泛型之后，只需要在定义集合时指定类型即可。</p>
+<h3 id="④在集合中使用泛型"><a href="#④在集合中使用泛型" class="headerlink" title="④在集合中使用泛型"></a>④在集合中使用泛型</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//没有使用多态</span></span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span> (i.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj2</span> <span class="operator">=</span> i.next();<span class="comment">//这里存在隐式的多态</span></span><br><span class="line">            System.out.println(obj2);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表示创建一个集合，而且这个集合中只能存储String</span></span><br><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>这就表示该集合只能存储字符串，存储其它类型时编译器报错。</p>
+<p>并且以上代码使用泛型后，避免了繁琐的类型转换，集合中的元素可以直接调用String类特有的方法。</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228212839842.png" alt="image-20240228212839842"></p>
+<h3 id="⑤Java7的新特性：钻石表达式"><a href="#⑤Java7的新特性：钻石表达式" class="headerlink" title="⑤Java7的新特性：钻石表达式"></a>⑤Java7的新特性：钻石表达式</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line"><span class="comment">//下面是钻石表达式，省了后面的尖括号内的东西</span></span><br><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型的擦除与补偿（了解）"><a href="#泛型的擦除与补偿（了解）" class="headerlink" title="泛型的擦除与补偿（了解）"></a>泛型的擦除与补偿（了解）</h3><p>①泛型的出现提高了编译时的安全性，正因为**&#x3D;&#x3D;编译时对添加的数据做了检查，则程序运行时才不会抛出类型转换异常。&#x3D;&#x3D;**因此泛型本质上是编译时期的技术，是专门给编译器用的。</p>
+<p><strong>&#x3D;&#x3D;泛型只是给Javac看的，在运行的时候，加载类的时候，会将泛型擦除掉（擦除之后的类型为Object类型），这个称为泛型擦除。&#x3D;&#x3D;</strong></p>
+<p><strong>②为什么要有泛型擦除呢？兼容低版本的JDK</strong>其本质是为了让JDK1.4和JDK1.5能够兼容同一个类加载器。在JDK1.5版本中，程序编译时期会对集合添加的元素进行安全检查，如果检查完是安全的、没有错误的，那么就意味着添加的元素都属于同一种数据类型，则加载类时就可以把这个泛型擦除掉，将泛型擦除后的类型就是Object类，这样擦除之后的代码就与JDK1.4的代码一致。</p>
+<p>③由于加载类的时候，会默认将类中的泛型擦除为Object类型，所以添加的元素就被转化为Object类型，同时取出的元素也默认为Object类型。而我们获得集合中的元素时，按理说取出的元素应该是Object类型，为什么取出的元素却是实际添加的元素类型呢？</p>
+<p>④这里又做了一个默认的操作，我们称之为**&#x3D;&#x3D;泛型的补偿&#x3D;&#x3D;<strong>。</strong>&#x3D;&#x3D;在程序运行时，通过获取元素的实际类型进行强转，这就叫做泛型补偿（不必手动实现强制转换）。获得集合中的元素时，虚拟机 会根据获得元素的实际类型进行向下转型，也就是会恢复获得元素的实际类型，因此我们就无需手动执行向下转型操作，从本质上避免了抛出类型转换异常。&#x3D;&#x3D;**</p>
+<p><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214144852.png" alt="image-20240228214144852" style="zoom:80%;" /><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214151875.png" alt="image-20240228214151875" style="zoom:67%;" /></p>
+<h2 id="迭代时删除元素"><a href="#迭代时删除元素" class="headerlink" title="迭代时删除元素"></a>迭代时删除元素</h2><h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h2 id="链表存储结构"><a href="#链表存储结构" class="headerlink" title="链表存储结构"></a>链表存储结构</h2><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><h2 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h2><h2 id="队列数据结构"><a href="#队列数据结构" class="headerlink" title="队列数据结构"></a>队列数据结构</h2><h2 id="Map继承结构"><a href="#Map继承结构" class="headerlink" title="Map继承结构"></a>Map继承结构</h2><h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2>]]></content>
       <categories>
         <category>Java体系知识</category>
         <category>java基础</category>

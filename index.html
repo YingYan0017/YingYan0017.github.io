@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -173,6 +173,94 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">Java基础部分4-集合</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-02-28 15:53:24 / 修改时间：16:00:23" itemprop="dateCreated datePublished" datetime="2024-02-28T15:53:24+08:00">2024-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">Java体系知识</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h2><h3 id="①什么是集合，有什么用？"><a href="#①什么是集合，有什么用？" class="headerlink" title="①什么是集合，有什么用？"></a>①什么是集合，有什么用？</h3><p>1.集合是一种容器，用来组织和管理数据的。非常重要。</p>
+<p><strong>2.Java的集合框架对应的这套类库其实就是对各种数据结构的实现。</strong></p>
+<p>3.每一个集合类底层采用的数据结构不同，例如ArrayList集合底层采用了数组，LinkedList集合底层采用了双向链表，HashMap集合底层采用了哈希表，TreeMap集合底层采用了红黑树。</p>
+<p>4.我们不用写数据结构的实现了。直接用就行了。但我们需要知道的是在哪种场合下选择哪一个集合效率是最高的。</p>
+<h3 id="②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。"><a href="#②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。" class="headerlink" title="②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。"></a>②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。</h3><h3 id="③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。"><a href="#③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。" class="headerlink" title="③默认情况下，&#x3D;&#x3D;如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;"></a>③默认情况下，&#x3D;&#x3D;<strong>如果不使用泛型的话</strong>，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;</h3><h3 id="④Java集合框架相关的类都在-java-util-包下。"><a href="#④Java集合框架相关的类都在-java-util-包下。" class="headerlink" title="④Java集合框架相关的类都在 java.util 包下。"></a>④Java集合框架相关的类都在 java.util 包下。</h3><h3 id="⑤Java集合框架分为两部分："><a href="#⑤Java集合框架分为两部分：" class="headerlink" title="⑤Java集合框架分为两部分："></a>⑤Java集合框架分为两部分：</h3><p>1.Collection结构：元素以单个形式存储。</p>
+<p>2.Map结构：元素以键值对的映射关系存储。</p>
+<h2 id="Collection继承结构"><a href="#Collection继承结构" class="headerlink" title="Collection继承结构"></a>Collection继承结构</h2><h2 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h2><h2 id="SequencedCollection接口"><a href="#SequencedCollection接口" class="headerlink" title="SequencedCollection接口"></a>SequencedCollection接口</h2><h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h2 id="迭代时删除元素"><a href="#迭代时删除元素" class="headerlink" title="迭代时删除元素"></a>迭代时删除元素</h2><h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h2 id="链表存储结构"><a href="#链表存储结构" class="headerlink" title="链表存储结构"></a>链表存储结构</h2><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><h2 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h2><h2 id="队列数据结构"><a href="#队列数据结构" class="headerlink" title="队列数据结构"></a>队列数据结构</h2><h2 id="Map继承结构"><a href="#Map继承结构" class="headerlink" title="Map继承结构"></a>Map继承结构</h2><h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -218,7 +306,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-28 11:57:18" itemprop="dateModified" datetime="2024-02-28T11:57:18+08:00">2024-02-28</time>
+      <time title="修改时间：2024-02-28 15:52:46" itemprop="dateModified" datetime="2024-02-28T15:52:46+08:00">2024-02-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -670,16 +758,18 @@
 <p>③java.util.SimpleDateFormat 日期格式化类</p>
 <p>​		①日期转换成字符串（java.util.Date -&gt; java.lang.String）</p>
 <p>​		②字符串转换成日期（java.lang.String -&gt; java.util.Date）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Date ---》string  format</span></span><br><span class="line"><span class="type">Date</span> <span class="variable">now</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss SSS&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sdf.format(now);</span><br><span class="line"></span><br><span class="line"><span class="comment">//string--》Date parse</span></span><br><span class="line"><span class="type">String</span> <span class="variable">strDate</span> <span class="operator">=</span> <span class="string">&quot;2008-08-08 08:08:08 888&quot;</span>;<span class="comment">//字符串格式和下面这个format格式要对上，不然就会报解析异常</span></span><br><span class="line"><span class="type">SimpleDateFormat</span> <span class="variable">sdf2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss SSS&quot;</span>);</span><br><span class="line"><span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> sdf2.parse(strDate)</span><br><span class="line">    </span><br><span class="line"><span class="comment">//获取指定的时间，单位为毫秒级别</span></span><br><span class="line"><span class="type">Date</span> <span class="variable">date1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">1000</span>);</span><br><span class="line">System.out.println(date1);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//获取当前系统的前十分钟</span></span><br><span class="line"><span class="type">Date</span>  <span class="variable">date2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() - <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line">System.out.println(date2);</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Date ---》string  format</span></span><br><span class="line"><span class="type">Date</span> <span class="variable">now</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss SSS&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sdf.format(now);</span><br><span class="line"></span><br><span class="line"><span class="comment">//string--》Date parse</span></span><br><span class="line"><span class="type">String</span> <span class="variable">strDate</span> <span class="operator">=</span> <span class="string">&quot;2008-08-08 08:08:08 888&quot;</span>;<span class="comment">//字符串格式和下面这个format格式要对上，不然就会报解析异常</span></span><br><span class="line"><span class="type">SimpleDateFormat</span> <span class="variable">sdf2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss SSS&quot;</span>);</span><br><span class="line"><span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> sdf2.parse(strDate)</span><br><span class="line">    </span><br><span class="line"><span class="comment">//获取指定的时间，单位为毫秒级别</span></span><br><span class="line"><span class="type">Date</span> <span class="variable">date1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">1000</span>);</span><br><span class="line">System.out.println(date1);</span><br><span class="line">        </span><br><span class="line"><span class="comment">//获取当前系统的前十分钟</span></span><br><span class="line"><span class="type">Date</span>  <span class="variable">date2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>(System.currentTimeMillis() - <span class="number">1000</span> * <span class="number">60</span> * <span class="number">10</span>);</span><br><span class="line">System.out.println(date2);</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
 
 <p>④java.util.Calendar 日历类</p>
 <p>​		①获取当前时间的日历对象：Calendar c &#x3D; Calendar.getInstance();</p>
 <p>​		②获取日历中的某部分：int year &#x3D; c.get(Calendar.YEAR);</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Calendar.YEAR <span class="comment">//获取年份 Calendar.MONTH 获取月份，0表示1月，1表示2月，...，11表示12月</span></span><br><span class="line"></span><br><span class="line">Calendar.DAY_OF_MONTH <span class="comment">//获取本月的第几天 Calendar.DAY_OF_YEAR 获取本年的第几天</span></span><br><span class="line"></span><br><span class="line">Calendar.HOUR_OF_DAY <span class="comment">//小时，24小时制 Calendar.HOUR 小时，12小时制</span></span><br><span class="line"></span><br><span class="line">Calendar.MINUTE <span class="comment">//获取分钟 Calendar.SECOND 获取秒</span></span><br><span class="line"></span><br><span class="line">Calendar.MILLISECOND <span class="comment">//获取毫秒 Calendar.DAY_OF_WEEK 获取星期几，1表示星期日，...，7表示星期六</span></span><br></pre></td></tr></table></figure>
 
-
-
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240228130311011.png" alt="image-20240228130311011"></p>
 <h5 id="①java-util-Calendar-日历类"><a href="#①java-util-Calendar-日历类" class="headerlink" title="①java.util.Calendar 日历类"></a>①java.util.Calendar 日历类</h5><p>​	1.日历的set方法：设置日历</p>
+<blockquote>
+<p>静态变量</p>
+</blockquote>
 <p>​			1.calendar.set(Calendar.YEAR, 2023); </p>
 <p>​			2.calendar.set(2008, Calendar.SEPTEMBER,8);</p>
 <p>​	2.日历的add方法（日历中各个部分的加减）：</p>
@@ -688,7 +778,108 @@
 <p>​			1.calendar.setTime(new Date());</p>
 <p>​	4.日历对象的getTime()方法获取日历的具体时间：</p>
 <p>​			1.Date time &#x3D; calendar.getTime();</p>
-<h3 id="Java8的新日期API"><a href="#Java8的新日期API" class="headerlink" title="Java8的新日期API"></a>Java8的新日期API</h3><h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240228131052018.png" alt="image-20240228131052018"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Calendar</span> <span class="variable">cal</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Calendar</span>();</span><br><span class="line"><span class="type">String</span> <span class="variable">strDate</span> <span class="operator">=</span> <span class="string">&quot;2008-05-12 15:30:30&quot;</span>;</span><br><span class="line"><span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line"><span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> sdf.parse(strDate);</span><br><span class="line">cal.setTime(date);</span><br><span class="line">System.out.println(cal.get(Calendar.HOUR_OF_DAY));</span><br><span class="line">System.out.println(cal.get(Calendar.MINUTE));</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java8的新日期API"><a href="#Java8的新日期API" class="headerlink" title="Java8的新日期API"></a>Java8的新日期API</h3><blockquote>
+<p>传统的日期API存在线程问题</p>
+<p>新的API在java.time包</p>
+</blockquote>
+<h4 id="传统的日期API存在线程安全问题，Java8又提供了一套全新的日期API"><a href="#传统的日期API存在线程安全问题，Java8又提供了一套全新的日期API" class="headerlink" title="传统的日期API存在线程安全问题，Java8又提供了一套全新的日期API"></a>传统的日期API存在线程安全问题，Java8又提供了一套全新的日期API</h4><ul>
+<li>①java.time.LocalDate、java.time.LocalTime、java.time.LocalDateTime 日期、时间、日期时间</li>
+<li>②java.time.Instant 时间戳信息197001010000到现在的时间毫秒</li>
+<li>③java.time.Duration 计算两个<strong>时间对象</strong>之间的时间间隔，精度为纳秒</li>
+<li>④java.time.Period 计算两个日期之间的时间间隔，以年、月、日为单位。</li>
+<li>⑤java.time.temporal.<strong>TemporalAdjusters</strong> 提供了一些方法用于方便的进行日期时间调整</li>
+<li>⑥java.time.format.DateTimeFormatter 用于进行日期时间格式化和解析</li>
+</ul>
+<h4 id="LocalDate日期、LocalTime时间、LocalDateTime日期时间"><a href="#LocalDate日期、LocalTime时间、LocalDateTime日期时间" class="headerlink" title="LocalDate日期、LocalTime时间、LocalDateTime日期时间"></a>LocalDate日期、LocalTime时间、LocalDateTime日期时间</h4><h5 id="①获取当前时间（精确到纳秒，1秒-1000毫秒，1毫秒-1000微秒，1微秒-1000纳秒）"><a href="#①获取当前时间（精确到纳秒，1秒-1000毫秒，1毫秒-1000微秒，1微秒-1000纳秒）" class="headerlink" title="①获取当前时间（精确到纳秒，1秒&#x3D;1000毫秒，1毫秒&#x3D;1000微秒，1微秒&#x3D;1000纳秒）"></a>①获取当前时间（精确到纳秒，1秒&#x3D;1000毫秒，1毫秒&#x3D;1000微秒，1微秒&#x3D;1000纳秒）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now(); </span><br></pre></td></tr></table></figure>
+
+<h5 id="②获取指定日期时间"><a href="#②获取指定日期时间" class="headerlink" title="②获取指定日期时间"></a>②获取指定日期时间</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDateTime</span> <span class="variable">ldt</span> <span class="operator">=</span> LocalDateTime.of(<span class="number">2008</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">8</span>); <span class="comment">// 获取指定的日期时间</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="③加日期和加时间"><a href="#③加日期和加时间" class="headerlink" title="③加日期和加时间"></a>③加日期和加时间</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDateTime</span> <span class="variable">localDateTime</span> <span class="operator">=</span> ldt.plusYears(<span class="number">1</span>).plusMonths(<span class="number">1</span>).plusDays(<span class="number">1</span>).plusHours(<span class="number">1</span>).plusMinutes(<span class="number">1</span>).plusSeconds(<span class="number">1</span>).plusNanos(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="④减日期和减时间"><a href="#④减日期和减时间" class="headerlink" title="④减日期和减时间"></a>④减日期和减时间</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDateTime</span> <span class="variable">localDateTime</span> <span class="operator">=</span> ldt.minusYears(<span class="number">1</span>).minusMonths(<span class="number">1</span>).minusDays(<span class="number">1</span>).minusHours(<span class="number">1</span>).minusMinutes(<span class="number">1</span>).minusSeconds(<span class="number">1</span>).minusNanos(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="⑤获取年月日时分秒"><a href="#⑤获取年月日时分秒" class="headerlink" title="⑤获取年月日时分秒"></a>⑤获取年月日时分秒</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">year</span> <span class="operator">=</span> now.getYear(); <span class="comment">// 年 int month = now.getMonth().getValue(); // 月</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">dayOfMonth</span> <span class="operator">=</span> now.getDayOfMonth(); <span class="comment">// 一个月的第几天 int dayOfWeek = now.getDayOfWeek().getValue(); // 一个周第几天</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">dayOfYear</span> <span class="operator">=</span> now.getDayOfYear(); <span class="comment">// 一年的第几天 int hour = now.getHour(); // 时</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">minute</span> <span class="operator">=</span> now.getMinute(); <span class="comment">// 分 int second = now.getSecond(); // 秒</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="variable">nano</span> <span class="operator">=</span> now.getNano(); <span class="comment">// 纳秒</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Instant-时间戳（获取1970年1月1日-0时0分0秒到某个时间的时间戳）"><a href="#Instant-时间戳（获取1970年1月1日-0时0分0秒到某个时间的时间戳）" class="headerlink" title="&#x3D;&#x3D;Instant 时间戳（获取1970年1月1日 0时0分0秒到某个时间的时间戳）&#x3D;&#x3D;"></a>&#x3D;&#x3D;Instant 时间戳（获取1970年1月1日 0时0分0秒到某个时间的时间戳）&#x3D;&#x3D;</h4><h5 id="①获取系统当前时间（UTC：全球标准时间）"><a href="#①获取系统当前时间（UTC：全球标准时间）" class="headerlink" title="①获取系统当前时间（UTC：全球标准时间）"></a>①获取系统当前时间（UTC：全球标准时间）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Instant</span> <span class="variable">instant</span> <span class="operator">=</span> Instant.now(); </span><br></pre></td></tr></table></figure>
+
+<h5 id="②获取时间戳"><a href="#②获取时间戳" class="headerlink" title="②获取时间戳"></a>②获取时间戳</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="variable">epochMilli</span> <span class="operator">=</span> instant.toEpochMilli(); </span><br></pre></td></tr></table></figure>
+
+<h4 id="Duration-计算时间间隔"><a href="#Duration-计算时间间隔" class="headerlink" title="Duration 计算时间间隔"></a>Duration 计算时间间隔</h4><h5 id="①计算两个时间相差时间间隔Duration-between-now1-now2"><a href="#①计算两个时间相差时间间隔Duration-between-now1-now2" class="headerlink" title="①计算两个时间相差时间间隔Duration.between(now1, now2);"></a>①计算两个时间相差时间间隔Duration.between(now1, now2);</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDateTime</span> <span class="variable">now1</span> <span class="operator">=</span> LocalDateTime.of(<span class="number">2008</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">8</span>,<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"> <span class="type">LocalDateTime</span> <span class="variable">now2</span> <span class="operator">=</span> LocalDateTime.of(<span class="number">2009</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>,<span class="number">9</span>);</span><br><span class="line"></span><br><span class="line"> <span class="type">Duration</span> <span class="variable">between</span> <span class="operator">=</span> Duration.between(now1, now2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 两个时间差多少个小时</span></span><br><span class="line"></span><br><span class="line">System.out.println(between.toHours());</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 两个时间差多少天</span></span><br><span class="line"></span><br><span class="line">System.out.println(between.toDays());</span><br></pre></td></tr></table></figure>
+
+<h4 id="Period-计算日期间隔"><a href="#Period-计算日期间隔" class="headerlink" title="Period 计算日期间隔"></a>Period 计算日期间隔</h4><h5 id="①计算两个日期间隔Period-between-now1-now2"><a href="#①计算两个日期间隔Period-between-now1-now2" class="headerlink" title="①计算两个日期间隔Period.between(now1, now2);"></a>①计算两个日期间隔Period.between(now1, now2);</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    <span class="type">LocalDate</span> <span class="variable">now1</span> <span class="operator">=</span> LocalDate.of(<span class="number">2007</span>,<span class="number">7</span>,<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line">​    <span class="type">LocalDate</span> <span class="variable">now2</span> <span class="operator">=</span> LocalDate.of(<span class="number">2008</span>,<span class="number">8</span>,<span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">​    <span class="type">Period</span> <span class="variable">between</span> <span class="operator">=</span> Period.between(now1, now2);</span><br><span class="line"></span><br><span class="line">​    <span class="comment">// 相差年数</span></span><br><span class="line"></span><br><span class="line">​    System.out.println(between.getYears());</span><br><span class="line"></span><br><span class="line">​    <span class="comment">// 相差月数</span></span><br><span class="line"></span><br><span class="line">​    System.out.println(between.getMonths());</span><br><span class="line"></span><br><span class="line">​    <span class="comment">// 相差天数</span></span><br><span class="line"></span><br><span class="line">​    System.out.println(between.getDays());</span><br></pre></td></tr></table></figure>
+
+<h4 id="TemporalAdjusters-时间矫正器"><a href="#TemporalAdjusters-时间矫正器" class="headerlink" title="TemporalAdjusters  时间矫正器"></a>TemporalAdjusters  时间矫正器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">①<span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now(); <span class="comment">// 获取系统当前时间</span></span><br><span class="line"></span><br><span class="line">②now.with(TemporalAdjusters.firstDayOfMonth()); <span class="comment">// 当前月的第一天</span></span><br><span class="line"></span><br><span class="line">③now.with(TemporalAdjusters.firstDayOfNextYear()); <span class="comment">// 下一年的第一天</span></span><br><span class="line"></span><br><span class="line">④now.with(TemporalAdjusters.lastDayOfYear()); <span class="comment">// 本年最后一天</span></span><br><span class="line"></span><br><span class="line">⑤now.with(TemporalAdjusters.lastDayOfMonth()); <span class="comment">// 本月最后一天</span></span><br><span class="line"></span><br><span class="line">⑥now.with(TemporalAdjusters.next(DayOfWeek.MONDAY)); <span class="comment">// 下周一</span></span><br><span class="line"></span><br><span class="line">⑦......</span><br></pre></td></tr></table></figure>
+
+<h4 id="DateTimeFormatter-日期格式化"><a href="#DateTimeFormatter-日期格式化" class="headerlink" title="DateTimeFormatter 日期格式化"></a>DateTimeFormatter 日期格式化</h4><h5 id="①日期格式化-（LocalDateTime-–-String）"><a href="#①日期格式化-（LocalDateTime-–-String）" class="headerlink" title="①日期格式化 （LocalDateTime –&gt; String）"></a>①日期格式化 （LocalDateTime –&gt; String）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">LocalDateTime</span> <span class="variable">now</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line"></span><br><span class="line"><span class="type">DateTimeFormatter</span> <span class="variable">dtf</span> <span class="operator">=</span> DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> dtf.format(now);</span><br></pre></td></tr></table></figure>
+
+<h5 id="②将字符串转换成日期（String-–-LocalDateTime）"><a href="#②将字符串转换成日期（String-–-LocalDateTime）" class="headerlink" title="②将字符串转换成日期（String –&gt; LocalDateTime）"></a>②将字符串转换成日期（String –&gt; LocalDateTime）</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DateTimeFormatter</span> <span class="variable">dtf</span> <span class="operator">=</span> DateTimeFormatter.ofPattern(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">LocalDateTime</span> <span class="variable">localDateTime</span> <span class="operator">=</span> LocalDateTime.parse(<span class="string">&quot;2008-08-08 08:08:08&quot;</span>, dtf);</span><br><span class="line"></span><br><span class="line">System.out.println(localDateTime);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h3><blockquote>
+<p>java.lang.Math 数学工具类，都是**&#x3D;&#x3D;静态方法&#x3D;&#x3D;**</p>
+</blockquote>
+<h5 id="①常用属性：static-final-double-PI（圆周率）"><a href="#①常用属性：static-final-double-PI（圆周率）" class="headerlink" title="①常用属性：static final double PI（圆周率）"></a>①常用属性：static final double PI（圆周率）</h5><h5 id="②常用方法："><a href="#②常用方法：" class="headerlink" title="②常用方法："></a>②常用方法：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> <span class="title function_">abs</span><span class="params">(<span class="type">int</span> a)</span>; <span class="comment">//绝对值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">double</span> <span class="title function_">ceil</span><span class="params">(<span class="type">double</span> a)</span>; <span class="comment">//向上取整</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">double</span> <span class="title function_">floor</span><span class="params">(<span class="type">double</span> a)</span>; <span class="comment">//向下取整</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>; <span class="comment">//最大值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">int</span> <span class="title function_">min</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>;<span class="comment">// 最小值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">double</span> <span class="title function_">random</span><span class="params">()</span>; <span class="comment">//随机数[0.0, 1.0)   int num = (int)(Math.random() * 100);可以获取[0-100)的随机数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">long</span> <span class="title function_">round</span><span class="params">(<span class="type">double</span> a)</span>; <span class="comment">//四舍五入</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">double</span> <span class="title function_">sqrt</span><span class="params">(<span class="type">double</span> a)</span>; <span class="comment">//平方根</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">double</span> <span class="title function_">pow</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span>;  <span class="comment">//a的b次幂</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><blockquote>
+<p>枚举（Java5新特性）</p>
+</blockquote>
+<h4 id="①枚举类型在Java中是一种-引用数据类型。"><a href="#①枚举类型在Java中是一种-引用数据类型。" class="headerlink" title="①枚举类型在Java中是一种&#x3D;&#x3D;引用数据类型。&#x3D;&#x3D;"></a>①枚举类型在Java中是一种&#x3D;&#x3D;引用数据类型。&#x3D;&#x3D;</h4><h4 id="②合理使用枚举类型可以让代码更加清晰、可读性更高，可以有效地避免一些常见的错误。"><a href="#②合理使用枚举类型可以让代码更加清晰、可读性更高，可以有效地避免一些常见的错误。" class="headerlink" title="②合理使用枚举类型可以让代码更加清晰、可读性更高，可以有效地避免一些常见的错误。"></a>②合理使用枚举类型可以让代码更加清晰、可读性更高，可以有效地避免一些常见的错误。</h4><h4 id="③什么情况下考虑使用枚举类型？"><a href="#③什么情况下考虑使用枚举类型？" class="headerlink" title="③什么情况下考虑使用枚举类型？"></a>③什么情况下考虑使用枚举类型？</h4><p>​	1.这个数据是有限的，并且可以一枚一枚列举出来的。</p>
+<p>​	2.枚举类型是类型安全的，它可以有效地防止使用错误的类型进行赋值。</p>
+<h4 id="④枚举如何定义？以下是最基本的格式："><a href="#④枚举如何定义？以下是最基本的格式：" class="headerlink" title="④枚举如何定义？以下是最基本的格式："></a>④枚举如何定义？以下是最基本的格式：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> 枚举类型名 &#123;</span><br><span class="line"></span><br><span class="line">  枚举值<span class="number">1</span>, 枚举值<span class="number">2</span>, 枚举值<span class="number">3</span>, 枚举值<span class="number">4</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="⑤通过反编译-javap-可以看到："><a href="#⑤通过反编译-javap-可以看到：" class="headerlink" title="⑤通过反编译(javap)可以看到："></a>⑤通过反编译(javap)可以看到：</h4><p>1.所有枚举类型默认继承<strong>java.lang.Enum</strong>,因此枚举类型无法继承其他类。</p>
+<p><strong>2.所有的枚举类型都被final修饰，所以枚举类型是无法继承的</strong></p>
+<p><strong>3.所有的枚举值都是常量</strong></p>
+<p>4.所有的枚举类型中都有一个values数组（可以通过values()获取所有枚举值并遍历）</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240228134745351.png" alt="image-20240228134745351"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240228134809247.png" alt="image-20240228134809247"></p>
+<h4 id="枚举的高级用法"><a href="#枚举的高级用法" class="headerlink" title="枚举的高级用法"></a>枚举的高级用法</h4><h5 id="①普通类中可以编写的元素，枚举类型中也可以编写。"><a href="#①普通类中可以编写的元素，枚举类型中也可以编写。" class="headerlink" title="①普通类中可以编写的元素，枚举类型中也可以编写。"></a>①普通类中可以编写的元素，枚举类型中也可以编写。</h5><blockquote>
+<p>静态代码块，构造代码块</p>
+<p>实例方法，静态方法</p>
+<p>实例变量，静态变量</p>
+</blockquote>
+<h5 id="②枚举类中的-构造方法是私有化-的（默认就是私有化的，只能在本类中调用）"><a href="#②枚举类中的-构造方法是私有化-的（默认就是私有化的，只能在本类中调用）" class="headerlink" title="②枚举类中的&#x3D;&#x3D;构造方法是私有化&#x3D;&#x3D;的（默认就是私有化的，只能在本类中调用）"></a>②枚举类中的&#x3D;&#x3D;构造方法是私有化&#x3D;&#x3D;的（默认就是私有化的，只能在本类中调用）</h5><p>构造方法调用时不能用new。直接使用“枚举值(实参);”调用。</p>
+<p>每一个枚举值相当于枚举类型的实例。</p>
+<blockquote>
+<p>枚举类最开始的时候 定义的枚举值就是枚举类对象，会调用构造函数，默认会调用无参构造函数</p>
+<p>如果定义了有参构造函数，没有修改在上面定义的枚举值的话，就会报错</p>
+<p>所以需要对于枚举值修改一下构造函数</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240228144551282.png" alt="image-20240228144551282"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Season</span> &#123;</span><br><span class="line">    SPRING(<span class="string">&quot;春天&quot;</span>) ,SUMMER(<span class="string">&quot;夏天&quot;</span>),AUTUMN(<span class="string">&quot;秋天&quot;</span>),WINTER(<span class="string">&quot;冬天&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>  <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;春天&quot;</span>;</span><br><span class="line">    Season(String name)&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SeasonTest</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Season</span> <span class="variable">season</span> <span class="operator">=</span> get();</span><br><span class="line">        <span class="keyword">switch</span> (season)&#123;</span><br><span class="line">            <span class="keyword">case</span> SPRING -&gt; System.out.println(Season.SPRING.name());</span><br><span class="line">            <span class="keyword">case</span> SUMMER -&gt; System.out.println(Season.SUMMER.name());</span><br><span class="line">            <span class="keyword">case</span> AUTUMN -&gt; System.out.println(Season.AUTUMN.name());</span><br><span class="line">            <span class="keyword">case</span> WINTER -&gt; System.out.println(Season.WINTER.name());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Season <span class="title function_">get</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Season.SPRING;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="③枚举类型中如果编写了其他代码，-必须要有枚举值，枚举值的定义要放到最上面，"><a href="#③枚举类型中如果编写了其他代码，-必须要有枚举值，枚举值的定义要放到最上面，" class="headerlink" title="③枚举类型中如果编写了其他代码，&#x3D;&#x3D;必须要有枚举值，枚举值的定义要放到最上面，&#x3D;&#x3D;"></a>③枚举类型中如果编写了其他代码，&#x3D;&#x3D;必须要有枚举值，枚举值的定义要放到最上面，&#x3D;&#x3D;</h5><p>&#x3D;&#x3D;最后一个枚举值的分号不能省略。&#x3D;&#x3D;</p>
+<h5 id="④枚举类因为默认继承了-java-lang-Enum-，因此不能再继承其他类，但可以实现接口。"><a href="#④枚举类因为默认继承了-java-lang-Enum-，因此不能再继承其他类，但可以实现接口。" class="headerlink" title="④枚举类因为默认继承了&#x3D;&#x3D;java.lang.Enum&#x3D;&#x3D;，因此不能再继承其他类，但可以实现接口。"></a>④枚举类因为默认继承了&#x3D;&#x3D;java.lang.Enum&#x3D;&#x3D;，因此不能再继承其他类，但可以实现接口。</h5><p>第一种实现方式：在枚举类中实现。</p>
+<p>第二种实现方式：让每一个枚举值实现接口。</p>
+<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/image-20240228134927319.png" alt="image-20240228134927319" style="zoom:50%;" />
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Season</span> <span class="keyword">implements</span> <span class="title class_">Eatable</span>&#123;</span><br><span class="line">    SPRING(<span class="string">&quot;春天&quot;</span>)&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;apple&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,SUMMER(<span class="string">&quot;夏天&quot;</span>)&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;lalala&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,AUTUMN(<span class="string">&quot;秋天&quot;</span>)&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;111&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,WINTER(<span class="string">&quot;冬天&quot;</span>)&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;111&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    或者</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Season</span> <span class="keyword">implements</span> <span class="title class_">Eatable</span>&#123;</span><br><span class="line">    SPRING(<span class="string">&quot;春天&quot;</span>),SUMMER(<span class="string">&quot;夏天&quot;</span>),AUTUMN(<span class="string">&quot;秋天&quot;</span>),WINTER(<span class="string">&quot;冬天&quot;</span>);</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>  <span class="variable">i</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;春天&quot;</span>;</span><br><span class="line">    Season(String name)&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h3><h4 id="java-util-Random-随机数生成器（生成随机数的工具类）"><a href="#java-util-Random-随机数生成器（生成随机数的工具类）" class="headerlink" title="java.util.Random 随机数生成器（生成随机数的工具类）"></a>java.util.Random 随机数生成器（生成随机数的工具类）</h4><h5 id="①常用构造方法："><a href="#①常用构造方法：" class="headerlink" title="①常用构造方法："></a>①常用构造方法：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Random()</span><br></pre></td></tr></table></figure>
+
+<h5 id="②常用方法：-1"><a href="#②常用方法：-1" class="headerlink" title="②常用方法："></a>②常用方法：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">nextInt</span><span class="params">()</span>; 获取一个<span class="type">int</span>类型取值范围内的随机<span class="type">int</span>数</span><br><span class="line"></span><br><span class="line">   <span class="type">int</span> <span class="title function_">nextInt</span><span class="params">(<span class="type">int</span> bound)</span>; 获取[<span class="number">0</span>,bound)区间的随机数</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">nextDouble</span><span class="params">()</span>; 获取[<span class="number">0.0</span>, <span class="number">1.0</span>)的随机数。</span><br></pre></td></tr></table></figure>
+
+<h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><h4 id="java-lang-System类的常用方法："><a href="#java-lang-System类的常用方法：" class="headerlink" title="java.lang.System类的常用方法："></a>java.lang.System类的常用方法：</h4><h5 id="①常用属性："><a href="#①常用属性：" class="headerlink" title="①常用属性："></a>①常用属性：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> PrintStream err 标准错误输出流（System.err.println(“错误信息”);输出红色字体）</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> InputStream in 标准输入流</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> PrintStream out 标准输出流</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="②常用方法：-2"><a href="#②常用方法：-2" class="headerlink" title="②常用方法："></a>②常用方法：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">arraycopy</span><span class="params">(Object src, <span class="type">int</span> srcPos, Object dest, <span class="type">int</span> destPos, <span class="type">int</span> length)</span>; 数组拷贝</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exit</span><span class="params">(<span class="type">int</span> status)</span>; 退出虚拟机</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">gc</span><span class="params">()</span>; 建议启动垃圾回收器</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">long</span> <span class="title function_">currentTimeMillis</span><span class="params">()</span>; 获取自<span class="number">1970</span>-<span class="number">01</span>-<span class="number">01</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> <span class="number">000</span>到系统当前时间的总毫秒数</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="type">long</span> <span class="title function_">nanoTime</span><span class="params">()</span>; 获取自<span class="number">1970</span>年<span class="number">1</span>月<span class="number">1</span>日<span class="number">0</span>时<span class="number">0</span>分<span class="number">0</span>秒以来，当前时间的纳秒数</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> Map&lt;String,String&gt; <span class="title function_">getenv</span><span class="params">()</span>; 获取当前系统的环境变量，例如Path，JAVA_HOME，CLASSPATH等。</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> Properties <span class="title function_">getProperties</span><span class="params">()</span>; 获取当前系统的属性。</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> String <span class="title function_">getProperty</span><span class="params">(String key)</span>; 通过key获取指定的系统属性。</span><br></pre></td></tr></table></figure>
+
+<h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><blockquote>
+<p>具有全球唯一性的标识</p>
+</blockquote>
+<h4 id="UUID（通用唯一标识符）是一种软件构建的标准，用来生成具有唯一性的ID。"><a href="#UUID（通用唯一标识符）是一种软件构建的标准，用来生成具有唯一性的ID。" class="headerlink" title="UUID（通用唯一标识符）是一种软件构建的标准，用来生成具有唯一性的ID。"></a>UUID（通用唯一标识符）是一种软件构建的标准，用来生成具有唯一性的ID。</h4><h4 id="UUID具有以下特点："><a href="#UUID具有以下特点：" class="headerlink" title="UUID具有以下特点："></a>UUID具有以下特点：</h4><p>​	①UUID可以在分布式系统中<strong>生成唯一的标识符</strong>，避免因为主键冲突等问题带来的麻烦。</p>
+<p>​	&#x3D;&#x3D;<strong>②UUID具有足够的唯一性，重复的概率相当低。UUID使用的是128位数字，除了传统的16进制表示之外（32位的16进制表示</strong>），还有<strong>基于62进制的表示，可以更加简洁紧凑。</strong>&#x3D;&#x3D;</p>
+<p>③UUID生成时不需要依赖任何中央控制器或数据库服务器，可以在本地方便、快速地生成唯一标识符。</p>
+<p>④UUID生成后可以被许多编程语言支持并方便地转化为字符串表示形式，适用于多种应用场景。</p>
+<p><strong>在Java开发中，UUID的使用是非常普遍的。它可以用于生成数据表主键、场景标识、链路追踪、缓存Key等。</strong>使用UUID可以方便地避免主键、缓存Key等因冲突而产生的问题，同时能够实现多种功能，例如追踪、缓存、日志记录等。</p>
+<h4 id="Java中的java-util-UUID类提供对UUID的支持"><a href="#Java中的java-util-UUID类提供对UUID的支持" class="headerlink" title="Java中的java.util.UUID类提供对UUID的支持"></a>Java中的java.util.UUID类提供对UUID的支持</h4><p>①生成UUID：static UUID randomUUID();</p>
+<p>②将UUID转换为字符串：String toString();</p>
+
       
     </div>
 
@@ -2371,252 +2562,6 @@
 <h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
 <p>后端的端口：8088 在application.yml中修改</p>
 <p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/" class="post-title-link" itemprop="url">未命名</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-18 00:54:17" itemprop="dateCreated datePublished" datetime="2024-02-18T00:54:17+08:00">2024-02-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-23 19:29:33" itemprop="dateModified" datetime="2024-02-23T19:29:33+08:00">2024-02-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
-<li><p>编译java代码 ： javac HelloWorld.java</p>
-</li>
-<li><p>main方法是JVM规定的，程序就是从这个位置执行的，程序的入口</p>
-</li>
-<li><p>public class 和class的区别</p>
-</li>
-</ol>
-<h2 id="P19-public-class和class的区别"><a href="#P19-public-class和class的区别" class="headerlink" title="P19 public class和class的区别"></a>P19 public class和class的区别</h2><ol>
-<li><p>一个java源文件中可以生成多个源文件 ；</p>
-</li>
-<li><p>编译后，一个class对应生成一个class字节码文件</p>
-</li>
-</ol>
-<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111209337.png" alt="image-20240223111209337" style="zoom:50%;" />
-
-<ol start="3">
-<li><p>如果一个类是public的，那么这个类名要和文件名保持一致，如果不一致就会报错。</p>
-</li>
-<li><p>一个java文件里，public class可以没有，如果有也只能有一个。</p>
-</li>
-<li><p>每个类里面都可以写入口main函数 ，执行只需要 java 类名</p>
-<blockquote>
-<p>在实际的开发中，入口只能有一个</p>
-</blockquote>
-</li>
-</ol>
-<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111722726.png" alt="image-20240223111722726" style="zoom:50%;" />
-
-<h2 id="JAVA基础语法"><a href="#JAVA基础语法" class="headerlink" title="JAVA基础语法"></a>JAVA基础语法</h2><h3 id="一、标识符"><a href="#一、标识符" class="headerlink" title="一、标识符"></a>一、标识符</h3><blockquote>
-<p>凡是有权利自己起名的都是标识符，比如类名等</p>
-</blockquote>
-<p>①在Java中，标识符是用来给变量、方法、类和包等命名的字符序列。</p>
-<p>②标识符的长度没有限制，但是建议使用有意义的、简洁的标识符，以提高代码的可读性和可维护性。</p>
-<h4 id="标识符可以标识什么"><a href="#标识符可以标识什么" class="headerlink" title="标识符可以标识什么"></a><strong>标识符可以标识什么</strong></h4><p>①变量名</p>
-<p>②方法名</p>
-<p>③类名、接口名、枚举名、注解名</p>
-<p>④包名</p>
-<p>⑤常量名</p>
-<p>⑥……</p>
-<h4 id="标识符命名规则"><a href="#标识符命名规则" class="headerlink" title="标识符命名规则"></a>标识符命名规则</h4><p>①标识符可以由字母、数字、下划线(_)和美元符号($)组成，不能含有其他符号。（java支持全球所有语言，所以这里的 字母 指的是任何一个国家的文字都可以）</p>
-<p>②标识符不能以数字开头。</p>
-<p>③标识符不能是Java中的关键字，如public、class、void等。</p>
-<p>④标识符是区分大小写的，即Foo和foo是两个不同的标识符。</p>
-<p>⑤标识符的长度没有限制，但是Java建议使用有意义的、简短的标识符。</p>
-<h4 id="标识符命名规范"><a href="#标识符命名规范" class="headerlink" title="标识符命名规范"></a><strong>标识符命名规范</strong></h4><p>①见名知意</p>
-<p>②驼峰式命名方式</p>
-<p>③类名、接口名、枚举、注解：首字母大写，后面每个单词首字母大写。（StudentService，UserService）</p>
-<p>④变量名和方法名：首字母小写，后面每个单词首字母大写。（doSome，doOther）</p>
-<p>⑤常量名：全部大写，每个单词用下划线连接。（LOGIN_SUCCESS，SYSTEM_ERROR）</p>
-<p>⑥包名：全部小写    </p>
-<h3 id="二、关键字"><a href="#二、关键字" class="headerlink" title="二、关键字"></a>二、关键字</h3><blockquote>
-<p>Java关键字是Java编程语言中预定义的具有特殊含义的单词，这些单词不能被用作标识符，而是在语法中有特定的用法和限制。</p>
-</blockquote>
-<h4 id="Java关键字有哪些"><a href="#Java关键字有哪些" class="headerlink" title="Java关键字有哪些"></a>Java关键字有哪些</h4><p>①Java关键字都是小写的。</p>
-<p>②abstract, assert, boolean, break, byte, case, catch, char, class, continue, default, do, double, else, enum, extends, final, finally, float, for, if, implements, import, instanceof, int, interface, long, native, new, package, private, protected, public, return, short, static, strictfp, super, switch, synchronized, this, throw, throws, transient, try, void, volatile, while（50）</p>
-<p>③Java保留字：goto，const(虽然没有在java中用到，但是不能用)</p>
-<h3 id="三、字面量"><a href="#三、字面量" class="headerlink" title="三、字面量"></a>三、字面量</h3><blockquote>
-<p>①字面量指的是在程序中直接使用的数据，字面量是Java中最基本的表达式，不需要进行计算或转换，直接使用即可。</p>
-<p>就是数据</p>
-</blockquote>
-<h4 id="Java中有哪些字面量"><a href="#Java中有哪些字面量" class="headerlink" title="Java中有哪些字面量"></a>Java中有哪些字面量</h4><p>①整数型：10、-5、0、100</p>
-<p>②浮点型：3.14、-0.5、1.0</p>
-<p>③布尔型：true、false</p>
-<p>④字符型：’a’、’b’、’c’、’1’、’2’、’国’</p>
-<p>⑤字符串型：”Hello”、”World”、”Java”、”你好呀”</p>
-<h4 id="加号运算符"><a href="#加号运算符" class="headerlink" title="加号运算符 +"></a>加号运算符 +</h4><p>①作用1：求和（当加号两边都是数字时进行求和运算）</p>
-<p>②作用2：字符串拼接（当加号&#x3D;&#x3D;两边有任意一边是字符串类型&#x3D;&#x3D;时会进行字符串拼接，结果还是一个字符串）</p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113100144.png" alt="image-20240223113100144"></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113232992.png" alt="image-20240223113232992"></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113303115.png" alt="image-20240223113303115"></p>
-<h3 id="四、变量"><a href="#四、变量" class="headerlink" title="四、变量"></a>四、变量</h3><p><strong>①变量是内存当中的一块空间。是计算机中存储数据最基本的单元。</strong></p>
-<p><strong>②变量三要素：</strong></p>
-<ul>
-<li>l数据类型（决定空间大小）【int, double, String】</li>
-<li>l变量名（只要是合法的标识符即可）</li>
-<li>l变量值（变量中具体存储的数据）</li>
-</ul>
-<p><strong>③变量的声明、赋值、访问</strong></p>
-<ul>
-<li>lint i; &#x2F;&#x2F; 声明一个整数型的变量，起名i</li>
-<li>li &#x3D; 100; &#x2F;&#x2F; 给变量i赋值100</li>
-<li>lSystem.out.println(i); &#x2F;&#x2F; 访问i变量：读操作</li>
-<li>li &#x3D; 200; &#x2F;&#x2F; 访问i变量：改操作【给变量i重新赋值200】</li>
-</ul>
-<p>生命周期就是从内存开辟到内存释放</p>
-<h4 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h4><p><strong>①局部变量</strong></p>
-<p>在方法体里面定义的变量</p>
-<p><strong>②成员变量</strong></p>
-<p>在类里面，不是在方法体里面定义的；</p>
-<p>&#x3D;&#x3D;对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。&#x3D;&#x3D;0.false，null</p>
-<ol>
-<li><p>静态变量</p>
-<p>​	&#x2F;&#x2F;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> a；</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实例变量</p>
-</li>
-</ol>
-<h3 id="五、数据类型"><a href="#五、数据类型" class="headerlink" title="五、数据类型"></a>五、数据类型</h3><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124717592.png" alt="image-20240223124717592"></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124824008.png" alt="image-20240223124824008"></p>
-<p>关于默认值：Java语言中变量必须先声明，再赋值，才能使用。对于局部变量来说必须手动赋值，而对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。</p>
-<h4 id="1-整数型详解"><a href="#1-整数型详解" class="headerlink" title="1.整数型详解"></a>1.整数型详解</h4><ol>
-<li>整数型字面量一般默认是int，所以在定义long的时候，需要在字面量的后面加上“L&#x2F;l”</li>
-</ol>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223125508845.png" alt="image-20240223125508845"></p>
-<h4 id="2-自动类型转换"><a href="#2-自动类型转换" class="headerlink" title="2.自动类型转换"></a>2.自动类型转换</h4><p>小容量的可以转大的，在Java中，对于基本数据类型来说，<strong>小容量是可以直接赋值给大容量的，这被称为自动类型转换。</strong></p>
-<p><strong>&#x3D;&#x3D;<em>byte &lt; short &lt; int &lt; long &lt; float &lt; double</em>&#x3D;&#x3D;</strong></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134152096.png" alt="image-20240223134152096"></p>
-<h4 id="3-强制类型转换"><a href="#3-强制类型转换" class="headerlink" title="3.强制类型转换"></a>3.强制类型转换</h4><blockquote>
-<p>需要大容量转小容量</p>
-</blockquote>
-<p><strong>①Java中大容量是无法直接转换成小容量的。</strong>因为这种操作可能会导致精度损失，所以这种行为交给了程序员来决定，当然这种后果自然是程序员自己去承担。因此在代码中需要程序员自己亲手加上强制类型转换符，程序才能编译通过</p>
-<p><strong>②强制类型转换时，底层二进制是如何变化的？原则：砍掉左侧多余的二进制。</strong></p>
-<p><strong>③强制类型转换时，精度可能会损失，也可能不会损失，这要看具体的数据是否真正的超出了强转后的类型的取值范围</strong>。如下图：水可能溢出，也可能不会溢出，这要看真实存放的水有多少</p>
-<p>④请推算结果：byte b &#x3D; (byte)150;</p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134219863.png" alt="image-20240223134219863"></p>
-<h4 id="4-byte"><a href="#4-byte" class="headerlink" title="4.byte"></a>4.byte</h4><p><strong>当整数字面量没有超出byte的范围</strong></p>
-<p><strong>①在Java中有这样一个规定，</strong>&#x3D;&#x3D;当整数型字面量没有超出byte的范围：可以直接赋值给byte类型的变量。&#x3D;&#x3D;</p>
-<p><strong>byte b &#x3D; 127</strong>; &#x2F;&#x2F; 这是允许的</p>
-<p>很显然，这是一种编译优化。同时也是为了方便程序员写代码。</p>
-<p><strong>②如果超出了范围</strong>，例如：</p>
-<p>byte b &#x3D; 128; &#x2F;&#x2F; 编译报错</p>
-<p>这样就会报错，需要做强制类型转换，例如：</p>
-<p>byte b &#x3D; (byte)128;</p>
-<p>它的执行结果你知道吗？可以尝试推算一下</p>
-<p><strong>③在整数类型中，除了byte有这个待遇之外，short同样也是支持的。</strong>也就是说：如果整数型字面量没有超出short取值范围时，也是支持直接赋值的。</p>
-<h4 id="5-数据类型运算"><a href="#5-数据类型运算" class="headerlink" title="5.数据类型运算"></a>5.数据类型运算</h4><p><strong>两个int类型做运算：</strong>两个int类型的数据做运算，最终的结果还是int类型</p>
-<p><strong>多种数据类型混合运算：</strong></p>
-<h5 id="a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"><a href="#a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算" class="headerlink" title="a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"></a>a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算</h5><p>byte a &#x3D; 100;</p>
-<p>int b &#x3D; 200;</p>
-<p>long c &#x3D; 300L;</p>
-<p>long d &#x3D; a + b + c;</p>
-<p>你可以测试一下，如果d变量是int类型则编译器会报错</p>
-<h5 id="b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"><a href="#b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short" class="headerlink" title="b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"></a>b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short</h5><h5 id="c-byte-a-10-3-这个是在编译的时候就得到结果了"><a href="#c-byte-a-10-3-这个是在编译的时候就得到结果了" class="headerlink" title="c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了"></a>c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了</h5><p>编译后的class文件中直接就是byte a &#x3D; 3</p>
-<h5 id="d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。"><a href="#d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。" class="headerlink" title="d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。"></a>d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。</h5><p>编译的阶段只能知道a&#x2F;b的结果是int类型，不知道最后的结果是多少。</p>
-<h3 id="6-浮点型"><a href="#6-浮点型" class="headerlink" title="6.浮点型"></a>6.浮点型</h3><p><strong>浮点型字面量默认被当做double</strong></p>
-<h4 id="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。"><a href="#①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。" class="headerlink" title="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加 F 或 f。"></a><strong>①Java中，浮点型字面量默认被当做double类型</strong>，如果要当做float类型，需要在数字后面添加 F 或 f。</h4><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142425166.png" alt="image-20240223142425166"></p>
-<p>&#x3D;&#x3D;float f &#x3D; 3.0; &#x2F;&#x2F; 编译报错&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;报错原因是：3.0默认被当做double类型，大容量无法直接赋值给小容量。如何修改：&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;float f &#x3D; 3.0F;&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;float f &#x3D; （double）3.14;&#x3D;&#x3D;这个是强制类型转换</p>
-<h4 id="②另外，可以通过以下程序的输出结果看到，double精度高于float："><a href="#②另外，可以通过以下程序的输出结果看到，double精度高于float：" class="headerlink" title="②另外，可以通过以下程序的输出结果看到，double精度高于float："></a><strong>②另外，可以通过以下程序的输出结果看到，double精度高于float：</strong></h4><p>double d &#x3D; 1.5656856894;</p>
-<p>System.out.println(d);</p>
-<p>float f &#x3D; 1.5656856894F;</p>
-<p>System.out.println(f);</p>
-<h4 id="③浮点型数据两种表示形式"><a href="#③浮点型数据两种表示形式" class="headerlink" title="③浮点型数据两种表示形式"></a>③浮点型数据两种表示形式</h4><p> <strong>第一种形式：十进制</strong></p>
-<p>double x &#x3D; 1.23;</p>
-<p>double y &#x3D; 0.23;</p>
-<p>double z &#x3D; .23;</p>
-<p> <strong>第二种形式：科学计数法</strong></p>
-<p>double x &#x3D; 0.123E2; &#x2F;&#x2F; 0.123 * 10的平方</p>
-<p>double y &#x3D; 123.34E-2; &#x2F;&#x2F; 123.34 &#x2F; 10的平方</p>
-<h4 id="⑤浮点型数据存储原理"><a href="#⑤浮点型数据存储原理" class="headerlink" title="⑤浮点型数据存储原理"></a>⑤<strong>浮点型数据存储原理</strong></h4><blockquote>
-<p>①符号位：0表示整数。1表示负数。</p>
-<p>②指数位：比如小数0.123E30，其中30就是指数。表示0.123 * 10的30次幂。所以也有把指数位叫做偏移量的。最大偏移量127。</p>
-<p>③尾数位：浮点数的小数部分的有效数字。例如：0.00123，那么尾数位存储123对应的二进制。</p>
-<p>④从浮点型数据存储原理上可以看到，二进制中的指数位决定了数字呈指数级增大。因此float虽然是4个字节，但却可以表示比long更大的数值。因此float容量比long的容量大。</p>
-</blockquote>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142930629.png" alt="image-20240223142930629"></p>
-<p>①一旦有浮点型数据参与运算得出的结果，一定不要使用“&#x3D;&#x3D;”与其它数字进行“相等比较”</p>
-<blockquote>
-<p>浮点型数据在计算机底层计算的是近似值，</p>
-</blockquote>
-<h3 id="7-字符型"><a href="#7-字符型" class="headerlink" title="7.字符型"></a>7.字符型</h3><p>①占用两个字节，0~65535，和short容量相同，但char可以取更大的整数</p>
-<p>②单个字符，使用单引号括起来，不能是多个字符</p>
-<p>③可以保存一个汉字                       </p>
-<p>④char c &#x3D; ‘’; 这是不允许的</p>
-<p>⑤char c &#x3D; ‘\u0000’; 这表示一个空字符，也是char的默认值。\u0000是一个Unicode码。</p>
-<p>⑥空字符与空格字符是不同的。空字符表示什么也没有。空格字符表示一个空格。****</p>
-<h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>乱码产生的原因在于，在编码和解码的时候没有用同一个码表</p>
 
       
     </div>

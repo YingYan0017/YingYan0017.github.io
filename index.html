@@ -212,7 +212,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-02-28 15:53:24 / 修改时间：21:42:01" itemprop="dateCreated datePublished" datetime="2024-02-28T15:53:24+08:00">2024-02-28</time>
+      <time title="创建时间：2024-02-28 15:53:24 / 修改时间：21:59:32" itemprop="dateCreated datePublished" datetime="2024-02-28T15:53:24+08:00">2024-02-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -303,7 +303,15 @@
 <p><strong>②为什么要有泛型擦除呢？兼容低版本的JDK</strong>其本质是为了让JDK1.4和JDK1.5能够兼容同一个类加载器。在JDK1.5版本中，程序编译时期会对集合添加的元素进行安全检查，如果检查完是安全的、没有错误的，那么就意味着添加的元素都属于同一种数据类型，则加载类时就可以把这个泛型擦除掉，将泛型擦除后的类型就是Object类，这样擦除之后的代码就与JDK1.4的代码一致。</p>
 <p>③由于加载类的时候，会默认将类中的泛型擦除为Object类型，所以添加的元素就被转化为Object类型，同时取出的元素也默认为Object类型。而我们获得集合中的元素时，按理说取出的元素应该是Object类型，为什么取出的元素却是实际添加的元素类型呢？</p>
 <p>④这里又做了一个默认的操作，我们称之为**&#x3D;&#x3D;泛型的补偿&#x3D;&#x3D;<strong>。</strong>&#x3D;&#x3D;在程序运行时，通过获取元素的实际类型进行强转，这就叫做泛型补偿（不必手动实现强制转换）。获得集合中的元素时，虚拟机 会根据获得元素的实际类型进行向下转型，也就是会恢复获得元素的实际类型，因此我们就无需手动执行向下转型操作，从本质上避免了抛出类型转换异常。&#x3D;&#x3D;**</p>
-<p><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214144852.png" alt="image-20240228214144852" style="zoom:80%;" /><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214151875.png" alt="image-20240228214151875" style="zoom:67%;" /></p>
+<h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><h4 id="在类上定义泛型"><a href="#在类上定义泛型" class="headerlink" title="在类上定义泛型"></a>在类上定义泛型</h4><p><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214144852.png" alt="image-20240228214144852" style="zoom:80%;" /><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214151875.png" alt="image-20240228214151875" style="zoom:67%;" /></p>
+<h4 id="在方法上定义泛型"><a href="#在方法上定义泛型" class="headerlink" title="在方法上定义泛型"></a>在方法上定义泛型</h4><blockquote>
+<p>实例方法可以，静态方法不能直接用</p>
+<p>因为实例方法跑的时候要new实例，刚好在创建的时候会确定泛型的类型。而静态方法不需要创建实例，不能确定类型</p>
+</blockquote>
+<p>①在类上定义的泛型，在**&#x3D;&#x3D;静态方法中无法使用&#x3D;&#x3D;**。如果在静态方法中使用泛型，则需要再方法返回值类型前面进行泛型的声明。</p>
+<p>②语法格式：&lt;泛型1, 泛型2, 泛型3, …&gt; 返回值类型 方法名(形参列表) {}</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228215823508.png" alt="image-20240228215823508"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228215931140.png" alt="image-20240228215931140"></p>
 <h2 id="迭代时删除元素"><a href="#迭代时删除元素" class="headerlink" title="迭代时删除元素"></a>迭代时删除元素</h2><h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h2 id="链表存储结构"><a href="#链表存储结构" class="headerlink" title="链表存储结构"></a>链表存储结构</h2><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><h2 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h2><h2 id="队列数据结构"><a href="#队列数据结构" class="headerlink" title="队列数据结构"></a>队列数据结构</h2><h2 id="Map继承结构"><a href="#Map继承结构" class="headerlink" title="Map继承结构"></a>Map继承结构</h2><h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2>
       
     </div>

@@ -768,6 +768,366 @@
       </categories>
   </entry>
   <entry>
+    <title>Java基础部分4-集合</title>
+    <url>/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/</url>
+    <content><![CDATA[<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h2><h3 id="①什么是集合，有什么用？"><a href="#①什么是集合，有什么用？" class="headerlink" title="①什么是集合，有什么用？"></a>①什么是集合，有什么用？</h3><p>1.集合是一种容器，用来组织和管理数据的。非常重要。</p>
+<p><strong>2.Java的集合框架对应的这套类库其实就是对各种数据结构的实现。</strong></p>
+<p>3.每一个集合类底层采用的数据结构不同，例如ArrayList集合底层采用了数组，LinkedList集合底层采用了双向链表，HashMap集合底层采用了哈希表，TreeMap集合底层采用了红黑树。</p>
+<p>4.我们不用写数据结构的实现了。直接用就行了。但我们需要知道的是在哪种场合下选择哪一个集合效率是最高的。</p>
+<h3 id="②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。"><a href="#②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。" class="headerlink" title="②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。"></a>②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。</h3><h3 id="③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。"><a href="#③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。" class="headerlink" title="③默认情况下，&#x3D;&#x3D;如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;"></a>③默认情况下，&#x3D;&#x3D;<strong>如果不使用泛型的话</strong>，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CollectionTest01</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Collection</span> <span class="variable">collection</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        collection.add(<span class="number">1</span>);</span><br><span class="line">        collection.add(<span class="keyword">new</span> <span class="title class_">Object</span>());</span><br><span class="line">        collection.add(<span class="string">&quot;A&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="④Java集合框架相关的类都在-java-util-包下。"><a href="#④Java集合框架相关的类都在-java-util-包下。" class="headerlink" title="④Java集合框架相关的类都在 java.util 包下。"></a>④Java集合框架相关的类都在 java.util 包下。</h3><h3 id="⑤Java集合框架分为两部分："><a href="#⑤Java集合框架分为两部分：" class="headerlink" title="⑤Java集合框架分为两部分："></a>⑤Java集合框架分为两部分：</h3><p>1.Collection结构：元素以单个形式存储。</p>
+<p>2.Map结构：元素以键值对的映射关系存储。</p>
+<h2 id="Collection继承结构"><a href="#Collection继承结构" class="headerlink" title="Collection继承结构"></a>Collection继承结构</h2><blockquote>
+<p>Collection接口是一个所有以单个方式存储元素的所有集合的<strong>超级接口</strong>，所有的以单个方式存储元素的这些集合都继承了Collection接口 </p>
+<p>Collection接口继承了iterable接口，所以都是可以遍历的，接口返回值iterator</p>
+<p>Collection和iterator，依赖关系。</p>
+<p>List重复，set不可以重复</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228161736123.png" alt="image-20240228161736123"></p>
+<p>①<strong>SequencedCollection</strong>和<strong>SequencedSet</strong>接口都是Java21新增的接口。</p>
+<p>②图中蓝色的是实现类。其它的都是接口。</p>
+<p>③6个实现类中只有<strong>HashSet是无序集合</strong>。剩下的都是<strong>有序集合</strong>。</p>
+<blockquote>
+<p>1.有序集合：集合中存储的元素**&#x3D;&#x3D;有下标&#x3D;&#x3D;<strong>或者集合中存储的元素是</strong>可排序的**。</p>
+<p>2.无序集合：集合中存储的元素**&#x3D;&#x3D;没有下标&#x3D;&#x3D;<strong>并且集合中存储的元素也</strong>没有排序**。</p>
+</blockquote>
+<p>④每个集合实现类对应的数据结构如下：</p>
+<blockquote>
+<p>1.LinkedList:双向链表（不是队列数据结构，但使用它可以模拟队列）</p>
+<p>2.ArrayList：数组</p>
+<p>3.Vector：数组（线程安全的）</p>
+<p>4.HashSet：哈希表</p>
+<p>5.LinkedHashSet：双向链表和哈希表结合体</p>
+<p>6.TreeSet：红黑树</p>
+</blockquote>
+<p>&#x3D;&#x3D;<strong>⑤List集合中存储的元素可重复。Set集合中存储的元素不可重复。</strong>&#x3D;&#x3D;</p>
+<h2 id="Collection接口（超级接口）"><a href="#Collection接口（超级接口）" class="headerlink" title="Collection接口（超级接口）"></a>Collection接口（超级接口）</h2><h3 id="Collection接口的通用方法"><a href="#Collection接口的通用方法" class="headerlink" title="Collection接口的通用方法"></a>Collection接口的通用方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>; <span class="comment">//向集合中添加元素</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">size</span><span class="params">()</span>; <span class="comment">//获取集合中元素个数</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">addAll</span><span class="params">(Collection c)</span>; <span class="comment">//将参数集合中所有元素全部加入当前集合</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span>; <span class="comment">//判断集合中是否包含对象o</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">remove</span><span class="params">(Object o)</span>; <span class="comment">//从集合中删除对象o</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span>; <span class="comment">//清空集合</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span>; <span class="comment">//判断集合中元素个数是否为0</span></span><br><span class="line"></span><br><span class="line">Object[] toArray(); <span class="comment">//将集合转换成一维数组</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Collection的遍历（集合的通用遍历方式）"><a href="#Collection的遍历（集合的通用遍历方式）" class="headerlink" title="Collection的遍历（集合的通用遍历方式）"></a>Collection的遍历（集合的通用遍历方式）</h3><p>①第一步：获取当前集合依赖的迭代器对象</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line"><span class="comment">//获取到迭代器之后，迭代器中有一个光标cursor，这个光标起初默认指向集合的第一个位置</span></span><br></pre></td></tr></table></figure>
+
+<p>②第二步：编写循环，循环条件是：当前光标指向的位置是否存在元素。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(it.hasNext())&#123;&#125;</span><br><span class="line"><span class="comment">//boolean has = it.hasNext();</span></span><br><span class="line"><span class="comment">//has-&gt;true,表示光标指向的位置有数据；</span></span><br><span class="line"><span class="comment">//has-&gt;false,表示光标指向的位置没有数据。</span></span><br></pre></td></tr></table></figure>
+
+<p>③第三步：如果有，将光标指向的当前元素返回，并且将光标向下移动一位。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> it.next();</span><br><span class="line"><span class="comment">//做了两件事情，</span></span><br><span class="line"><span class="comment">//1：取出当前光标只向位置的元素</span></span><br><span class="line"><span class="comment">//2：将光标向下移动一位</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228210734004.png" alt="image-20240228210734004"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();it.hasNext();)&#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> it.next();</span><br><span class="line">    System.out.println(obj);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span> (i.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj2</span> <span class="operator">=</span> i.next();<span class="comment">//这里存在隐式的多态</span></span><br><span class="line">            System.out.println(obj2);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SequencedCollection接口-有序集合"><a href="#SequencedCollection接口-有序集合" class="headerlink" title="SequencedCollection接口**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**"></a>SequencedCollection接口**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**</h2><p>所有的**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**都实现了SequencedCollection接口</p>
+<h3 id="①SequencedCollection接口是Java21版本新增的。"><a href="#①SequencedCollection接口是Java21版本新增的。" class="headerlink" title="①SequencedCollection接口是Java21版本新增的。"></a>①SequencedCollection接口是Java21版本新增的。</h3><h3 id="②SequencedCollection接口-（有序集合）-中的方法："><a href="#②SequencedCollection接口-（有序集合）-中的方法：" class="headerlink" title="②SequencedCollection接口&#x3D;&#x3D;（有序集合）&#x3D;&#x3D;中的方法："></a>②SequencedCollection接口&#x3D;&#x3D;（有序集合）&#x3D;&#x3D;中的方法：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(Object o)</span>：<span class="comment">//向头部添加</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(Object o)</span>：<span class="comment">//向末尾添加</span></span><br><span class="line">Object <span class="title function_">removeFirst</span><span class="params">()</span>：<span class="comment">//删除头部</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">removeLast</span><span class="params">()</span>：<span class="comment">//删除末尾</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">getFirst</span><span class="params">()</span>：<span class="comment">//获取头部节点</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">getLast</span><span class="params">()</span>：<span class="comment">//获取末尾节点</span></span><br><span class="line"></span><br><span class="line">SequencedCollection <span class="title function_">reversed</span><span class="params">()</span>; <span class="comment">//反转集合中的元素</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet-Stack-都可以调用这个接口中的方法。"><a href="#③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet-Stack-都可以调用这个接口中的方法。" class="headerlink" title="&#x3D;&#x3D;③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet,Stack 都可以调用这个接口中的方法。&#x3D;&#x3D;"></a>&#x3D;&#x3D;③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet,Stack 都可以调用这个接口中的方法。&#x3D;&#x3D;</h3><h2 id="泛型-编译阶段的功能"><a href="#泛型-编译阶段的功能" class="headerlink" title="泛型(编译阶段的功能)"></a>泛型(编译阶段的功能)</h2><h3 id="①泛型是Java5的新特性，属于编译阶段的功能。"><a href="#①泛型是Java5的新特性，属于编译阶段的功能。" class="headerlink" title="①泛型是Java5的新特性，属于编译阶段的功能。"></a>①泛型是Java5的新特性，属于编译阶段的功能。</h3><h3 id="②泛型可以让开发者在编写代码时指定集合中存储的数据类型"><a href="#②泛型可以让开发者在编写代码时指定集合中存储的数据类型" class="headerlink" title="②泛型可以让开发者在编写代码时指定集合中存储的数据类型"></a>②泛型可以让开发者在编写代码时指定集合中存储的数据类型</h3><h3 id="③泛型作用："><a href="#③泛型作用：" class="headerlink" title="③泛型作用："></a>③泛型作用：</h3><p>1.类型安全：指定了集合中元素的类型之后，**&#x3D;&#x3D;编译器会在编译时进行类型检查&#x3D;&#x3D;<strong>，</strong>如果尝试将错误类型的元素添加到集合中<strong>，</strong>就会在编译时报错，避免了在运行时出现类型错误的问题。**</p>
+<p>2.代码简洁：使用泛型可以简化代码，避免了繁琐的类型转换操作。比如，在没有泛型的时候，需要使用 Object 类型来保存集合中的元素，并在使用时&#x3D;&#x3D;强制类型转换成实际类型&#x3D;&#x3D;（向下转型），而有了泛型之后，只需要在定义集合时指定类型即可。</p>
+<h3 id="④在集合中使用泛型"><a href="#④在集合中使用泛型" class="headerlink" title="④在集合中使用泛型"></a>④在集合中使用泛型</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//没有使用多态</span></span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span> (i.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj2</span> <span class="operator">=</span> i.next();<span class="comment">//这里存在隐式的多态</span></span><br><span class="line">            System.out.println(obj2);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表示创建一个集合，而且这个集合中只能存储String</span></span><br><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>这就表示该集合只能存储字符串，存储其它类型时编译器报错。</p>
+<p>并且以上代码使用泛型后，避免了繁琐的类型转换，集合中的元素可以直接调用String类特有的方法。</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228212839842.png" alt="image-20240228212839842"></p>
+<h3 id="⑤Java7的新特性：钻石表达式"><a href="#⑤Java7的新特性：钻石表达式" class="headerlink" title="⑤Java7的新特性：钻石表达式"></a>⑤Java7的新特性：钻石表达式</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line"><span class="comment">//下面是钻石表达式，省了后面的尖括号内的东西</span></span><br><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型的擦除与补偿（了解）"><a href="#泛型的擦除与补偿（了解）" class="headerlink" title="泛型的擦除与补偿（了解）"></a>泛型的擦除与补偿（了解）</h3><p>①泛型的出现提高了编译时的安全性，正因为**&#x3D;&#x3D;编译时对添加的数据做了检查，则程序运行时才不会抛出类型转换异常。&#x3D;&#x3D;**因此泛型本质上是编译时期的技术，是专门给编译器用的。</p>
+<p><strong>&#x3D;&#x3D;泛型只是给Javac看的，在运行的时候，加载类的时候，会将泛型擦除掉（擦除之后的类型为Object类型），这个称为泛型擦除。&#x3D;&#x3D;</strong></p>
+<p><strong>②为什么要有泛型擦除呢？兼容低版本的JDK</strong>其本质是为了让JDK1.4和JDK1.5能够兼容同一个类加载器。在JDK1.5版本中，程序编译时期会对集合添加的元素进行安全检查，如果检查完是安全的、没有错误的，那么就意味着添加的元素都属于同一种数据类型，则加载类时就可以把这个泛型擦除掉，将泛型擦除后的类型就是Object类，这样擦除之后的代码就与JDK1.4的代码一致。</p>
+<p>③由于加载类的时候，会默认将类中的泛型擦除为Object类型，所以添加的元素就被转化为Object类型，同时取出的元素也默认为Object类型。而我们获得集合中的元素时，按理说取出的元素应该是Object类型，为什么取出的元素却是实际添加的元素类型呢？</p>
+<p>④这里又做了一个默认的操作，我们称之为**&#x3D;&#x3D;泛型的补偿&#x3D;&#x3D;<strong>。</strong>&#x3D;&#x3D;在程序运行时，通过获取元素的实际类型进行强转，这就叫做泛型补偿（不必手动实现强制转换）。获得集合中的元素时，虚拟机 会根据获得元素的实际类型进行向下转型，也就是会恢复获得元素的实际类型，因此我们就无需手动执行向下转型操作，从本质上避免了抛出类型转换异常。&#x3D;&#x3D;**</p>
+<h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><h4 id="在类上定义泛型"><a href="#在类上定义泛型" class="headerlink" title="在类上定义泛型"></a>在类上定义泛型</h4><p><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214144852.png" alt="image-20240228214144852" style="zoom:80%;" /><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214151875.png" alt="image-20240228214151875" style="zoom:67%;" /></p>
+<h4 id="在方法上定义泛型"><a href="#在方法上定义泛型" class="headerlink" title="在方法上定义泛型"></a>在方法上定义泛型</h4><blockquote>
+<p>实例方法可以，静态方法不能直接用</p>
+<p>因为实例方法跑的时候要new实例，刚好在创建的时候会确定泛型的类型。而静态方法不需要创建实例，不能确定类型</p>
+</blockquote>
+<p>①在类上定义的泛型，在**&#x3D;&#x3D;静态方法中无法使用&#x3D;&#x3D;**。如果在静态方法中使用泛型，则需要再方法返回值类型前面进行泛型的声明。</p>
+<p>②语法格式：&lt;泛型1, 泛型2, 泛型3, …&gt; 返回值类型 方法名(形参列表) {}</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228215823508.png" alt="image-20240228215823508"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228215931140.png" alt="image-20240228215931140"></p>
+<h4 id="在接口上定义泛型"><a href="#在接口上定义泛型" class="headerlink" title="在接口上定义泛型"></a>在接口上定义泛型</h4><p>①语法格式：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">interface 接口名&lt;泛型<span class="number">1</span>,泛型<span class="number">2</span>,...&gt; &#123;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>②例如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Flayable</span>&lt;T&gt;&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MyComparable</span> &lt;T&gt;&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T o)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>③实现接口时，如果知道具体的类型，则：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyClass</span> <span class="keyword">implements</span> <span class="title class_">Flyable</span>&lt;Bird&gt;&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CollectionTest03</span> <span class="keyword">implements</span> <span class="title class_">MyComparable</span>&lt;CollectionTest03&gt;&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>④实现接口时，如果不知道具体的类型，则：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyClass</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Flyable</span>&lt;T&gt;&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型通配符"><a href="#泛型通配符" class="headerlink" title="泛型通配符"></a>泛型通配符</h3><blockquote>
+<p>这个是从使用泛型的角度，不是从泛型定义的角度</p>
+<p>别人把泛型定义好了，我来用</p>
+</blockquote>
+<p>①泛型是在限定数据类型，当在集合或者其他地方使用到泛型后，那么这时一旦明确泛型的数据类型，那么在使用的时候只能给其传递和数据类型匹配的类型，否则就会报错。</p>
+<p>②有的情况下，我们在定义方法时，根本无法确定集合中存储元素的类型是什么。为了解决这个“无法确定集合中存储元素类型”问题，那么Java语言就提供了泛型的通配符。</p>
+<p>③通配符的几种形式：</p>
+<ol>
+<li>无限定通配符，&lt;?&gt;，此处“？”可以为任意引用数据类型。不确定类型</li>
+</ol>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229001042986.png" alt="image-20240229001042986"></p>
+<ol start="2">
+<li><p>上限通配符，&lt;? extends Number&gt;，此处“？”必须为Number及其子类。</p>
+</li>
+<li><p>下限通配符，&lt;? super Number&gt;，此处“？”必须为Number及其父类。</p>
+</li>
+</ol>
+<h2 id="集合迭代时删除元素"><a href="#集合迭代时删除元素" class="headerlink" title="集合迭代时删除元素"></a>集合迭代时删除元素</h2><h3 id="①迭代集合时删除元素"><a href="#①迭代集合时删除元素" class="headerlink" title="①迭代集合时删除元素"></a>①迭代集合时删除元素</h3><p>使用“集合对象.remove(元素)”：会出现ConcurrentModificationException异常。（并发修改异常）</p>
+<p>使用“迭代器对象.remove()”：不会出现异常。</p>
+<p>it.next前后的变化</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229001752728.png" alt="image-20240229001752728"></p>
+<h3 id="②关于集合的并发修改问题"><a href="#②关于集合的并发修改问题" class="headerlink" title="②关于集合的并发修改问题"></a>②关于集合的并发修改问题</h3><p>想象一下，有两个线程：A和B。A线程负责迭代遍历集合，B线程负责删除集合中的某个元素。当这两个线程同时执行时会有什么问题？</p>
+<h3 id="③如何解决并发修改问题：-fail-fast机制"><a href="#③如何解决并发修改问题：-fail-fast机制" class="headerlink" title="③如何解决并发修改问题：&#x3D;&#x3D;fail-fast机制&#x3D;&#x3D;"></a>③如何解决并发修改问题：&#x3D;&#x3D;fail-fast机制&#x3D;&#x3D;</h3><p>fail-fast机制又被称为：<strong>快速失败机制</strong>。也就是说只要程序发现了程序对集合进行了并发修改。就会立即让其失败，以防出现错误。</p>
+<h3 id="④fail-fast机制是如何实现的？以下是源码中的实现原理："><a href="#④fail-fast机制是如何实现的？以下是源码中的实现原理：" class="headerlink" title="④fail-fast机制是如何实现的？以下是源码中的实现原理："></a>④fail-fast机制是如何实现的？以下是源码中的实现原理：</h3><p>集合中设置了一个modCount属性，用来记录修改次数，使用集合对象执行增，删，改中任意一个操作时，modCount就会自动加1。</p>
+<p>获取迭代器对象的时候，会给迭代器对象初始化一个expectedModCount属性。并且将expectedModCount初始化为modCount，即：int expectedModCount &#x3D; modCount;</p>
+<p>当使用集合对象删除元素时：modCount会加1。但是迭代器中的expectedModCount不会加1。而当迭代器对象的next()方法执行时，会检测expectedModCount和modCount是否相等，如果不相等，则抛出：ConcurrentModificationException异常。</p>
+<p>当使用迭代器删除元素的时候：modCount会加1，并且expectedModCount也会加1。这样当迭代器对象的next()方法执行时，检测到的expectedModCount和modCount相等，则不会出现ConcurrentModificationException异常。</p>
+<h3 id="⑤注意：虽然我们当前写的程序是单线程的程序，并没有使用多线程，但是通过迭代器去遍历的同时使用集合去删除元素，这个行为将被认定为并发修改。"><a href="#⑤注意：虽然我们当前写的程序是单线程的程序，并没有使用多线程，但是通过迭代器去遍历的同时使用集合去删除元素，这个行为将被认定为并发修改。" class="headerlink" title="⑤注意：虽然我们当前写的程序是单线程的程序，并没有使用多线程，但是通过迭代器去遍历的同时使用集合去删除元素，这个行为将被认定为并发修改。"></a>⑤注意：虽然我们当前写的程序是单线程的程序，并没有使用多线程，但是通过迭代器去遍历的同时使用集合去删除元素，这个行为将被认定为并发修改。</h3><h3 id="⑥结论：迭代集合时，删除元素要使用“迭代器对象-remove-”方法来删除，避免使用“集合对象-remove-元素-”。主要是为了避免ConcurrentModificationException异常的发生。"><a href="#⑥结论：迭代集合时，删除元素要使用“迭代器对象-remove-”方法来删除，避免使用“集合对象-remove-元素-”。主要是为了避免ConcurrentModificationException异常的发生。" class="headerlink" title="⑥结论：迭代集合时，删除元素要使用“迭代器对象.remove()”方法来删除，避免使用“集合对象.remove(元素)”。主要是为了避免ConcurrentModificationException异常的发生。"></a>⑥结论：迭代集合时，删除元素要使用“迭代器对象.remove()”方法来删除，避免使用“集合对象.remove(元素)”。主要是为了避免ConcurrentModificationException异常的发生。</h3><p>注意：迭代器的remove()方法删除的是next()方法的返回的那个数据。remove()方法调用之前一定是先调用了next()方法，如果不是这样的，就会报错。</p>
+<h2 id="List接口-有下标、有序"><a href="#List接口-有下标、有序" class="headerlink" title="List接口 有下标、有序"></a>List接口 有下标、有序</h2><h3 id="List接口常用方法"><a href="#List接口常用方法" class="headerlink" title="List接口常用方法"></a>List接口常用方法</h3><h4 id="①List集合存储元素特点：有序可重复。"><a href="#①List集合存储元素特点：有序可重复。" class="headerlink" title="①List集合存储元素特点：有序可重复。"></a>①List集合存储元素特点：有序可重复。</h4><ol>
+<li>有序：是因为List集合中的元素都是有下标的，从0开始，以1递增。</li>
+</ol>
+<p>存进去顺序</p>
+<ol start="2">
+<li>可重复：存进去1，还可以再存一个1。</li>
+</ol>
+<h4 id="②List接口下常见的实现类有："><a href="#②List接口下常见的实现类有：" class="headerlink" title="②List接口下常见的实现类有："></a>②List接口下常见的实现类有：</h4><ol>
+<li>ArrayList：数组</li>
+<li>Vector、Stack：数组（线程安全的）</li>
+<li>LinkedList：双向链表</li>
+</ol>
+<h4 id="③List接口特有方法：（在Collection和SequencedCollection中没有的方法，只适合List家族使用的方法，这些方法都和下标有关系。）"><a href="#③List接口特有方法：（在Collection和SequencedCollection中没有的方法，只适合List家族使用的方法，这些方法都和下标有关系。）" class="headerlink" title="③List接口特有方法：（在Collection和SequencedCollection中没有的方法，只适合List家族使用的方法，这些方法都和下标有关系。）"></a>③List接口特有方法：（在Collection和SequencedCollection中没有的方法，只适合List家族使用的方法，这些方法都和<em>下标</em>有关系。）</h4><ul>
+<li>1.void add(int index, E element) 在指定索引处插入元素</li>
+<li>2.E set(int index, E element); 修改索引处的元素</li>
+<li>3.E get(int index); 根据索引获取元素（通过这个方法List集合具有自己特殊的遍历方式：根据下标遍历）</li>
+<li>4.E remove(int index); 删除索引处的元素</li>
+<li>5.int indexOf(Object o); 获取对象o在当前集合中第一次出现时的索引。</li>
+<li>6.int lastIndexOf(Object o); 获取对象o在当前集合中最后一次出现时的索引。</li>
+<li><strong>7.List<E> subList(int fromIndex, int toIndex); 截取子List集合生成一个新集合（对原集合无影响）。[fromIndex, toIndex)</strong></li>
+</ul>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229003845865.png" alt="image-20240229003834620"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229003848999.png" alt="image-20240229003848999"></p>
+<ul>
+<li><strong>8.static List<E> of(E… elements); 静态方法，返回包含任意数量元素的不可修改列表。（获取的集合是只读的，不可修改的。）</strong></li>
+</ul>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229003945010.png" alt="image-20240229003945010"></p>
+<h3 id="List接口特有迭代"><a href="#List接口特有迭代" class="headerlink" title="List接口特有迭代"></a>List接口特有迭代</h3><p>①特有的迭代方式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ListIterator&lt;E&gt; <span class="title function_">listIterator</span><span class="params">()</span>; <span class="comment">//获取List集合特有的迭代器（该迭代器功能更加强大，但只适合于List集合使用）</span></span><br><span class="line"></span><br><span class="line">ListIterator&lt;E&gt; <span class="title function_">listIterator</span><span class="params">(<span class="type">int</span> index)</span>; <span class="comment">//从列表中的指定位置开始，返回列表中元素的列表迭代器</span></span><br><span class="line"></span><br><span class="line">②ListIterator<span class="comment">//接口中的常用方法：</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span>; <span class="comment">// 判断光标当前指向的位置是否存在元素。</span></span><br><span class="line"></span><br><span class="line">E <span class="title function_">next</span><span class="params">()</span>; <span class="comment">//将当前光标指向的元素返回，然后将光标向下移动一位。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">remove</span><span class="params">()</span>; <span class="comment">//删除上一次next()方法返回的那个数据(删除的是集合中的)。remove()方法调用的前提是：你先调用next()方法。不然会报错。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">add</span><span class="params">(E e)</span>; <span class="comment">//添加元素（将元素添加到光标指向的位置，然后光标向下移动一位。）</span></span><br><span class="line"><span class="comment">//所以指向的内容没有改变</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">hasPrevious</span><span class="params">()</span>; <span class="comment">//判断当前光标指向位置的上一个位置是否存在元素。</span></span><br><span class="line"></span><br><span class="line">E <span class="title function_">previous</span><span class="params">()</span>; <span class="comment">//获取上一个元素（将光标向上移动一位，然后将光标指向的元素返回）</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">nextIndex</span><span class="params">()</span>; <span class="comment">//获取光标指向的那个位置的下标</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">previousIndex</span><span class="params">()</span>; <span class="comment">//获取光标指向的那个位置的上一个位置的下标</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">set</span><span class="params">(E e)</span>; <span class="comment">//修改的是上一次next()方法返回的那个数据（修改的是集合中的）。set()方法调用的前提是：你先调用了next()方法。不然会报错。</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229150508050.png" alt="image-20240229150508050"></p>
+<blockquote>
+<p>调用迭代器之前的remove也需要调用next()</p>
+</blockquote>
+<h3 id="List接口使用Comparator排序"><a href="#List接口使用Comparator排序" class="headerlink" title="List接口使用Comparator排序"></a>List接口使用Comparator排序</h3><h4 id="①回顾数组中自定义类型是如何排序的？"><a href="#①回顾数组中自定义类型是如何排序的？" class="headerlink" title="①回顾数组中自定义类型是如何排序的？"></a>①回顾数组中自定义类型是如何排序的？</h4><p>所有自定义类型排序时必须指定排序规则。（int不需要指定，String不需要指定，因为他们都有固定的排序规则。int按照数字大小。String按照字典中的顺序）</p>
+<p>如何给自定义类型指定排序规则？让自定义类型实现java.lang.Comparable接口，然后重写compareTo方法，在该方法中指定比较规则。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 关于compareTo方法的返回值</span></span><br><span class="line"><span class="comment">//a - b == 0 ;</span></span><br><span class="line"><span class="comment">//a - b &gt; 0; a&gt;b</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//a - b &lt;0</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(CollectionTest03 o)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.age  - o.age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="②List集合的排序"><a href="#②List集合的排序" class="headerlink" title="②List集合的排序"></a>②List集合的排序</h4><blockquote>
+<p>两种方法：</p>
+<p>1.一种是类继承comparable</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> <span class="keyword">implements</span> <span class="title class_">Comparable</span>&lt;Person&gt;&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.额外新建一个类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PersonComparator</span> <span class="keyword">implements</span> <span class="title class_">Comparator</span>&lt;Person&gt; &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Person o1, Person o2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> o1.getAge()- o2.getAge();<span class="comment">//升序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">        persionList.sort(<span class="keyword">new</span> <span class="title class_">PersonComparator</span>());</span><br><span class="line"><span class="comment">//这样进行调用</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>default void sort(Comparator&lt;? super E&gt; c); 对List集合中元素排序可以调用此方法。</p>
+<p>sort方法需要一个参数: java.util.Comparator。我们把这个参数叫做比较器。这是一个接口。</p>
+<p>如何给自定义类型指定比较规则？可以对Comparator提供一个实现类，并重写compare方法来指定比较规则。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.CollectionTest.ListTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ListSort</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;张三&quot;</span>,<span class="number">18</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;李四&quot;</span>,<span class="number">20</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;王五&quot;</span>,<span class="number">15</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;赵六&quot;</span>,<span class="number">19</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p5</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;孙七&quot;</span>,<span class="number">23</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;Person&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        list.add(p1);</span><br><span class="line">        list.add(p2);</span><br><span class="line">        list.add(p3);</span><br><span class="line">        list.add(p4);</span><br><span class="line">        list.add(p5);</span><br><span class="line"></span><br><span class="line">        list.sort(<span class="keyword">new</span> <span class="title class_">PersonComparator</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Person person : list)&#123;</span><br><span class="line">            System.out.println(person.getName()+<span class="string">&quot;:&quot;</span>+person.getAge());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">persionList.sort(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Person&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Person o1, Person o2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> o1.getAge()-o2.getAge();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>当然，Comparator接口的实现类也可以采用**&#x3D;&#x3D;匿名内部类&#x3D;&#x3D;**的方式。</p>
+<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h3 id="①ArrayList集合底层采用了数组这种数据结构。"><a href="#①ArrayList集合底层采用了数组这种数据结构。" class="headerlink" title="①ArrayList集合底层采用了数组这种数据结构。"></a>①ArrayList集合底层采用了数组这种数据结构。</h3><h3 id="②ArrayList集合优点："><a href="#②ArrayList集合优点：" class="headerlink" title="②ArrayList集合优点："></a>②ArrayList集合优点：</h3><p>​	底层是数组，因此根据下标查找元素的时间复杂度是O(1)。因此检索效率高。</p>
+<blockquote>
+<p>底层是数组，内存存储是连续的，有下标、有偏移量，就可以用数学表达式很快的实现各种元素的访问</p>
+</blockquote>
+<h3 id="③ArrayList集合缺点："><a href="#③ArrayList集合缺点：" class="headerlink" title="③ArrayList集合缺点："></a>③ArrayList集合缺点：</h3><p>​	随机增删元素效率较低。不<strong>过只要数组的容量还没满，对末尾元素进行增删，效率不受影响。</strong></p>
+<h3 id="④ArrayList集合适用场景："><a href="#④ArrayList集合适用场景：" class="headerlink" title="④ArrayList集合适用场景："></a>④ArrayList集合适用场景：</h3><p>​	需要<strong>频繁的检索元素</strong>，并且很少的进行随机增删元素时建议使用。</p>
+<h3 id="⑤ArrayList默认初始化容量？"><a href="#⑤ArrayList默认初始化容量？" class="headerlink" title="⑤ArrayList默认初始化容量？"></a>⑤ArrayList默认初始化容量？</h3><p>​	<strong>从源码角度可以看到，当调用无参数构造方法时，初始化容量0</strong>，</p>
+<p>​	当第一次调用add方法时将ArrayList容量初始化为10个长度。</p>
+<h3 id="⑥ArrayList集合扩容策略？"><a href="#⑥ArrayList集合扩容策略？" class="headerlink" title="⑥ArrayList集合扩容策略？"></a>⑥ArrayList集合扩容策略？</h3><p>​	底层扩容会创建一个新的数组，然后使用数组拷贝。扩容之后的新容量是原容量的<strong>1.5</strong>倍。</p>
+<p>如果正常情况下，就是10+5；15+15&#x2F;2</p>
+<h3 id="⑦ArrayList集合源码分析："><a href="#⑦ArrayList集合源码分析：" class="headerlink" title="⑦ArrayList集合源码分析："></a>⑦ArrayList集合源码分析：</h3><ul>
+<li>属性分析</li>
+<li>构造方法分析（使用ArrayList集合时最好也是预测大概数量，给定初始化容量，减少扩容次数。）</li>
+<li>添加元素：向末尾加add</li>
+<li>修改元素 set 返回olddata</li>
+<li>插入元素 中间插入，存在位移</li>
+<li>删除元素</li>
+</ul>
+<p>添加删除都调用了arraycopy，增加效率</p>
+<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h2 id="链表存储结构"><a href="#链表存储结构" class="headerlink" title="链表存储结构"></a>链表存储结构</h2><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><h2 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h2><h2 id="队列数据结构"><a href="#队列数据结构" class="headerlink" title="队列数据结构"></a>队列数据结构</h2><h2 id="Map继承结构"><a href="#Map继承结构" class="headerlink" title="Map继承结构"></a>Map继承结构</h2><h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2>]]></content>
+      <categories>
+        <category>Java体系知识</category>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Redis-记录</title>
+    <url>/2024/02/21/Redis-%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="第一章-Redis-概述"><a href="#第一章-Redis-概述" class="headerlink" title="第一章 Redis 概述"></a>第一章 Redis 概述</h1><h2 id="一、Redis-Remote-Dictionary-Server-远程字典服务"><a href="#一、Redis-Remote-Dictionary-Server-远程字典服务" class="headerlink" title="一、Redis(Remote Dictionary Server)远程字典服务"></a>一、Redis(Remote Dictionary Server)远程字典服务</h2><ol>
+<li><p>使用 &#x3D;&#x3D;ANSI C 语言&#x3D;&#x3D;编写、&#x3D;&#x3D;支持网络、可基于内存亦可持久化的日志型、NoSQL 开源内存数据库&#x3D;&#x3D;，其提供多种语言的 API。</p>
+</li>
+<li><p>Redis被称为字典服务的原因在于，redis是一个key-value的存储系统。</p>
+<blockquote>
+<p>支持存储的value类型有很多，包括String（字符串）、List（链表）、Set（集合）、Zset（sorted set– 有序集合）和哈希类型等</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="二、NoSQL"><a href="#二、NoSQL" class="headerlink" title="二、NoSQL"></a>二、NoSQL</h2><p>Nosql（non-relational，Not Only SQL），泛指的是非关系型的数据库。</p>
+<blockquote>
+<p>比如社交类的等等</p>
+</blockquote>
+<p>&#x3D;&#x3D;NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题&#x3D;&#x3D;</p>
+<p>传统方法不适合这种情况。</p>
+<h3 id="1-键值存储数据库"><a href="#1-键值存储数据库" class="headerlink" title="1. 键值存储数据库"></a>1. 键值存储数据库</h3><p>类似Map的key-value对。</p>
+<blockquote>
+<p>典型代表redis</p>
+</blockquote>
+<h3 id="2-列存储数据库"><a href="#2-列存储数据库" class="headerlink" title="2. 列存储数据库"></a>2. 列存储数据库</h3><p>注意的是 ，关系数据库是行关系库，其存在的问题在于，按照行存储的数据在物理层面占用的是连续的存储空间，&#x3D;&#x3D;是不适合海量的数据存储&#x3D;&#x3D;的。</p>
+<p>而按列存储则可以实现一个分布式存储，适合海量的存储</p>
+<blockquote>
+<p>典型的代表就是HBase</p>
+</blockquote>
+<h3 id="3-文档型数据库"><a href="#3-文档型数据库" class="headerlink" title="3. 文档型数据库"></a>3. 文档型数据库</h3><p>NoSQL与关系型数据的结合，最想关系型数据库的NoSQL</p>
+<blockquote>
+<p>典型代表就是MongoDB。</p>
+</blockquote>
+<h3 id="4-图像（Graph）数据库"><a href="#4-图像（Graph）数据库" class="headerlink" title="4. 图像（Graph）数据库"></a>4. 图像（Graph）数据库</h3><blockquote>
+<p>用于存放一个节点关系的数据库，例如描述不同人间的关系。典型代表是 Neo4J。</p>
+</blockquote>
+<h2 id="三、Redis的用途"><a href="#三、Redis的用途" class="headerlink" title="三、Redis的用途"></a>三、Redis的用途</h2><h3 id="1-数据缓存"><a href="#1-数据缓存" class="headerlink" title="1.数据缓存"></a>1.数据缓存</h3><p>Redis在生产中用的最多的场景：&#x3D;&#x3D;数据缓存&#x3D;&#x3D;。</p>
+<p>正常情况下，用户-&gt;服务器-&gt;数据库 （query），然后再返回。</p>
+<p>但是当用户很多的时候，就是高并发的时候，解决不了了。</p>
+<p>因此提出解决方案： 用户-&gt;服务器-&gt;缓存-&gt; 数据库 （query）</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223001703204.png" alt="image-20240223001703204"></p>
+<p>这样DBMS压力就会减轻。</p>
+<blockquote>
+<p>即客户端从 DBMS 中查询出的数据首先写入到 Redis 中，后续无论哪个客户端再需要访问该数据，直接读取 Redis 中的即可，不仅减小了 RT，而且降低了 DBMS 的压力。</p>
+<p>而且，DBMS一般存放在磁盘中，而Redis作为内存数据库是放在内存中的，且直接通过key来查询，缓存层的查询非常的快，高并发的问题可以解决。</p>
+</blockquote>
+<h4 id="数据不一致问题？："><a href="#数据不一致问题？：" class="headerlink" title="数据不一致问题？："></a>数据不一致问题？：</h4><p>当一个用户提出要修改，修改了DBMS，没有修改缓存层，就会存在一个脏数据&#x2F;</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223074739083.png" alt="image-20240223074739083"></p>
+<p>预热：服务器不是刚开就提供服务，会有一个预热，把一些基础数据先保存到缓存中</p>
+<h2 id="四、Redis-特性"><a href="#四、Redis-特性" class="headerlink" title="四、Redis 特性"></a>四、<strong>Redis</strong> <strong>特性</strong></h2><h3 id="1-性能极高："><a href="#1-性能极高：" class="headerlink" title="1.性能极高："></a>1.性能极高：</h3><p>Redis 读的速度可以达到 11w 次&#x2F;s，写的速度可以达到 8w 次&#x2F;s。只所以具有，这么高的性能，因为以下几点原因：</p>
+<p>1）Redis 的所有操作都是在内存中发生的。</p>
+<p>2）Redis 是用 C 语言开发的。</p>
+<p>3）Redis 源码非常精细（集性能与优雅于一身）。</p>
+<h3 id="2-简单稳定"><a href="#2-简单稳定" class="headerlink" title="2.简单稳定"></a>2.简单稳定</h3><p>Redis 源码很少。早期版本只有 2w 行左右。从 3.0 版本开始，增加了集群功能，代码变为了 5w 行左右。</p>
+<h3 id="3-持久化"><a href="#3-持久化" class="headerlink" title="3.持久化"></a>3.持久化</h3><p>数据缓存是暂时的，要保存到磁盘，才能保证数据安全。Redis 内存中的数据可以进行持久化，其有两种方式：RDB 与 AOF。</p>
+<h3 id="4-高可用集群"><a href="#4-高可用集群" class="headerlink" title="4.高可用集群"></a>4.高可用集群</h3><p>Redis 提供了高可用的主从集群功能，可以确保系统的安全性</p>
+<h3 id="5-丰富的数据类型"><a href="#5-丰富的数据类型" class="headerlink" title="5.丰富的数据类型"></a>5.丰富的数据类型</h3><p>Redis 是一个 key-value 存储系统。支持存储的 value 类型很多，包括String(字符串)、List(链表)、Set(集合)、Zset(sorted set –有序集合)和 Hash（哈希类型）等，还有 BitMap、HyperLogLog、Geospatial 类型</p>
+<ol>
+<li><p> BitMap：一般用于大数据量的二值性统计。<br>比如员工是否打卡</p>
+</li>
+<li><p> HyperLogLog：其是 Hyperlog Log，用于对数据量超级庞大的日志做去重统计。</p>
+</li>
+<li><p> Geospatial：地理空间，其主要用于地理位置相关的计算。</p>
+<p>比如“附近的人”</p>
+</li>
+</ol>
+<h3 id="6-强大的功能"><a href="#6-强大的功能" class="headerlink" title="6.强大的功能"></a>6.强大的功能</h3><p>Redis 提供了数据过期功能、发布&#x2F;订阅功能、简单事务功能，还支持 Lua脚本扩展功能。</p>
+<h3 id="7-客户端语言广泛"><a href="#7-客户端语言广泛" class="headerlink" title="7.客户端语言广泛"></a>7.客户端语言广泛</h3><p>Redis提供了简单的 TCP 通信协议，编程语言可以方便地的接入 Redis。所以，有很多的开源社区、大公司等开发出了很多语言的 Redis 客户端。</p>
+<h3 id="8-支持-ACL-权限控制"><a href="#8-支持-ACL-权限控制" class="headerlink" title="8.支持 ACL 权限控制"></a>8.支持 ACL 权限控制</h3><p>之前的权限控制非常笨拙。从 Redis6 开始引入了 ACL 模块，可以为不同用户定制不同的用户权限。</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223081342029.png" alt="image-20240223081342029"></p>
+<blockquote>
+<p>linux 的drwxr-xr-x ：d表示目录&#x2F;l表示链接，rwx表示用户（创建者User）读写可执行；Group r-x后三位表示和创建者同组用户读可执行。Other r-x</p>
+</blockquote>
+<h3 id="9-支持多线程-IO-模型"><a href="#9-支持多线程-IO-模型" class="headerlink" title="9.支持多线程 IO 模型"></a>9.支持多线程 IO 模型</h3><p>Redis 之前版本采用的是单线程模型，从 6.0 版本开始支持了多线程模型。</p>
+<h2 id="五-Redis-的-IO-模型"><a href="#五-Redis-的-IO-模型" class="headerlink" title="五.Redis 的 IO 模型"></a>五.<strong>Redis</strong> <strong>的</strong> <strong>IO</strong> <strong>模型</strong></h2><p>单线程模型 多线程模型 混合模型</p>
+<p>Redis 客户端提交的各种请求是如何最终被 Redis 处理的？Redis 处理客户端请求所采用的处理架构，称为 Redis 的 IO 模型。不同版本的 Redis 采用的 IO 模型是不同的。</p>
+<h3 id="1-单线程模型"><a href="#1-单线程模型" class="headerlink" title="1.单线程模型"></a>1.<strong>单线程模型</strong></h3><blockquote>
+<p>性能还是很强,写8w&#x2F;qps,读11w&#x2F;qps–&gt;内存\单线程可维护性比较高(多线程存在线程切换问题,顾及到数据安全问题\死锁问题)</p>
+<p>问题:持久化等操作和客户端没太多联系,但是又比较费时,于是提出了混合线程模型</p>
+</blockquote>
+<p>对于 Redis 3.0 及其以前版本，Redis 的 IO 模型采用的是纯粹的单线程模型。即所有客户端的请求全部由一个线程处理。</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223082516763.png" alt="image-20240223082516763"></p>
+<p>每个客户端若要向 Redis 提交请求，都需要与 Redis 建立一个 socket 连接，并向事件分发器注册一个事件。</p>
+<p>一旦该事件发生就表明该连接已经就绪。而一旦连接就绪，事件分发器就会感知到，然后获取客户端通过该连接发送的请求，并将由该事件分发器所绑定的这个唯一的线程来处理。</p>
+<p>如果该线程还在处理多个任务，则将该任务写入到任务队列等待线程处理。只所以称为事件分发器，是因为它会根据不同的就绪事件，将任务交由不同的事件处理器去处理</p>
+<p><strong>&#x3D;&#x3D;Redis 的单线程模型采用了多路复用技术。&#x3D;&#x3D;</strong></p>
+<p>对于多路复用器的多路选择算法常见的有三种：select 模型、poll 模型、epoll 模型。</p>
+<ol>
+<li><p>poll 模型的选择算法：采用的是轮询算法。该模型对客户端的就绪处理是有延迟的。</p>
+</li>
+<li><p>epoll 模型的选择算法：采用的是回调方式。根据就绪事件发生后的处理方式的不同，又可分为 LT 模型与 ET 模型。</p>
+</li>
+</ol>
+<h3 id="2-混合线程模型"><a href="#2-混合线程模型" class="headerlink" title="2.混合线程模型"></a>2.混合线程模型</h3><p>从 Redis 4.0 版本开始，Redis 中就开始加入了多线程元素。处理客户端请求的仍是单线</p>
+<p>程模型，但对于一些比较耗时但又不影响对客户端的响应的操作，就由后台其它线程来处理。</p>
+<p>例如，持久化、对 AOF 的 rewrite、对失效连接的清理等</p>
+<h3 id="3-多线程模型"><a href="#3-多线程模型" class="headerlink" title="3.多线程模型"></a>3.<strong>多线程模型</strong></h3><p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083447687.png" alt="image-20240223083447687"></p>
+<p>内存响应时间(RT)100ns</p>
+<p>Redis 每秒处理读写请求 达到:1s&#x2F;100ns &#x3D; &#x3D;1kw次,实际情况是,redis8w&#x2F;qps,读11w&#x2F;qps,差距那么大的原因 就是redis的单线程</p>
+<p>是将单线程和多线程各取其优点.</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083854779.png" alt="image-20240223083854779"></p>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>Redis</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SpringSecurity</title>
+    <url>/2024/02/23/SpringSecurity/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>dlyk_part1</title>
+    <url>/2024/02/18/dlyk-part1/</url>
+    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/dlyk-part1/image-20240218015738084.png" alt="image-20240218015738084"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240218015750388.png" alt="image-20240218015750388"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152352894.png" alt="image-20240221152352894"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152403852.png" alt="image-20240221152403852"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152414970.png" alt="image-20240221152414970"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152423433.png" alt="image-20240221152423433"></p>
+<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
+<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
+<p> （1） node.js是一个开源的跨平台的JavaScript运行时环境，类似java的jvm</p>
+<p> （2） npm JavaScript依赖包管理器 ，全世界都可以用这个来共享javascript包，负责前端项目的打包，插件的下载 node package manager </p>
+<p> （3）Vite 是快速构建前端Vue项目的脚手架，可以理解为开发Spring boot的Spring initializr的快速构建工具。（之前是用vue-cil的）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vite@latest//</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、启动之前的项目"><a href="#三、启动之前的项目" class="headerlink" title="三、启动之前的项目"></a>三、启动之前的项目</h1><p>用的是jdk17 ；</p>
+<p>前端跑起来需要进入package.json 在scripts 处 跑dev</p>
+<h2 id="1-admin的密码"><a href="#1-admin的密码" class="headerlink" title="1. admin的密码"></a>1. admin的密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> t_user</span><br><span class="line"><span class="keyword">SET</span> login_pwd <span class="operator">=</span> <span class="string">&#x27;$2a$10$t1ZZqt3jgYNabcSS1NMZ/uqGALlCF/VH5wSL3CYduABGeVvKFVEi6&#x27;</span>  <span class="comment">-- 这里替换为新密码的哈希值</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>哈希代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PasswordEncoderExample</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 BCryptPasswordEncoder</span></span><br><span class="line">        <span class="type">PasswordEncoder</span> <span class="variable">encoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 编码密码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rawPassword</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">encodedPassword</span> <span class="operator">=</span> encoder.encode(rawPassword);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印编码后的密码</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Encoded Password: &quot;</span> + encodedPassword);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
+<p>后端的端口：8088 在application.yml中修改</p>
+<p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
+]]></content>
+      <categories>
+        <category>Java项目</category>
+        <category>动力云客</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SpringBoot</title>
+    <url>/2024/02/23/SpringBoot/</url>
+    <content><![CDATA[<blockquote>
+<p>这个是从原理开始讲的，这个我不照着写，我就是学</p>
+</blockquote>
+<p>springboot内置了tomcat，所以可以直接打包成jar包</p>
+<h1 id="什么是tomcat"><a href="#什么是tomcat" class="headerlink" title="什么是tomcat"></a>什么是tomcat</h1><p>Tomcat是常见的免费的web服务器。</p>
+<h2 id="1-不使用tomcat访问html"><a href="#1-不使用tomcat访问html" class="headerlink" title="1. 不使用tomcat访问html"></a>1. 不使用tomcat访问html</h2><p>可以在浏览器的地址里看到 file:d:&#x2F;test.html 这样的格式，是通过打开本地文件的形式打开的</p>
+<p>但是我们平时上网看到的html网址一般都是: <a href="https://link.zhihu.com/?target=http://12306.com/index.html">http://12306.com/index.html</a> 这样的形式<br>这是因为有web服务器的存在</p>
+<h2 id="2-使用tomcat后，访问html"><a href="#2-使用tomcat后，访问html" class="headerlink" title="2.使用tomcat后，访问html"></a>2.使用tomcat后，访问html</h2><p>使用tomcat后，可以像127.0.0.1:8080&#x2F;test.html这样访问一个网站，而不是访问一个html文件。因为tomcat本身就是一个web服务器，test.html部署在了这个web服务器上</p>
+<p><img src="/../blog_images/SpringBoot/2018120522281643.gif" alt="img"></p>
+<h1 id="SpringBoot启动"><a href="#SpringBoot启动" class="headerlink" title="SpringBoot启动"></a>SpringBoot启动</h1>]]></content>
+      <tags>
+        <tag>Java体系知识</tag>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java基础部分3</title>
     <url>/2024/02/26/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/</url>
     <content><![CDATA[<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="数组概述"><a href="#数组概述" class="headerlink" title="数组概述"></a>数组概述</h3><h4 id="①什么是数组？"><a href="#①什么是数组？" class="headerlink" title="①什么是数组？"></a>①什么是数组？</h4><p>1.在Java中，数组是一种用于存储多个相同数据类型元素的容器。</p>
@@ -1301,7 +1661,7 @@
 
 <h5 id="②常用方法：-1"><a href="#②常用方法：-1" class="headerlink" title="②常用方法："></a>②常用方法：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">nextInt</span><span class="params">()</span>; 获取一个<span class="type">int</span>类型取值范围内的随机<span class="type">int</span>数</span><br><span class="line"></span><br><span class="line">   <span class="type">int</span> <span class="title function_">nextInt</span><span class="params">(<span class="type">int</span> bound)</span>; 获取[<span class="number">0</span>,bound)区间的随机数</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">nextDouble</span><span class="params">()</span>; 获取[<span class="number">0.0</span>, <span class="number">1.0</span>)的随机数。</span><br></pre></td></tr></table></figure>
 
-<h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><h4 id="java-lang-System类的常用方法："><a href="#java-lang-System类的常用方法：" class="headerlink" title="java.lang.System类的常用方法："></a>java.lang.System类的常用方法：</h4><h5 id="①常用属性："><a href="#①常用属性：" class="headerlink" title="①常用属性："></a>①常用属性：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> PrintStream err 标准错误输出流（System.err.println(“错误信息”);输出红色字体）</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> InputStream in 标准输入流</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> PrintStream out 标准输出流</span><br></pre></td></tr></table></figure>
+<h3 id="xxxxxxxxxx-package-com-powernode-javase-oop45-​-匿名内部类：没有名字的类。只能使用一次。-public-class-Test-public-static-void-main-String-args-创建电脑对象-Computer-computer-new-Computer-computer-conn-new-Printer-​-以下conn方法参数上的代码做了两件事：-第一：完成了匿名内部类的定义。-第二：同时实例化了一个匿名内部类的对象。-computer-conn-new-Usb-接口的实现-Override-public-void-read-System-out-println-“read…-”-​-Override-public-void-write-System-out-println-“write…-”-​class-Computer-public-void-conn-Usb-usb-usb-read-usb-write-​interface-Usb-void-read-void-write-​-编写一个接口的实现类-class-Printer-implements-Usb-​-Override-public-void-read-System-out-println-“打印机开始读取数据”-​-Override-public-void-write-System-out-println-“打印机开始打印”-java"><a href="#xxxxxxxxxx-package-com-powernode-javase-oop45-​-匿名内部类：没有名字的类。只能使用一次。-public-class-Test-public-static-void-main-String-args-创建电脑对象-Computer-computer-new-Computer-computer-conn-new-Printer-​-以下conn方法参数上的代码做了两件事：-第一：完成了匿名内部类的定义。-第二：同时实例化了一个匿名内部类的对象。-computer-conn-new-Usb-接口的实现-Override-public-void-read-System-out-println-“read…-”-​-Override-public-void-write-System-out-println-“write…-”-​class-Computer-public-void-conn-Usb-usb-usb-read-usb-write-​interface-Usb-void-read-void-write-​-编写一个接口的实现类-class-Printer-implements-Usb-​-Override-public-void-read-System-out-println-“打印机开始读取数据”-​-Override-public-void-write-System-out-println-“打印机开始打印”-java" class="headerlink" title="xxxxxxxxxx package com.powernode.javase.oop45;​&#x2F;** * 匿名内部类：没有名字的类。只能使用一次。 *&#x2F;public class Test {    public static void main(String[] args) {        &#x2F;&#x2F; 创建电脑对象        Computer computer &#x3D; new Computer();        &#x2F;&#x2F;computer.conn(new Printer());​        &#x2F;&#x2F; 以下conn方法参数上的代码做了两件事：        &#x2F;&#x2F; 第一：完成了匿名内部类的定义。        &#x2F;&#x2F; 第二：同时实例化了一个匿名内部类的对象。        computer.conn(new Usb(){            &#x2F;&#x2F; 接口的实现            @Override            public void read() {                System.out.println(“read…..”);            }​            @Override            public void write() {                System.out.println(“write…..”);            }        });    }}​class Computer {    public void conn(Usb usb){        usb.read();        usb.write();    }}​interface Usb {    void read();    void write();}​&#x2F;&#x2F; 编写一个接口的实现类&#x2F;*class Printer implements Usb {​    @Override    public void read() {        System.out.println(“打印机开始读取数据”);    }​    @Override    public void write() {        System.out.println(“打印机开始打印”);    }} *&#x2F;java"></a>xxxxxxxxxx package com.powernode.javase.oop45;​&#x2F;** * 匿名内部类：没有名字的类。只能使用一次。 *&#x2F;public class Test {    public static void main(String[] args) {        &#x2F;&#x2F; 创建电脑对象        Computer computer &#x3D; new Computer();        &#x2F;&#x2F;computer.conn(new Printer());​        &#x2F;&#x2F; 以下conn方法参数上的代码做了两件事：        &#x2F;&#x2F; 第一：完成了匿名内部类的定义。        &#x2F;&#x2F; 第二：同时实例化了一个匿名内部类的对象。        computer.conn(new Usb(){            &#x2F;&#x2F; 接口的实现            @Override            public void read() {                System.out.println(“read…..”);            }​            @Override            public void write() {                System.out.println(“write…..”);            }        });    }}​class Computer {    public void conn(Usb usb){        usb.read();        usb.write();    }}​interface Usb {    void read();    void write();}​&#x2F;&#x2F; 编写一个接口的实现类&#x2F;*class Printer implements Usb {​    @Override    public void read() {        System.out.println(“打印机开始读取数据”);    }​    @Override    public void write() {        System.out.println(“打印机开始打印”);    }} *&#x2F;java</h3><h4 id="java-lang-System类的常用方法："><a href="#java-lang-System类的常用方法：" class="headerlink" title="java.lang.System类的常用方法："></a>java.lang.System类的常用方法：</h4><h5 id="①常用属性："><a href="#①常用属性：" class="headerlink" title="①常用属性："></a>①常用属性：</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> PrintStream err 标准错误输出流（System.err.println(“错误信息”);输出红色字体）</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> InputStream in 标准输入流</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> PrintStream out 标准输出流</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1321,249 +1681,6 @@
       <categories>
         <category>Java体系知识</category>
         <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java基础部分4-集合</title>
-    <url>/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/</url>
-    <content><![CDATA[<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h2><h3 id="①什么是集合，有什么用？"><a href="#①什么是集合，有什么用？" class="headerlink" title="①什么是集合，有什么用？"></a>①什么是集合，有什么用？</h3><p>1.集合是一种容器，用来组织和管理数据的。非常重要。</p>
-<p><strong>2.Java的集合框架对应的这套类库其实就是对各种数据结构的实现。</strong></p>
-<p>3.每一个集合类底层采用的数据结构不同，例如ArrayList集合底层采用了数组，LinkedList集合底层采用了双向链表，HashMap集合底层采用了哈希表，TreeMap集合底层采用了红黑树。</p>
-<p>4.我们不用写数据结构的实现了。直接用就行了。但我们需要知道的是在哪种场合下选择哪一个集合效率是最高的。</p>
-<h3 id="②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。"><a href="#②集合中-存储的是引用-，不是把堆中的对象存储到集合中，是把-对象的地址-存储到集合中。" class="headerlink" title="②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。"></a>②集合中&#x3D;&#x3D;存储的是引用&#x3D;&#x3D;，不是把堆中的对象存储到集合中，是把&#x3D;&#x3D;对象的地址&#x3D;&#x3D;存储到集合中。</h3><h3 id="③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。"><a href="#③默认情况下，-如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。" class="headerlink" title="③默认情况下，&#x3D;&#x3D;如果不使用泛型的话，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;"></a>③默认情况下，&#x3D;&#x3D;<strong>如果不使用泛型的话</strong>，集合中可以存储任何类型的引用，只要是Object的子类都可以存储。&#x3D;&#x3D;</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CollectionTest01</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Collection</span> <span class="variable">collection</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        collection.add(<span class="number">1</span>);</span><br><span class="line">        collection.add(<span class="keyword">new</span> <span class="title class_">Object</span>());</span><br><span class="line">        collection.add(<span class="string">&quot;A&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="④Java集合框架相关的类都在-java-util-包下。"><a href="#④Java集合框架相关的类都在-java-util-包下。" class="headerlink" title="④Java集合框架相关的类都在 java.util 包下。"></a>④Java集合框架相关的类都在 java.util 包下。</h3><h3 id="⑤Java集合框架分为两部分："><a href="#⑤Java集合框架分为两部分：" class="headerlink" title="⑤Java集合框架分为两部分："></a>⑤Java集合框架分为两部分：</h3><p>1.Collection结构：元素以单个形式存储。</p>
-<p>2.Map结构：元素以键值对的映射关系存储。</p>
-<h2 id="Collection继承结构"><a href="#Collection继承结构" class="headerlink" title="Collection继承结构"></a>Collection继承结构</h2><blockquote>
-<p>Collection接口是一个所有以单个方式存储元素的所有集合的<strong>超级接口</strong>，所有的以单个方式存储元素的这些集合都继承了Collection接口 </p>
-<p>Collection接口继承了iterable接口，所以都是可以遍历的，接口返回值iterator</p>
-<p>Collection和iterator，依赖关系。</p>
-<p>List重复，set不可以重复</p>
-</blockquote>
-<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228161736123.png" alt="image-20240228161736123"></p>
-<p>①<strong>SequencedCollection</strong>和<strong>SequencedSet</strong>接口都是Java21新增的接口。</p>
-<p>②图中蓝色的是实现类。其它的都是接口。</p>
-<p>③6个实现类中只有<strong>HashSet是无序集合</strong>。剩下的都是<strong>有序集合</strong>。</p>
-<blockquote>
-<p>1.有序集合：集合中存储的元素**&#x3D;&#x3D;有下标&#x3D;&#x3D;<strong>或者集合中存储的元素是</strong>可排序的**。</p>
-<p>2.无序集合：集合中存储的元素**&#x3D;&#x3D;没有下标&#x3D;&#x3D;<strong>并且集合中存储的元素也</strong>没有排序**。</p>
-</blockquote>
-<p>④每个集合实现类对应的数据结构如下：</p>
-<blockquote>
-<p>1.LinkedList:双向链表（不是队列数据结构，但使用它可以模拟队列）</p>
-<p>2.ArrayList：数组</p>
-<p>3.Vector：数组（线程安全的）</p>
-<p>4.HashSet：哈希表</p>
-<p>5.LinkedHashSet：双向链表和哈希表结合体</p>
-<p>6.TreeSet：红黑树</p>
-</blockquote>
-<p>&#x3D;&#x3D;<strong>⑤List集合中存储的元素可重复。Set集合中存储的元素不可重复。</strong>&#x3D;&#x3D;</p>
-<h2 id="Collection接口（超级接口）"><a href="#Collection接口（超级接口）" class="headerlink" title="Collection接口（超级接口）"></a>Collection接口（超级接口）</h2><h3 id="Collection接口的通用方法"><a href="#Collection接口的通用方法" class="headerlink" title="Collection接口的通用方法"></a>Collection接口的通用方法</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>; <span class="comment">//向集合中添加元素</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">size</span><span class="params">()</span>; <span class="comment">//获取集合中元素个数</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">addAll</span><span class="params">(Collection c)</span>; <span class="comment">//将参数集合中所有元素全部加入当前集合</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">contains</span><span class="params">(Object o)</span>; <span class="comment">//判断集合中是否包含对象o</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">remove</span><span class="params">(Object o)</span>; <span class="comment">//从集合中删除对象o</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span>; <span class="comment">//清空集合</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span>; <span class="comment">//判断集合中元素个数是否为0</span></span><br><span class="line"></span><br><span class="line">Object[] toArray(); <span class="comment">//将集合转换成一维数组</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Collection的遍历（集合的通用遍历方式）"><a href="#Collection的遍历（集合的通用遍历方式）" class="headerlink" title="Collection的遍历（集合的通用遍历方式）"></a>Collection的遍历（集合的通用遍历方式）</h3><p>①第一步：获取当前集合依赖的迭代器对象</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line"><span class="comment">//获取到迭代器之后，迭代器中有一个光标cursor，这个光标起初默认指向集合的第一个位置</span></span><br></pre></td></tr></table></figure>
-
-<p>②第二步：编写循环，循环条件是：当前光标指向的位置是否存在元素。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(it.hasNext())&#123;&#125;</span><br><span class="line"><span class="comment">//boolean has = it.hasNext();</span></span><br><span class="line"><span class="comment">//has-&gt;true,表示光标指向的位置有数据；</span></span><br><span class="line"><span class="comment">//has-&gt;false,表示光标指向的位置没有数据。</span></span><br></pre></td></tr></table></figure>
-
-<p>③第三步：如果有，将光标指向的当前元素返回，并且将光标向下移动一位。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> it.next();</span><br><span class="line"><span class="comment">//做了两件事情，</span></span><br><span class="line"><span class="comment">//1：取出当前光标只向位置的元素</span></span><br><span class="line"><span class="comment">//2：将光标向下移动一位</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228210734004.png" alt="image-20240228210734004"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();it.hasNext();)&#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">obj</span> <span class="operator">=</span> it.next();</span><br><span class="line">    System.out.println(obj);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span> (i.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj2</span> <span class="operator">=</span> i.next();<span class="comment">//这里存在隐式的多态</span></span><br><span class="line">            System.out.println(obj2);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="SequencedCollection接口-有序集合"><a href="#SequencedCollection接口-有序集合" class="headerlink" title="SequencedCollection接口**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**"></a>SequencedCollection接口**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**</h2><p>所有的**&#x3D;&#x3D;有序集合&#x3D;&#x3D;**都实现了SequencedCollection接口</p>
-<h3 id="①SequencedCollection接口是Java21版本新增的。"><a href="#①SequencedCollection接口是Java21版本新增的。" class="headerlink" title="①SequencedCollection接口是Java21版本新增的。"></a>①SequencedCollection接口是Java21版本新增的。</h3><h3 id="②SequencedCollection接口-（有序集合）-中的方法："><a href="#②SequencedCollection接口-（有序集合）-中的方法：" class="headerlink" title="②SequencedCollection接口&#x3D;&#x3D;（有序集合）&#x3D;&#x3D;中的方法："></a>②SequencedCollection接口&#x3D;&#x3D;（有序集合）&#x3D;&#x3D;中的方法：</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(Object o)</span>：<span class="comment">//向头部添加</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(Object o)</span>：<span class="comment">//向末尾添加</span></span><br><span class="line">Object <span class="title function_">removeFirst</span><span class="params">()</span>：<span class="comment">//删除头部</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">removeLast</span><span class="params">()</span>：<span class="comment">//删除末尾</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">getFirst</span><span class="params">()</span>：<span class="comment">//获取头部节点</span></span><br><span class="line"></span><br><span class="line">Object <span class="title function_">getLast</span><span class="params">()</span>：<span class="comment">//获取末尾节点</span></span><br><span class="line"></span><br><span class="line">SequencedCollection <span class="title function_">reversed</span><span class="params">()</span>; <span class="comment">//反转集合中的元素</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet-Stack-都可以调用这个接口中的方法。"><a href="#③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet-Stack-都可以调用这个接口中的方法。" class="headerlink" title="&#x3D;&#x3D;③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet,Stack 都可以调用这个接口中的方法。&#x3D;&#x3D;"></a>&#x3D;&#x3D;③ArrayList，LinkedList，Vector，LinkedHashSet，TreeSet,Stack 都可以调用这个接口中的方法。&#x3D;&#x3D;</h3><h2 id="泛型-编译阶段的功能"><a href="#泛型-编译阶段的功能" class="headerlink" title="泛型(编译阶段的功能)"></a>泛型(编译阶段的功能)</h2><h3 id="①泛型是Java5的新特性，属于编译阶段的功能。"><a href="#①泛型是Java5的新特性，属于编译阶段的功能。" class="headerlink" title="①泛型是Java5的新特性，属于编译阶段的功能。"></a>①泛型是Java5的新特性，属于编译阶段的功能。</h3><h3 id="②泛型可以让开发者在编写代码时指定集合中存储的数据类型"><a href="#②泛型可以让开发者在编写代码时指定集合中存储的数据类型" class="headerlink" title="②泛型可以让开发者在编写代码时指定集合中存储的数据类型"></a>②泛型可以让开发者在编写代码时指定集合中存储的数据类型</h3><h3 id="③泛型作用："><a href="#③泛型作用：" class="headerlink" title="③泛型作用："></a>③泛型作用：</h3><p>1.类型安全：指定了集合中元素的类型之后，**&#x3D;&#x3D;编译器会在编译时进行类型检查&#x3D;&#x3D;<strong>，</strong>如果尝试将错误类型的元素添加到集合中<strong>，</strong>就会在编译时报错，避免了在运行时出现类型错误的问题。**</p>
-<p>2.代码简洁：使用泛型可以简化代码，避免了繁琐的类型转换操作。比如，在没有泛型的时候，需要使用 Object 类型来保存集合中的元素，并在使用时&#x3D;&#x3D;强制类型转换成实际类型&#x3D;&#x3D;（向下转型），而有了泛型之后，只需要在定义集合时指定类型即可。</p>
-<h3 id="④在集合中使用泛型"><a href="#④在集合中使用泛型" class="headerlink" title="④在集合中使用泛型"></a>④在集合中使用泛型</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//没有使用多态</span></span><br><span class="line"><span class="type">Iterator</span> <span class="variable">i</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span> (i.hasNext())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">obj2</span> <span class="operator">=</span> i.next();<span class="comment">//这里存在隐式的多态</span></span><br><span class="line">            System.out.println(obj2);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//表示创建一个集合，而且这个集合中只能存储String</span></span><br><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>这就表示该集合只能存储字符串，存储其它类型时编译器报错。</p>
-<p>并且以上代码使用泛型后，避免了繁琐的类型转换，集合中的元素可以直接调用String类特有的方法。</p>
-<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228212839842.png" alt="image-20240228212839842"></p>
-<h3 id="⑤Java7的新特性：钻石表达式"><a href="#⑤Java7的新特性：钻石表达式" class="headerlink" title="⑤Java7的新特性：钻石表达式"></a>⑤Java7的新特性：钻石表达式</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line"><span class="comment">//下面是钻石表达式，省了后面的尖括号内的东西</span></span><br><span class="line">Collection&lt;String&gt; strs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<h3 id="泛型的擦除与补偿（了解）"><a href="#泛型的擦除与补偿（了解）" class="headerlink" title="泛型的擦除与补偿（了解）"></a>泛型的擦除与补偿（了解）</h3><p>①泛型的出现提高了编译时的安全性，正因为**&#x3D;&#x3D;编译时对添加的数据做了检查，则程序运行时才不会抛出类型转换异常。&#x3D;&#x3D;**因此泛型本质上是编译时期的技术，是专门给编译器用的。</p>
-<p><strong>&#x3D;&#x3D;泛型只是给Javac看的，在运行的时候，加载类的时候，会将泛型擦除掉（擦除之后的类型为Object类型），这个称为泛型擦除。&#x3D;&#x3D;</strong></p>
-<p><strong>②为什么要有泛型擦除呢？兼容低版本的JDK</strong>其本质是为了让JDK1.4和JDK1.5能够兼容同一个类加载器。在JDK1.5版本中，程序编译时期会对集合添加的元素进行安全检查，如果检查完是安全的、没有错误的，那么就意味着添加的元素都属于同一种数据类型，则加载类时就可以把这个泛型擦除掉，将泛型擦除后的类型就是Object类，这样擦除之后的代码就与JDK1.4的代码一致。</p>
-<p>③由于加载类的时候，会默认将类中的泛型擦除为Object类型，所以添加的元素就被转化为Object类型，同时取出的元素也默认为Object类型。而我们获得集合中的元素时，按理说取出的元素应该是Object类型，为什么取出的元素却是实际添加的元素类型呢？</p>
-<p>④这里又做了一个默认的操作，我们称之为**&#x3D;&#x3D;泛型的补偿&#x3D;&#x3D;<strong>。</strong>&#x3D;&#x3D;在程序运行时，通过获取元素的实际类型进行强转，这就叫做泛型补偿（不必手动实现强制转换）。获得集合中的元素时，虚拟机 会根据获得元素的实际类型进行向下转型，也就是会恢复获得元素的实际类型，因此我们就无需手动执行向下转型操作，从本质上避免了抛出类型转换异常。&#x3D;&#x3D;**</p>
-<h3 id="自定义泛型"><a href="#自定义泛型" class="headerlink" title="自定义泛型"></a>自定义泛型</h3><h4 id="在类上定义泛型"><a href="#在类上定义泛型" class="headerlink" title="在类上定义泛型"></a>在类上定义泛型</h4><p><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214144852.png" alt="image-20240228214144852" style="zoom:80%;" /><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228214151875.png" alt="image-20240228214151875" style="zoom:67%;" /></p>
-<h4 id="在方法上定义泛型"><a href="#在方法上定义泛型" class="headerlink" title="在方法上定义泛型"></a>在方法上定义泛型</h4><blockquote>
-<p>实例方法可以，静态方法不能直接用</p>
-<p>因为实例方法跑的时候要new实例，刚好在创建的时候会确定泛型的类型。而静态方法不需要创建实例，不能确定类型</p>
-</blockquote>
-<p>①在类上定义的泛型，在**&#x3D;&#x3D;静态方法中无法使用&#x3D;&#x3D;**。如果在静态方法中使用泛型，则需要再方法返回值类型前面进行泛型的声明。</p>
-<p>②语法格式：&lt;泛型1, 泛型2, 泛型3, …&gt; 返回值类型 方法名(形参列表) {}</p>
-<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228215823508.png" alt="image-20240228215823508"></p>
-<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240228215931140.png" alt="image-20240228215931140"></p>
-<h2 id="迭代时删除元素"><a href="#迭代时删除元素" class="headerlink" title="迭代时删除元素"></a>迭代时删除元素</h2><h2 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h2><h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h2 id="链表存储结构"><a href="#链表存储结构" class="headerlink" title="链表存储结构"></a>链表存储结构</h2><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><h2 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h2><h2 id="队列数据结构"><a href="#队列数据结构" class="headerlink" title="队列数据结构"></a>队列数据结构</h2><h2 id="Map继承结构"><a href="#Map继承结构" class="headerlink" title="Map继承结构"></a>Map继承结构</h2><h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2>]]></content>
-      <categories>
-        <category>Java体系知识</category>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Redis-记录</title>
-    <url>/2024/02/21/Redis-%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="第一章-Redis-概述"><a href="#第一章-Redis-概述" class="headerlink" title="第一章 Redis 概述"></a>第一章 Redis 概述</h1><h2 id="一、Redis-Remote-Dictionary-Server-远程字典服务"><a href="#一、Redis-Remote-Dictionary-Server-远程字典服务" class="headerlink" title="一、Redis(Remote Dictionary Server)远程字典服务"></a>一、Redis(Remote Dictionary Server)远程字典服务</h2><ol>
-<li><p>使用 &#x3D;&#x3D;ANSI C 语言&#x3D;&#x3D;编写、&#x3D;&#x3D;支持网络、可基于内存亦可持久化的日志型、NoSQL 开源内存数据库&#x3D;&#x3D;，其提供多种语言的 API。</p>
-</li>
-<li><p>Redis被称为字典服务的原因在于，redis是一个key-value的存储系统。</p>
-<blockquote>
-<p>支持存储的value类型有很多，包括String（字符串）、List（链表）、Set（集合）、Zset（sorted set– 有序集合）和哈希类型等</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="二、NoSQL"><a href="#二、NoSQL" class="headerlink" title="二、NoSQL"></a>二、NoSQL</h2><p>Nosql（non-relational，Not Only SQL），泛指的是非关系型的数据库。</p>
-<blockquote>
-<p>比如社交类的等等</p>
-</blockquote>
-<p>&#x3D;&#x3D;NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题&#x3D;&#x3D;</p>
-<p>传统方法不适合这种情况。</p>
-<h3 id="1-键值存储数据库"><a href="#1-键值存储数据库" class="headerlink" title="1. 键值存储数据库"></a>1. 键值存储数据库</h3><p>类似Map的key-value对。</p>
-<blockquote>
-<p>典型代表redis</p>
-</blockquote>
-<h3 id="2-列存储数据库"><a href="#2-列存储数据库" class="headerlink" title="2. 列存储数据库"></a>2. 列存储数据库</h3><p>注意的是 ，关系数据库是行关系库，其存在的问题在于，按照行存储的数据在物理层面占用的是连续的存储空间，&#x3D;&#x3D;是不适合海量的数据存储&#x3D;&#x3D;的。</p>
-<p>而按列存储则可以实现一个分布式存储，适合海量的存储</p>
-<blockquote>
-<p>典型的代表就是HBase</p>
-</blockquote>
-<h3 id="3-文档型数据库"><a href="#3-文档型数据库" class="headerlink" title="3. 文档型数据库"></a>3. 文档型数据库</h3><p>NoSQL与关系型数据的结合，最想关系型数据库的NoSQL</p>
-<blockquote>
-<p>典型代表就是MongoDB。</p>
-</blockquote>
-<h3 id="4-图像（Graph）数据库"><a href="#4-图像（Graph）数据库" class="headerlink" title="4. 图像（Graph）数据库"></a>4. 图像（Graph）数据库</h3><blockquote>
-<p>用于存放一个节点关系的数据库，例如描述不同人间的关系。典型代表是 Neo4J。</p>
-</blockquote>
-<h2 id="三、Redis的用途"><a href="#三、Redis的用途" class="headerlink" title="三、Redis的用途"></a>三、Redis的用途</h2><h3 id="1-数据缓存"><a href="#1-数据缓存" class="headerlink" title="1.数据缓存"></a>1.数据缓存</h3><p>Redis在生产中用的最多的场景：&#x3D;&#x3D;数据缓存&#x3D;&#x3D;。</p>
-<p>正常情况下，用户-&gt;服务器-&gt;数据库 （query），然后再返回。</p>
-<p>但是当用户很多的时候，就是高并发的时候，解决不了了。</p>
-<p>因此提出解决方案： 用户-&gt;服务器-&gt;缓存-&gt; 数据库 （query）</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223001703204.png" alt="image-20240223001703204"></p>
-<p>这样DBMS压力就会减轻。</p>
-<blockquote>
-<p>即客户端从 DBMS 中查询出的数据首先写入到 Redis 中，后续无论哪个客户端再需要访问该数据，直接读取 Redis 中的即可，不仅减小了 RT，而且降低了 DBMS 的压力。</p>
-<p>而且，DBMS一般存放在磁盘中，而Redis作为内存数据库是放在内存中的，且直接通过key来查询，缓存层的查询非常的快，高并发的问题可以解决。</p>
-</blockquote>
-<h4 id="数据不一致问题？："><a href="#数据不一致问题？：" class="headerlink" title="数据不一致问题？："></a>数据不一致问题？：</h4><p>当一个用户提出要修改，修改了DBMS，没有修改缓存层，就会存在一个脏数据&#x2F;</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223074739083.png" alt="image-20240223074739083"></p>
-<p>预热：服务器不是刚开就提供服务，会有一个预热，把一些基础数据先保存到缓存中</p>
-<h2 id="四、Redis-特性"><a href="#四、Redis-特性" class="headerlink" title="四、Redis 特性"></a>四、<strong>Redis</strong> <strong>特性</strong></h2><h3 id="1-性能极高："><a href="#1-性能极高：" class="headerlink" title="1.性能极高："></a>1.性能极高：</h3><p>Redis 读的速度可以达到 11w 次&#x2F;s，写的速度可以达到 8w 次&#x2F;s。只所以具有，这么高的性能，因为以下几点原因：</p>
-<p>1）Redis 的所有操作都是在内存中发生的。</p>
-<p>2）Redis 是用 C 语言开发的。</p>
-<p>3）Redis 源码非常精细（集性能与优雅于一身）。</p>
-<h3 id="2-简单稳定"><a href="#2-简单稳定" class="headerlink" title="2.简单稳定"></a>2.简单稳定</h3><p>Redis 源码很少。早期版本只有 2w 行左右。从 3.0 版本开始，增加了集群功能，代码变为了 5w 行左右。</p>
-<h3 id="3-持久化"><a href="#3-持久化" class="headerlink" title="3.持久化"></a>3.持久化</h3><p>数据缓存是暂时的，要保存到磁盘，才能保证数据安全。Redis 内存中的数据可以进行持久化，其有两种方式：RDB 与 AOF。</p>
-<h3 id="4-高可用集群"><a href="#4-高可用集群" class="headerlink" title="4.高可用集群"></a>4.高可用集群</h3><p>Redis 提供了高可用的主从集群功能，可以确保系统的安全性</p>
-<h3 id="5-丰富的数据类型"><a href="#5-丰富的数据类型" class="headerlink" title="5.丰富的数据类型"></a>5.丰富的数据类型</h3><p>Redis 是一个 key-value 存储系统。支持存储的 value 类型很多，包括String(字符串)、List(链表)、Set(集合)、Zset(sorted set –有序集合)和 Hash（哈希类型）等，还有 BitMap、HyperLogLog、Geospatial 类型</p>
-<ol>
-<li><p> BitMap：一般用于大数据量的二值性统计。<br>比如员工是否打卡</p>
-</li>
-<li><p> HyperLogLog：其是 Hyperlog Log，用于对数据量超级庞大的日志做去重统计。</p>
-</li>
-<li><p> Geospatial：地理空间，其主要用于地理位置相关的计算。</p>
-<p>比如“附近的人”</p>
-</li>
-</ol>
-<h3 id="6-强大的功能"><a href="#6-强大的功能" class="headerlink" title="6.强大的功能"></a>6.强大的功能</h3><p>Redis 提供了数据过期功能、发布&#x2F;订阅功能、简单事务功能，还支持 Lua脚本扩展功能。</p>
-<h3 id="7-客户端语言广泛"><a href="#7-客户端语言广泛" class="headerlink" title="7.客户端语言广泛"></a>7.客户端语言广泛</h3><p>Redis提供了简单的 TCP 通信协议，编程语言可以方便地的接入 Redis。所以，有很多的开源社区、大公司等开发出了很多语言的 Redis 客户端。</p>
-<h3 id="8-支持-ACL-权限控制"><a href="#8-支持-ACL-权限控制" class="headerlink" title="8.支持 ACL 权限控制"></a>8.支持 ACL 权限控制</h3><p>之前的权限控制非常笨拙。从 Redis6 开始引入了 ACL 模块，可以为不同用户定制不同的用户权限。</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223081342029.png" alt="image-20240223081342029"></p>
-<blockquote>
-<p>linux 的drwxr-xr-x ：d表示目录&#x2F;l表示链接，rwx表示用户（创建者User）读写可执行；Group r-x后三位表示和创建者同组用户读可执行。Other r-x</p>
-</blockquote>
-<h3 id="9-支持多线程-IO-模型"><a href="#9-支持多线程-IO-模型" class="headerlink" title="9.支持多线程 IO 模型"></a>9.支持多线程 IO 模型</h3><p>Redis 之前版本采用的是单线程模型，从 6.0 版本开始支持了多线程模型。</p>
-<h2 id="五-Redis-的-IO-模型"><a href="#五-Redis-的-IO-模型" class="headerlink" title="五.Redis 的 IO 模型"></a>五.<strong>Redis</strong> <strong>的</strong> <strong>IO</strong> <strong>模型</strong></h2><p>单线程模型 多线程模型 混合模型</p>
-<p>Redis 客户端提交的各种请求是如何最终被 Redis 处理的？Redis 处理客户端请求所采用的处理架构，称为 Redis 的 IO 模型。不同版本的 Redis 采用的 IO 模型是不同的。</p>
-<h3 id="1-单线程模型"><a href="#1-单线程模型" class="headerlink" title="1.单线程模型"></a>1.<strong>单线程模型</strong></h3><blockquote>
-<p>性能还是很强,写8w&#x2F;qps,读11w&#x2F;qps–&gt;内存\单线程可维护性比较高(多线程存在线程切换问题,顾及到数据安全问题\死锁问题)</p>
-<p>问题:持久化等操作和客户端没太多联系,但是又比较费时,于是提出了混合线程模型</p>
-</blockquote>
-<p>对于 Redis 3.0 及其以前版本，Redis 的 IO 模型采用的是纯粹的单线程模型。即所有客户端的请求全部由一个线程处理。</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223082516763.png" alt="image-20240223082516763"></p>
-<p>每个客户端若要向 Redis 提交请求，都需要与 Redis 建立一个 socket 连接，并向事件分发器注册一个事件。</p>
-<p>一旦该事件发生就表明该连接已经就绪。而一旦连接就绪，事件分发器就会感知到，然后获取客户端通过该连接发送的请求，并将由该事件分发器所绑定的这个唯一的线程来处理。</p>
-<p>如果该线程还在处理多个任务，则将该任务写入到任务队列等待线程处理。只所以称为事件分发器，是因为它会根据不同的就绪事件，将任务交由不同的事件处理器去处理</p>
-<p><strong>&#x3D;&#x3D;Redis 的单线程模型采用了多路复用技术。&#x3D;&#x3D;</strong></p>
-<p>对于多路复用器的多路选择算法常见的有三种：select 模型、poll 模型、epoll 模型。</p>
-<ol>
-<li><p>poll 模型的选择算法：采用的是轮询算法。该模型对客户端的就绪处理是有延迟的。</p>
-</li>
-<li><p>epoll 模型的选择算法：采用的是回调方式。根据就绪事件发生后的处理方式的不同，又可分为 LT 模型与 ET 模型。</p>
-</li>
-</ol>
-<h3 id="2-混合线程模型"><a href="#2-混合线程模型" class="headerlink" title="2.混合线程模型"></a>2.混合线程模型</h3><p>从 Redis 4.0 版本开始，Redis 中就开始加入了多线程元素。处理客户端请求的仍是单线</p>
-<p>程模型，但对于一些比较耗时但又不影响对客户端的响应的操作，就由后台其它线程来处理。</p>
-<p>例如，持久化、对 AOF 的 rewrite、对失效连接的清理等</p>
-<h3 id="3-多线程模型"><a href="#3-多线程模型" class="headerlink" title="3.多线程模型"></a>3.<strong>多线程模型</strong></h3><p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083447687.png" alt="image-20240223083447687"></p>
-<p>内存响应时间(RT)100ns</p>
-<p>Redis 每秒处理读写请求 达到:1s&#x2F;100ns &#x3D; &#x3D;1kw次,实际情况是,redis8w&#x2F;qps,读11w&#x2F;qps,差距那么大的原因 就是redis的单线程</p>
-<p>是将单线程和多线程各取其优点.</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083854779.png" alt="image-20240223083854779"></p>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>Redis</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SpringBoot</title>
-    <url>/2024/02/23/SpringBoot/</url>
-    <content><![CDATA[<blockquote>
-<p>这个是从原理开始讲的，这个我不照着写，我就是学</p>
-</blockquote>
-<p>springboot内置了tomcat，所以可以直接打包成jar包</p>
-<h1 id="什么是tomcat"><a href="#什么是tomcat" class="headerlink" title="什么是tomcat"></a>什么是tomcat</h1><p>Tomcat是常见的免费的web服务器。</p>
-<h2 id="1-不使用tomcat访问html"><a href="#1-不使用tomcat访问html" class="headerlink" title="1. 不使用tomcat访问html"></a>1. 不使用tomcat访问html</h2><p>可以在浏览器的地址里看到 file:d:&#x2F;test.html 这样的格式，是通过打开本地文件的形式打开的</p>
-<p>但是我们平时上网看到的html网址一般都是: <a href="https://link.zhihu.com/?target=http://12306.com/index.html">http://12306.com/index.html</a> 这样的形式<br>这是因为有web服务器的存在</p>
-<h2 id="2-使用tomcat后，访问html"><a href="#2-使用tomcat后，访问html" class="headerlink" title="2.使用tomcat后，访问html"></a>2.使用tomcat后，访问html</h2><p>使用tomcat后，可以像127.0.0.1:8080&#x2F;test.html这样访问一个网站，而不是访问一个html文件。因为tomcat本身就是一个web服务器，test.html部署在了这个web服务器上</p>
-<p><img src="/../blog_images/SpringBoot/2018120522281643.gif" alt="img"></p>
-<h1 id="SpringBoot启动"><a href="#SpringBoot启动" class="headerlink" title="SpringBoot启动"></a>SpringBoot启动</h1>]]></content>
-      <tags>
-        <tag>Java体系知识</tag>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringSecurity</title>
-    <url>/2024/02/23/SpringSecurity/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>dlyk_part1</title>
-    <url>/2024/02/18/dlyk-part1/</url>
-    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/dlyk-part1/image-20240218015738084.png" alt="image-20240218015738084"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240218015750388.png" alt="image-20240218015750388"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152352894.png" alt="image-20240221152352894"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152403852.png" alt="image-20240221152403852"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152414970.png" alt="image-20240221152414970"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152423433.png" alt="image-20240221152423433"></p>
-<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
-<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
-<p> （1） node.js是一个开源的跨平台的JavaScript运行时环境，类似java的jvm</p>
-<p> （2） npm JavaScript依赖包管理器 ，全世界都可以用这个来共享javascript包，负责前端项目的打包，插件的下载 node package manager </p>
-<p> （3）Vite 是快速构建前端Vue项目的脚手架，可以理解为开发Spring boot的Spring initializr的快速构建工具。（之前是用vue-cil的）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vite@latest//</span><br></pre></td></tr></table></figure>
-
-<h1 id="三、启动之前的项目"><a href="#三、启动之前的项目" class="headerlink" title="三、启动之前的项目"></a>三、启动之前的项目</h1><p>用的是jdk17 ；</p>
-<p>前端跑起来需要进入package.json 在scripts 处 跑dev</p>
-<h2 id="1-admin的密码"><a href="#1-admin的密码" class="headerlink" title="1. admin的密码"></a>1. admin的密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> t_user</span><br><span class="line"><span class="keyword">SET</span> login_pwd <span class="operator">=</span> <span class="string">&#x27;$2a$10$t1ZZqt3jgYNabcSS1NMZ/uqGALlCF/VH5wSL3CYduABGeVvKFVEi6&#x27;</span>  <span class="comment">-- 这里替换为新密码的哈希值</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>哈希代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PasswordEncoderExample</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 BCryptPasswordEncoder</span></span><br><span class="line">        <span class="type">PasswordEncoder</span> <span class="variable">encoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 编码密码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rawPassword</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">encodedPassword</span> <span class="operator">=</span> encoder.encode(rawPassword);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印编码后的密码</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Encoded Password: &quot;</span> + encodedPassword);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
-<p>后端的端口：8088 在application.yml中修改</p>
-<p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
-]]></content>
-      <categories>
-        <category>Java项目</category>
-        <category>动力云客</category>
       </categories>
   </entry>
   <entry>

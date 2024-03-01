@@ -218,7 +218,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-01 10:52:02" itemprop="dateModified" datetime="2024-03-01T10:52:02+08:00">2024-03-01</time>
+      <time title="修改时间：2024-03-01 14:48:15" itemprop="dateModified" datetime="2024-03-01T14:48:15+08:00">2024-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -567,41 +567,134 @@
 <p>hashset底层就是hashmap，把map中的所有k取出来就是set</p>
 <p>hash是什么，是key的hashcode执行结果</p>
 <p>transient Node&lt;k,v&gt;[] table;</p>
+<p>get()方法：给出一个key，先计算hashcode，然后到相应的单链表里找，最多可以n&#x2F;k 效率提高</p>
 </blockquote>
 <p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301105201886.png" alt="image-20240301105201886"></p>
-<h3 id="①HashMap集合的key是-无序不可重复-的。"><a href="#①HashMap集合的key是-无序不可重复-的。" class="headerlink" title="①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。"></a>①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。</h3><ol>
+<blockquote>
+<p>key进行hashCode编码，取模。</p>
+</blockquote>
+<h3 id="HashMap-散列表-1"><a href="#HashMap-散列表-1" class="headerlink" title="HashMap(散列表)"></a>HashMap(散列表)</h3><h4 id="①HashMap集合的key是-无序不可重复-的。"><a href="#①HashMap集合的key是-无序不可重复-的。" class="headerlink" title="①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。"></a>①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。</h4><ol>
 <li><p><strong>无序：插入顺序和取出顺序不一定相同。</strong></p>
 </li>
 <li><p><strong>不可重复：key具有唯一性。</strong></p>
 </li>
 </ol>
-<h3 id="②向HashMap集合中put时，key如果重复的话，value会覆盖。"><a href="#②向HashMap集合中put时，key如果重复的话，value会覆盖。" class="headerlink" title="②向HashMap集合中put时，key如果重复的话，value会覆盖。"></a>②向HashMap集合中put时，key如果重复的话，value会覆盖。</h3><h3 id="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"><a href="#③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？" class="headerlink" title="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"></a>③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？</h3><p>如果没有重写equals，就会调用Object的equals，就是用&#x3D;&#x3D;进行比较的，就是比较内存地址。</p>
+<h4 id="②向HashMap集合中put时，key如果重复的话，value会覆盖。"><a href="#②向HashMap集合中put时，key如果重复的话，value会覆盖。" class="headerlink" title="②向HashMap集合中put时，key如果重复的话，value会覆盖。"></a>②向HashMap集合中put时，key如果重复的话，value会覆盖。</h4><h4 id="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"><a href="#③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？" class="headerlink" title="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"></a>③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？</h4><p>如果没有重写equals，就会调用Object的equals，就是用&#x3D;&#x3D;进行比较的，就是比较内存地址。</p>
 <p>按照加双引号的字面量会在JVM开始的时候就在字符串常量池中创建的规则，相同的都放进去了</p>
 <p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229232150946.png" alt="image-20240229232150946"></p>
-<h3 id="④HashMap底层的数据结构是：哈希表-散列表"><a href="#④HashMap底层的数据结构是：哈希表-散列表" class="headerlink" title="④HashMap底层的数据结构是：哈希表&#x2F;散列表"></a>④HashMap底层的数据结构是：哈希表&#x2F;散列表</h3><p>hash是key调Object的hashcode方法得到的</p>
+<h4 id="④HashMap底层的数据结构是：哈希表-散列表"><a href="#④HashMap底层的数据结构是：哈希表-散列表" class="headerlink" title="④HashMap底层的数据结构是：哈希表&#x2F;散列表"></a>④HashMap底层的数据结构是：哈希表&#x2F;散列表</h4><p>hash是key调Object的hashcode方法得到的</p>
 <ul>
 <li>①哈希表是一种查询和增删效率都很高的一种数据结构，非常重要，在很多场合使用，并且面试也很常见。必须掌握。</li>
 <li>②哈希表如何做到的查询和增删效率都好的呢，因为哈希表是“数组 + 链表”的结合体。数组和链表的结合不是绝对的。</li>
 <li>③哈希表可能是：数组 + 链表，数组 + 红黑树， 数组 + 链表 + 红黑树等。</li>
 </ul>
-<h3 id="⑤HashMap集合底层部分源码："><a href="#⑤HashMap集合底层部分源码：" class="headerlink" title="⑤HashMap集合底层部分源码："></a>⑤HashMap集合底层部分源码：</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229235156266.png" alt="image-20240229235156266"></p>
+<h4 id="⑤HashMap集合底层部分源码："><a href="#⑤HashMap集合底层部分源码：" class="headerlink" title="⑤HashMap集合底层部分源码："></a>⑤HashMap集合底层部分源码：</h4><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229235156266.png" alt="image-20240229235156266"></p>
 <p>长度永远是2的倍数，一维数组挂链表</p>
-<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap（底层红黑树）"><a href="#TreeMap（底层红黑树）" class="headerlink" title="TreeMap（底层红黑树）"></a>TreeMap（底层红黑树）</h2><h2 id="Set接口（无序、不可重复）"><a href="#Set接口（无序、不可重复）" class="headerlink" title="Set接口（无序、不可重复）"></a>Set接口（无序、不可重复）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229191216355.png" alt="image-20240229191216355"></p>
+<h3 id="哈希表存储原理"><a href="#哈希表存储原理" class="headerlink" title="哈希表存储原理"></a>哈希表存储原理</h3><h4 id="①概念："><a href="#①概念：" class="headerlink" title="①概念："></a>①概念：</h4><h5 id="1-哈希表：一种数据结构的名字。"><a href="#1-哈希表：一种数据结构的名字。" class="headerlink" title="1. 哈希表：一种数据结构的名字。"></a>1. 哈希表：一种数据结构的名字。</h5><h5 id="2-哈希函数："><a href="#2-哈希函数：" class="headerlink" title="2. 哈希函数："></a>2. 哈希函数：</h5><ul>
+<li>①通过哈希函数可以将一个Java对象映射为一个数字。（就像现实世界中，每个人（对象）都会映射一个身份证号（哈希值）一样。）</li>
+<li>②也就是说通过哈希函数的执行可以得到一个哈希值。</li>
+<li>③在Java中，hashCode()方法就是哈希函数。</li>
+<li>④也就是说hashCode()方法的返回值就是哈希值。</li>
+<li>⑤一个好的哈希函数，可以让散列分布均匀。</li>
+</ul>
+<h5 id="3-哈希值：也叫做哈希码。是哈希函数执行的结果。"><a href="#3-哈希值：也叫做哈希码。是哈希函数执行的结果。" class="headerlink" title="3.哈希值：也叫做哈希码。是哈希函数执行的结果。"></a>3.哈希值：也叫做哈希码。是哈希函数执行的结果。</h5><h5 id="4-哈希碰撞：也叫做哈希冲突。"><a href="#4-哈希碰撞：也叫做哈希冲突。" class="headerlink" title="4.哈希碰撞：也叫做哈希冲突。"></a>4.哈希碰撞：也叫做哈希冲突。</h5><ul>
+<li>①当两个对象“哈希值%数组长度”之后得到的下标相同时，就发生了哈希冲突。</li>
+<li>②如何解决哈希冲突？将冲突的挂到同一个链表上或同一个红黑树上。</li>
+</ul>
+<h5 id="5-以上描述凡是“哈希”都可以换为“散列”。"><a href="#5-以上描述凡是“哈希”都可以换为“散列”。" class="headerlink" title="5.以上描述凡是“哈希”都可以换为“散列”。"></a>5.以上描述凡是“哈希”都可以换为“散列”。</h5><h4 id="②重点："><a href="#②重点：" class="headerlink" title="②重点："></a>②重点：</h4><ul>
+<li>①存放在HashMap集合key部分的元素必须同时重写hashCode+equals方法。</li>
+</ul>
+<blockquote>
+<p>如果是 </p>
+</blockquote>
+<ul>
+<li>②equals返回true时，hashCode必须相同。</li>
+</ul>
+<h3 id="Hashcode和equals要同时重写"><a href="#Hashcode和equals要同时重写" class="headerlink" title="Hashcode和equals要同时重写"></a>Hashcode和equals要同时重写</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301123921129.png" alt="image-20240301123921129"></p>
+<h3 id="手写HashMap的put方法"><a href="#手写HashMap的put方法" class="headerlink" title="手写HashMap的put方法"></a>手写HashMap的put方法</h3><h4 id="①【第一步】：处理key为null的情况"><a href="#①【第一步】：处理key为null的情况" class="headerlink" title="①【第一步】：处理key为null的情况"></a>①【第一步】：处理key为null的情况</h4><blockquote>
+<p>key可以是null，null只能有一个</p>
+</blockquote>
+<p>如果添加键值对的key就是null，则将该键值对存储到table数组索引为0的位置。</p>
+<h4 id="②【第二步】：获得key对象的哈希值"><a href="#②【第二步】：获得key对象的哈希值" class="headerlink" title="②【第二步】：获得key对象的哈希值"></a>②【第二步】：获得key对象的哈希值</h4><p>如果添加键值对的key不是null，则就调用key的hashcode()方法，获得key的哈希值。</p>
+<h4 id="③【第三步】：获得键值对的存储位置"><a href="#③【第三步】：获得键值对的存储位置" class="headerlink" title="③【第三步】：获得键值对的存储位置"></a>③【第三步】：获得键值对的存储位置</h4><p>因为获得的哈希值在数组合法索引范围之外，因此我们就需要将获得的哈希值转化为[0，数组长度-1]范围的整数，</p>
+<p>那么可以通过取模法来实现，也就是通过“哈希值 % 数组长度”来获得索引位置（i）。</p>
+<h4 id="④【第四步】：将键值对添加到table数组中"><a href="#④【第四步】：将键值对添加到table数组中" class="headerlink" title="④【第四步】：将键值对添加到table数组中"></a>④【第四步】：将键值对添加到table数组中</h4><p>当table[i]返回结果为null时，则键键值对封装为Node对象并存入到table[i]的位置。</p>
+<p>当table[i]返回结果不为null时，则意味着table[i]存储的是单链表。我们首先遍历单链表，如果遍历出来节点的</p>
+<p>key和添加键值对的key相同，那么就执行覆盖操作；如果遍历出来节点的key和添加键值对的key都不同，则就将键键</p>
+<p>值对封装为Node对象并插入到单链表末尾。</p>
+<h3 id="HashMap在Java8后的改进（包含Java8）"><a href="#HashMap在Java8后的改进（包含Java8）" class="headerlink" title="HashMap在Java8后的改进（包含Java8）"></a>HashMap在Java8后的改进（包含Java8）</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301130406549.png" alt="image-20240301130406549"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301130412465.png" alt="image-20240301130412465"></p>
+<p>①初始化时机：</p>
+<ul>
+<li>①Java8之前，构造方法执行时初始化table数组。</li>
+<li>②Java8之后，第一次调用put方法时初始化table数组。</li>
+</ul>
+<p>②插入法：</p>
+<ul>
+<li>①Java8之前，头插法</li>
+<li>②Java8之后，尾插法</li>
+</ul>
+<p>③数据结构：</p>
+<ul>
+<li>①Java8之前：数组 + 单向链表</li>
+<li>②Java8之后：数组 + 单向链表 + 红黑树。</li>
+<li><strong>③最开始使用单向链表解决哈希冲突。如果结点数量 &gt;&#x3D; 8，并且table的长度 &gt;&#x3D; 64。单向链表转换为红黑树。</strong></li>
+<li><strong>④当删除红黑树上的结点时，结点数量 &lt;&#x3D; 6 时。红黑树转换为单向链表。</strong></li>
+</ul>
+<h3 id="HashMap初始化容量永远都是2的次幂"><a href="#HashMap初始化容量永远都是2的次幂" class="headerlink" title="HashMap初始化容量永远都是2的次幂"></a>HashMap初始化容量永远都是2的次幂</h3><h4 id="①HashMap集合初始化容量16（第一次调用put方法时初始化）"><a href="#①HashMap集合初始化容量16（第一次调用put方法时初始化）" class="headerlink" title="①HashMap集合初始化容量16（第一次调用put方法时初始化）"></a>①HashMap集合初始化容量16（第一次调用put方法时初始化）</h4><h4 id="②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。"><a href="#②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。" class="headerlink" title="②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。"></a>②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。</h4><h4 id="③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。"><a href="#③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。" class="headerlink" title="③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。"></a>③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。</h4><h4 id="④为什么会加快哈希计算？"><a href="#④为什么会加快哈希计算？" class="headerlink" title="④为什么会加快哈希计算？"></a>④为什么会加快哈希计算？</h4><ul>
+<li>①首先你要知道，使用二进制运算是最快的。</li>
+<li>②当一个数字是2的次幂时，例如数组的长度是2的次幂：</li>
+</ul>
+<blockquote>
+<p>①hash &amp; (length-1) 的结果和 hash % length的结果相同。</p>
+<p>②注意：只有是2的次幂时，以上等式才会成立。因为了使用 &amp; 运算符，让效率提升，因此建议容量一直是2的次幂。</p>
+</blockquote>
+<h4 id="⑤为什么会减少哈希冲突？"><a href="#⑤为什么会减少哈希冲突？" class="headerlink" title="⑤为什么会减少哈希冲突？"></a>⑤为什么会减少哈希冲突？</h4><ul>
+<li>①底层运算是：hash &amp; length - 1</li>
+<li>②如果length是偶数：length-1后一定是奇数，奇数二进制位最后一位一定是1,1和其他二进制位进行与运算，结果可能是1，也可能是0，这样可以减少哈希冲突，让散列分布更加均匀。</li>
+<li>③如果length是奇数：length-1后一定是偶数，偶数二进制位最后一位一定是0,0和任何数进行与运算，结果一定是0，这样就会导致发生大量的哈希冲突，白白浪费了一半的空间。</li>
+</ul>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301134520761.png" alt="image-20240301134520761"></p>
+<ul>
+<li><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2></li>
+</ul>
+<h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap（底层红黑树）"><a href="#TreeMap（底层红黑树）" class="headerlink" title="TreeMap（底层红黑树）"></a>TreeMap（底层红黑树）</h2><h2 id="Set接口（无序、不可重复）"><a href="#Set接口（无序、不可重复）" class="headerlink" title="Set接口（无序、不可重复）"></a>Set接口（无序、不可重复）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229191216355.png" alt="image-20240229191216355"></p>
 <h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><h2 id="IO流概述"><a href="#IO流概述" class="headerlink" title="IO流概述"></a>IO流概述</h2><h3 id="①什么是IO流？"><a href="#①什么是IO流？" class="headerlink" title="①什么是IO流？"></a>①什么是IO流？</h3><p> 水分子的移动形成了水流。</p>
 <p> IO流指的是：程序中数据的流动。数据可以从内存流动到硬盘，也可以从硬盘流动到内存。</p>
 <p> Java中IO流最基本的作用是：完成文件的读和写。</p>
-<h3 id="②IO流的分类？"><a href="#②IO流的分类？" class="headerlink" title="②IO流的分类？"></a>②IO流的分类？</h3><p>l根据数据流向分为：输入和输出是相对于内存而言的。</p>
-<p>①输入流：从硬盘到内存。(输入又叫做读：read)</p>
-<p>②输出流：从内存到硬盘。（输出又叫做写：write）</p>
-<p>l根据读写数据形式分为：</p>
-<p>①字节流：一次读取一个字节。适合读取非文本数据。例如图片、声音、视频等文件。（当然字节流是万能的。什么都可以读和写。）</p>
-<p>②字符流：一次读取一个字符。只适合读取普通文本。不适合读取二进制文件。因为字符流统一使用Unicode编码，可以避免出现编码混乱的问题。</p>
-<p><strong>注意：</strong>Java<strong><strong>的所有</strong></strong>IO<strong><strong>流中凡是以</strong></strong>Stream<strong><strong>结尾的都是字节流。凡是以</strong></strong>Reader<strong><strong>和</strong></strong>Writer****结尾的都是字符流。</p>
-<p>l根据流在IO操作中的作用和实现方式来分类:</p>
-<p>①节点流：节点流负责数据源和数据目的地的连接，是IO中最基本的组成部分。</p>
-<p>②处理流：处理流对节点流进行装饰&#x2F;包装，提供更多高级处理操作，方便用户进行数据处理。</p>
-<p>③Java中已经将io流实现了，在<strong>java.io</strong>包下，可以直接使用。</p>
-
+<h3 id="②IO流的分类？"><a href="#②IO流的分类？" class="headerlink" title="②IO流的分类？"></a>②IO流的分类？</h3><h4 id="根据数据流向分为：输入和输出是相对于内存而言的。"><a href="#根据数据流向分为：输入和输出是相对于内存而言的。" class="headerlink" title="根据数据流向分为：输入和输出是相对于内存而言的。"></a>根据数据流向分为：输入和输出是相对于内存而言的。</h4><p>​	①输入流：从硬盘到内存。(输入又叫做读：read)</p>
+<p>​	②输出流：从内存到硬盘。（输出又叫做写：write）</p>
+<h4 id="根据读写数据形式分为："><a href="#根据读写数据形式分为：" class="headerlink" title="根据读写数据形式分为："></a>根据读写数据形式分为：</h4><p>​	①字节流：一次读取一个字节。适合读取非文本数据。例如图片、声音、视频等文件。（当然字节流是万能的。什么都可以读和写。）</p>
+<p>​	②字符流：一次读取一个字符。只适合读取普通文本。不适合读取二进制文件。因为字符流统一使用Unicode编码，可以避免出现编码混乱的问题。</p>
+<p>&#x3D;&#x3D;<strong>注意：Java的所有IO流中凡是以Stream结尾的都是字节流。凡是以Reader和Writer结尾的都是字符流。</strong>&#x3D;&#x3D;</p>
+<h4 id="根据流在IO操作中的作用和实现方式来分类"><a href="#根据流在IO操作中的作用和实现方式来分类" class="headerlink" title="根据流在IO操作中的作用和实现方式来分类:"></a>根据流在IO操作中的作用和实现方式来分类:</h4><p>​	①节点流：节点流负责数据源和数据目的地的连接，是IO中最基本的组成部分。</p>
+<p>​	②处理流：处理流对节点流进行装饰&#x2F;包装，提供更多高级处理操作，方便用户进行数据处理。</p>
+<p>​	③Java中已经将io流实现了，在<strong>java.io</strong>包下，可以直接使用。</p>
+<h2 id="IO流体系结构"><a href="#IO流体系结构" class="headerlink" title="IO流体系结构"></a>IO流体系结构</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301144110666.png" alt="image-20240301144110666"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301144135589.png" alt="image-20240301144135589"></p>
+<p>IO流的体系结构</p>
+<blockquote>
+<p>①右图是常用的IO流。实际上IO流远远不止这些。</p>
+<p>②InputStream：字节输入流</p>
+<p>③OutputStream：字节输出流</p>
+<p>④Reader：字符输入流</p>
+<p>⑤Writer：字符输出流</p>
+<p>⑥以上4个流都是抽象类，是所有IO流的四大头领！！！</p>
+<p><strong>⑦所有的流都实现了Closeable接口，都有close()方法</strong>，流用完要关闭。</p>
+<p>⑧所有的输出流都实现了Flushable接口，都有flush()方法，flush方法的作用是，将缓存清空，全部写出。养成好习惯，以防数据丢失。</p>
+</blockquote>
+<h2 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h2><p>①文件字节输入流，可以读取任何文件。</p>
+<p>②常用构造方法</p>
+<p>①FileInputStream(String name)：创建一个文件字节输入流对象，参数是文件的路径</p>
+<p>③常用方法</p>
+<p>①int read();从文件读取一个字节(8个二进制位)，返回值读取到的字节本身，如果读不到任何数据返回-1</p>
+<p>②int read(byte[] b); 一次读取多个字节，如果文件内容足够多，则一次最多读取b.length个字节。返回值是读取到字节总数。如果没有读取到任何数据，则返回 -1</p>
+<p>③int read(byte[] b, int off, int len); 读到数据后向byte数组中存放时，从off开始存放，最多读取len个字节。读取不到任何数据则返回 -1</p>
+<p>④long skip(long n); 跳过n个字节</p>
+<p>⑤int available(); 返回流中剩余的估计字节数量。</p>
+<p>⑥void close() 关闭流。</p>
+<p>④使用FileInputStream读取的文件中有中文时，有可能读取到中文某个汉字的一半，在将byte[]数组转换为String时可能出现乱码问题，因此FileInputStream不太适合读取纯文本。</p>
+<h2 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h2><h2 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h2><h2 id="FileWriter"><a href="#FileWriter" class="headerlink" title="FileWriter"></a>FileWriter</h2><h2 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h2><h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><h2 id="标准输入流-标准输出流"><a href="#标准输入流-标准输出流" class="headerlink" title="标准输入流&amp;标准输出流"></a>标准输入流&amp;标准输出流</h2><h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><h2 id="读取属性配置文件"><a href="#读取属性配置文件" class="headerlink" title="读取属性配置文件"></a>读取属性配置文件</h2><h2 id="装饰器设计模式"><a href="#装饰器设计模式" class="headerlink" title="装饰器设计模式"></a>装饰器设计模式</h2><h2 id="压缩和解压缩流"><a href="#压缩和解压缩流" class="headerlink" title="压缩和解压缩流"></a>压缩和解压缩流</h2><h2 id="字节数组流"><a href="#字节数组流" class="headerlink" title="字节数组流"></a>字节数组流</h2><h2 id="对象克隆"><a href="#对象克隆" class="headerlink" title="对象克隆"></a>对象克隆</h2>
       
     </div>
 

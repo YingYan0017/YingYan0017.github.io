@@ -2,6 +2,15 @@
 <search>
   <entry>
     <title></title>
+    <url>/2024/02/18/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/</url>
+    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015738084.png" alt="image-20240218015738084"></p>
+<p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015750388.png" alt="image-20240218015750388"></p>
+<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
+<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
     <url>/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
     <content><![CDATA[<h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
 <li><p>编译java代码 ： javac HelloWorld.java</p>
@@ -174,15 +183,6 @@
 <p>⑤char c &#x3D; ‘\u0000’; 这表示一个空字符，也是char的默认值。\u0000是一个Unicode码。</p>
 <p>⑥空字符与空格字符是不同的。空字符表示什么也没有。空格字符表示一个空格。****</p>
 <h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>乱码产生的原因在于，在编码和解码的时候没有用同一个码表</p>
-]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/02/18/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/</url>
-    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015738084.png" alt="image-20240218015738084"></p>
-<p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015750388.png" alt="image-20240218015750388"></p>
-<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
-<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
 ]]></content>
   </entry>
   <entry>
@@ -765,111 +765,6 @@
       <categories>
         <category>Java体系知识</category>
         <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Redis-记录</title>
-    <url>/2024/02/21/Redis-%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="第一章-Redis-概述"><a href="#第一章-Redis-概述" class="headerlink" title="第一章 Redis 概述"></a>第一章 Redis 概述</h1><h2 id="一、Redis-Remote-Dictionary-Server-远程字典服务"><a href="#一、Redis-Remote-Dictionary-Server-远程字典服务" class="headerlink" title="一、Redis(Remote Dictionary Server)远程字典服务"></a>一、Redis(Remote Dictionary Server)远程字典服务</h2><ol>
-<li><p>使用 &#x3D;&#x3D;ANSI C 语言&#x3D;&#x3D;编写、&#x3D;&#x3D;支持网络、可基于内存亦可持久化的日志型、NoSQL 开源内存数据库&#x3D;&#x3D;，其提供多种语言的 API。</p>
-</li>
-<li><p>Redis被称为字典服务的原因在于，redis是一个key-value的存储系统。</p>
-<blockquote>
-<p>支持存储的value类型有很多，包括String（字符串）、List（链表）、Set（集合）、Zset（sorted set– 有序集合）和哈希类型等</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="二、NoSQL"><a href="#二、NoSQL" class="headerlink" title="二、NoSQL"></a>二、NoSQL</h2><p>Nosql（non-relational，Not Only SQL），泛指的是非关系型的数据库。</p>
-<blockquote>
-<p>比如社交类的等等</p>
-</blockquote>
-<p>&#x3D;&#x3D;NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题&#x3D;&#x3D;</p>
-<p>传统方法不适合这种情况。</p>
-<h3 id="1-键值存储数据库"><a href="#1-键值存储数据库" class="headerlink" title="1. 键值存储数据库"></a>1. 键值存储数据库</h3><p>类似Map的key-value对。</p>
-<blockquote>
-<p>典型代表redis</p>
-</blockquote>
-<h3 id="2-列存储数据库"><a href="#2-列存储数据库" class="headerlink" title="2. 列存储数据库"></a>2. 列存储数据库</h3><p>注意的是 ，关系数据库是行关系库，其存在的问题在于，按照行存储的数据在物理层面占用的是连续的存储空间，&#x3D;&#x3D;是不适合海量的数据存储&#x3D;&#x3D;的。</p>
-<p>而按列存储则可以实现一个分布式存储，适合海量的存储</p>
-<blockquote>
-<p>典型的代表就是HBase</p>
-</blockquote>
-<h3 id="3-文档型数据库"><a href="#3-文档型数据库" class="headerlink" title="3. 文档型数据库"></a>3. 文档型数据库</h3><p>NoSQL与关系型数据的结合，最想关系型数据库的NoSQL</p>
-<blockquote>
-<p>典型代表就是MongoDB。</p>
-</blockquote>
-<h3 id="4-图像（Graph）数据库"><a href="#4-图像（Graph）数据库" class="headerlink" title="4. 图像（Graph）数据库"></a>4. 图像（Graph）数据库</h3><blockquote>
-<p>用于存放一个节点关系的数据库，例如描述不同人间的关系。典型代表是 Neo4J。</p>
-</blockquote>
-<h2 id="三、Redis的用途"><a href="#三、Redis的用途" class="headerlink" title="三、Redis的用途"></a>三、Redis的用途</h2><h3 id="1-数据缓存"><a href="#1-数据缓存" class="headerlink" title="1.数据缓存"></a>1.数据缓存</h3><p>Redis在生产中用的最多的场景：&#x3D;&#x3D;数据缓存&#x3D;&#x3D;。</p>
-<p>正常情况下，用户-&gt;服务器-&gt;数据库 （query），然后再返回。</p>
-<p>但是当用户很多的时候，就是高并发的时候，解决不了了。</p>
-<p>因此提出解决方案： 用户-&gt;服务器-&gt;缓存-&gt; 数据库 （query）</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223001703204.png" alt="image-20240223001703204"></p>
-<p>这样DBMS压力就会减轻。</p>
-<blockquote>
-<p>即客户端从 DBMS 中查询出的数据首先写入到 Redis 中，后续无论哪个客户端再需要访问该数据，直接读取 Redis 中的即可，不仅减小了 RT，而且降低了 DBMS 的压力。</p>
-<p>而且，DBMS一般存放在磁盘中，而Redis作为内存数据库是放在内存中的，且直接通过key来查询，缓存层的查询非常的快，高并发的问题可以解决。</p>
-</blockquote>
-<h4 id="数据不一致问题？："><a href="#数据不一致问题？：" class="headerlink" title="数据不一致问题？："></a>数据不一致问题？：</h4><p>当一个用户提出要修改，修改了DBMS，没有修改缓存层，就会存在一个脏数据&#x2F;</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223074739083.png" alt="image-20240223074739083"></p>
-<p>预热：服务器不是刚开就提供服务，会有一个预热，把一些基础数据先保存到缓存中</p>
-<h2 id="四、Redis-特性"><a href="#四、Redis-特性" class="headerlink" title="四、Redis 特性"></a>四、<strong>Redis</strong> <strong>特性</strong></h2><h3 id="1-性能极高："><a href="#1-性能极高：" class="headerlink" title="1.性能极高："></a>1.性能极高：</h3><p>Redis 读的速度可以达到 11w 次&#x2F;s，写的速度可以达到 8w 次&#x2F;s。只所以具有，这么高的性能，因为以下几点原因：</p>
-<p>1）Redis 的所有操作都是在内存中发生的。</p>
-<p>2）Redis 是用 C 语言开发的。</p>
-<p>3）Redis 源码非常精细（集性能与优雅于一身）。</p>
-<h3 id="2-简单稳定"><a href="#2-简单稳定" class="headerlink" title="2.简单稳定"></a>2.简单稳定</h3><p>Redis 源码很少。早期版本只有 2w 行左右。从 3.0 版本开始，增加了集群功能，代码变为了 5w 行左右。</p>
-<h3 id="3-持久化"><a href="#3-持久化" class="headerlink" title="3.持久化"></a>3.持久化</h3><p>数据缓存是暂时的，要保存到磁盘，才能保证数据安全。Redis 内存中的数据可以进行持久化，其有两种方式：RDB 与 AOF。</p>
-<h3 id="4-高可用集群"><a href="#4-高可用集群" class="headerlink" title="4.高可用集群"></a>4.高可用集群</h3><p>Redis 提供了高可用的主从集群功能，可以确保系统的安全性</p>
-<h3 id="5-丰富的数据类型"><a href="#5-丰富的数据类型" class="headerlink" title="5.丰富的数据类型"></a>5.丰富的数据类型</h3><p>Redis 是一个 key-value 存储系统。支持存储的 value 类型很多，包括String(字符串)、List(链表)、Set(集合)、Zset(sorted set –有序集合)和 Hash（哈希类型）等，还有 BitMap、HyperLogLog、Geospatial 类型</p>
-<ol>
-<li><p> BitMap：一般用于大数据量的二值性统计。<br>比如员工是否打卡</p>
-</li>
-<li><p> HyperLogLog：其是 Hyperlog Log，用于对数据量超级庞大的日志做去重统计。</p>
-</li>
-<li><p> Geospatial：地理空间，其主要用于地理位置相关的计算。</p>
-<p>比如“附近的人”</p>
-</li>
-</ol>
-<h3 id="6-强大的功能"><a href="#6-强大的功能" class="headerlink" title="6.强大的功能"></a>6.强大的功能</h3><p>Redis 提供了数据过期功能、发布&#x2F;订阅功能、简单事务功能，还支持 Lua脚本扩展功能。</p>
-<h3 id="7-客户端语言广泛"><a href="#7-客户端语言广泛" class="headerlink" title="7.客户端语言广泛"></a>7.客户端语言广泛</h3><p>Redis提供了简单的 TCP 通信协议，编程语言可以方便地的接入 Redis。所以，有很多的开源社区、大公司等开发出了很多语言的 Redis 客户端。</p>
-<h3 id="8-支持-ACL-权限控制"><a href="#8-支持-ACL-权限控制" class="headerlink" title="8.支持 ACL 权限控制"></a>8.支持 ACL 权限控制</h3><p>之前的权限控制非常笨拙。从 Redis6 开始引入了 ACL 模块，可以为不同用户定制不同的用户权限。</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223081342029.png" alt="image-20240223081342029"></p>
-<blockquote>
-<p>linux 的drwxr-xr-x ：d表示目录&#x2F;l表示链接，rwx表示用户（创建者User）读写可执行；Group r-x后三位表示和创建者同组用户读可执行。Other r-x</p>
-</blockquote>
-<h3 id="9-支持多线程-IO-模型"><a href="#9-支持多线程-IO-模型" class="headerlink" title="9.支持多线程 IO 模型"></a>9.支持多线程 IO 模型</h3><p>Redis 之前版本采用的是单线程模型，从 6.0 版本开始支持了多线程模型。</p>
-<h2 id="五-Redis-的-IO-模型"><a href="#五-Redis-的-IO-模型" class="headerlink" title="五.Redis 的 IO 模型"></a>五.<strong>Redis</strong> <strong>的</strong> <strong>IO</strong> <strong>模型</strong></h2><p>单线程模型 多线程模型 混合模型</p>
-<p>Redis 客户端提交的各种请求是如何最终被 Redis 处理的？Redis 处理客户端请求所采用的处理架构，称为 Redis 的 IO 模型。不同版本的 Redis 采用的 IO 模型是不同的。</p>
-<h3 id="1-单线程模型"><a href="#1-单线程模型" class="headerlink" title="1.单线程模型"></a>1.<strong>单线程模型</strong></h3><blockquote>
-<p>性能还是很强,写8w&#x2F;qps,读11w&#x2F;qps–&gt;内存\单线程可维护性比较高(多线程存在线程切换问题,顾及到数据安全问题\死锁问题)</p>
-<p>问题:持久化等操作和客户端没太多联系,但是又比较费时,于是提出了混合线程模型</p>
-</blockquote>
-<p>对于 Redis 3.0 及其以前版本，Redis 的 IO 模型采用的是纯粹的单线程模型。即所有客户端的请求全部由一个线程处理。</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223082516763.png" alt="image-20240223082516763"></p>
-<p>每个客户端若要向 Redis 提交请求，都需要与 Redis 建立一个 socket 连接，并向事件分发器注册一个事件。</p>
-<p>一旦该事件发生就表明该连接已经就绪。而一旦连接就绪，事件分发器就会感知到，然后获取客户端通过该连接发送的请求，并将由该事件分发器所绑定的这个唯一的线程来处理。</p>
-<p>如果该线程还在处理多个任务，则将该任务写入到任务队列等待线程处理。只所以称为事件分发器，是因为它会根据不同的就绪事件，将任务交由不同的事件处理器去处理</p>
-<p><strong>&#x3D;&#x3D;Redis 的单线程模型采用了多路复用技术。&#x3D;&#x3D;</strong></p>
-<p>对于多路复用器的多路选择算法常见的有三种：select 模型、poll 模型、epoll 模型。</p>
-<ol>
-<li><p>poll 模型的选择算法：采用的是轮询算法。该模型对客户端的就绪处理是有延迟的。</p>
-</li>
-<li><p>epoll 模型的选择算法：采用的是回调方式。根据就绪事件发生后的处理方式的不同，又可分为 LT 模型与 ET 模型。</p>
-</li>
-</ol>
-<h3 id="2-混合线程模型"><a href="#2-混合线程模型" class="headerlink" title="2.混合线程模型"></a>2.混合线程模型</h3><p>从 Redis 4.0 版本开始，Redis 中就开始加入了多线程元素。处理客户端请求的仍是单线</p>
-<p>程模型，但对于一些比较耗时但又不影响对客户端的响应的操作，就由后台其它线程来处理。</p>
-<p>例如，持久化、对 AOF 的 rewrite、对失效连接的清理等</p>
-<h3 id="3-多线程模型"><a href="#3-多线程模型" class="headerlink" title="3.多线程模型"></a>3.<strong>多线程模型</strong></h3><p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083447687.png" alt="image-20240223083447687"></p>
-<p>内存响应时间(RT)100ns</p>
-<p>Redis 每秒处理读写请求 达到:1s&#x2F;100ns &#x3D; &#x3D;1kw次,实际情况是,redis8w&#x2F;qps,读11w&#x2F;qps,差距那么大的原因 就是redis的单线程</p>
-<p>是将单线程和多线程各取其优点.</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083854779.png" alt="image-20240223083854779"></p>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>Redis</category>
       </categories>
   </entry>
   <entry>
@@ -1754,44 +1649,242 @@
 <p>hashset底层就是hashmap，把map中的所有k取出来就是set</p>
 <p>hash是什么，是key的hashcode执行结果</p>
 <p>transient Node&lt;k,v&gt;[] table;</p>
+<p>get()方法：给出一个key，先计算hashcode，然后到相应的单链表里找，最多可以n&#x2F;k 效率提高</p>
 </blockquote>
 <p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301105201886.png" alt="image-20240301105201886"></p>
-<h3 id="①HashMap集合的key是-无序不可重复-的。"><a href="#①HashMap集合的key是-无序不可重复-的。" class="headerlink" title="①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。"></a>①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。</h3><ol>
+<blockquote>
+<p>key进行hashCode编码，取模。</p>
+</blockquote>
+<h3 id="HashMap-散列表-1"><a href="#HashMap-散列表-1" class="headerlink" title="HashMap(散列表)"></a>HashMap(散列表)</h3><h4 id="①HashMap集合的key是-无序不可重复-的。"><a href="#①HashMap集合的key是-无序不可重复-的。" class="headerlink" title="①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。"></a>①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。</h4><ol>
 <li><p><strong>无序：插入顺序和取出顺序不一定相同。</strong></p>
 </li>
 <li><p><strong>不可重复：key具有唯一性。</strong></p>
 </li>
 </ol>
-<h3 id="②向HashMap集合中put时，key如果重复的话，value会覆盖。"><a href="#②向HashMap集合中put时，key如果重复的话，value会覆盖。" class="headerlink" title="②向HashMap集合中put时，key如果重复的话，value会覆盖。"></a>②向HashMap集合中put时，key如果重复的话，value会覆盖。</h3><h3 id="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"><a href="#③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？" class="headerlink" title="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"></a>③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？</h3><p>如果没有重写equals，就会调用Object的equals，就是用&#x3D;&#x3D;进行比较的，就是比较内存地址。</p>
+<h4 id="②向HashMap集合中put时，key如果重复的话，value会覆盖。"><a href="#②向HashMap集合中put时，key如果重复的话，value会覆盖。" class="headerlink" title="②向HashMap集合中put时，key如果重复的话，value会覆盖。"></a>②向HashMap集合中put时，key如果重复的话，value会覆盖。</h4><h4 id="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"><a href="#③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？" class="headerlink" title="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"></a>③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？</h4><p>如果没有重写equals，就会调用Object的equals，就是用&#x3D;&#x3D;进行比较的，就是比较内存地址。</p>
 <p>按照加双引号的字面量会在JVM开始的时候就在字符串常量池中创建的规则，相同的都放进去了</p>
 <p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229232150946.png" alt="image-20240229232150946"></p>
-<h3 id="④HashMap底层的数据结构是：哈希表-散列表"><a href="#④HashMap底层的数据结构是：哈希表-散列表" class="headerlink" title="④HashMap底层的数据结构是：哈希表&#x2F;散列表"></a>④HashMap底层的数据结构是：哈希表&#x2F;散列表</h3><p>hash是key调Object的hashcode方法得到的</p>
+<h4 id="④HashMap底层的数据结构是：哈希表-散列表"><a href="#④HashMap底层的数据结构是：哈希表-散列表" class="headerlink" title="④HashMap底层的数据结构是：哈希表&#x2F;散列表"></a>④HashMap底层的数据结构是：哈希表&#x2F;散列表</h4><p>hash是key调Object的hashcode方法得到的</p>
 <ul>
 <li>①哈希表是一种查询和增删效率都很高的一种数据结构，非常重要，在很多场合使用，并且面试也很常见。必须掌握。</li>
 <li>②哈希表如何做到的查询和增删效率都好的呢，因为哈希表是“数组 + 链表”的结合体。数组和链表的结合不是绝对的。</li>
 <li>③哈希表可能是：数组 + 链表，数组 + 红黑树， 数组 + 链表 + 红黑树等。</li>
 </ul>
-<h3 id="⑤HashMap集合底层部分源码："><a href="#⑤HashMap集合底层部分源码：" class="headerlink" title="⑤HashMap集合底层部分源码："></a>⑤HashMap集合底层部分源码：</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229235156266.png" alt="image-20240229235156266"></p>
+<h4 id="⑤HashMap集合底层部分源码："><a href="#⑤HashMap集合底层部分源码：" class="headerlink" title="⑤HashMap集合底层部分源码："></a>⑤HashMap集合底层部分源码：</h4><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229235156266.png" alt="image-20240229235156266"></p>
 <p>长度永远是2的倍数，一维数组挂链表</p>
-<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap（底层红黑树）"><a href="#TreeMap（底层红黑树）" class="headerlink" title="TreeMap（底层红黑树）"></a>TreeMap（底层红黑树）</h2><h2 id="Set接口（无序、不可重复）"><a href="#Set接口（无序、不可重复）" class="headerlink" title="Set接口（无序、不可重复）"></a>Set接口（无序、不可重复）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229191216355.png" alt="image-20240229191216355"></p>
+<h3 id="哈希表存储原理"><a href="#哈希表存储原理" class="headerlink" title="哈希表存储原理"></a>哈希表存储原理</h3><h4 id="①概念："><a href="#①概念：" class="headerlink" title="①概念："></a>①概念：</h4><h5 id="1-哈希表：一种数据结构的名字。"><a href="#1-哈希表：一种数据结构的名字。" class="headerlink" title="1. 哈希表：一种数据结构的名字。"></a>1. 哈希表：一种数据结构的名字。</h5><h5 id="2-哈希函数："><a href="#2-哈希函数：" class="headerlink" title="2. 哈希函数："></a>2. 哈希函数：</h5><ul>
+<li>①通过哈希函数可以将一个Java对象映射为一个数字。（就像现实世界中，每个人（对象）都会映射一个身份证号（哈希值）一样。）</li>
+<li>②也就是说通过哈希函数的执行可以得到一个哈希值。</li>
+<li>③在Java中，hashCode()方法就是哈希函数。</li>
+<li>④也就是说hashCode()方法的返回值就是哈希值。</li>
+<li>⑤一个好的哈希函数，可以让散列分布均匀。</li>
+</ul>
+<h5 id="3-哈希值：也叫做哈希码。是哈希函数执行的结果。"><a href="#3-哈希值：也叫做哈希码。是哈希函数执行的结果。" class="headerlink" title="3.哈希值：也叫做哈希码。是哈希函数执行的结果。"></a>3.哈希值：也叫做哈希码。是哈希函数执行的结果。</h5><h5 id="4-哈希碰撞：也叫做哈希冲突。"><a href="#4-哈希碰撞：也叫做哈希冲突。" class="headerlink" title="4.哈希碰撞：也叫做哈希冲突。"></a>4.哈希碰撞：也叫做哈希冲突。</h5><ul>
+<li>①当两个对象“哈希值%数组长度”之后得到的下标相同时，就发生了哈希冲突。</li>
+<li>②如何解决哈希冲突？将冲突的挂到同一个链表上或同一个红黑树上。</li>
+</ul>
+<h5 id="5-以上描述凡是“哈希”都可以换为“散列”。"><a href="#5-以上描述凡是“哈希”都可以换为“散列”。" class="headerlink" title="5.以上描述凡是“哈希”都可以换为“散列”。"></a>5.以上描述凡是“哈希”都可以换为“散列”。</h5><h4 id="②重点："><a href="#②重点：" class="headerlink" title="②重点："></a>②重点：</h4><ul>
+<li>①存放在HashMap集合key部分的元素必须同时重写hashCode+equals方法。</li>
+</ul>
+<blockquote>
+<p>如果是 </p>
+</blockquote>
+<ul>
+<li>②equals返回true时，hashCode必须相同。</li>
+</ul>
+<h3 id="Hashcode和equals要同时重写"><a href="#Hashcode和equals要同时重写" class="headerlink" title="Hashcode和equals要同时重写"></a>Hashcode和equals要同时重写</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301123921129.png" alt="image-20240301123921129"></p>
+<h3 id="手写HashMap的put方法"><a href="#手写HashMap的put方法" class="headerlink" title="手写HashMap的put方法"></a>手写HashMap的put方法</h3><h4 id="①【第一步】：处理key为null的情况"><a href="#①【第一步】：处理key为null的情况" class="headerlink" title="①【第一步】：处理key为null的情况"></a>①【第一步】：处理key为null的情况</h4><blockquote>
+<p>key可以是null，null只能有一个</p>
+</blockquote>
+<p>如果添加键值对的key就是null，则将该键值对存储到table数组索引为0的位置。</p>
+<h4 id="②【第二步】：获得key对象的哈希值"><a href="#②【第二步】：获得key对象的哈希值" class="headerlink" title="②【第二步】：获得key对象的哈希值"></a>②【第二步】：获得key对象的哈希值</h4><p>如果添加键值对的key不是null，则就调用key的hashcode()方法，获得key的哈希值。</p>
+<h4 id="③【第三步】：获得键值对的存储位置"><a href="#③【第三步】：获得键值对的存储位置" class="headerlink" title="③【第三步】：获得键值对的存储位置"></a>③【第三步】：获得键值对的存储位置</h4><p>因为获得的哈希值在数组合法索引范围之外，因此我们就需要将获得的哈希值转化为[0，数组长度-1]范围的整数，</p>
+<p>那么可以通过取模法来实现，也就是通过“哈希值 % 数组长度”来获得索引位置（i）。</p>
+<h4 id="④【第四步】：将键值对添加到table数组中"><a href="#④【第四步】：将键值对添加到table数组中" class="headerlink" title="④【第四步】：将键值对添加到table数组中"></a>④【第四步】：将键值对添加到table数组中</h4><p>当table[i]返回结果为null时，则键键值对封装为Node对象并存入到table[i]的位置。</p>
+<p>当table[i]返回结果不为null时，则意味着table[i]存储的是单链表。我们首先遍历单链表，如果遍历出来节点的</p>
+<p>key和添加键值对的key相同，那么就执行覆盖操作；如果遍历出来节点的key和添加键值对的key都不同，则就将键键</p>
+<p>值对封装为Node对象并插入到单链表末尾。</p>
+<h3 id="HashMap在Java8后的改进（包含Java8）"><a href="#HashMap在Java8后的改进（包含Java8）" class="headerlink" title="HashMap在Java8后的改进（包含Java8）"></a>HashMap在Java8后的改进（包含Java8）</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301130406549.png" alt="image-20240301130406549"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301130412465.png" alt="image-20240301130412465"></p>
+<p>①初始化时机：</p>
+<ul>
+<li>①Java8之前，构造方法执行时初始化table数组。</li>
+<li>②Java8之后，第一次调用put方法时初始化table数组。</li>
+</ul>
+<p>②插入法：</p>
+<ul>
+<li>①Java8之前，头插法</li>
+<li>②Java8之后，尾插法</li>
+</ul>
+<p>③数据结构：</p>
+<ul>
+<li>①Java8之前：数组 + 单向链表</li>
+<li>②Java8之后：数组 + 单向链表 + 红黑树。</li>
+<li><strong>③最开始使用单向链表解决哈希冲突。如果结点数量 &gt;&#x3D; 8，并且table的长度 &gt;&#x3D; 64。单向链表转换为红黑树。</strong></li>
+<li><strong>④当删除红黑树上的结点时，结点数量 &lt;&#x3D; 6 时。红黑树转换为单向链表。</strong></li>
+</ul>
+<h3 id="HashMap初始化容量永远都是2的次幂"><a href="#HashMap初始化容量永远都是2的次幂" class="headerlink" title="HashMap初始化容量永远都是2的次幂"></a>HashMap初始化容量永远都是2的次幂</h3><h4 id="①HashMap集合初始化容量16（第一次调用put方法时初始化）"><a href="#①HashMap集合初始化容量16（第一次调用put方法时初始化）" class="headerlink" title="①HashMap集合初始化容量16（第一次调用put方法时初始化）"></a>①HashMap集合初始化容量16（第一次调用put方法时初始化）</h4><h4 id="②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。"><a href="#②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。" class="headerlink" title="②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。"></a>②HashMap集合的容量永远都是2的次幂，假如给定初始化容量为31，它底层也会变成32的容量。</h4><h4 id="③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。"><a href="#③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。" class="headerlink" title="③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。"></a>③将容量设置为2的次幂作用是：加快哈希计算，减少哈希冲突。</h4><h4 id="④为什么会加快哈希计算？"><a href="#④为什么会加快哈希计算？" class="headerlink" title="④为什么会加快哈希计算？"></a>④为什么会加快哈希计算？</h4><ul>
+<li>①首先你要知道，使用二进制运算是最快的。</li>
+<li>②当一个数字是2的次幂时，例如数组的长度是2的次幂：</li>
+</ul>
+<blockquote>
+<p>①hash &amp; (length-1) 的结果和 hash % length的结果相同。</p>
+<p>②注意：只有是2的次幂时，以上等式才会成立。因为了使用 &amp; 运算符，让效率提升，因此建议容量一直是2的次幂。</p>
+</blockquote>
+<h4 id="⑤为什么会减少哈希冲突？"><a href="#⑤为什么会减少哈希冲突？" class="headerlink" title="⑤为什么会减少哈希冲突？"></a>⑤为什么会减少哈希冲突？</h4><ul>
+<li>①底层运算是：hash &amp; length - 1</li>
+<li>②如果length是偶数：length-1后一定是奇数，奇数二进制位最后一位一定是1,1和其他二进制位进行与运算，结果可能是1，也可能是0，这样可以减少哈希冲突，让散列分布更加均匀。</li>
+<li>③如果length是奇数：length-1后一定是偶数，偶数二进制位最后一位一定是0,0和任何数进行与运算，结果一定是0，这样就会导致发生大量的哈希冲突，白白浪费了一半的空间。</li>
+</ul>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301134520761.png" alt="image-20240301134520761"></p>
+<ul>
+<li><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2></li>
+</ul>
+<h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap（底层红黑树）"><a href="#TreeMap（底层红黑树）" class="headerlink" title="TreeMap（底层红黑树）"></a>TreeMap（底层红黑树）</h2><h2 id="Set接口（无序、不可重复）"><a href="#Set接口（无序、不可重复）" class="headerlink" title="Set接口（无序、不可重复）"></a>Set接口（无序、不可重复）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229191216355.png" alt="image-20240229191216355"></p>
 <h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><h2 id="IO流概述"><a href="#IO流概述" class="headerlink" title="IO流概述"></a>IO流概述</h2><h3 id="①什么是IO流？"><a href="#①什么是IO流？" class="headerlink" title="①什么是IO流？"></a>①什么是IO流？</h3><p> 水分子的移动形成了水流。</p>
 <p> IO流指的是：程序中数据的流动。数据可以从内存流动到硬盘，也可以从硬盘流动到内存。</p>
 <p> Java中IO流最基本的作用是：完成文件的读和写。</p>
-<h3 id="②IO流的分类？"><a href="#②IO流的分类？" class="headerlink" title="②IO流的分类？"></a>②IO流的分类？</h3><p>l根据数据流向分为：输入和输出是相对于内存而言的。</p>
-<p>①输入流：从硬盘到内存。(输入又叫做读：read)</p>
-<p>②输出流：从内存到硬盘。（输出又叫做写：write）</p>
-<p>l根据读写数据形式分为：</p>
-<p>①字节流：一次读取一个字节。适合读取非文本数据。例如图片、声音、视频等文件。（当然字节流是万能的。什么都可以读和写。）</p>
-<p>②字符流：一次读取一个字符。只适合读取普通文本。不适合读取二进制文件。因为字符流统一使用Unicode编码，可以避免出现编码混乱的问题。</p>
-<p><strong>注意：</strong>Java<strong><strong>的所有</strong></strong>IO<strong><strong>流中凡是以</strong></strong>Stream<strong><strong>结尾的都是字节流。凡是以</strong></strong>Reader<strong><strong>和</strong></strong>Writer****结尾的都是字符流。</p>
-<p>l根据流在IO操作中的作用和实现方式来分类:</p>
-<p>①节点流：节点流负责数据源和数据目的地的连接，是IO中最基本的组成部分。</p>
-<p>②处理流：处理流对节点流进行装饰&#x2F;包装，提供更多高级处理操作，方便用户进行数据处理。</p>
-<p>③Java中已经将io流实现了，在<strong>java.io</strong>包下，可以直接使用。</p>
-]]></content>
+<h3 id="②IO流的分类？"><a href="#②IO流的分类？" class="headerlink" title="②IO流的分类？"></a>②IO流的分类？</h3><h4 id="根据数据流向分为：输入和输出是相对于内存而言的。"><a href="#根据数据流向分为：输入和输出是相对于内存而言的。" class="headerlink" title="根据数据流向分为：输入和输出是相对于内存而言的。"></a>根据数据流向分为：输入和输出是相对于内存而言的。</h4><p>​	①输入流：从硬盘到内存。(输入又叫做读：read)</p>
+<p>​	②输出流：从内存到硬盘。（输出又叫做写：write）</p>
+<h4 id="根据读写数据形式分为："><a href="#根据读写数据形式分为：" class="headerlink" title="根据读写数据形式分为："></a>根据读写数据形式分为：</h4><p>​	①字节流：一次读取一个字节。适合读取非文本数据。例如图片、声音、视频等文件。（当然字节流是万能的。什么都可以读和写。）</p>
+<p>​	②字符流：一次读取一个字符。只适合读取普通文本。不适合读取二进制文件。因为字符流统一使用Unicode编码，可以避免出现编码混乱的问题。</p>
+<p>&#x3D;&#x3D;<strong>注意：Java的所有IO流中凡是以Stream结尾的都是字节流。凡是以Reader和Writer结尾的都是字符流。</strong>&#x3D;&#x3D;</p>
+<h4 id="根据流在IO操作中的作用和实现方式来分类"><a href="#根据流在IO操作中的作用和实现方式来分类" class="headerlink" title="根据流在IO操作中的作用和实现方式来分类:"></a>根据流在IO操作中的作用和实现方式来分类:</h4><p>​	①节点流：节点流负责数据源和数据目的地的连接，是IO中最基本的组成部分。</p>
+<p>​	②处理流：处理流对节点流进行装饰&#x2F;包装，提供更多高级处理操作，方便用户进行数据处理。</p>
+<p>​	③Java中已经将io流实现了，在<strong>java.io</strong>包下，可以直接使用。</p>
+<h2 id="IO流体系结构"><a href="#IO流体系结构" class="headerlink" title="IO流体系结构"></a>IO流体系结构</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301144110666.png" alt="image-20240301144110666"></p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301144135589.png" alt="image-20240301144135589"></p>
+<p>IO流的体系结构</p>
+<blockquote>
+<p>①右图是常用的IO流。实际上IO流远远不止这些。</p>
+<p>②InputStream：字节输入流</p>
+<p>③OutputStream：字节输出流</p>
+<p>④Reader：字符输入流</p>
+<p>⑤Writer：字符输出流</p>
+<p>⑥以上4个流都是抽象类，是所有IO流的四大头领！！！</p>
+<p><strong>⑦所有的流都实现了Closeable接口，都有close()方法</strong>，流用完要关闭。</p>
+<p>⑧所有的输出流都实现了Flushable接口，都有flush()方法，flush方法的作用是，将缓存清空，全部写出。养成好习惯，以防数据丢失。</p>
+</blockquote>
+<h2 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h2><p>①文件字节输入流，可以读取任何文件。</p>
+<p>②常用构造方法</p>
+<p>①FileInputStream(String name)：创建一个文件字节输入流对象，参数是文件的路径</p>
+<p>③常用方法</p>
+<p>①int read();从文件读取一个字节(8个二进制位)，返回值读取到的字节本身，如果读不到任何数据返回-1</p>
+<p>②int read(byte[] b); 一次读取多个字节，如果文件内容足够多，则一次最多读取b.length个字节。返回值是读取到字节总数。如果没有读取到任何数据，则返回 -1</p>
+<p>③int read(byte[] b, int off, int len); 读到数据后向byte数组中存放时，从off开始存放，最多读取len个字节。读取不到任何数据则返回 -1</p>
+<p>④long skip(long n); 跳过n个字节</p>
+<p>⑤int available(); 返回流中剩余的估计字节数量。</p>
+<p>⑥void close() 关闭流。</p>
+<p>④使用FileInputStream读取的文件中有中文时，有可能读取到中文某个汉字的一半，在将byte[]数组转换为String时可能出现乱码问题，因此FileInputStream不太适合读取纯文本。</p>
+<h2 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h2><h2 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h2><h2 id="FileWriter"><a href="#FileWriter" class="headerlink" title="FileWriter"></a>FileWriter</h2><h2 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h2><h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><h2 id="标准输入流-标准输出流"><a href="#标准输入流-标准输出流" class="headerlink" title="标准输入流&amp;标准输出流"></a>标准输入流&amp;标准输出流</h2><h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><h2 id="读取属性配置文件"><a href="#读取属性配置文件" class="headerlink" title="读取属性配置文件"></a>读取属性配置文件</h2><h2 id="装饰器设计模式"><a href="#装饰器设计模式" class="headerlink" title="装饰器设计模式"></a>装饰器设计模式</h2><h2 id="压缩和解压缩流"><a href="#压缩和解压缩流" class="headerlink" title="压缩和解压缩流"></a>压缩和解压缩流</h2><h2 id="字节数组流"><a href="#字节数组流" class="headerlink" title="字节数组流"></a>字节数组流</h2><h2 id="对象克隆"><a href="#对象克隆" class="headerlink" title="对象克隆"></a>对象克隆</h2>]]></content>
       <categories>
         <category>Java体系知识</category>
         <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Redis-记录</title>
+    <url>/2024/02/21/Redis-%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="第一章-Redis-概述"><a href="#第一章-Redis-概述" class="headerlink" title="第一章 Redis 概述"></a>第一章 Redis 概述</h1><h2 id="一、Redis-Remote-Dictionary-Server-远程字典服务"><a href="#一、Redis-Remote-Dictionary-Server-远程字典服务" class="headerlink" title="一、Redis(Remote Dictionary Server)远程字典服务"></a>一、Redis(Remote Dictionary Server)远程字典服务</h2><ol>
+<li><p>使用 &#x3D;&#x3D;ANSI C 语言&#x3D;&#x3D;编写、&#x3D;&#x3D;支持网络、可基于内存亦可持久化的日志型、NoSQL 开源内存数据库&#x3D;&#x3D;，其提供多种语言的 API。</p>
+</li>
+<li><p>Redis被称为字典服务的原因在于，redis是一个key-value的存储系统。</p>
+<blockquote>
+<p>支持存储的value类型有很多，包括String（字符串）、List（链表）、Set（集合）、Zset（sorted set– 有序集合）和哈希类型等</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="二、NoSQL"><a href="#二、NoSQL" class="headerlink" title="二、NoSQL"></a>二、NoSQL</h2><p>Nosql（non-relational，Not Only SQL），泛指的是非关系型的数据库。</p>
+<blockquote>
+<p>比如社交类的等等</p>
+</blockquote>
+<p>&#x3D;&#x3D;NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题&#x3D;&#x3D;</p>
+<p>传统方法不适合这种情况。</p>
+<h3 id="1-键值存储数据库"><a href="#1-键值存储数据库" class="headerlink" title="1. 键值存储数据库"></a>1. 键值存储数据库</h3><p>类似Map的key-value对。</p>
+<blockquote>
+<p>典型代表redis</p>
+</blockquote>
+<h3 id="2-列存储数据库"><a href="#2-列存储数据库" class="headerlink" title="2. 列存储数据库"></a>2. 列存储数据库</h3><p>注意的是 ，关系数据库是行关系库，其存在的问题在于，按照行存储的数据在物理层面占用的是连续的存储空间，&#x3D;&#x3D;是不适合海量的数据存储&#x3D;&#x3D;的。</p>
+<p>而按列存储则可以实现一个分布式存储，适合海量的存储</p>
+<blockquote>
+<p>典型的代表就是HBase</p>
+</blockquote>
+<h3 id="3-文档型数据库"><a href="#3-文档型数据库" class="headerlink" title="3. 文档型数据库"></a>3. 文档型数据库</h3><p>NoSQL与关系型数据的结合，最想关系型数据库的NoSQL</p>
+<blockquote>
+<p>典型代表就是MongoDB。</p>
+</blockquote>
+<h3 id="4-图像（Graph）数据库"><a href="#4-图像（Graph）数据库" class="headerlink" title="4. 图像（Graph）数据库"></a>4. 图像（Graph）数据库</h3><blockquote>
+<p>用于存放一个节点关系的数据库，例如描述不同人间的关系。典型代表是 Neo4J。</p>
+</blockquote>
+<h2 id="三、Redis的用途"><a href="#三、Redis的用途" class="headerlink" title="三、Redis的用途"></a>三、Redis的用途</h2><h3 id="1-数据缓存"><a href="#1-数据缓存" class="headerlink" title="1.数据缓存"></a>1.数据缓存</h3><p>Redis在生产中用的最多的场景：&#x3D;&#x3D;数据缓存&#x3D;&#x3D;。</p>
+<p>正常情况下，用户-&gt;服务器-&gt;数据库 （query），然后再返回。</p>
+<p>但是当用户很多的时候，就是高并发的时候，解决不了了。</p>
+<p>因此提出解决方案： 用户-&gt;服务器-&gt;缓存-&gt; 数据库 （query）</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223001703204.png" alt="image-20240223001703204"></p>
+<p>这样DBMS压力就会减轻。</p>
+<blockquote>
+<p>即客户端从 DBMS 中查询出的数据首先写入到 Redis 中，后续无论哪个客户端再需要访问该数据，直接读取 Redis 中的即可，不仅减小了 RT，而且降低了 DBMS 的压力。</p>
+<p>而且，DBMS一般存放在磁盘中，而Redis作为内存数据库是放在内存中的，且直接通过key来查询，缓存层的查询非常的快，高并发的问题可以解决。</p>
+</blockquote>
+<h4 id="数据不一致问题？："><a href="#数据不一致问题？：" class="headerlink" title="数据不一致问题？："></a>数据不一致问题？：</h4><p>当一个用户提出要修改，修改了DBMS，没有修改缓存层，就会存在一个脏数据&#x2F;</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223074739083.png" alt="image-20240223074739083"></p>
+<p>预热：服务器不是刚开就提供服务，会有一个预热，把一些基础数据先保存到缓存中</p>
+<h2 id="四、Redis-特性"><a href="#四、Redis-特性" class="headerlink" title="四、Redis 特性"></a>四、<strong>Redis</strong> <strong>特性</strong></h2><h3 id="1-性能极高："><a href="#1-性能极高：" class="headerlink" title="1.性能极高："></a>1.性能极高：</h3><p>Redis 读的速度可以达到 11w 次&#x2F;s，写的速度可以达到 8w 次&#x2F;s。只所以具有，这么高的性能，因为以下几点原因：</p>
+<p>1）Redis 的所有操作都是在内存中发生的。</p>
+<p>2）Redis 是用 C 语言开发的。</p>
+<p>3）Redis 源码非常精细（集性能与优雅于一身）。</p>
+<h3 id="2-简单稳定"><a href="#2-简单稳定" class="headerlink" title="2.简单稳定"></a>2.简单稳定</h3><p>Redis 源码很少。早期版本只有 2w 行左右。从 3.0 版本开始，增加了集群功能，代码变为了 5w 行左右。</p>
+<h3 id="3-持久化"><a href="#3-持久化" class="headerlink" title="3.持久化"></a>3.持久化</h3><p>数据缓存是暂时的，要保存到磁盘，才能保证数据安全。Redis 内存中的数据可以进行持久化，其有两种方式：RDB 与 AOF。</p>
+<h3 id="4-高可用集群"><a href="#4-高可用集群" class="headerlink" title="4.高可用集群"></a>4.高可用集群</h3><p>Redis 提供了高可用的主从集群功能，可以确保系统的安全性</p>
+<h3 id="5-丰富的数据类型"><a href="#5-丰富的数据类型" class="headerlink" title="5.丰富的数据类型"></a>5.丰富的数据类型</h3><p>Redis 是一个 key-value 存储系统。支持存储的 value 类型很多，包括String(字符串)、List(链表)、Set(集合)、Zset(sorted set –有序集合)和 Hash（哈希类型）等，还有 BitMap、HyperLogLog、Geospatial 类型</p>
+<ol>
+<li><p> BitMap：一般用于大数据量的二值性统计。<br>比如员工是否打卡</p>
+</li>
+<li><p> HyperLogLog：其是 Hyperlog Log，用于对数据量超级庞大的日志做去重统计。</p>
+</li>
+<li><p> Geospatial：地理空间，其主要用于地理位置相关的计算。</p>
+<p>比如“附近的人”</p>
+</li>
+</ol>
+<h3 id="6-强大的功能"><a href="#6-强大的功能" class="headerlink" title="6.强大的功能"></a>6.强大的功能</h3><p>Redis 提供了数据过期功能、发布&#x2F;订阅功能、简单事务功能，还支持 Lua脚本扩展功能。</p>
+<h3 id="7-客户端语言广泛"><a href="#7-客户端语言广泛" class="headerlink" title="7.客户端语言广泛"></a>7.客户端语言广泛</h3><p>Redis提供了简单的 TCP 通信协议，编程语言可以方便地的接入 Redis。所以，有很多的开源社区、大公司等开发出了很多语言的 Redis 客户端。</p>
+<h3 id="8-支持-ACL-权限控制"><a href="#8-支持-ACL-权限控制" class="headerlink" title="8.支持 ACL 权限控制"></a>8.支持 ACL 权限控制</h3><p>之前的权限控制非常笨拙。从 Redis6 开始引入了 ACL 模块，可以为不同用户定制不同的用户权限。</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223081342029.png" alt="image-20240223081342029"></p>
+<blockquote>
+<p>linux 的drwxr-xr-x ：d表示目录&#x2F;l表示链接，rwx表示用户（创建者User）读写可执行；Group r-x后三位表示和创建者同组用户读可执行。Other r-x</p>
+</blockquote>
+<h3 id="9-支持多线程-IO-模型"><a href="#9-支持多线程-IO-模型" class="headerlink" title="9.支持多线程 IO 模型"></a>9.支持多线程 IO 模型</h3><p>Redis 之前版本采用的是单线程模型，从 6.0 版本开始支持了多线程模型。</p>
+<h2 id="五-Redis-的-IO-模型"><a href="#五-Redis-的-IO-模型" class="headerlink" title="五.Redis 的 IO 模型"></a>五.<strong>Redis</strong> <strong>的</strong> <strong>IO</strong> <strong>模型</strong></h2><p>单线程模型 多线程模型 混合模型</p>
+<p>Redis 客户端提交的各种请求是如何最终被 Redis 处理的？Redis 处理客户端请求所采用的处理架构，称为 Redis 的 IO 模型。不同版本的 Redis 采用的 IO 模型是不同的。</p>
+<h3 id="1-单线程模型"><a href="#1-单线程模型" class="headerlink" title="1.单线程模型"></a>1.<strong>单线程模型</strong></h3><blockquote>
+<p>性能还是很强,写8w&#x2F;qps,读11w&#x2F;qps–&gt;内存\单线程可维护性比较高(多线程存在线程切换问题,顾及到数据安全问题\死锁问题)</p>
+<p>问题:持久化等操作和客户端没太多联系,但是又比较费时,于是提出了混合线程模型</p>
+</blockquote>
+<p>对于 Redis 3.0 及其以前版本，Redis 的 IO 模型采用的是纯粹的单线程模型。即所有客户端的请求全部由一个线程处理。</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223082516763.png" alt="image-20240223082516763"></p>
+<p>每个客户端若要向 Redis 提交请求，都需要与 Redis 建立一个 socket 连接，并向事件分发器注册一个事件。</p>
+<p>一旦该事件发生就表明该连接已经就绪。而一旦连接就绪，事件分发器就会感知到，然后获取客户端通过该连接发送的请求，并将由该事件分发器所绑定的这个唯一的线程来处理。</p>
+<p>如果该线程还在处理多个任务，则将该任务写入到任务队列等待线程处理。只所以称为事件分发器，是因为它会根据不同的就绪事件，将任务交由不同的事件处理器去处理</p>
+<p><strong>&#x3D;&#x3D;Redis 的单线程模型采用了多路复用技术。&#x3D;&#x3D;</strong></p>
+<p>对于多路复用器的多路选择算法常见的有三种：select 模型、poll 模型、epoll 模型。</p>
+<ol>
+<li><p>poll 模型的选择算法：采用的是轮询算法。该模型对客户端的就绪处理是有延迟的。</p>
+</li>
+<li><p>epoll 模型的选择算法：采用的是回调方式。根据就绪事件发生后的处理方式的不同，又可分为 LT 模型与 ET 模型。</p>
+</li>
+</ol>
+<h3 id="2-混合线程模型"><a href="#2-混合线程模型" class="headerlink" title="2.混合线程模型"></a>2.混合线程模型</h3><p>从 Redis 4.0 版本开始，Redis 中就开始加入了多线程元素。处理客户端请求的仍是单线</p>
+<p>程模型，但对于一些比较耗时但又不影响对客户端的响应的操作，就由后台其它线程来处理。</p>
+<p>例如，持久化、对 AOF 的 rewrite、对失效连接的清理等</p>
+<h3 id="3-多线程模型"><a href="#3-多线程模型" class="headerlink" title="3.多线程模型"></a>3.<strong>多线程模型</strong></h3><p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083447687.png" alt="image-20240223083447687"></p>
+<p>内存响应时间(RT)100ns</p>
+<p>Redis 每秒处理读写请求 达到:1s&#x2F;100ns &#x3D; &#x3D;1kw次,实际情况是,redis8w&#x2F;qps,读11w&#x2F;qps,差距那么大的原因 就是redis的单线程</p>
+<p>是将单线程和多线程各取其优点.</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083854779.png" alt="image-20240223083854779"></p>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>Redis</category>
       </categories>
   </entry>
   <entry>
@@ -1843,6 +1936,146 @@
 <h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
 <p>后端的端口：8088 在application.yml中修改</p>
 <p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
+]]></content>
+      <categories>
+        <category>Java项目</category>
+        <category>动力云客</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>dlyk-part2-front-1</title>
+    <url>/2024/02/18/dlyk-part2-front-1/</url>
+    <content><![CDATA[<h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="一-、-登录界面"><a href="#一-、-登录界面" class="headerlink" title="一 、 登录界面"></a>一 、 登录界面</h2><h3 id="（1）用vite脚手架创建项目"><a href="#（1）用vite脚手架创建项目" class="headerlink" title="（1）用vite脚手架创建项目"></a>（1）用vite脚手架创建项目</h3><blockquote>
+<p>工程化方式，采用脚手架工具创建一个vue工程，然后进行开发；（项目开发<strong>广泛</strong>使用）</p>
+</blockquote>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240218233633476.png" alt="image-20240218233633476"></p>
+<h3 id="（2）vue项目的工程结构说明"><a href="#（2）vue项目的工程结构说明" class="headerlink" title="（2）vue项目的工程结构说明"></a>（2）vue项目的工程结构说明</h3><p><img src="/../blog_images/dlyk-part2-front-1/image-20240218234826841.png" alt="image-20240218234826841"><img src="/../blog_images/dlyk-part2-front-1/image-20240219000847361.png" alt="image-20240219000847361"></p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219000858770.png" alt="image-20240219000858770"></p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219000912548.png" alt="image-20240219000912548"></p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219000919973.png" alt="image-20240219000919973"></p>
+<h2 id="（3）启动Vue项目工程"><a href="#（3）启动Vue项目工程" class="headerlink" title="（3）启动Vue项目工程"></a>（3）启动Vue项目工程</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//以下是为了修改端口 之前的（老版本）vue端口占了8080，这里</span></span><br><span class="line">vite,config.<span class="property">js</span>:</span><br><span class="line"></span><br><span class="line"><span class="attr">server</span>:&#123;</span><br><span class="line">  <span class="attr">host</span>:<span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">  <span class="attr">port</span>:<span class="number">8081</span>,</span><br><span class="line">  <span class="attr">open</span>:<span class="literal">true</span>,</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> dlyk_front</span><br><span class="line">npm install  或者  npm i</span><br><span class="line">npm run dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="（4）开始Vue的项目开发"><a href="#（4）开始Vue的项目开发" class="headerlink" title="（4）开始Vue的项目开发"></a>（4）开始Vue的项目开发</h2><ul>
+<li><h3 id="最基础的文件"><a href="#最基础的文件" class="headerlink" title="最基础的文件"></a>最基础的文件</h3><p>最基础的就是.vue文件，这个文件的就是vue界面，也成为vue组件，一般来说是分为三个部分：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. //&lt;template&gt; 这个里面写了一个html业面要展示的内容</span><br><span class="line"></span><br><span class="line">   //&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">2. //&lt;script&gt; 这个里面鞋的是javascript的代码</span><br><span class="line"></span><br><span class="line">   //&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">3. //&lt;style&gt; 这里写的是css的样式 </span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><h3 id="vue工程的运行流程分析"><a href="#vue工程的运行流程分析" class="headerlink" title="vue工程的运行流程分析"></a>vue工程的运行流程分析</h3><p>&#x3D;&#x3D;项目的运行入口：main.js&#x3D;&#x3D;</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; from <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp是函数</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./style.css&#x27;</span></span><br><span class="line"><span class="keyword">import</span> App from <span class="string">&#x27;./App.vue&#x27;</span><span class="comment">//从一个单文件组件中导入根组件</span></span><br><span class="line"></span><br><span class="line">createApp(App)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">    <span class="comment">//利用导入的函数 创建一个vue应用</span></span><br><span class="line">    <span class="comment">//挂载到页面的#app这个id下，id在index.html&lt;div id=&#x27;app&#x27;&gt;</span></span><br><span class="line">    <span class="comment">//动态渲染在这个div里</span></span><br><span class="line">    <span class="comment">//运行一下，把运行的结果放在这个id的标签下</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h3 id="登录页面使用的技术"><a href="#登录页面使用的技术" class="headerlink" title="登录页面使用的技术"></a>登录页面使用的技术</h3><p>vue – controller - service – manager - mapper ( mysql、redis)</p>
+<p>页面使用了element-plus进行页面开发；</p>
+<h4 id="1-element-plus安装"><a href="#1-element-plus安装" class="headerlink" title="1. element plus安装"></a>1. element plus安装</h4></li>
+</ul>
+<blockquote>
+<p>我们的项目，需要使用到一些页面的效果（表单、输入框、表格、按钮、布局、图标等等），我们采用的都是element-plus给我们提供的；</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、项目中要安装element-plus：</span><br><span class="line">npm install element-plus --save</span><br><span class="line">npm i element-plus --save</span><br><span class="line">-g 全局安装，安装到D:\course\tool\node-v20.9.0-win-x64\node_global</span><br><span class="line">--save表示安装包信息会写入package.json的dependencies中，在dependencies中，那么项目打包就会依赖到该模块；</span><br><span class="line">--save-dev上线不需要用，如果项目打包时不需要依赖该模块，那么就使用--save-dev，它会在devDependencies下，表示项目开发需要依赖该模块，项目打包发布就不需要它；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2、导入element-plus"><a href="#2、导入element-plus" class="headerlink" title="2、导入element-plus"></a>2、导入element-plus</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在main.js中</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ElementPlus from <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="comment">//css不用 from</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"></span><br><span class="line">createApp(App).use(ElementPlus).mount(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">    <span class="comment">//挂载一定是最后一步</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-element提供的组件"><a href="#3-element提供的组件" class="headerlink" title="3. element提供的组件"></a>3. element提供的组件</h4><blockquote>
+<p><a href="https://element-plus.gitee.io/zh-CN/guide/design.html#%E4%B8%80%E8%87%B4-consistency">设计 | Element Plus (gitee.io)</a></p>
+</blockquote>
+<p>element-plus提供的组件：</p>
+<p>1、Basic 基础组件</p>
+<p>2、配置组件</p>
+<p>3、Form 表单组件</p>
+<p>4、Data 数据展示</p>
+<p>5、Navigation 导航</p>
+<p>6、Feedback 反馈组件</p>
+<p>7、Others 其他</p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219004142653.png" alt="image-20240219004142653"></p>
+<h4 id="4-布局"><a href="#4-布局" class="headerlink" title="4. 布局"></a>4. 布局</h4><p> 这里是利用element实现最简单的左右布局，由于我们不弄前端，这个浅浅了解就行，无需非常深入</p>
+<h5 id="step1：创建新vue-component"><a href="#step1：创建新vue-component" class="headerlink" title="step1：创建新vue component"></a>step1：创建新vue component</h5><blockquote>
+<p>composition api:大项目 、推荐</p>
+<p>options api ：初学者</p>
+</blockquote>
+<p>创建<img src="/../blog_images/dlyk-part2-front-1/image-20240219073424268.png" alt="image-20240219073424268"></p>
+<h5 id="step2：界面"><a href="#step2：界面" class="headerlink" title="step2：界面"></a>step2：界面</h5><p>创建一个view文件夹 ，里面都是要写的一些页面 。</p>
+<p>在view文件夹下面 创建LoginView.vue的页面，然后就开始编写。</p>
+<p>去element ui的网站里面去复制格局和部件等等。</p>
+<p>当要加入表单的时候，就是要从页面获取信息的时候，需要在script里加入一些设置</p>
+<p>注意：</p>
+<p>要在App.vue处增加内容</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; from <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp这个是一个函数</span></span><br><span class="line"><span class="comment">//import &#x27;./style.css&#x27;</span></span><br><span class="line"><span class="comment">//import App from &#x27;./App.vue&#x27;//从一个单文件组件中导入根组件</span></span><br><span class="line"><span class="keyword">import</span> ElementPlus from <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="keyword">import</span> loginView from <span class="string">&quot;./view/LoginView.vue&quot;</span>;</span><br><span class="line">createApp(loginView).use(ElementPlus).mount(<span class="string">&#x27;#app&#x27;</span>)<span class="comment">//创建一个vue对象//挂载到页面的#app这个id下</span></span><br><span class="line">    <span class="comment">//上面两句很重要</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">el-container</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!--    左侧--&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">el-aside</span> <span class="attr">width</span>=<span class="string">&quot;200px&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../assets/loginBox.svg&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;imgTitle&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        欢迎使用动力云客系统</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">el-aside</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="comment">&lt;!--    右侧--&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">el-main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loginTile&quot;</span>&gt;</span>欢迎登录<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">el-form</span> <span class="attr">ref</span>=<span class="string">&quot;loginRefForm&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;user&quot;</span> <span class="attr">label-width</span>=<span class="string">&quot;120px&quot;</span> <span class="attr">:rules</span>=<span class="string">&quot;loginRules&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;账号&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginAct&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginAct&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;密码&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginPwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginPwd&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span>&gt;</span>登 录<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-checkbox</span> <span class="attr">label</span>=<span class="string">&quot;记住我&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.rememberMe&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">el-form</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">el-main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">el-container</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//定义页面使用到的变量，定义时初始值都是给个空的</span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123;defineComponent&#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;LoginView&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//定义页面使用到的变量，定义时初始值都是给个空的</span></span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">//对象变量定义，是&#123;&#125;</span></span><br><span class="line">      user : &#123;&#125;,</span><br><span class="line">      <span class="comment">//字符串变量定义，是&#x27;&#x27;</span></span><br><span class="line">      name : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">//数字变量定义，是0</span></span><br><span class="line">      age : <span class="number">0</span>,</span><br><span class="line">      <span class="comment">//数组变量定义，是[]</span></span><br><span class="line">      arr : [],</span><br><span class="line">      <span class="comment">//list集合对象(对象数组)，是[&#123;&#125;]</span></span><br><span class="line">      userList : [&#123;&#125;],</span><br><span class="line">      <span class="comment">//定义登录表单的验证规则</span></span><br><span class="line">      loginRules : &#123;</span><br><span class="line">        <span class="comment">//定义账号的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginAct : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录账号&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">//定义密码的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginPwd : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录密码&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">6</span>, <span class="attr">max</span>: <span class="number">16</span>, <span class="attr">message</span>: <span class="string">&#x27;登录密码长度为6-16位&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="step3：表单验证"><a href="#step3：表单验证" class="headerlink" title="step3：表单验证"></a>step3：表单验证</h5><blockquote>
+<p>（1）账号字段：loginAct （account）登录账号；</p>
+<p>（2）密码字段：loginPwd （password）登录密码；</p>
+<p>（3）是否记住我字段：rememberMe</p>
+<p>需求：前端非空验证；</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、在&lt;el-form&gt;里面定义一个:rules=&quot;rules&quot;；</span><br><span class="line">2、在要验证的el-input上的&lt;el-form-item&gt;中定义prop=xx 比如下面的loginAct和pwd， </span><br><span class="line">3、给要验证的字段定义验证规则；</span><br></pre></td></tr></table></figure>
+
+<p>3、给要验证的字段定义验证规则；</p>
+</blockquote>
+<ol>
+<li>在el-form头标签里面写：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;el-form ref=<span class="string">&quot;loginRefForm&quot;</span> :model=<span class="string">&quot;user&quot;</span> label-width=<span class="string">&quot;120px&quot;</span> :rules=<span class="string">&quot;loginRules&quot;</span>&gt;</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;账号&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginAct&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginAct&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;密码&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginPwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginPwd&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line">	这里是增加了一个点击事件</span><br><span class="line">        &lt;el-form-item&gt;</span><br><span class="line">          <span class="language-xml"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span>&gt;</span>登 录<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span></span><br><span class="line">        &lt;/el-form-item&gt;</span><br><span class="line"></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-checkbox</span> <span class="attr">label</span>=<span class="string">&quot;记住我&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.rememberMe&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line">      &lt;/el-form&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>需要在script里面</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123;defineComponent&#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;LoginView&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//定义页面使用到的变量，定义时初始值都是给个空的</span></span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">//对象变量定义，是&#123;&#125;</span></span><br><span class="line">      user : &#123;&#125;,</span><br><span class="line">      <span class="comment">//字符串变量定义，是&#x27;&#x27;</span></span><br><span class="line">      name : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">//数字变量定义，是0</span></span><br><span class="line">      age : <span class="number">0</span>,</span><br><span class="line">      <span class="comment">//数组变量定义，是[]</span></span><br><span class="line">      arr : [],</span><br><span class="line">      <span class="comment">//list集合对象(对象数组)，是[&#123;&#125;]</span></span><br><span class="line">      userList : [&#123;&#125;],</span><br><span class="line">      <span class="comment">//定义登录表单的验证规则</span></span><br><span class="line">      loginRules : &#123;</span><br><span class="line">        <span class="comment">//定义账号的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginAct : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录账号&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">//定义密码的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginPwd : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录密码&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">6</span>, <span class="attr">max</span>: <span class="number">16</span>, <span class="attr">message</span>: <span class="string">&#x27;登录密码长度为6-16位&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>需要加入这个属性</p>
+<p>ref&#x3D;”loginRefForm”   </p>
+<p>表示在提交之前 需要执行一下规则</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-form ref=&quot;loginRefForm&quot; :model=&quot;user&quot; label-width=&quot;120px&quot; :rules=&quot;loginRules&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240221130953823.png" alt="image-20240221130953823"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">loginRefForm</span>.<span class="title function_">validate</span>( <span class="function">(<span class="params">isValid</span>) =&gt;</span> &#123;</span><br></pre></td></tr></table></figure>
+
+<p>这个会调用:rules&#x3D;”loginRules”规则 ，然后得到一个返回值，就是一个验证之后的结果。</p>
+<p>如果是true 表示验证通过</p>
+<p>​	验证通过后 ，就表示要提交了。axios 。ajax</p>
+<p>反之表示没通过</p>
+<h5 id="step4-使用axios-封装"><a href="#step4-使用axios-封装" class="headerlink" title="step4: 使用axios &#x2F;&#x2F;封装"></a>step4: 使用axios &#x2F;&#x2F;封装</h5><p>主要就是封装4个方法；</p>
+<p>doGet() 查询</p>
+<p>doPost() 新增</p>
+<p>doPut() 修改</p>
+<p>doDelete() 删除</p>
+<ol>
+<li>创建文件与文件夹</li>
+</ol>
+<p>  <img src="/../blog_images/dlyk-part2-front-1/image-20240221140148575.png" alt="image-20240221140148575"></p>
+<ol start="2">
+<li><p>封装函数</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原本这个函数是只有function 但是因为要在别的页面上使用，所以就加上了一个export，这里导出</span></span><br><span class="line"><span class="comment">//那边导入</span></span><br><span class="line"><span class="comment">// 从这个框架导入组件</span></span><br><span class="line"><span class="keyword">import</span> axios from <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line">export function <span class="title function_">doGet</span><span class="params">(url ,params)</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;get&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        params: params, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export function <span class="title function_">doPost</span><span class="params">(url,data )</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        data: data, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">export function <span class="title function_">doPut</span><span class="params">(url,data )</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;put&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        data: data, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">export function <span class="title function_">doDelete</span><span class="params">(url ,params)</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;Delete&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        params: params, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="step4-使用axios-封装-1"><a href="#step4-使用axios-封装-1" class="headerlink" title="step4: 使用axios &#x2F;&#x2F;封装"></a>step4: 使用axios &#x2F;&#x2F;封装</h5><blockquote>
+<p>一般提交是使用一个表单，然后用put提交，也可以用get 但是一般用put</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在httpRequest.js开始处</span><br><span class="line"><span class="comment">//定义端口的地址，默认地址前缀，</span></span><br><span class="line">axios.defaults.baseURL = <span class="string">&quot;http://localhost:8089&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="（5）动力云客后端项目创建"><a href="#（5）动力云客后端项目创建" class="headerlink" title="（5）动力云客后端项目创建"></a>（5）动力云客后端项目创建</h2><p><img src="/../blog_images/dlyk-part2-front-1/image-20240221145546841.png" alt="image-20240221145546841"></p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240221150859764.png" alt="image-20240221150859764"><img src="/../blog_images/dlyk-part2-front-1/image-20240221150910929.png" alt="image-20240221150910929"></p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240221150924045.png" alt="image-20240221150924045"></p>
+<h2 id="（6）编写yml配置文件"><a href="#（6）编写yml配置文件" class="headerlink" title="（6）编写yml配置文件"></a>（6）编写yml配置文件</h2><p>进入<img src="/../blog_images/dlyk-part2-front-1/image-20240222102204105.png" alt="image-20240222102204105"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: <span class="number">8089</span><span class="comment">//端口 这里改成了8089</span></span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /</span><br><span class="line"></span><br><span class="line">#配置数据库连接相关信息</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql:<span class="comment">//localhost:3306/dlyk?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false//这里是链接数据库</span></span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    username: root</span><br><span class="line">    password: <span class="number">123456</span></span><br><span class="line">    hikari:</span><br><span class="line">      #最大连接数，默认是<span class="number">10</span></span><br><span class="line">      maximum-pool-size: <span class="number">30</span></span><br><span class="line">      #最小空闲连接，默认是<span class="number">10</span></span><br><span class="line">      minimum-idle: <span class="number">30</span></span><br><span class="line">      #等待连接池分配连接的最大时长，超过该时长还没有可用连接则发生超时异常（单位毫秒）</span><br><span class="line">      connection-timeout: <span class="number">5000</span></span><br><span class="line">      #空闲连接的最大时长，空闲多久就被释放回收，设置为<span class="number">0</span>不让连接回收</span><br><span class="line">      idle-timeout: <span class="number">0</span></span><br><span class="line">      #一个连接的最大生命时间，超过该时间还没有使用就回收掉（单位毫秒），最好不要超过<span class="number">8</span>小时</span><br><span class="line">      max-lifetime: <span class="number">18000000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  #配置redis的连接信息</span><br><span class="line">  data:</span><br><span class="line">    redis:</span><br><span class="line">      host: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="comment">//redis的host 要去看redis的配置。</span></span><br><span class="line">      port: <span class="number">6379</span></span><br><span class="line">      password: <span class="number">123456</span></span><br><span class="line">      database: <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  #设置jackson返回json数据时，时区和格式</span><br><span class="line">  jackson:</span><br><span class="line">    time-zone: GMT+<span class="number">8</span></span><br><span class="line">    date-format: yyyy-MM-dd HH:mm:ss</span><br><span class="line"></span><br><span class="line">#指定一下mapper.xml文件的位置</span><br><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper<span class="comment">/*.xml</span></span><br><span class="line"><span class="comment">  configuration:</span></span><br><span class="line"><span class="comment">    #在控制台打印sql语句</span></span><br><span class="line"><span class="comment">    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#定义定时任务的调度时间</span></span><br><span class="line"><span class="comment">project:</span></span><br><span class="line"><span class="comment">  task:</span></span><br><span class="line"><span class="comment">    cron: &#x27;* */</span><span class="number">5</span> * * * *<span class="string">&#x27;</span></span><br><span class="line"><span class="string">    delay: 180000</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="（7）mysql反向工程生成表"><a href="#（7）mysql反向工程生成表" class="headerlink" title="（7）mysql反向工程生成表"></a>（7）mysql反向工程生成表</h2><p><img src="/../blog_images/dlyk-part2-front-1/image-20240222102505798.png" alt="image-20240222102505798"></p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240222102955294.png" alt="image-20240222102955294"> </p>
+<h3 id="注意：Free-Mybatis-plugin-直接在setting-–-plugin-搜索下载就行，然后选中数据库里面的所有表，点击mybatis-generator-，"><a href="#注意：Free-Mybatis-plugin-直接在setting-–-plugin-搜索下载就行，然后选中数据库里面的所有表，点击mybatis-generator-，" class="headerlink" title="注意：Free Mybatis plugin 直接在setting –&gt; plugin 搜索下载就行，然后选中数据库里面的所有表，点击mybatis generator ，"></a>注意：Free <a href="https://so.csdn.net/so/search?q=Mybatis&spm=1001.2101.3001.7020">Mybatis</a> plugin 直接在setting –&gt; plugin 搜索下载就行，然后选中数据库里面的所有表，点击mybatis generator ，</h3><p><img src="/../blog_images/dlyk-part2-front-1/image-20240222120628352.png" alt="image-20240222120628352"></p>
+<p>生成结果</p>
+<p><img src="/../blog_images/dlyk-part2-front-1/image-20240222120824860.png" alt="image-20240222120824860"></p>
+<h2 id="8-加入mapper包的扫描"><a href="#8-加入mapper包的扫描" class="headerlink" title="(8)加入mapper包的扫描"></a>(8)加入mapper包的扫描</h2><p>在<img src="/../blog_images/dlyk-part2-front-1/image-20240222121147528.png" alt="image-20240222121147528"></p>
+<p>加入</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.spring.annotation.MapperScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="comment">//！！！！！！！！！！ 加入这个</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages = &#123;&quot;com.bjpowernode.mapper&quot;&#125;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DlykServerApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(DlykServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此外 ，由于mapper的xml（sql语句文件）与mapper不在一个文件夹下面，所以需要指定一下，在application.yml中指定</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  configuration:</span><br><span class="line">    #??????sql??</span><br><span class="line">    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Java项目</category>
@@ -2060,146 +2293,6 @@
 
 <p><img src="/../blog_images/dlyk-part2-front-2/image-20240222213354364.png" alt="image-20240222213354364"></p>
 <p>如果访问&#x2F;. ，那么就渲染LoginView.vue,如果是&#x2F;dashBoard，那么就渲染dashboard.vue</p>
-]]></content>
-      <categories>
-        <category>Java项目</category>
-        <category>动力云客</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>dlyk-part2-front-1</title>
-    <url>/2024/02/18/dlyk-part2-front-1/</url>
-    <content><![CDATA[<h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="一-、-登录界面"><a href="#一-、-登录界面" class="headerlink" title="一 、 登录界面"></a>一 、 登录界面</h2><h3 id="（1）用vite脚手架创建项目"><a href="#（1）用vite脚手架创建项目" class="headerlink" title="（1）用vite脚手架创建项目"></a>（1）用vite脚手架创建项目</h3><blockquote>
-<p>工程化方式，采用脚手架工具创建一个vue工程，然后进行开发；（项目开发<strong>广泛</strong>使用）</p>
-</blockquote>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240218233633476.png" alt="image-20240218233633476"></p>
-<h3 id="（2）vue项目的工程结构说明"><a href="#（2）vue项目的工程结构说明" class="headerlink" title="（2）vue项目的工程结构说明"></a>（2）vue项目的工程结构说明</h3><p><img src="/../blog_images/dlyk-part2-front-1/image-20240218234826841.png" alt="image-20240218234826841"><img src="/../blog_images/dlyk-part2-front-1/image-20240219000847361.png" alt="image-20240219000847361"></p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219000858770.png" alt="image-20240219000858770"></p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219000912548.png" alt="image-20240219000912548"></p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219000919973.png" alt="image-20240219000919973"></p>
-<h2 id="（3）启动Vue项目工程"><a href="#（3）启动Vue项目工程" class="headerlink" title="（3）启动Vue项目工程"></a>（3）启动Vue项目工程</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//以下是为了修改端口 之前的（老版本）vue端口占了8080，这里</span></span><br><span class="line">vite,config.<span class="property">js</span>:</span><br><span class="line"></span><br><span class="line"><span class="attr">server</span>:&#123;</span><br><span class="line">  <span class="attr">host</span>:<span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">  <span class="attr">port</span>:<span class="number">8081</span>,</span><br><span class="line">  <span class="attr">open</span>:<span class="literal">true</span>,</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> dlyk_front</span><br><span class="line">npm install  或者  npm i</span><br><span class="line">npm run dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="（4）开始Vue的项目开发"><a href="#（4）开始Vue的项目开发" class="headerlink" title="（4）开始Vue的项目开发"></a>（4）开始Vue的项目开发</h2><ul>
-<li><h3 id="最基础的文件"><a href="#最基础的文件" class="headerlink" title="最基础的文件"></a>最基础的文件</h3><p>最基础的就是.vue文件，这个文件的就是vue界面，也成为vue组件，一般来说是分为三个部分：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. //&lt;template&gt; 这个里面写了一个html业面要展示的内容</span><br><span class="line"></span><br><span class="line">   //&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">2. //&lt;script&gt; 这个里面鞋的是javascript的代码</span><br><span class="line"></span><br><span class="line">   //&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">3. //&lt;style&gt; 这里写的是css的样式 </span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><h3 id="vue工程的运行流程分析"><a href="#vue工程的运行流程分析" class="headerlink" title="vue工程的运行流程分析"></a>vue工程的运行流程分析</h3><p>&#x3D;&#x3D;项目的运行入口：main.js&#x3D;&#x3D;</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; from <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp是函数</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./style.css&#x27;</span></span><br><span class="line"><span class="keyword">import</span> App from <span class="string">&#x27;./App.vue&#x27;</span><span class="comment">//从一个单文件组件中导入根组件</span></span><br><span class="line"></span><br><span class="line">createApp(App)</span><br><span class="line">    .mount(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">    <span class="comment">//利用导入的函数 创建一个vue应用</span></span><br><span class="line">    <span class="comment">//挂载到页面的#app这个id下，id在index.html&lt;div id=&#x27;app&#x27;&gt;</span></span><br><span class="line">    <span class="comment">//动态渲染在这个div里</span></span><br><span class="line">    <span class="comment">//运行一下，把运行的结果放在这个id的标签下</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><h3 id="登录页面使用的技术"><a href="#登录页面使用的技术" class="headerlink" title="登录页面使用的技术"></a>登录页面使用的技术</h3><p>vue – controller - service – manager - mapper ( mysql、redis)</p>
-<p>页面使用了element-plus进行页面开发；</p>
-<h4 id="1-element-plus安装"><a href="#1-element-plus安装" class="headerlink" title="1. element plus安装"></a>1. element plus安装</h4></li>
-</ul>
-<blockquote>
-<p>我们的项目，需要使用到一些页面的效果（表单、输入框、表格、按钮、布局、图标等等），我们采用的都是element-plus给我们提供的；</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1、项目中要安装element-plus：</span><br><span class="line">npm install element-plus --save</span><br><span class="line">npm i element-plus --save</span><br><span class="line">-g 全局安装，安装到D:\course\tool\node-v20.9.0-win-x64\node_global</span><br><span class="line">--save表示安装包信息会写入package.json的dependencies中，在dependencies中，那么项目打包就会依赖到该模块；</span><br><span class="line">--save-dev上线不需要用，如果项目打包时不需要依赖该模块，那么就使用--save-dev，它会在devDependencies下，表示项目开发需要依赖该模块，项目打包发布就不需要它；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="2、导入element-plus"><a href="#2、导入element-plus" class="headerlink" title="2、导入element-plus"></a>2、导入element-plus</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在main.js中</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> ElementPlus from <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="comment">//css不用 from</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"></span><br><span class="line">createApp(App).use(ElementPlus).mount(<span class="string">&#x27;#app&#x27;</span>)</span><br><span class="line">    <span class="comment">//挂载一定是最后一步</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-element提供的组件"><a href="#3-element提供的组件" class="headerlink" title="3. element提供的组件"></a>3. element提供的组件</h4><blockquote>
-<p><a href="https://element-plus.gitee.io/zh-CN/guide/design.html#%E4%B8%80%E8%87%B4-consistency">设计 | Element Plus (gitee.io)</a></p>
-</blockquote>
-<p>element-plus提供的组件：</p>
-<p>1、Basic 基础组件</p>
-<p>2、配置组件</p>
-<p>3、Form 表单组件</p>
-<p>4、Data 数据展示</p>
-<p>5、Navigation 导航</p>
-<p>6、Feedback 反馈组件</p>
-<p>7、Others 其他</p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240219004142653.png" alt="image-20240219004142653"></p>
-<h4 id="4-布局"><a href="#4-布局" class="headerlink" title="4. 布局"></a>4. 布局</h4><p> 这里是利用element实现最简单的左右布局，由于我们不弄前端，这个浅浅了解就行，无需非常深入</p>
-<h5 id="step1：创建新vue-component"><a href="#step1：创建新vue-component" class="headerlink" title="step1：创建新vue component"></a>step1：创建新vue component</h5><blockquote>
-<p>composition api:大项目 、推荐</p>
-<p>options api ：初学者</p>
-</blockquote>
-<p>创建<img src="/../blog_images/dlyk-part2-front-1/image-20240219073424268.png" alt="image-20240219073424268"></p>
-<h5 id="step2：界面"><a href="#step2：界面" class="headerlink" title="step2：界面"></a>step2：界面</h5><p>创建一个view文件夹 ，里面都是要写的一些页面 。</p>
-<p>在view文件夹下面 创建LoginView.vue的页面，然后就开始编写。</p>
-<p>去element ui的网站里面去复制格局和部件等等。</p>
-<p>当要加入表单的时候，就是要从页面获取信息的时候，需要在script里加入一些设置</p>
-<p>注意：</p>
-<p>要在App.vue处增加内容</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; from <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp这个是一个函数</span></span><br><span class="line"><span class="comment">//import &#x27;./style.css&#x27;</span></span><br><span class="line"><span class="comment">//import App from &#x27;./App.vue&#x27;//从一个单文件组件中导入根组件</span></span><br><span class="line"><span class="keyword">import</span> ElementPlus from <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="keyword">import</span> loginView from <span class="string">&quot;./view/LoginView.vue&quot;</span>;</span><br><span class="line">createApp(loginView).use(ElementPlus).mount(<span class="string">&#x27;#app&#x27;</span>)<span class="comment">//创建一个vue对象//挂载到页面的#app这个id下</span></span><br><span class="line">    <span class="comment">//上面两句很重要</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">el-container</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!--    左侧--&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">el-aside</span> <span class="attr">width</span>=<span class="string">&quot;200px&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;../assets/loginBox.svg&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;imgTitle&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        欢迎使用动力云客系统</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">el-aside</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="comment">&lt;!--    右侧--&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">el-main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loginTile&quot;</span>&gt;</span>欢迎登录<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">el-form</span> <span class="attr">ref</span>=<span class="string">&quot;loginRefForm&quot;</span> <span class="attr">:model</span>=<span class="string">&quot;user&quot;</span> <span class="attr">label-width</span>=<span class="string">&quot;120px&quot;</span> <span class="attr">:rules</span>=<span class="string">&quot;loginRules&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;账号&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginAct&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginAct&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;密码&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginPwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginPwd&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span>&gt;</span>登 录<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-checkbox</span> <span class="attr">label</span>=<span class="string">&quot;记住我&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.rememberMe&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">el-form</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">el-main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">el-container</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="comment">//定义页面使用到的变量，定义时初始值都是给个空的</span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123;defineComponent&#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;LoginView&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//定义页面使用到的变量，定义时初始值都是给个空的</span></span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">//对象变量定义，是&#123;&#125;</span></span><br><span class="line">      user : &#123;&#125;,</span><br><span class="line">      <span class="comment">//字符串变量定义，是&#x27;&#x27;</span></span><br><span class="line">      name : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">//数字变量定义，是0</span></span><br><span class="line">      age : <span class="number">0</span>,</span><br><span class="line">      <span class="comment">//数组变量定义，是[]</span></span><br><span class="line">      arr : [],</span><br><span class="line">      <span class="comment">//list集合对象(对象数组)，是[&#123;&#125;]</span></span><br><span class="line">      userList : [&#123;&#125;],</span><br><span class="line">      <span class="comment">//定义登录表单的验证规则</span></span><br><span class="line">      loginRules : &#123;</span><br><span class="line">        <span class="comment">//定义账号的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginAct : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录账号&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">//定义密码的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginPwd : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录密码&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">6</span>, <span class="attr">max</span>: <span class="number">16</span>, <span class="attr">message</span>: <span class="string">&#x27;登录密码长度为6-16位&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="step3：表单验证"><a href="#step3：表单验证" class="headerlink" title="step3：表单验证"></a>step3：表单验证</h5><blockquote>
-<p>（1）账号字段：loginAct （account）登录账号；</p>
-<p>（2）密码字段：loginPwd （password）登录密码；</p>
-<p>（3）是否记住我字段：rememberMe</p>
-<p>需求：前端非空验证；</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、在&lt;el-form&gt;里面定义一个:rules=&quot;rules&quot;；</span><br><span class="line">2、在要验证的el-input上的&lt;el-form-item&gt;中定义prop=xx 比如下面的loginAct和pwd， </span><br><span class="line">3、给要验证的字段定义验证规则；</span><br></pre></td></tr></table></figure>
-
-<p>3、给要验证的字段定义验证规则；</p>
-</blockquote>
-<ol>
-<li>在el-form头标签里面写：</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;el-form ref=<span class="string">&quot;loginRefForm&quot;</span> :model=<span class="string">&quot;user&quot;</span> label-width=<span class="string">&quot;120px&quot;</span> :rules=<span class="string">&quot;loginRules&quot;</span>&gt;</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;账号&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginAct&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginAct&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-form-item</span> <span class="attr">label</span>=<span class="string">&quot;密码&quot;</span> <span class="attr">prop</span>=<span class="string">&quot;loginPwd&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.loginPwd&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line">	这里是增加了一个点击事件</span><br><span class="line">        &lt;el-form-item&gt;</span><br><span class="line">          <span class="language-xml"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span>&gt;</span>登 录<span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span></span><br><span class="line">        &lt;/el-form-item&gt;</span><br><span class="line"></span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">el-checkbox</span> <span class="attr">label</span>=<span class="string">&quot;记住我&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;user.rememberMe&quot;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">el-form-item</span>&gt;</span></span></span><br><span class="line">      &lt;/el-form&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>需要在script里面</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> &#123;defineComponent&#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;LoginView&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//定义页面使用到的变量，定义时初始值都是给个空的</span></span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="comment">//对象变量定义，是&#123;&#125;</span></span><br><span class="line">      user : &#123;&#125;,</span><br><span class="line">      <span class="comment">//字符串变量定义，是&#x27;&#x27;</span></span><br><span class="line">      name : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="comment">//数字变量定义，是0</span></span><br><span class="line">      age : <span class="number">0</span>,</span><br><span class="line">      <span class="comment">//数组变量定义，是[]</span></span><br><span class="line">      arr : [],</span><br><span class="line">      <span class="comment">//list集合对象(对象数组)，是[&#123;&#125;]</span></span><br><span class="line">      userList : [&#123;&#125;],</span><br><span class="line">      <span class="comment">//定义登录表单的验证规则</span></span><br><span class="line">      loginRules : &#123;</span><br><span class="line">        <span class="comment">//定义账号的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginAct : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录账号&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ],</span><br><span class="line">        <span class="comment">//定义密码的验证规则，规则可以有多个，所以是数组</span></span><br><span class="line">        loginPwd : [</span><br><span class="line">          &#123; <span class="attr">required</span>: <span class="literal">true</span>, <span class="attr">message</span>: <span class="string">&#x27;请输入登录密码&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">min</span>: <span class="number">6</span>, <span class="attr">max</span>: <span class="number">16</span>, <span class="attr">message</span>: <span class="string">&#x27;登录密码长度为6-16位&#x27;</span>, <span class="attr">trigger</span>: <span class="string">&#x27;blur&#x27;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>需要加入这个属性</p>
-<p>ref&#x3D;”loginRefForm”   </p>
-<p>表示在提交之前 需要执行一下规则</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-form ref=&quot;loginRefForm&quot; :model=&quot;user&quot; label-width=&quot;120px&quot; :rules=&quot;loginRules&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240221130953823.png" alt="image-20240221130953823"></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">loginRefForm</span>.<span class="title function_">validate</span>( <span class="function">(<span class="params">isValid</span>) =&gt;</span> &#123;</span><br></pre></td></tr></table></figure>
-
-<p>这个会调用:rules&#x3D;”loginRules”规则 ，然后得到一个返回值，就是一个验证之后的结果。</p>
-<p>如果是true 表示验证通过</p>
-<p>​	验证通过后 ，就表示要提交了。axios 。ajax</p>
-<p>反之表示没通过</p>
-<h5 id="step4-使用axios-封装"><a href="#step4-使用axios-封装" class="headerlink" title="step4: 使用axios &#x2F;&#x2F;封装"></a>step4: 使用axios &#x2F;&#x2F;封装</h5><p>主要就是封装4个方法；</p>
-<p>doGet() 查询</p>
-<p>doPost() 新增</p>
-<p>doPut() 修改</p>
-<p>doDelete() 删除</p>
-<ol>
-<li>创建文件与文件夹</li>
-</ol>
-<p>  <img src="/../blog_images/dlyk-part2-front-1/image-20240221140148575.png" alt="image-20240221140148575"></p>
-<ol start="2">
-<li><p>封装函数</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 原本这个函数是只有function 但是因为要在别的页面上使用，所以就加上了一个export，这里导出</span></span><br><span class="line"><span class="comment">//那边导入</span></span><br><span class="line"><span class="comment">// 从这个框架导入组件</span></span><br><span class="line"><span class="keyword">import</span> axios from <span class="string">&quot;axios&quot;</span>;</span><br><span class="line"></span><br><span class="line">export function <span class="title function_">doGet</span><span class="params">(url ,params)</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;get&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        params: params, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export function <span class="title function_">doPost</span><span class="params">(url,data )</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;post&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        data: data, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">export function <span class="title function_">doPut</span><span class="params">(url,data )</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;put&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        data: data, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">export function <span class="title function_">doDelete</span><span class="params">(url ,params)</span>&#123;</span><br><span class="line">    axios(&#123;</span><br><span class="line">        method: <span class="string">&quot;Delete&quot;</span>,</span><br><span class="line">        url: url,</span><br><span class="line">        params: params, <span class="comment">//&#123;name: &quot;对的&quot;, age: 22&#125;,</span></span><br><span class="line">        dataType:<span class="string">&quot;json&quot;</span></span><br><span class="line">    &#125;).then(function (rep)&#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">s</span> <span class="operator">=</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        reo.data.forEach(function (stu)&#123;</span><br><span class="line">            s += stu.name + <span class="string">&quot;-------------------&quot;</span>+stu.age+<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        document.getElementById(<span class="string">&quot;mydiv&quot;</span>).innerHTML = s;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h5 id="step4-使用axios-封装-1"><a href="#step4-使用axios-封装-1" class="headerlink" title="step4: 使用axios &#x2F;&#x2F;封装"></a>step4: 使用axios &#x2F;&#x2F;封装</h5><blockquote>
-<p>一般提交是使用一个表单，然后用put提交，也可以用get 但是一般用put</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在httpRequest.js开始处</span><br><span class="line"><span class="comment">//定义端口的地址，默认地址前缀，</span></span><br><span class="line">axios.defaults.baseURL = <span class="string">&quot;http://localhost:8089&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="（5）动力云客后端项目创建"><a href="#（5）动力云客后端项目创建" class="headerlink" title="（5）动力云客后端项目创建"></a>（5）动力云客后端项目创建</h2><p><img src="/../blog_images/dlyk-part2-front-1/image-20240221145546841.png" alt="image-20240221145546841"></p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240221150859764.png" alt="image-20240221150859764"><img src="/../blog_images/dlyk-part2-front-1/image-20240221150910929.png" alt="image-20240221150910929"></p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240221150924045.png" alt="image-20240221150924045"></p>
-<h2 id="（6）编写yml配置文件"><a href="#（6）编写yml配置文件" class="headerlink" title="（6）编写yml配置文件"></a>（6）编写yml配置文件</h2><p>进入<img src="/../blog_images/dlyk-part2-front-1/image-20240222102204105.png" alt="image-20240222102204105"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: <span class="number">8089</span><span class="comment">//端口 这里改成了8089</span></span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /</span><br><span class="line"></span><br><span class="line">#配置数据库连接相关信息</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql:<span class="comment">//localhost:3306/dlyk?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false//这里是链接数据库</span></span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    username: root</span><br><span class="line">    password: <span class="number">123456</span></span><br><span class="line">    hikari:</span><br><span class="line">      #最大连接数，默认是<span class="number">10</span></span><br><span class="line">      maximum-pool-size: <span class="number">30</span></span><br><span class="line">      #最小空闲连接，默认是<span class="number">10</span></span><br><span class="line">      minimum-idle: <span class="number">30</span></span><br><span class="line">      #等待连接池分配连接的最大时长，超过该时长还没有可用连接则发生超时异常（单位毫秒）</span><br><span class="line">      connection-timeout: <span class="number">5000</span></span><br><span class="line">      #空闲连接的最大时长，空闲多久就被释放回收，设置为<span class="number">0</span>不让连接回收</span><br><span class="line">      idle-timeout: <span class="number">0</span></span><br><span class="line">      #一个连接的最大生命时间，超过该时间还没有使用就回收掉（单位毫秒），最好不要超过<span class="number">8</span>小时</span><br><span class="line">      max-lifetime: <span class="number">18000000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  #配置redis的连接信息</span><br><span class="line">  data:</span><br><span class="line">    redis:</span><br><span class="line">      host: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="comment">//redis的host 要去看redis的配置。</span></span><br><span class="line">      port: <span class="number">6379</span></span><br><span class="line">      password: <span class="number">123456</span></span><br><span class="line">      database: <span class="number">1</span></span><br><span class="line"></span><br><span class="line">  #设置jackson返回json数据时，时区和格式</span><br><span class="line">  jackson:</span><br><span class="line">    time-zone: GMT+<span class="number">8</span></span><br><span class="line">    date-format: yyyy-MM-dd HH:mm:ss</span><br><span class="line"></span><br><span class="line">#指定一下mapper.xml文件的位置</span><br><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper<span class="comment">/*.xml</span></span><br><span class="line"><span class="comment">  configuration:</span></span><br><span class="line"><span class="comment">    #在控制台打印sql语句</span></span><br><span class="line"><span class="comment">    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#定义定时任务的调度时间</span></span><br><span class="line"><span class="comment">project:</span></span><br><span class="line"><span class="comment">  task:</span></span><br><span class="line"><span class="comment">    cron: &#x27;* */</span><span class="number">5</span> * * * *<span class="string">&#x27;</span></span><br><span class="line"><span class="string">    delay: 180000</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="（7）mysql反向工程生成表"><a href="#（7）mysql反向工程生成表" class="headerlink" title="（7）mysql反向工程生成表"></a>（7）mysql反向工程生成表</h2><p><img src="/../blog_images/dlyk-part2-front-1/image-20240222102505798.png" alt="image-20240222102505798"></p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240222102955294.png" alt="image-20240222102955294"> </p>
-<h3 id="注意：Free-Mybatis-plugin-直接在setting-–-plugin-搜索下载就行，然后选中数据库里面的所有表，点击mybatis-generator-，"><a href="#注意：Free-Mybatis-plugin-直接在setting-–-plugin-搜索下载就行，然后选中数据库里面的所有表，点击mybatis-generator-，" class="headerlink" title="注意：Free Mybatis plugin 直接在setting –&gt; plugin 搜索下载就行，然后选中数据库里面的所有表，点击mybatis generator ，"></a>注意：Free <a href="https://so.csdn.net/so/search?q=Mybatis&spm=1001.2101.3001.7020">Mybatis</a> plugin 直接在setting –&gt; plugin 搜索下载就行，然后选中数据库里面的所有表，点击mybatis generator ，</h3><p><img src="/../blog_images/dlyk-part2-front-1/image-20240222120628352.png" alt="image-20240222120628352"></p>
-<p>生成结果</p>
-<p><img src="/../blog_images/dlyk-part2-front-1/image-20240222120824860.png" alt="image-20240222120824860"></p>
-<h2 id="8-加入mapper包的扫描"><a href="#8-加入mapper包的扫描" class="headerlink" title="(8)加入mapper包的扫描"></a>(8)加入mapper包的扫描</h2><p>在<img src="/../blog_images/dlyk-part2-front-1/image-20240222121147528.png" alt="image-20240222121147528"></p>
-<p>加入</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.bjpowernode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.spring.annotation.MapperScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="comment">//！！！！！！！！！！ 加入这个</span></span><br><span class="line"><span class="meta">@MapperScan(basePackages = &#123;&quot;com.bjpowernode.mapper&quot;&#125;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DlykServerApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(DlykServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>此外 ，由于mapper的xml（sql语句文件）与mapper不在一个文件夹下面，所以需要指定一下，在application.yml中指定</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  configuration:</span><br><span class="line">    #??????sql??</span><br><span class="line">    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>Java项目</category>

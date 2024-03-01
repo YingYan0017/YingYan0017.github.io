@@ -218,7 +218,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-02-29 17:27:29" itemprop="dateModified" datetime="2024-02-29T17:27:29+08:00">2024-02-29</time>
+      <time title="修改时间：2024-03-01 10:52:02" itemprop="dateModified" datetime="2024-03-01T10:52:02+08:00">2024-03-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -416,7 +416,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">persionList.sort(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Person&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Person o1, Person o2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> o1.getAge()-o2.getAge();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>当然，Comparator接口的实现类也可以采用**&#x3D;&#x3D;匿名内部类&#x3D;&#x3D;**的方式。</p>
-<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><h3 id="①ArrayList集合底层采用了数组这种数据结构。"><a href="#①ArrayList集合底层采用了数组这种数据结构。" class="headerlink" title="①ArrayList集合底层采用了数组这种数据结构。"></a>①ArrayList集合底层采用了数组这种数据结构。</h3><h3 id="②ArrayList集合优点："><a href="#②ArrayList集合优点：" class="headerlink" title="②ArrayList集合优点："></a>②ArrayList集合优点：</h3><p>​	底层是数组，因此根据下标查找元素的时间复杂度是O(1)。因此检索效率高。</p>
+<h2 id="ArrayList1-5倍扩容"><a href="#ArrayList1-5倍扩容" class="headerlink" title="ArrayList1.5倍扩容"></a>ArrayList1.5倍扩容</h2><h3 id="①ArrayList集合底层采用了数组这种数据结构。"><a href="#①ArrayList集合底层采用了数组这种数据结构。" class="headerlink" title="①ArrayList集合底层采用了数组这种数据结构。"></a>①ArrayList集合底层采用了数组这种数据结构。</h3><h3 id="②ArrayList集合优点："><a href="#②ArrayList集合优点：" class="headerlink" title="②ArrayList集合优点："></a>②ArrayList集合优点：</h3><p>​	底层是数组，因此根据下标查找元素的时间复杂度是O(1)。因此检索效率高。</p>
 <blockquote>
 <p>底层是数组，内存存储是连续的，有下标、有偏移量，就可以用数学表达式很快的实现各种元素的访问</p>
 </blockquote>
@@ -435,7 +435,173 @@
 <li>删除元素</li>
 </ul>
 <p>添加删除都调用了arraycopy，增加效率</p>
-<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><h2 id="链表存储结构"><a href="#链表存储结构" class="headerlink" title="链表存储结构"></a>链表存储结构</h2><h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><h2 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h2><h2 id="队列数据结构"><a href="#队列数据结构" class="headerlink" title="队列数据结构"></a>队列数据结构</h2><h2 id="Map继承结构"><a href="#Map继承结构" class="headerlink" title="Map继承结构"></a>Map继承结构</h2><h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><h2 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h2><h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2>
+<h2 id="Vector2倍扩容"><a href="#Vector2倍扩容" class="headerlink" title="Vector2倍扩容"></a>Vector2倍扩容</h2><p>vector和stack都是线程安全的，但是效率不是很高，现在也有更好的控制线程安全的方法</p>
+<h3 id="①Vector底层也是数组，和ArrayList相同。"><a href="#①Vector底层也是数组，和ArrayList相同。" class="headerlink" title="①Vector底层也是数组，和ArrayList相同。"></a>①Vector底层也是数组，和ArrayList相同。</h3><h3 id="②不同的是Vector几乎所有的方法都是线程同步的"><a href="#②不同的是Vector几乎所有的方法都是线程同步的" class="headerlink" title="②不同的是Vector几乎所有的方法都是线程同步的"></a>②不同的是Vector几乎所有的方法都是线程同步的</h3><p>vector所有方法都被synchronized修饰：线程排队执行，不能并发），因此Vector是**&#x3D;&#x3D;线程安全&#x3D;&#x3D;**的，但由于效率较低，很少使用。因为控制线程安全有新方式。</p>
+<h3 id="③Vector初始化容量：10"><a href="#③Vector初始化容量：10" class="headerlink" title="③Vector初始化容量：10"></a>③Vector初始化容量：10</h3><h3 id="④Vector扩容策略：扩容之后的容量是原容量的2倍。"><a href="#④Vector扩容策略：扩容之后的容量是原容量的2倍。" class="headerlink" title="④Vector扩容策略：扩容之后的容量是原容量的2倍。"></a>④Vector扩容策略：扩容之后的容量是原容量的2倍。</h3><h2 id="链表存储结构link"><a href="#链表存储结构link" class="headerlink" title="链表存储结构link"></a>链表存储结构link</h2><p>链表</p>
+<h3 id="①单向链表"><a href="#①单向链表" class="headerlink" title="①单向链表"></a>①单向链表</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229174036307.png" alt="image-20240229174036307"></p>
+<p>每个节点维护两个部分，一个头一个指针指向下一个节点。</p>
+<p>内存地址不连续</p>
+<p>优点：，增删效率O（1）</p>
+<p>缺点：检索的效率很慢，挨个找，越大越慢</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229174606521.png" alt="image-20240229174606521"></p>
+<h4 id="删除结点O-1"><a href="#删除结点O-1" class="headerlink" title="删除结点O(1)"></a>删除结点O(1)</h4><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229174655439.png" alt="image-20240229174655439"></p>
+<h4 id="新增结点O-1"><a href="#新增结点O-1" class="headerlink" title="新增结点O(1)"></a>新增结点O(1)</h4><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229174713907.png" alt="image-20240229174713907"></p>
+<h3 id="②双向链表"><a href="#②双向链表" class="headerlink" title="②双向链表"></a>②双向链表</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229174432545.png" alt="image-20240229174432545"></p>
+<p>优点：查找效率比单向的快</p>
+<p>缺点：查找效率虽然比单向的快，但是还是慢</p>
+<h3 id="③环形链表"><a href="#③环形链表" class="headerlink" title="③环形链表"></a>③环形链表</h3><p>​	环形单链表</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229175051590.png" alt="image-20240229175051590"></p>
+<p>​	环形双链表</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229175101942.png" alt="image-20240229175101942"></p>
+<h3 id="④链表优点："><a href="#④链表优点：" class="headerlink" title="④链表优点："></a>④链表优点：</h3><p>​	<strong>因为链表节点在空间存储上，内存地址不是连续的。</strong>因此删除某个节点时不需要涉及到元素位移的问题。&#x3D;&#x3D;<strong>因此随机增删元素效率较高。时间复杂度O(1)</strong>&#x3D;&#x3D;</p>
+<h3 id="⑤链表缺点："><a href="#⑤链表缺点：" class="headerlink" title="⑤链表缺点："></a>⑤链表缺点：</h3><p>​	<strong>&#x3D;&#x3D;链表中元素在查找时，只能从某个节点开始顺序查找，因为链表节点的内存地址在空间上不是连续的。链表查找元素效率较低，时间复杂度O(n)&#x3D;&#x3D;</strong></p>
+<h3 id="⑥链表的适用场景："><a href="#⑥链表的适用场景：" class="headerlink" title="⑥链表的适用场景："></a>⑥链表的适用场景：</h3><p>​	需要频繁进行随机增删，但很少的查找的操作时。</p>
+<h2 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h2><p>①LinkedList是一个**&#x3D;&#x3D;双向链表&#x3D;&#x3D;**</p>
+<p>注意，虽然是双向链表，但是还是只能从头或者从尾开始寻找，效率还是非常的慢</p>
+<p>②源码分析：</p>
+<p>​	属性分析</p>
+<p>​	构造方法分析</p>
+<p>​	添加元素：</p>
+<blockquote>
+<p>add ，向末尾添加元素 addlast</p>
+</blockquote>
+<p>​	修改元素</p>
+<blockquote>
+<p>set: 查找、修改</p>
+<p>set()方法返回的是改前的值oldvalue</p>
+</blockquote>
+<p>​	插入元素</p>
+<blockquote>
+<p>add(index): </p>
+</blockquote>
+<p>​	删除元素</p>
+<blockquote>
+<p>remove()</p>
+</blockquote>
+<p>③<strong>手写单向链表</strong></p>
+<h2 id="栈数据结构-使用的很少了，不建议使用了"><a href="#栈数据结构-使用的很少了，不建议使用了" class="headerlink" title="栈数据结构&#x2F;&#x2F;使用的很少了，不建议使用了"></a>栈数据结构&#x2F;&#x2F;使用的很少了，不建议使用了</h2><blockquote>
+<p>这里是使用一个数组实现的</p>
+</blockquote>
+<h3 id="①LIFO原则（Last-In，First-Out）：后进先出"><a href="#①LIFO原则（Last-In，First-Out）：后进先出" class="headerlink" title="①LIFO原则（Last In，First Out）：后进先出"></a>①LIFO原则（Last In，First Out）：后进先出</h3><h3 id="②实现栈数据结构，可以用数组来实现，也可以用双向链表来实现。"><a href="#②实现栈数据结构，可以用数组来实现，也可以用双向链表来实现。" class="headerlink" title="②实现栈数据结构，可以用数组来实现，也可以用双向链表来实现。"></a>②实现栈数据结构，可以用数组来实现，也可以用双向链表来实现。</h3><h3 id="③用数组实现的代表是：Stack、ArrayDeque"><a href="#③用数组实现的代表是：Stack、ArrayDeque" class="headerlink" title="③用数组实现的代表是：Stack、ArrayDeque"></a>③用数组实现的代表是：Stack、ArrayDeque</h3><ol>
+<li>Stack：Vetor的子类，实现了栈数据结构，除了具有Vetor的方法，还扩展了其它方法，完成了栈结构的模拟。不过在JDK1.6（Java6）之后就不建议使用了，因为它是线程安全的，太慢了。Stack中的方法如下：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">E <span class="title function_">push</span><span class="params">(E item)</span>：<span class="comment">//压栈</span></span><br><span class="line"></span><br><span class="line">E <span class="title function_">pop</span><span class="params">()</span>：<span class="comment">//弹栈（将栈顶元素删除，并返回被删除的引用）</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">search</span><span class="params">(Object o)</span>：<span class="comment">//查找栈中元素（返回值的意思是：以1为开始，从栈顶往下数第几个）</span></span><br><span class="line"></span><br><span class="line">E <span class="title function_">peek</span><span class="params">()</span>：<span class="comment">//窥视栈顶元素（不会将栈顶元素删除，只是看看栈顶元素是什么。注意：如果栈为空时会报异常。）</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229185252920.png" alt="image-20240229185252920"></p>
+<blockquote>
+<p>返回4，search()栈顶是1，下一个是2……..</p>
+</blockquote>
+<ol start="2">
+<li>ArrayDeque</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E <span class="title function_">push</span><span class="params">(E item)</span></span><br><span class="line">E <span class="title function_">pop</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="④用链表实现的代表是：LinkedList"><a href="#④用链表实现的代表是：LinkedList" class="headerlink" title="④用链表实现的代表是：LinkedList"></a>④用链表实现的代表是：LinkedList</h3><blockquote>
+<p>LinkedList实现了栈，可以直接创建Linklist进行pushback</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E <span class="title function_">push</span><span class="params">(E item)</span></span><br><span class="line"></span><br><span class="line">E <span class="title function_">pop</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="队列数据结构queue（FIFO）"><a href="#队列数据结构queue（FIFO）" class="headerlink" title="队列数据结构queue（FIFO）"></a>队列数据结构queue（FIFO）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229185618282.png" alt="image-20240229185618282"></p>
+<h3 id="①queue的删除插入"><a href="#①queue的删除插入" class="headerlink" title="①queue的删除插入"></a>①queue的删除插入</h3><p>queue队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作（poll），而在表的后端（rear）进行插入操作（offer）。</p>
+<p>队列是一种操作受限制的线性表。进行插入操作（入口）的端称为队尾，进行删除操作（出口）的端称为队头。</p>
+<h3 id="②队列是一种先进先出（First-In-First-Out）的线性表，简称FIFO表"><a href="#②队列是一种先进先出（First-In-First-Out）的线性表，简称FIFO表" class="headerlink" title="②队列是一种先进先出（First In First Out）的线性表，简称FIFO表"></a>②队列是一种先进先出（First In First Out）的线性表，简称FIFO表</h3><p>队列的插入操作只能在队尾操作，队列的删除操作只能在队头操作，因此</p>
+<h3 id="③Queue接口是一种基于FIFO（先进先出）的数据结构，而Deque接口则同时支持FIFO和LIFO（后进先出）两种操作。因此Deque接口也被称为“双端队列”。"><a href="#③Queue接口是一种基于FIFO（先进先出）的数据结构，而Deque接口则同时支持FIFO和LIFO（后进先出）两种操作。因此Deque接口也被称为“双端队列”。" class="headerlink" title="③Queue接口是一种基于FIFO（先进先出）的数据结构，而Deque接口则同时支持FIFO和LIFO（后进先出）两种操作。因此Deque接口也被称为“双端队列”。"></a>③Queue接口是一种基于FIFO（先进先出）的数据结构，而Deque接口则同时支持FIFO和LIFO（后进先出）两种操作。因此Deque接口也被称为“双端队列”。</h3><h4 id="④Java集合框架中队列的实现："><a href="#④Java集合框架中队列的实现：" class="headerlink" title="④Java集合框架中队列的实现："></a>④Java集合框架中队列的实现：</h4><ul>
+<li>①链表实现方式：LinkedList</li>
+<li>②数组实现方式：ArrayDeque</li>
+<li><strong>③LinkedList和ArrayDeque都实现了Queue、Deque接口，因此这两个类都具备队列和双端队列的特性。</strong></li>
+<li><strong>④LinkedList底层是基于双向链表实现的，因此它天然就是一个双端队列</strong>，既支持从队尾入队，从队头出队，也支持从队头入队，从队尾出队。</li>
+<li>用Deque的实现方式来说，就是它既实现了队列的offer()和poll()方法，也实现了双端队列的offerFirst()、offerLast()、pollFirst()和pollLast()方法等。</li>
+<li><strong>⑤ArrayDeque底层是使用环形数组实现的，也是一个双端队列。</strong>它比LinkedList更加高效，因为在数组中随机访问元素的时间复杂度是O(1)，而链表中需要从头或尾部遍历链表寻找元素，时间复杂度是O(N)。</li>
+<li>循环数组：index &#x3D; (start + i) % capacity</li>
+</ul>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229190619501.png" alt="image-20240229190619501"></p>
+<h3 id="①Queue接口基于Collection扩展的方法包括："><a href="#①Queue接口基于Collection扩展的方法包括：" class="headerlink" title="①Queue接口基于Collection扩展的方法包括："></a>①Queue接口基于Collection扩展的方法包括：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">offer</span><span class="params">(E e)</span>; 入队。</span><br><span class="line"></span><br><span class="line">E <span class="title function_">poll</span><span class="params">()</span>; 出队，如果队列为空，返回<span class="literal">null</span>。</span><br><span class="line"></span><br><span class="line">E <span class="title function_">remove</span><span class="params">()</span>; 出队，如果队列为空，抛异常。</span><br><span class="line"></span><br><span class="line">E <span class="title function_">peek</span><span class="params">()</span>; 查看队头元素，如果为空则返回<span class="literal">null</span>。</span><br><span class="line"></span><br><span class="line">E <span class="title function_">element</span><span class="params">()</span>; 查看对头元素，如果为空则抛异常。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="①Deque接口基于Queen接口扩展的方法包括："><a href="#①Deque接口基于Queen接口扩展的方法包括：" class="headerlink" title="①Deque接口基于Queen接口扩展的方法包括："></a>①Deque接口基于Queen接口扩展的方法包括：</h3><p>以下2个方法可模拟队列：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="title function_">offerLast</span><span class="params">(E e)</span>;  从队尾入队</span><br><span class="line"></span><br><span class="line">E <span class="title function_">pollFirst</span><span class="params">()</span>;  从队头出队</span><br><span class="line"></span><br><span class="line">以下<span class="number">4</span>个方法可模拟双端队列：</span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">offerLast</span><span class="params">(E e)</span>;  从队尾入队</span><br><span class="line"></span><br><span class="line">E <span class="title function_">pollFirst</span><span class="params">()</span>;  从队头出队 </span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">offerFirst</span><span class="params">(E e)</span>;  从队头入队</span><br><span class="line"></span><br><span class="line">E <span class="title function_">pollLast</span><span class="params">()</span>;  从队尾出队</span><br></pre></td></tr></table></figure>
+
+<p>另外offerLast+pollLast或者pollFirst+offerFirst可以模拟栈数据结构。或者也可以直接调用push&#x2F;pop方法。</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229191036405.png" alt="image-20240229191036405"></p>
+<h2 id="Map继承结构（独立的）"><a href="#Map继承结构（独立的）" class="headerlink" title="Map继承结构（独立的）"></a>Map继承结构（独立的）</h2><blockquote>
+<p>set集合是map集合的一部分</p>
+<p>map和collection之间没有继承关系</p>
+<p>无序指的是插入顺序和实际的存储顺序不一致</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229192702174.png" alt="image-20240229192702174"></p>
+<ul>
+<li>①Map集合以<strong>key和value的键值对形式存储。key和value存储的都是引用。</strong></li>
+<li>②Map集合<strong>中key起主导作用。value是附属在key上的。</strong></li>
+<li>③SequencedMap是Java21新增的。</li>
+<li><strong>④LinkedHashMap和TreeMap都是有序集合。（key是有序的）</strong></li>
+<li><strong>⑤HashMap，Hashtable，Properties都是无序集合。（key是无序的）</strong></li>
+<li>⑥Map集合的<strong>key都是不可重复的</strong>。<strong>key重复的话，value会覆盖。</strong></li>
+<li><strong>⑦HashSet集合底层是new了一个HashMap。往HashSet集合中存储元素实际上是将元素存储到HashMap集合的key部分。</strong>HashMap集合的key是无序不可重复的，因此HashSet集合就是无序不可重复的。<strong>HashMap集合底层是哈希表&#x2F;散列表数据结构，因此HashSet底层也是哈希表&#x2F;散列表。</strong></li>
+<li>⑧<strong>TreeSet集合底层是new了一个TreeMap</strong>。往TreeSet集合中存储元素实际上是将元素存储到TreeMap集合的key部分。TreeMap集合的key是不可重复但可排序的，因此TreeSet集合就是不可重复但可排序的。TreeMap集合底层是红黑树，因此TreeSet底层也是红黑树。它们的排序通过java.lang.Comparable和java.util.Comparator均可实现。</li>
+<li>⑨LinkedHashSet集合底层是new了一个LinkedHashMap。LinkedHashMap集合只是为了保证元素的插入顺序，效率比HashSet低，底层采用的哈希表+双向链表实现。</li>
+<li>⑩根据源码可以看到向Set集合中add时，底层会向Map中put。value只是一个固定不变的常量，只是起到一个占位符的作用。主要是key。</li>
+</ul>
+<h2 id="Map接口常用方法"><a href="#Map接口常用方法" class="headerlink" title="Map接口常用方法"></a>Map接口常用方法</h2><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229193024307.png" alt="image-20240229193024307" style="zoom:33%;" />
+
+<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229193404374.png" alt="image-20240229193404374" style="zoom:50%;" />
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229193500437.png" alt="image-20240229193500437"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">V <span class="title function_">put</span><span class="params">(K key, V value)</span>; <span class="comment">//添加键值对</span></span><br><span class="line"><span class="comment">//在底层会创建一个node结点，然后把kv作为结点的属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">putAll</span><span class="params">(Map&lt;? extends K,? extends V&gt; m)</span>; <span class="comment">//添加多个键值对</span></span><br><span class="line"></span><br><span class="line">V <span class="title function_">get</span><span class="params">(Object key)</span>; <span class="comment">//通过key获取value，不存在返回null</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">containsKey</span><span class="params">(Object key)</span>; <span class="comment">//是否包含某个key</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">containsValue</span><span class="params">(Object value)</span>; <span class="comment">//是否包含某个value</span></span><br><span class="line">	<span class="comment">//一定用了equals</span></span><br><span class="line"></span><br><span class="line">V <span class="title function_">remove</span><span class="params">(Object key)</span>; <span class="comment">//通过key删除key-value</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span>; <span class="comment">//清空Map</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">size</span><span class="params">()</span>; <span class="comment">//键值对个数</span></span><br><span class="line"></span><br><span class="line"><span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span>; <span class="comment">//判断是否为空Map（判断键值对的个数是否为0）</span></span><br><span class="line">	<span class="comment">//空了是false</span></span><br><span class="line">Collection&lt;V&gt; <span class="title function_">values</span><span class="params">()</span>; <span class="comment">//获取所有的value</span></span><br><span class="line"><span class="comment">// 取出所有的value，不管key了，生成一个collection集合</span></span><br><span class="line"><span class="keyword">for</span>(String value: values)&#123;</span><br><span class="line">    <span class="comment">//这里就可以得到value</span></span><br><span class="line">&#125;</span><br><span class="line">Set&lt;K&gt; <span class="title function_">keySet</span><span class="params">()</span>; <span class="comment">//获取所有的key</span></span><br><span class="line"></span><br><span class="line">Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet(); <span class="comment">//获取所有键值对的Set视图。 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> &lt;K,V&gt; Map&lt;K,V&gt; <span class="title function_">of</span><span class="params">(K k1, V v1, K k2, V v2, K k3, V v3)</span>; <span class="comment">//静态方法，使用现有的key-value构造Map</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229192847865.png" alt="image-20240229192847865"></p>
+<h2 id="Map怎么进行遍历"><a href="#Map怎么进行遍历" class="headerlink" title="Map怎么进行遍历"></a>Map怎么进行遍历</h2><blockquote>
+<p>遍历Map集合的所有key，然后遍历每个key，通过key获得value。</p>
+</blockquote>
+<p>Set<K> keySet(); &#x2F;&#x2F;获取所有的key</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法一</span></span><br><span class="line">Set&lt;String&gt; set = map.keySet();</span><br><span class="line"> Iterator&lt;String&gt; it = set.iterator();</span><br><span class="line"> <span class="keyword">while</span> (it.hasNext())&#123;</span><br><span class="line">     <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> it.next();</span><br><span class="line">     System.out.println(key + <span class="string">&quot;=&quot;</span> + map.get(key));</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> System.out.println(<span class="string">&quot;----------------&quot;</span>);</span><br><span class="line"> <span class="keyword">for</span> (String key : set) &#123;</span><br><span class="line">     System.out.println(key);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet(); &#x2F;&#x2F;获取所有键值对的Set视图。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//遍历Map的第二种方法；这种方法效率比较的高</span><br><span class="line">//        Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet(); //获取所有键值对的Set视图。 </span><br><span class="line">//        entry 是一个键值对的对象</span><br><span class="line">        Set&lt;Map.Entry&lt;String, String&gt;&gt; entrySet = mapself.entrySet();</span><br><span class="line">        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; it2 = entrySet.iterator();</span><br><span class="line">        while (it2.hasNext())   &#123;</span><br><span class="line">            Map.Entry&lt;String, String&gt; entry = it2.next();</span><br><span class="line">            String  key = entry.getKey();</span><br><span class="line">            String value = entry.getValue();</span><br><span class="line">            System.out.println(key + &quot;=&quot; + value);</span><br><span class="line">//            System.out.println(entry.getKey() + &quot;=&quot; + entry.getValue());</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="HashMap-散列表"><a href="#HashMap-散列表" class="headerlink" title="HashMap(散列表)"></a>HashMap(散列表)</h2><blockquote>
+<p>hashset底层就是hashmap，把map中的所有k取出来就是set</p>
+<p>hash是什么，是key的hashcode执行结果</p>
+<p>transient Node&lt;k,v&gt;[] table;</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240301105201886.png" alt="image-20240301105201886"></p>
+<h3 id="①HashMap集合的key是-无序不可重复-的。"><a href="#①HashMap集合的key是-无序不可重复-的。" class="headerlink" title="①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。"></a>①HashMap集合的key是&#x3D;&#x3D;无序不可重复&#x3D;&#x3D;的。</h3><ol>
+<li><p><strong>无序：插入顺序和取出顺序不一定相同。</strong></p>
+</li>
+<li><p><strong>不可重复：key具有唯一性。</strong></p>
+</li>
+</ol>
+<h3 id="②向HashMap集合中put时，key如果重复的话，value会覆盖。"><a href="#②向HashMap集合中put时，key如果重复的话，value会覆盖。" class="headerlink" title="②向HashMap集合中put时，key如果重复的话，value会覆盖。"></a>②向HashMap集合中put时，key如果重复的话，value会覆盖。</h3><h3 id="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"><a href="#③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？" class="headerlink" title="③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？"></a>③HashMap集合的key具有唯一性，向key部分插入自定义的类型会怎样？如果自定义的类型重写equals之后会怎样？？？</h3><p>如果没有重写equals，就会调用Object的equals，就是用&#x3D;&#x3D;进行比较的，就是比较内存地址。</p>
+<p>按照加双引号的字面量会在JVM开始的时候就在字符串常量池中创建的规则，相同的都放进去了</p>
+<p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229232150946.png" alt="image-20240229232150946"></p>
+<h3 id="④HashMap底层的数据结构是：哈希表-散列表"><a href="#④HashMap底层的数据结构是：哈希表-散列表" class="headerlink" title="④HashMap底层的数据结构是：哈希表&#x2F;散列表"></a>④HashMap底层的数据结构是：哈希表&#x2F;散列表</h3><p>hash是key调Object的hashcode方法得到的</p>
+<ul>
+<li>①哈希表是一种查询和增删效率都很高的一种数据结构，非常重要，在很多场合使用，并且面试也很常见。必须掌握。</li>
+<li>②哈希表如何做到的查询和增删效率都好的呢，因为哈希表是“数组 + 链表”的结合体。数组和链表的结合不是绝对的。</li>
+<li>③哈希表可能是：数组 + 链表，数组 + 红黑树， 数组 + 链表 + 红黑树等。</li>
+</ul>
+<h3 id="⑤HashMap集合底层部分源码："><a href="#⑤HashMap集合底层部分源码：" class="headerlink" title="⑤HashMap集合底层部分源码："></a>⑤HashMap集合底层部分源码：</h3><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229235156266.png" alt="image-20240229235156266"></p>
+<p>长度永远是2的倍数，一维数组挂链表</p>
+<h2 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h2><h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h2 id="二叉树与红黑二叉树"><a href="#二叉树与红黑二叉树" class="headerlink" title="二叉树与红黑二叉树"></a>二叉树与红黑二叉树</h2><h2 id="TreeMap（底层红黑树）"><a href="#TreeMap（底层红黑树）" class="headerlink" title="TreeMap（底层红黑树）"></a>TreeMap（底层红黑树）</h2><h2 id="Set接口（无序、不可重复）"><a href="#Set接口（无序、不可重复）" class="headerlink" title="Set接口（无序、不可重复）"></a>Set接口（无序、不可重复）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/image-20240229191216355.png" alt="image-20240229191216355"></p>
+<h2 id="Collections工具类"><a href="#Collections工具类" class="headerlink" title="Collections工具类"></a>Collections工具类</h2><h1 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h1><h2 id="IO流概述"><a href="#IO流概述" class="headerlink" title="IO流概述"></a>IO流概述</h2><h3 id="①什么是IO流？"><a href="#①什么是IO流？" class="headerlink" title="①什么是IO流？"></a>①什么是IO流？</h3><p> 水分子的移动形成了水流。</p>
+<p> IO流指的是：程序中数据的流动。数据可以从内存流动到硬盘，也可以从硬盘流动到内存。</p>
+<p> Java中IO流最基本的作用是：完成文件的读和写。</p>
+<h3 id="②IO流的分类？"><a href="#②IO流的分类？" class="headerlink" title="②IO流的分类？"></a>②IO流的分类？</h3><p>l根据数据流向分为：输入和输出是相对于内存而言的。</p>
+<p>①输入流：从硬盘到内存。(输入又叫做读：read)</p>
+<p>②输出流：从内存到硬盘。（输出又叫做写：write）</p>
+<p>l根据读写数据形式分为：</p>
+<p>①字节流：一次读取一个字节。适合读取非文本数据。例如图片、声音、视频等文件。（当然字节流是万能的。什么都可以读和写。）</p>
+<p>②字符流：一次读取一个字符。只适合读取普通文本。不适合读取二进制文件。因为字符流统一使用Unicode编码，可以避免出现编码混乱的问题。</p>
+<p><strong>注意：</strong>Java<strong><strong>的所有</strong></strong>IO<strong><strong>流中凡是以</strong></strong>Stream<strong><strong>结尾的都是字节流。凡是以</strong></strong>Reader<strong><strong>和</strong></strong>Writer****结尾的都是字符流。</p>
+<p>l根据流在IO操作中的作用和实现方式来分类:</p>
+<p>①节点流：节点流负责数据源和数据目的地的连接，是IO中最基本的组成部分。</p>
+<p>②处理流：处理流对节点流进行装饰&#x2F;包装，提供更多高级处理操作，方便用户进行数据处理。</p>
+<p>③Java中已经将io流实现了，在<strong>java.io</strong>包下，可以直接使用。</p>
+
       
     </div>
 

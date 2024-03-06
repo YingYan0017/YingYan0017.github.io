@@ -10,14 +10,180 @@
 ]]></content>
   </entry>
   <entry>
-    <title>JavaWeb</title>
-    <url>/2024/03/05/JavaWeb/</url>
-    <content><![CDATA[<p><img src="/../blog_images/JavaWeb/image-20240305150715516.png" alt="image-20240305150715516"></p>
+    <title></title>
+    <url>/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
+    <content><![CDATA[<h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
+<li><p>编译java代码 ： javac HelloWorld.java</p>
+</li>
+<li><p>main方法是JVM规定的，程序就是从这个位置执行的，程序的入口</p>
+</li>
+<li><p>public class 和class的区别</p>
+</li>
+</ol>
+<h2 id="P19-public-class和class的区别"><a href="#P19-public-class和class的区别" class="headerlink" title="P19 public class和class的区别"></a>P19 public class和class的区别</h2><ol>
+<li><p>一个java源文件中可以生成多个源文件 ；</p>
+</li>
+<li><p>编译后，一个class对应生成一个class字节码文件</p>
+</li>
+</ol>
+<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111209337.png" alt="image-20240223111209337" style="zoom:50%;" />
+
+<ol start="3">
+<li><p>如果一个类是public的，那么这个类名要和文件名保持一致，如果不一致就会报错。</p>
+</li>
+<li><p>一个java文件里，public class可以没有，如果有也只能有一个。</p>
+</li>
+<li><p>每个类里面都可以写入口main函数 ，执行只需要 java 类名</p>
+<blockquote>
+<p>在实际的开发中，入口只能有一个</p>
+</blockquote>
+</li>
+</ol>
+<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111722726.png" alt="image-20240223111722726" style="zoom:50%;" />
+
+<h2 id="JAVA基础语法"><a href="#JAVA基础语法" class="headerlink" title="JAVA基础语法"></a>JAVA基础语法</h2><h3 id="一、标识符"><a href="#一、标识符" class="headerlink" title="一、标识符"></a>一、标识符</h3><blockquote>
+<p>凡是有权利自己起名的都是标识符，比如类名等</p>
+</blockquote>
+<p>①在Java中，标识符是用来给变量、方法、类和包等命名的字符序列。</p>
+<p>②标识符的长度没有限制，但是建议使用有意义的、简洁的标识符，以提高代码的可读性和可维护性。</p>
+<h4 id="标识符可以标识什么"><a href="#标识符可以标识什么" class="headerlink" title="标识符可以标识什么"></a><strong>标识符可以标识什么</strong></h4><p>①变量名</p>
+<p>②方法名</p>
+<p>③类名、接口名、枚举名、注解名</p>
+<p>④包名</p>
+<p>⑤常量名</p>
+<p>⑥……</p>
+<h4 id="标识符命名规则"><a href="#标识符命名规则" class="headerlink" title="标识符命名规则"></a>标识符命名规则</h4><p>①标识符可以由字母、数字、下划线(_)和美元符号($)组成，不能含有其他符号。（java支持全球所有语言，所以这里的 字母 指的是任何一个国家的文字都可以）</p>
+<p>②标识符不能以数字开头。</p>
+<p>③标识符不能是Java中的关键字，如public、class、void等。</p>
+<p>④标识符是区分大小写的，即Foo和foo是两个不同的标识符。</p>
+<p>⑤标识符的长度没有限制，但是Java建议使用有意义的、简短的标识符。</p>
+<h4 id="标识符命名规范"><a href="#标识符命名规范" class="headerlink" title="标识符命名规范"></a><strong>标识符命名规范</strong></h4><p>①见名知意</p>
+<p>②驼峰式命名方式</p>
+<p>③类名、接口名、枚举、注解：首字母大写，后面每个单词首字母大写。（StudentService，UserService）</p>
+<p>④变量名和方法名：首字母小写，后面每个单词首字母大写。（doSome，doOther）</p>
+<p>⑤常量名：全部大写，每个单词用下划线连接。（LOGIN_SUCCESS，SYSTEM_ERROR）</p>
+<p>⑥包名：全部小写    </p>
+<h3 id="二、关键字"><a href="#二、关键字" class="headerlink" title="二、关键字"></a>二、关键字</h3><blockquote>
+<p>Java关键字是Java编程语言中预定义的具有特殊含义的单词，这些单词不能被用作标识符，而是在语法中有特定的用法和限制。</p>
+</blockquote>
+<h4 id="Java关键字有哪些"><a href="#Java关键字有哪些" class="headerlink" title="Java关键字有哪些"></a>Java关键字有哪些</h4><p>①Java关键字都是小写的。</p>
+<p>②abstract, assert, boolean, break, byte, case, catch, char, class, continue, default, do, double, else, enum, extends, final, finally, float, for, if, implements, import, instanceof, int, interface, long, native, new, package, private, protected, public, return, short, static, strictfp, super, switch, synchronized, this, throw, throws, transient, try, void, volatile, while（50）</p>
+<p>③Java保留字：goto，const(虽然没有在java中用到，但是不能用)</p>
+<h3 id="三、字面量"><a href="#三、字面量" class="headerlink" title="三、字面量"></a>三、字面量</h3><blockquote>
+<p>①字面量指的是在程序中直接使用的数据，字面量是Java中最基本的表达式，不需要进行计算或转换，直接使用即可。</p>
+<p>就是数据</p>
+</blockquote>
+<h4 id="Java中有哪些字面量"><a href="#Java中有哪些字面量" class="headerlink" title="Java中有哪些字面量"></a>Java中有哪些字面量</h4><p>①整数型：10、-5、0、100</p>
+<p>②浮点型：3.14、-0.5、1.0</p>
+<p>③布尔型：true、false</p>
+<p>④字符型：’a’、’b’、’c’、’1’、’2’、’国’</p>
+<p>⑤字符串型：”Hello”、”World”、”Java”、”你好呀”</p>
+<h4 id="加号运算符"><a href="#加号运算符" class="headerlink" title="加号运算符 +"></a>加号运算符 +</h4><p>①作用1：求和（当加号两边都是数字时进行求和运算）</p>
+<p>②作用2：字符串拼接（当加号&#x3D;&#x3D;两边有任意一边是字符串类型&#x3D;&#x3D;时会进行字符串拼接，结果还是一个字符串）</p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113100144.png" alt="image-20240223113100144"></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113232992.png" alt="image-20240223113232992"></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113303115.png" alt="image-20240223113303115"></p>
+<h3 id="四、变量"><a href="#四、变量" class="headerlink" title="四、变量"></a>四、变量</h3><p><strong>①变量是内存当中的一块空间。是计算机中存储数据最基本的单元。</strong></p>
+<p><strong>②变量三要素：</strong></p>
+<ul>
+<li>l数据类型（决定空间大小）【int, double, String】</li>
+<li>l变量名（只要是合法的标识符即可）</li>
+<li>l变量值（变量中具体存储的数据）</li>
+</ul>
+<p><strong>③变量的声明、赋值、访问</strong></p>
+<ul>
+<li>lint i; &#x2F;&#x2F; 声明一个整数型的变量，起名i</li>
+<li>li &#x3D; 100; &#x2F;&#x2F; 给变量i赋值100</li>
+<li>lSystem.out.println(i); &#x2F;&#x2F; 访问i变量：读操作</li>
+<li>li &#x3D; 200; &#x2F;&#x2F; 访问i变量：改操作【给变量i重新赋值200】</li>
+</ul>
+<p>生命周期就是从内存开辟到内存释放</p>
+<h4 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h4><p><strong>①局部变量</strong></p>
+<p>在方法体里面定义的变量</p>
+<p><strong>②成员变量</strong></p>
+<p>在类里面，不是在方法体里面定义的；</p>
+<p>&#x3D;&#x3D;对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。&#x3D;&#x3D;0.false，null</p>
+<ol>
+<li><p>静态变量</p>
+<p>​	&#x2F;&#x2F;</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> a；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实例变量</p>
+</li>
+</ol>
+<h3 id="五、数据类型"><a href="#五、数据类型" class="headerlink" title="五、数据类型"></a>五、数据类型</h3><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124717592.png" alt="image-20240223124717592"></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124824008.png" alt="image-20240223124824008"></p>
+<p>关于默认值：Java语言中变量必须先声明，再赋值，才能使用。对于局部变量来说必须手动赋值，而对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。</p>
+<h4 id="1-整数型详解"><a href="#1-整数型详解" class="headerlink" title="1.整数型详解"></a>1.整数型详解</h4><ol>
+<li>整数型字面量一般默认是int，所以在定义long的时候，需要在字面量的后面加上“L&#x2F;l”</li>
+</ol>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223125508845.png" alt="image-20240223125508845"></p>
+<h4 id="2-自动类型转换"><a href="#2-自动类型转换" class="headerlink" title="2.自动类型转换"></a>2.自动类型转换</h4><p>小容量的可以转大的，在Java中，对于基本数据类型来说，<strong>小容量是可以直接赋值给大容量的，这被称为自动类型转换。</strong></p>
+<p><strong>&#x3D;&#x3D;<em>byte &lt; short &lt; int &lt; long &lt; float &lt; double</em>&#x3D;&#x3D;</strong></p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134152096.png" alt="image-20240223134152096"></p>
+<h4 id="3-强制类型转换"><a href="#3-强制类型转换" class="headerlink" title="3.强制类型转换"></a>3.强制类型转换</h4><blockquote>
+<p>需要大容量转小容量</p>
+</blockquote>
+<p><strong>①Java中大容量是无法直接转换成小容量的。</strong>因为这种操作可能会导致精度损失，所以这种行为交给了程序员来决定，当然这种后果自然是程序员自己去承担。因此在代码中需要程序员自己亲手加上强制类型转换符，程序才能编译通过</p>
+<p><strong>②强制类型转换时，底层二进制是如何变化的？原则：砍掉左侧多余的二进制。</strong></p>
+<p><strong>③强制类型转换时，精度可能会损失，也可能不会损失，这要看具体的数据是否真正的超出了强转后的类型的取值范围</strong>。如下图：水可能溢出，也可能不会溢出，这要看真实存放的水有多少</p>
+<p>④请推算结果：byte b &#x3D; (byte)150;</p>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134219863.png" alt="image-20240223134219863"></p>
+<h4 id="4-byte"><a href="#4-byte" class="headerlink" title="4.byte"></a>4.byte</h4><p><strong>当整数字面量没有超出byte的范围</strong></p>
+<p><strong>①在Java中有这样一个规定，</strong>&#x3D;&#x3D;当整数型字面量没有超出byte的范围：可以直接赋值给byte类型的变量。&#x3D;&#x3D;</p>
+<p><strong>byte b &#x3D; 127</strong>; &#x2F;&#x2F; 这是允许的</p>
+<p>很显然，这是一种编译优化。同时也是为了方便程序员写代码。</p>
+<p><strong>②如果超出了范围</strong>，例如：</p>
+<p>byte b &#x3D; 128; &#x2F;&#x2F; 编译报错</p>
+<p>这样就会报错，需要做强制类型转换，例如：</p>
+<p>byte b &#x3D; (byte)128;</p>
+<p>它的执行结果你知道吗？可以尝试推算一下</p>
+<p><strong>③在整数类型中，除了byte有这个待遇之外，short同样也是支持的。</strong>也就是说：如果整数型字面量没有超出short取值范围时，也是支持直接赋值的。</p>
+<h4 id="5-数据类型运算"><a href="#5-数据类型运算" class="headerlink" title="5.数据类型运算"></a>5.数据类型运算</h4><p><strong>两个int类型做运算：</strong>两个int类型的数据做运算，最终的结果还是int类型</p>
+<p><strong>多种数据类型混合运算：</strong></p>
+<h5 id="a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"><a href="#a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算" class="headerlink" title="a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"></a>a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算</h5><p>byte a &#x3D; 100;</p>
+<p>int b &#x3D; 200;</p>
+<p>long c &#x3D; 300L;</p>
+<p>long d &#x3D; a + b + c;</p>
+<p>你可以测试一下，如果d变量是int类型则编译器会报错</p>
+<h5 id="b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"><a href="#b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short" class="headerlink" title="b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"></a>b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short</h5><h5 id="c-byte-a-10-3-这个是在编译的时候就得到结果了"><a href="#c-byte-a-10-3-这个是在编译的时候就得到结果了" class="headerlink" title="c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了"></a>c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了</h5><p>编译后的class文件中直接就是byte a &#x3D; 3</p>
+<h5 id="d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。"><a href="#d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。" class="headerlink" title="d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。"></a>d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。</h5><p>编译的阶段只能知道a&#x2F;b的结果是int类型，不知道最后的结果是多少。</p>
+<h3 id="6-浮点型"><a href="#6-浮点型" class="headerlink" title="6.浮点型"></a>6.浮点型</h3><p><strong>浮点型字面量默认被当做double</strong></p>
+<h4 id="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。"><a href="#①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。" class="headerlink" title="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加 F 或 f。"></a><strong>①Java中，浮点型字面量默认被当做double类型</strong>，如果要当做float类型，需要在数字后面添加 F 或 f。</h4><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142425166.png" alt="image-20240223142425166"></p>
+<p>&#x3D;&#x3D;float f &#x3D; 3.0; &#x2F;&#x2F; 编译报错&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;报错原因是：3.0默认被当做double类型，大容量无法直接赋值给小容量。如何修改：&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;float f &#x3D; 3.0F;&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;float f &#x3D; （double）3.14;&#x3D;&#x3D;这个是强制类型转换</p>
+<h4 id="②另外，可以通过以下程序的输出结果看到，double精度高于float："><a href="#②另外，可以通过以下程序的输出结果看到，double精度高于float：" class="headerlink" title="②另外，可以通过以下程序的输出结果看到，double精度高于float："></a><strong>②另外，可以通过以下程序的输出结果看到，double精度高于float：</strong></h4><p>double d &#x3D; 1.5656856894;</p>
+<p>System.out.println(d);</p>
+<p>float f &#x3D; 1.5656856894F;</p>
+<p>System.out.println(f);</p>
+<h4 id="③浮点型数据两种表示形式"><a href="#③浮点型数据两种表示形式" class="headerlink" title="③浮点型数据两种表示形式"></a>③浮点型数据两种表示形式</h4><p> <strong>第一种形式：十进制</strong></p>
+<p>double x &#x3D; 1.23;</p>
+<p>double y &#x3D; 0.23;</p>
+<p>double z &#x3D; .23;</p>
+<p> <strong>第二种形式：科学计数法</strong></p>
+<p>double x &#x3D; 0.123E2; &#x2F;&#x2F; 0.123 * 10的平方</p>
+<p>double y &#x3D; 123.34E-2; &#x2F;&#x2F; 123.34 &#x2F; 10的平方</p>
+<h4 id="⑤浮点型数据存储原理"><a href="#⑤浮点型数据存储原理" class="headerlink" title="⑤浮点型数据存储原理"></a>⑤<strong>浮点型数据存储原理</strong></h4><blockquote>
+<p>①符号位：0表示整数。1表示负数。</p>
+<p>②指数位：比如小数0.123E30，其中30就是指数。表示0.123 * 10的30次幂。所以也有把指数位叫做偏移量的。最大偏移量127。</p>
+<p>③尾数位：浮点数的小数部分的有效数字。例如：0.00123，那么尾数位存储123对应的二进制。</p>
+<p>④从浮点型数据存储原理上可以看到，二进制中的指数位决定了数字呈指数级增大。因此float虽然是4个字节，但却可以表示比long更大的数值。因此float容量比long的容量大。</p>
+</blockquote>
+<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142930629.png" alt="image-20240223142930629"></p>
+<p>①一旦有浮点型数据参与运算得出的结果，一定不要使用“&#x3D;&#x3D;”与其它数字进行“相等比较”</p>
+<blockquote>
+<p>浮点型数据在计算机底层计算的是近似值，</p>
+</blockquote>
+<h3 id="7-字符型"><a href="#7-字符型" class="headerlink" title="7.字符型"></a>7.字符型</h3><p>①占用两个字节，0~65535，和short容量相同，但char可以取更大的整数</p>
+<p>②单个字符，使用单引号括起来，不能是多个字符</p>
+<p>③可以保存一个汉字                       </p>
+<p>④char c &#x3D; ‘’; 这是不允许的</p>
+<p>⑤char c &#x3D; ‘\u0000’; 这表示一个空字符，也是char的默认值。\u0000是一个Unicode码。</p>
+<p>⑥空字符与空格字符是不同的。空字符表示什么也没有。空格字符表示一个空格。****</p>
+<h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>乱码产生的原因在于，在编码和解码的时候没有用同一个码表</p>
 ]]></content>
-      <tags>
-        <tag>JavaWeb</tag>
-        <tag>前端</tag>
-      </tags>
   </entry>
   <entry>
     <title>Java基础知识5</title>
@@ -261,180 +427,280 @@
       </categories>
   </entry>
   <entry>
-    <title></title>
-    <url>/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
-    <content><![CDATA[<h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
-<li><p>编译java代码 ： javac HelloWorld.java</p>
-</li>
-<li><p>main方法是JVM规定的，程序就是从这个位置执行的，程序的入口</p>
-</li>
-<li><p>public class 和class的区别</p>
-</li>
-</ol>
-<h2 id="P19-public-class和class的区别"><a href="#P19-public-class和class的区别" class="headerlink" title="P19 public class和class的区别"></a>P19 public class和class的区别</h2><ol>
-<li><p>一个java源文件中可以生成多个源文件 ；</p>
-</li>
-<li><p>编译后，一个class对应生成一个class字节码文件</p>
-</li>
-</ol>
-<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111209337.png" alt="image-20240223111209337" style="zoom:50%;" />
-
-<ol start="3">
-<li><p>如果一个类是public的，那么这个类名要和文件名保持一致，如果不一致就会报错。</p>
-</li>
-<li><p>一个java文件里，public class可以没有，如果有也只能有一个。</p>
-</li>
-<li><p>每个类里面都可以写入口main函数 ，执行只需要 java 类名</p>
+    <title>JavaWeb</title>
+    <url>/2024/03/05/JavaWeb/</url>
+    <content><![CDATA[<p><img src="/../blog_images/JavaWeb/image-20240305150715516.png" alt="image-20240305150715516"></p>
 <blockquote>
-<p>在实际的开发中，入口只能有一个</p>
+<p>缩减一下，直接就ajax和axios，Vue</p>
 </blockquote>
-</li>
-</ol>
-<img src="../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223111722726.png" alt="image-20240223111722726" style="zoom:50%;" />
+<h1 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h1><h2 id="1-JS引入方式"><a href="#1-JS引入方式" class="headerlink" title="1.JS引入方式"></a>1.JS引入方式</h2><p>内部脚本：将JS代码定义在html页面的*<script></script>*中</p>
+<p>​		建议：将*<script></script><em>放在</em><body>*的底部</p>
+<p>外部脚本：将JS代码定义在js文件中，通过*<script></script>*标签引入</p>
+<p>​		注意：通过*<script>*标签引入外部js文件时，标签不可以自闭合</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用 window.alert() 写入警告框</span><br><span class="line">使用 document.write() 写入 HTML 输出</span><br><span class="line">使用 console.log() 写入浏览器控制台</span><br></pre></td></tr></table></figure>
 
-<h2 id="JAVA基础语法"><a href="#JAVA基础语法" class="headerlink" title="JAVA基础语法"></a>JAVA基础语法</h2><h3 id="一、标识符"><a href="#一、标识符" class="headerlink" title="一、标识符"></a>一、标识符</h3><blockquote>
-<p>凡是有权利自己起名的都是标识符，比如类名等</p>
-</blockquote>
-<p>①在Java中，标识符是用来给变量、方法、类和包等命名的字符序列。</p>
-<p>②标识符的长度没有限制，但是建议使用有意义的、简洁的标识符，以提高代码的可读性和可维护性。</p>
-<h4 id="标识符可以标识什么"><a href="#标识符可以标识什么" class="headerlink" title="标识符可以标识什么"></a><strong>标识符可以标识什么</strong></h4><p>①变量名</p>
-<p>②方法名</p>
-<p>③类名、接口名、枚举名、注解名</p>
-<p>④包名</p>
-<p>⑤常量名</p>
-<p>⑥……</p>
-<h4 id="标识符命名规则"><a href="#标识符命名规则" class="headerlink" title="标识符命名规则"></a>标识符命名规则</h4><p>①标识符可以由字母、数字、下划线(_)和美元符号($)组成，不能含有其他符号。（java支持全球所有语言，所以这里的 字母 指的是任何一个国家的文字都可以）</p>
-<p>②标识符不能以数字开头。</p>
-<p>③标识符不能是Java中的关键字，如public、class、void等。</p>
-<p>④标识符是区分大小写的，即Foo和foo是两个不同的标识符。</p>
-<p>⑤标识符的长度没有限制，但是Java建议使用有意义的、简短的标识符。</p>
-<h4 id="标识符命名规范"><a href="#标识符命名规范" class="headerlink" title="标识符命名规范"></a><strong>标识符命名规范</strong></h4><p>①见名知意</p>
-<p>②驼峰式命名方式</p>
-<p>③类名、接口名、枚举、注解：首字母大写，后面每个单词首字母大写。（StudentService，UserService）</p>
-<p>④变量名和方法名：首字母小写，后面每个单词首字母大写。（doSome，doOther）</p>
-<p>⑤常量名：全部大写，每个单词用下划线连接。（LOGIN_SUCCESS，SYSTEM_ERROR）</p>
-<p>⑥包名：全部小写    </p>
-<h3 id="二、关键字"><a href="#二、关键字" class="headerlink" title="二、关键字"></a>二、关键字</h3><blockquote>
-<p>Java关键字是Java编程语言中预定义的具有特殊含义的单词，这些单词不能被用作标识符，而是在语法中有特定的用法和限制。</p>
-</blockquote>
-<h4 id="Java关键字有哪些"><a href="#Java关键字有哪些" class="headerlink" title="Java关键字有哪些"></a>Java关键字有哪些</h4><p>①Java关键字都是小写的。</p>
-<p>②abstract, assert, boolean, break, byte, case, catch, char, class, continue, default, do, double, else, enum, extends, final, finally, float, for, if, implements, import, instanceof, int, interface, long, native, new, package, private, protected, public, return, short, static, strictfp, super, switch, synchronized, this, throw, throws, transient, try, void, volatile, while（50）</p>
-<p>③Java保留字：goto，const(虽然没有在java中用到，但是不能用)</p>
-<h3 id="三、字面量"><a href="#三、字面量" class="headerlink" title="三、字面量"></a>三、字面量</h3><blockquote>
-<p>①字面量指的是在程序中直接使用的数据，字面量是Java中最基本的表达式，不需要进行计算或转换，直接使用即可。</p>
-<p>就是数据</p>
-</blockquote>
-<h4 id="Java中有哪些字面量"><a href="#Java中有哪些字面量" class="headerlink" title="Java中有哪些字面量"></a>Java中有哪些字面量</h4><p>①整数型：10、-5、0、100</p>
-<p>②浮点型：3.14、-0.5、1.0</p>
-<p>③布尔型：true、false</p>
-<p>④字符型：’a’、’b’、’c’、’1’、’2’、’国’</p>
-<p>⑤字符串型：”Hello”、”World”、”Java”、”你好呀”</p>
-<h4 id="加号运算符"><a href="#加号运算符" class="headerlink" title="加号运算符 +"></a>加号运算符 +</h4><p>①作用1：求和（当加号两边都是数字时进行求和运算）</p>
-<p>②作用2：字符串拼接（当加号&#x3D;&#x3D;两边有任意一边是字符串类型&#x3D;&#x3D;时会进行字符串拼接，结果还是一个字符串）</p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113100144.png" alt="image-20240223113100144"></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113232992.png" alt="image-20240223113232992"></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223113303115.png" alt="image-20240223113303115"></p>
-<h3 id="四、变量"><a href="#四、变量" class="headerlink" title="四、变量"></a>四、变量</h3><p><strong>①变量是内存当中的一块空间。是计算机中存储数据最基本的单元。</strong></p>
-<p><strong>②变量三要素：</strong></p>
-<ul>
-<li>l数据类型（决定空间大小）【int, double, String】</li>
-<li>l变量名（只要是合法的标识符即可）</li>
-<li>l变量值（变量中具体存储的数据）</li>
-</ul>
-<p><strong>③变量的声明、赋值、访问</strong></p>
-<ul>
-<li>lint i; &#x2F;&#x2F; 声明一个整数型的变量，起名i</li>
-<li>li &#x3D; 100; &#x2F;&#x2F; 给变量i赋值100</li>
-<li>lSystem.out.println(i); &#x2F;&#x2F; 访问i变量：读操作</li>
-<li>li &#x3D; 200; &#x2F;&#x2F; 访问i变量：改操作【给变量i重新赋值200】</li>
-</ul>
-<p>生命周期就是从内存开辟到内存释放</p>
-<h4 id="变量分类"><a href="#变量分类" class="headerlink" title="变量分类"></a>变量分类</h4><p><strong>①局部变量</strong></p>
-<p>在方法体里面定义的变量</p>
-<p><strong>②成员变量</strong></p>
-<p>在类里面，不是在方法体里面定义的；</p>
-<p>&#x3D;&#x3D;对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。&#x3D;&#x3D;0.false，null</p>
-<ol>
-<li><p>静态变量</p>
-<p>​	&#x2F;&#x2F;</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span> a；</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>实例变量</p>
-</li>
-</ol>
-<h3 id="五、数据类型"><a href="#五、数据类型" class="headerlink" title="五、数据类型"></a>五、数据类型</h3><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124717592.png" alt="image-20240223124717592"></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223124824008.png" alt="image-20240223124824008"></p>
-<p>关于默认值：Java语言中变量必须先声明，再赋值，才能使用。对于局部变量来说必须手动赋值，而对于成员变量来说，如果没有手动赋值，系统会自动赋默认值。</p>
-<h4 id="1-整数型详解"><a href="#1-整数型详解" class="headerlink" title="1.整数型详解"></a>1.整数型详解</h4><ol>
-<li>整数型字面量一般默认是int，所以在定义long的时候，需要在字面量的后面加上“L&#x2F;l”</li>
-</ol>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223125508845.png" alt="image-20240223125508845"></p>
-<h4 id="2-自动类型转换"><a href="#2-自动类型转换" class="headerlink" title="2.自动类型转换"></a>2.自动类型转换</h4><p>小容量的可以转大的，在Java中，对于基本数据类型来说，<strong>小容量是可以直接赋值给大容量的，这被称为自动类型转换。</strong></p>
-<p><strong>&#x3D;&#x3D;<em>byte &lt; short &lt; int &lt; long &lt; float &lt; double</em>&#x3D;&#x3D;</strong></p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134152096.png" alt="image-20240223134152096"></p>
-<h4 id="3-强制类型转换"><a href="#3-强制类型转换" class="headerlink" title="3.强制类型转换"></a>3.强制类型转换</h4><blockquote>
-<p>需要大容量转小容量</p>
-</blockquote>
-<p><strong>①Java中大容量是无法直接转换成小容量的。</strong>因为这种操作可能会导致精度损失，所以这种行为交给了程序员来决定，当然这种后果自然是程序员自己去承担。因此在代码中需要程序员自己亲手加上强制类型转换符，程序才能编译通过</p>
-<p><strong>②强制类型转换时，底层二进制是如何变化的？原则：砍掉左侧多余的二进制。</strong></p>
-<p><strong>③强制类型转换时，精度可能会损失，也可能不会损失，这要看具体的数据是否真正的超出了强转后的类型的取值范围</strong>。如下图：水可能溢出，也可能不会溢出，这要看真实存放的水有多少</p>
-<p>④请推算结果：byte b &#x3D; (byte)150;</p>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223134219863.png" alt="image-20240223134219863"></p>
-<h4 id="4-byte"><a href="#4-byte" class="headerlink" title="4.byte"></a>4.byte</h4><p><strong>当整数字面量没有超出byte的范围</strong></p>
-<p><strong>①在Java中有这样一个规定，</strong>&#x3D;&#x3D;当整数型字面量没有超出byte的范围：可以直接赋值给byte类型的变量。&#x3D;&#x3D;</p>
-<p><strong>byte b &#x3D; 127</strong>; &#x2F;&#x2F; 这是允许的</p>
-<p>很显然，这是一种编译优化。同时也是为了方便程序员写代码。</p>
-<p><strong>②如果超出了范围</strong>，例如：</p>
-<p>byte b &#x3D; 128; &#x2F;&#x2F; 编译报错</p>
-<p>这样就会报错，需要做强制类型转换，例如：</p>
-<p>byte b &#x3D; (byte)128;</p>
-<p>它的执行结果你知道吗？可以尝试推算一下</p>
-<p><strong>③在整数类型中，除了byte有这个待遇之外，short同样也是支持的。</strong>也就是说：如果整数型字面量没有超出short取值范围时，也是支持直接赋值的。</p>
-<h4 id="5-数据类型运算"><a href="#5-数据类型运算" class="headerlink" title="5.数据类型运算"></a>5.数据类型运算</h4><p><strong>两个int类型做运算：</strong>两个int类型的数据做运算，最终的结果还是int类型</p>
-<p><strong>多种数据类型混合运算：</strong></p>
-<h5 id="a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"><a href="#a-在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算" class="headerlink" title="a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算"></a>a.在Java中，多种数据类型混合运算时，各自先转换成容量最大的类型，再做运算</h5><p>byte a &#x3D; 100;</p>
-<p>int b &#x3D; 200;</p>
-<p>long c &#x3D; 300L;</p>
-<p>long d &#x3D; a + b + c;</p>
-<p>你可以测试一下，如果d变量是int类型则编译器会报错</p>
-<h5 id="b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"><a href="#b-byte和short混合运算（byte-byte、short-short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short" class="headerlink" title="b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short"></a>b.byte和short混合运算（byte+byte、short+short）的时候，各自先转换成int再做运算，最后的结果是int，不能用short</h5><h5 id="c-byte-a-10-3-这个是在编译的时候就得到结果了"><a href="#c-byte-a-10-3-这个是在编译的时候就得到结果了" class="headerlink" title="c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了"></a>c.byte a  &#x3D; 10&#x2F;3 ,这个是在编译的时候就得到结果了</h5><p>编译后的class文件中直接就是byte a &#x3D; 3</p>
-<h5 id="d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。"><a href="#d-byte-a-10-byte-b-3-byte-c-a-b-这个是运行的时候才得到结果的。" class="headerlink" title="d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。"></a>d.byte a &#x3D; 10; byte b &#x3D; 3; byte c &#x3D; a&#x2F;b 这个是运行的时候才得到结果的。</h5><p>编译的阶段只能知道a&#x2F;b的结果是int类型，不知道最后的结果是多少。</p>
-<h3 id="6-浮点型"><a href="#6-浮点型" class="headerlink" title="6.浮点型"></a>6.浮点型</h3><p><strong>浮点型字面量默认被当做double</strong></p>
-<h4 id="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。"><a href="#①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加-F-或-f。" class="headerlink" title="①Java中，浮点型字面量默认被当做double类型，如果要当做float类型，需要在数字后面添加 F 或 f。"></a><strong>①Java中，浮点型字面量默认被当做double类型</strong>，如果要当做float类型，需要在数字后面添加 F 或 f。</h4><p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142425166.png" alt="image-20240223142425166"></p>
-<p>&#x3D;&#x3D;float f &#x3D; 3.0; &#x2F;&#x2F; 编译报错&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;报错原因是：3.0默认被当做double类型，大容量无法直接赋值给小容量。如何修改：&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;float f &#x3D; 3.0F;&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;float f &#x3D; （double）3.14;&#x3D;&#x3D;这个是强制类型转换</p>
-<h4 id="②另外，可以通过以下程序的输出结果看到，double精度高于float："><a href="#②另外，可以通过以下程序的输出结果看到，double精度高于float：" class="headerlink" title="②另外，可以通过以下程序的输出结果看到，double精度高于float："></a><strong>②另外，可以通过以下程序的输出结果看到，double精度高于float：</strong></h4><p>double d &#x3D; 1.5656856894;</p>
-<p>System.out.println(d);</p>
-<p>float f &#x3D; 1.5656856894F;</p>
-<p>System.out.println(f);</p>
-<h4 id="③浮点型数据两种表示形式"><a href="#③浮点型数据两种表示形式" class="headerlink" title="③浮点型数据两种表示形式"></a>③浮点型数据两种表示形式</h4><p> <strong>第一种形式：十进制</strong></p>
-<p>double x &#x3D; 1.23;</p>
-<p>double y &#x3D; 0.23;</p>
-<p>double z &#x3D; .23;</p>
-<p> <strong>第二种形式：科学计数法</strong></p>
-<p>double x &#x3D; 0.123E2; &#x2F;&#x2F; 0.123 * 10的平方</p>
-<p>double y &#x3D; 123.34E-2; &#x2F;&#x2F; 123.34 &#x2F; 10的平方</p>
-<h4 id="⑤浮点型数据存储原理"><a href="#⑤浮点型数据存储原理" class="headerlink" title="⑤浮点型数据存储原理"></a>⑤<strong>浮点型数据存储原理</strong></h4><blockquote>
-<p>①符号位：0表示整数。1表示负数。</p>
-<p>②指数位：比如小数0.123E30，其中30就是指数。表示0.123 * 10的30次幂。所以也有把指数位叫做偏移量的。最大偏移量127。</p>
-<p>③尾数位：浮点数的小数部分的有效数字。例如：0.00123，那么尾数位存储123对应的二进制。</p>
-<p>④从浮点型数据存储原理上可以看到，二进制中的指数位决定了数字呈指数级增大。因此float虽然是4个字节，但却可以表示比long更大的数值。因此float容量比long的容量大。</p>
-</blockquote>
-<p><img src="/../blog_images/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/image-20240223142930629.png" alt="image-20240223142930629"></p>
-<p>①一旦有浮点型数据参与运算得出的结果，一定不要使用“&#x3D;&#x3D;”与其它数字进行“相等比较”</p>
+
+
+<h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><p>JavaScript 中用 <strong>var</strong> 关键字（variable 的缩写）来声明变量 。</p>
+<p>JavaScript 是一门弱类型语言，变量可以存放不同类型的值 。</p>
+<p>变量名需要遵循如下规则：</p>
+<p>​	Ø组成字符可以是任何字母、数字、下划线（_）或美元符号（$）</p>
+<p>​	Ø数字不能开头</p>
+<p>​	Ø建议使用驼峰命名</p>
 <blockquote>
-<p>浮点型数据在计算机底层计算的是近似值，</p>
+<p>ECMAScript 6 新增了 let 关键字来定义变量。它的用法类似于 var，但是所声明的变量，只在 let 关键字所在的代码块内有效，且不允许重复声明。</p>
 </blockquote>
-<h3 id="7-字符型"><a href="#7-字符型" class="headerlink" title="7.字符型"></a>7.字符型</h3><p>①占用两个字节，0~65535，和short容量相同，但char可以取更大的整数</p>
-<p>②单个字符，使用单引号括起来，不能是多个字符</p>
-<p>③可以保存一个汉字                       </p>
-<p>④char c &#x3D; ‘’; 这是不允许的</p>
-<p>⑤char c &#x3D; ‘\u0000’; 这表示一个空字符，也是char的默认值。\u0000是一个Unicode码。</p>
-<p>⑥空字符与空格字符是不同的。空字符表示什么也没有。空格字符表示一个空格。****</p>
-<h4 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h4><p>乱码产生的原因在于，在编码和解码的时候没有用同一个码表</p>
-]]></content>
+<blockquote>
+<p>ECMAScript 6 新增了 const 关键字，用来声明一个只读的常量。一旦声明，常量的值就不能改变。</p>
+</blockquote>
+<p><strong>•var：声明变量，全局作用域/函数作用域，允许重复声明</strong></p>
+<p><strong>• let：声明变量，块级作用域，不允许重复声明</strong></p>
+<p><strong>• const：声明常量，一旦声明，常量的值不能改变</strong></p>
+<h2 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3.数据类型"></a>3.数据类型</h2><p>JavaScript中分为：<strong>原始类型 和 引用类型</strong>。</p>
+<p><img src="/../blog_images/JavaWeb/image-20240306105949534.png" alt="image-20240306105949534"></p>
+<p>var 变量名 = new Array(元素列表); </p>
+<p><img src="/../blog_images/JavaWeb/image-20240306110748714.png" alt="image-20240306110748714"></p>
+<h2 id="4-BOW"><a href="#4-BOW" class="headerlink" title="4.BOW"></a>4.BOW</h2><p>Browser Object Model 浏览器对象模型，允许JavaScript与浏览器对话， JavaScript 将浏览器的各个组成部分封装为对象。</p>
+<p>location地址对象：就是那个框</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>history：对 History 对象的只读引用。请参阅 <a href="https://www.w3school.com.cn/jsref/dom_obj_history.asp">History </a><a href="https://www.w3school.com.cn/jsref/dom_obj_history.asp">对象</a>。</p>
+<p>location：用于窗口或框架的 Location 对象。请参阅 <a href="https://www.w3school.com.cn/jsref/dom_obj_location.asp">Location </a><a href="https://www.w3school.com.cn/jsref/dom_obj_location.asp">对象</a>。</p>
+<p>navigator：对 Navigator 对象的只读引用。请参阅 <a href="https://www.w3school.com.cn/jsref/dom_obj_navigator.asp">Navigator </a><a href="https://www.w3school.com.cn/jsref/dom_obj_navigator.asp">对象</a>。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>alert()：显示带有一段消息和一个确认按钮的警告框。</p>
+<p>confirm()：显示带有一段消息以及确认按钮和取消按钮的对话框。</p>
+<p>setInterval()：按照指定的周期（以毫秒计）来调用函数或计算表达式。</p>
+<p>setTimeout()：在指定的毫秒数后调用函数或计算表达式。</p>
+<h2 id="5-DOM（概念：Document-Object-Model-，文档对象模型）"><a href="#5-DOM（概念：Document-Object-Model-，文档对象模型）" class="headerlink" title="5.DOM（概念：Document Object Model ，文档对象模型）"></a>5.DOM（概念：Document Object Model ，文档对象模型）</h2><p><img src="/../blog_images/JavaWeb/image-20240306111613344.png" alt="image-20240306111613344"></p>
+<h2 id="6-事件监听"><a href="#6-事件监听" class="headerlink" title="6.事件监听"></a>6.事件监听</h2><p>事件：HTML事件是发生在HTML元素上的 “事情”。比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">按钮被点击</span><br><span class="line"></span><br><span class="line">鼠标移动到元素上</span><br><span class="line"></span><br><span class="line">按下键盘按键</span><br></pre></td></tr></table></figure>
+
+<p>事件监听：JavaScript可以在事件被侦测到时 执行代码。</p>
+<h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><h4 id="方式一：通过-HTML标签中的事件属性进行绑定"><a href="#方式一：通过-HTML标签中的事件属性进行绑定" class="headerlink" title="方式一：通过 HTML标签中的事件属性进行绑定"></a>方式一：通过 HTML标签中的事件属性进行绑定</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;button&quot;</span> onclick=<span class="string">&quot;on()&quot;</span> value=<span class="string">&quot;按钮1&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function <span class="title function_">on</span><span class="params">()</span>&#123;</span><br><span class="line">        alert(<span class="string">&#x27;我被点击了!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：通过-DOM-元素属性绑定"><a href="#方式二：通过-DOM-元素属性绑定" class="headerlink" title="方式二：通过 DOM 元素属性绑定"></a>方式二：通过 DOM 元素属性绑定</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;按钮2&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">  document.getElementById(&#x27;btn&#x27;).onclick=function()&#123;</span><br><span class="line"></span><br><span class="line">    alert(&#x27;我被点击了!&#x27;);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常见事件"><a href="#常见事件" class="headerlink" title="常见事件"></a>常见事件</h3><p><img src="/../blog_images/JavaWeb/image-20240306112610533.png" alt="image-20240306112610533"></p>
+<h2 id="7-Vue"><a href="#7-Vue" class="headerlink" title="7.Vue"></a>7.Vue</h2><p>Vue 是一套前端框架，免除原生JavaScript中的DOM操作，简化书写。</p>
+<p>基于MVVM(Model-View-ViewModel)思想，实现数据的双向绑定，将编程的关注点放在数据上。</p>
+<p>官网： <a href="https://v2.cn.vuejs.org/">https://v2.cn.vuejs.org/</a></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306112707334.png" alt="image-20240306112707334"></p>
+<h3 id="Vue快速入门"><a href="#Vue快速入门" class="headerlink" title="Vue快速入门"></a>Vue快速入门</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="/../blog_images/JavaWeb/image-20240306112754269.png" alt="image-20240306112754269"></h3><h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><p>指令：HTML 标签上带有 v- 前缀 的特殊属性，不同指令具有不同含义。例如：v-if，v-for…</p>
+<p>常用指令</p>
+<table>
+<thead>
+<tr>
+<th><strong>指令</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v-bind</td>
+<td>为HTML标签绑定属性值，如设置 href , css样式等</td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>在表单元素上创建双向数据绑定</td>
+</tr>
+<tr>
+<td>v-on</td>
+<td>为HTML标签绑定事件</td>
+</tr>
+<tr>
+<td>v-if</td>
+<td>条件性的渲染某元素，判定为true时渲染,否则不渲染</td>
+</tr>
+<tr>
+<td>v-else-if</td>
+<td></td>
+</tr>
+<tr>
+<td>v-else</td>
+<td></td>
+</tr>
+<tr>
+<td>v-show</td>
+<td>根据条件展示某元素，区别在于切换的是display属性的值</td>
+</tr>
+<tr>
+<td>v-for</td>
+<td>列表渲染，遍历容器的元素或者对象的属性</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>指令</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v-bind</td>
+<td>为HTML标签绑定属性值，如设置 href , css样式等</td>
+</tr>
+<tr>
+<td>v-model</td>
+<td>在表单元素上创建双向数据绑定</td>
+</tr>
+</tbody></table>
+<p>通过v-bind或者v-model绑定的变量，必须在数据模型中声明。</p>
+<p><img src="/../blog_images/JavaWeb/image-20240306113353512.png" alt="image-20240306113353512"></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306113419926.png" alt="image-20240306113419926"></p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>生命周期：指一个对象从创建到销毁的整个过程。</p>
+<p>生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法(钩子)。</p>
+<table>
+<thead>
+<tr>
+<th><strong>状态</strong></th>
+<th><strong>阶段周期</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>beforeCreate</td>
+<td>创建前</td>
+</tr>
+<tr>
+<td>created</td>
+<td>创建后</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td>挂载前</td>
+</tr>
+<tr>
+<td>mounted</td>
+<td>挂载完成</td>
+</tr>
+<tr>
+<td>beforeUpdate</td>
+<td>更新前</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>更新后</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td>销毁前</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>销毁后</td>
+</tr>
+</tbody></table>
+<p><img src="/../blog_images/JavaWeb/image-20240306114312596.png" alt="image-20240306114312596"></p>
+<p><strong>生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法(钩子)</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">        el: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;,</span><br><span class="line">        mounted() &#123;</span><br><span class="line">            console.log(<span class="string">&quot;Vue挂载完毕,发送请求获取数据&quot;</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">           </span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>mounted：挂载完成，Vue初始化成功，HTML页面渲染成功。（发送请求到服务端，加载数据）</p>
+<h1 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h1><p>Maven是apache旗下的一个开源项目，是一款用于管理和构建java项目的工具。</p>
+<blockquote>
+<p>基于项目对象模型(POM)的概念，通过一小段描述信息来管理项目的构建。</p>
+</blockquote>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>  <strong>依赖管理</strong>：方便快捷的管理项目依赖的资源(jar包)，避免版本冲突问题</p>
+<p>  <strong>统一项目结构</strong>：提供标准、统一的项目结构</p>
+<p>  <strong>项目构建</strong>：标准跨平台（Linux、Windows、MacOS）的自动化项目构建方式</p>
+<p>清理、编译、测试、打包、发布</p>
+<p><img src="/../blog_images/JavaWeb/image-20240306132942342.png" alt="image-20240306132942342"></p>
+<h2 id="Maven概述"><a href="#Maven概述" class="headerlink" title="Maven概述"></a>Maven概述</h2><p><img src="/../blog_images/JavaWeb/image-20240306134710518.png" alt="image-20240306134710518"></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306134742641.png" alt="image-20240306134742641"></p>
+<h3 id="Maven坐标"><a href="#Maven坐标" class="headerlink" title="Maven坐标"></a>Maven坐标</h3><p>Maven 中的坐标是资源的唯一标识，通过该坐标可以唯一定位资源位置。</p>
+<p>使用坐标来定义项目或引入项目中需要的依赖。</p>
+<h4 id="Maven-坐标主要组成"><a href="#Maven-坐标主要组成" class="headerlink" title="Maven 坐标主要组成"></a>Maven 坐标主要组成</h4><p>groupId：定义当前Maven项目隶属组织名称（通常是域名反写，例如：com.itheima）</p>
+<p>artifactId：定义当前Maven项目名称（通常是模块名称，例如 order-service、goods-service）</p>
+<p>version：定义当前项目版本号</p>
+<p><img src="/../blog_images/JavaWeb/image-20240306135618173.png" alt="image-20240306135618173"></p>
+<h4 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h4><p>依赖：指当前项目运行所需要的jar包，一个项目中可以引入多个依赖。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.在 pom.xml 中编写 &lt;dependencies&gt; 标签</span><br><span class="line"></span><br><span class="line">2.在 &lt;dependencies&gt; 标签中 使用 &lt;dependency&gt; 引入坐标</span><br><span class="line"></span><br><span class="line">3.定义坐标的 groupId，artifactId，version</span><br><span class="line"></span><br><span class="line">4.点击刷新按钮，引入最新加入的坐标</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;        </span><br><span class="line">    	&lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;        </span><br><span class="line">    	&lt;artifactId&gt;logback-classic&lt;/artifactId&gt;      </span><br><span class="line">    	&lt;version&gt;1.2.3&lt;/version&gt;    </span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="依赖具有传递性"><a href="#依赖具有传递性" class="headerlink" title="依赖具有传递性"></a>依赖具有传递性</h5><blockquote>
+<p>直接依赖：在当前项目中通过依赖配置建立的依赖关系</p>
+<p>间接依赖：被依赖的资源如果依赖其他资源，当前项目间接依赖其他资源</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306140113368.png" alt="image-20240306140113368"></p>
+<h5 id="排除依赖"><a href="#排除依赖" class="headerlink" title="排除依赖"></a>排除依赖</h5><blockquote>
+<p>排除依赖指主动断开依赖的资源，被排除的资源无需指定版本。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306140209596.png" alt="image-20240306140209596"></p>
+<h4 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h4><p>依赖的jar包，默认情况下，可以在任何地方使用。可以通过</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;scope&gt;…&lt;/ scope &gt; </span><br></pre></td></tr></table></figure>
+
+<p>设置其作用范围。</p>
+<p><strong>作用范围：</strong></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306140857607.png" alt="image-20240306140857607"></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306140907131.png" alt="image-20240306140907131"></p>
+<table>
+<thead>
+<tr>
+<th><strong>scope****值</strong></th>
+<th><strong>主程序</strong></th>
+<th><strong>测试程序</strong></th>
+<th><strong>打包（运行）</strong></th>
+<th><strong>范例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compile（默认）</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>log4j</td>
+</tr>
+<tr>
+<td>test</td>
+<td>-</td>
+<td>Y</td>
+<td>-</td>
+<td>junit</td>
+</tr>
+<tr>
+<td>provided</td>
+<td>Y</td>
+<td>Y</td>
+<td>-</td>
+<td>servlet-api</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>-</td>
+<td>Y</td>
+<td>Y</td>
+<td>jdbc驱动</td>
+</tr>
+</tbody></table>
+<h4 id="生命周期-1"><a href="#生命周期-1" class="headerlink" title="生命周期"></a>生命周期</h4><blockquote>
+<p>Maven的生命周期就是为了对所有的maven项目构建过程进行抽象和统一。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306141128223.png" alt="image-20240306141128223"></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306141920091.png" alt="image-20240306141920091"></p>
+<p>Maven中有3套相互独立的生命周期：</p>
+<blockquote>
+<p>在同一套生命周期中，当运行后面的阶段时，前面的阶段都会运行。</p>
+</blockquote>
+<ul>
+<li>clean：清理工作。</li>
+<li>default：核心工作，如：编译、测试、打包、安装、部署等。</li>
+<li>site：生成报告、发布站点等。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">clean：移除上一次构建生成的文件</span><br><span class="line">compile：编译项目源代码</span><br><span class="line">test：使用合适的单元测试框架运行测试(junit)</span><br><span class="line">package：将编译后的文件打包，如：jar、war等</span><br><span class="line">install：安装项目到本地仓库</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb/image-20240306142550365.png" alt="image-20240306142550365"></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306142605065.png" alt="image-20240306142605065"></p>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><p><img src="/../blog_images/JavaWeb/image-20240306142800941.png" alt="image-20240306142800941"></p>
+<blockquote>
+<p>Spring Framework配置比较繁琐，入门的难度比较大</p>
+<p>Sprint Boot简化配置，快速入门</p>
+</blockquote>
+<h2 id="SpringBootWeb入门"><a href="#SpringBootWeb入门" class="headerlink" title="SpringBootWeb入门"></a>SpringBootWeb入门</h2><h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><p><img src="/../blog_images/JavaWeb/image-20240306143624478.png" alt="image-20240306143624478"></p>
+<p><img src="/../blog_images/JavaWeb/image-20240306143813629.png" alt="image-20240306143813629"></p>
+<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><h4 id="HTTP-概述"><a href="#HTTP-概述" class="headerlink" title="HTTP-概述"></a>HTTP-概述</h4><blockquote>
+<p>Hyper Text Transfer Protocol，超文本传输协议，规定了浏览器和服务器之间数据传输的规则。 </p>
+</blockquote>
+<h4 id="HTTP-请求协议"><a href="#HTTP-请求协议" class="headerlink" title="HTTP-请求协议"></a>HTTP-请求协议</h4><h4 id="HTTP-响应协议"><a href="#HTTP-响应协议" class="headerlink" title="HTTP-响应协议"></a>HTTP-响应协议</h4><h4 id="HTTP-协议解析"><a href="#HTTP-协议解析" class="headerlink" title="HTTP-协议解析"></a>HTTP-协议解析</h4>]]></content>
+      <tags>
+        <tag>JavaWeb</tag>
+        <tag>前端</tag>
+      </tags>
   </entry>
   <entry>
     <title>Java基础知识7-注解</title>
@@ -896,11 +1162,6 @@
         <tag>Java体系知识</tag>
         <tag>java基础</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Java基础知识9-lambda表达式概述</title>
-    <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%869-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Java基础部分2</title>
@@ -1485,6 +1746,11 @@
       </categories>
   </entry>
   <entry>
+    <title>Java基础知识9-lambda表达式概述</title>
+    <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%869-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>Java基础部分3</title>
     <url>/2024/02/26/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%863/</url>
     <content><![CDATA[<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="数组概述"><a href="#数组概述" class="headerlink" title="数组概述"></a>数组概述</h3><h4 id="①什么是数组？"><a href="#①什么是数组？" class="headerlink" title="①什么是数组？"></a>①什么是数组？</h4><p>1.在Java中，数组是一种用于存储多个相同数据类型元素的容器。</p>
@@ -2038,161 +2304,6 @@
       <categories>
         <category>Java体系知识</category>
         <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Redis-记录</title>
-    <url>/2024/02/21/Redis-%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h1 id="第一章-Redis-概述"><a href="#第一章-Redis-概述" class="headerlink" title="第一章 Redis 概述"></a>第一章 Redis 概述</h1><h2 id="一、Redis-Remote-Dictionary-Server-远程字典服务"><a href="#一、Redis-Remote-Dictionary-Server-远程字典服务" class="headerlink" title="一、Redis(Remote Dictionary Server)远程字典服务"></a>一、Redis(Remote Dictionary Server)远程字典服务</h2><ol>
-<li><p>使用 &#x3D;&#x3D;ANSI C 语言&#x3D;&#x3D;编写、&#x3D;&#x3D;支持网络、可基于内存亦可持久化的日志型、NoSQL 开源内存数据库&#x3D;&#x3D;，其提供多种语言的 API。</p>
-</li>
-<li><p>Redis被称为字典服务的原因在于，redis是一个key-value的存储系统。</p>
-<blockquote>
-<p>支持存储的value类型有很多，包括String（字符串）、List（链表）、Set（集合）、Zset（sorted set– 有序集合）和哈希类型等</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="二、NoSQL"><a href="#二、NoSQL" class="headerlink" title="二、NoSQL"></a>二、NoSQL</h2><p>Nosql（non-relational，Not Only SQL），泛指的是非关系型的数据库。</p>
-<blockquote>
-<p>比如社交类的等等</p>
-</blockquote>
-<p>&#x3D;&#x3D;NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题&#x3D;&#x3D;</p>
-<p>传统方法不适合这种情况。</p>
-<h3 id="1-键值存储数据库"><a href="#1-键值存储数据库" class="headerlink" title="1. 键值存储数据库"></a>1. 键值存储数据库</h3><p>类似Map的key-value对。</p>
-<blockquote>
-<p>典型代表redis</p>
-</blockquote>
-<h3 id="2-列存储数据库"><a href="#2-列存储数据库" class="headerlink" title="2. 列存储数据库"></a>2. 列存储数据库</h3><p>注意的是 ，关系数据库是行关系库，其存在的问题在于，按照行存储的数据在物理层面占用的是连续的存储空间，&#x3D;&#x3D;是不适合海量的数据存储&#x3D;&#x3D;的。</p>
-<p>而按列存储则可以实现一个分布式存储，适合海量的存储</p>
-<blockquote>
-<p>典型的代表就是HBase</p>
-</blockquote>
-<h3 id="3-文档型数据库"><a href="#3-文档型数据库" class="headerlink" title="3. 文档型数据库"></a>3. 文档型数据库</h3><p>NoSQL与关系型数据的结合，最想关系型数据库的NoSQL</p>
-<blockquote>
-<p>典型代表就是MongoDB。</p>
-</blockquote>
-<h3 id="4-图像（Graph）数据库"><a href="#4-图像（Graph）数据库" class="headerlink" title="4. 图像（Graph）数据库"></a>4. 图像（Graph）数据库</h3><blockquote>
-<p>用于存放一个节点关系的数据库，例如描述不同人间的关系。典型代表是 Neo4J。</p>
-</blockquote>
-<h2 id="三、Redis的用途"><a href="#三、Redis的用途" class="headerlink" title="三、Redis的用途"></a>三、Redis的用途</h2><h3 id="1-数据缓存"><a href="#1-数据缓存" class="headerlink" title="1.数据缓存"></a>1.数据缓存</h3><p>Redis在生产中用的最多的场景：&#x3D;&#x3D;数据缓存&#x3D;&#x3D;。</p>
-<p>正常情况下，用户-&gt;服务器-&gt;数据库 （query），然后再返回。</p>
-<p>但是当用户很多的时候，就是高并发的时候，解决不了了。</p>
-<p>因此提出解决方案： 用户-&gt;服务器-&gt;缓存-&gt; 数据库 （query）</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223001703204.png" alt="image-20240223001703204"></p>
-<p>这样DBMS压力就会减轻。</p>
-<blockquote>
-<p>即客户端从 DBMS 中查询出的数据首先写入到 Redis 中，后续无论哪个客户端再需要访问该数据，直接读取 Redis 中的即可，不仅减小了 RT，而且降低了 DBMS 的压力。</p>
-<p>而且，DBMS一般存放在磁盘中，而Redis作为内存数据库是放在内存中的，且直接通过key来查询，缓存层的查询非常的快，高并发的问题可以解决。</p>
-</blockquote>
-<h4 id="数据不一致问题？："><a href="#数据不一致问题？：" class="headerlink" title="数据不一致问题？："></a>数据不一致问题？：</h4><p>当一个用户提出要修改，修改了DBMS，没有修改缓存层，就会存在一个脏数据&#x2F;</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223074739083.png" alt="image-20240223074739083"></p>
-<p>预热：服务器不是刚开就提供服务，会有一个预热，把一些基础数据先保存到缓存中</p>
-<h2 id="四、Redis-特性"><a href="#四、Redis-特性" class="headerlink" title="四、Redis 特性"></a>四、<strong>Redis</strong> <strong>特性</strong></h2><h3 id="1-性能极高："><a href="#1-性能极高：" class="headerlink" title="1.性能极高："></a>1.性能极高：</h3><p>Redis 读的速度可以达到 11w 次&#x2F;s，写的速度可以达到 8w 次&#x2F;s。只所以具有，这么高的性能，因为以下几点原因：</p>
-<p>1）Redis 的所有操作都是在内存中发生的。</p>
-<p>2）Redis 是用 C 语言开发的。</p>
-<p>3）Redis 源码非常精细（集性能与优雅于一身）。</p>
-<h3 id="2-简单稳定"><a href="#2-简单稳定" class="headerlink" title="2.简单稳定"></a>2.简单稳定</h3><p>Redis 源码很少。早期版本只有 2w 行左右。从 3.0 版本开始，增加了集群功能，代码变为了 5w 行左右。</p>
-<h3 id="3-持久化"><a href="#3-持久化" class="headerlink" title="3.持久化"></a>3.持久化</h3><p>数据缓存是暂时的，要保存到磁盘，才能保证数据安全。Redis 内存中的数据可以进行持久化，其有两种方式：RDB 与 AOF。</p>
-<h3 id="4-高可用集群"><a href="#4-高可用集群" class="headerlink" title="4.高可用集群"></a>4.高可用集群</h3><p>Redis 提供了高可用的主从集群功能，可以确保系统的安全性</p>
-<h3 id="5-丰富的数据类型"><a href="#5-丰富的数据类型" class="headerlink" title="5.丰富的数据类型"></a>5.丰富的数据类型</h3><p>Redis 是一个 key-value 存储系统。支持存储的 value 类型很多，包括String(字符串)、List(链表)、Set(集合)、Zset(sorted set –有序集合)和 Hash（哈希类型）等，还有 BitMap、HyperLogLog、Geospatial 类型</p>
-<ol>
-<li><p> BitMap：一般用于大数据量的二值性统计。<br>比如员工是否打卡</p>
-</li>
-<li><p> HyperLogLog：其是 Hyperlog Log，用于对数据量超级庞大的日志做去重统计。</p>
-</li>
-<li><p> Geospatial：地理空间，其主要用于地理位置相关的计算。</p>
-<p>比如“附近的人”</p>
-</li>
-</ol>
-<h3 id="6-强大的功能"><a href="#6-强大的功能" class="headerlink" title="6.强大的功能"></a>6.强大的功能</h3><p>Redis 提供了数据过期功能、发布&#x2F;订阅功能、简单事务功能，还支持 Lua脚本扩展功能。</p>
-<h3 id="7-客户端语言广泛"><a href="#7-客户端语言广泛" class="headerlink" title="7.客户端语言广泛"></a>7.客户端语言广泛</h3><p>Redis提供了简单的 TCP 通信协议，编程语言可以方便地的接入 Redis。所以，有很多的开源社区、大公司等开发出了很多语言的 Redis 客户端。</p>
-<h3 id="8-支持-ACL-权限控制"><a href="#8-支持-ACL-权限控制" class="headerlink" title="8.支持 ACL 权限控制"></a>8.支持 ACL 权限控制</h3><p>之前的权限控制非常笨拙。从 Redis6 开始引入了 ACL 模块，可以为不同用户定制不同的用户权限。</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223081342029.png" alt="image-20240223081342029"></p>
-<blockquote>
-<p>linux 的drwxr-xr-x ：d表示目录&#x2F;l表示链接，rwx表示用户（创建者User）读写可执行；Group r-x后三位表示和创建者同组用户读可执行。Other r-x</p>
-</blockquote>
-<h3 id="9-支持多线程-IO-模型"><a href="#9-支持多线程-IO-模型" class="headerlink" title="9.支持多线程 IO 模型"></a>9.支持多线程 IO 模型</h3><p>Redis 之前版本采用的是单线程模型，从 6.0 版本开始支持了多线程模型。</p>
-<h2 id="五-Redis-的-IO-模型"><a href="#五-Redis-的-IO-模型" class="headerlink" title="五.Redis 的 IO 模型"></a>五.<strong>Redis</strong> <strong>的</strong> <strong>IO</strong> <strong>模型</strong></h2><p>单线程模型 多线程模型 混合模型</p>
-<p>Redis 客户端提交的各种请求是如何最终被 Redis 处理的？Redis 处理客户端请求所采用的处理架构，称为 Redis 的 IO 模型。不同版本的 Redis 采用的 IO 模型是不同的。</p>
-<h3 id="1-单线程模型"><a href="#1-单线程模型" class="headerlink" title="1.单线程模型"></a>1.<strong>单线程模型</strong></h3><blockquote>
-<p>性能还是很强,写8w&#x2F;qps,读11w&#x2F;qps–&gt;内存\单线程可维护性比较高(多线程存在线程切换问题,顾及到数据安全问题\死锁问题)</p>
-<p>问题:持久化等操作和客户端没太多联系,但是又比较费时,于是提出了混合线程模型</p>
-</blockquote>
-<p>对于 Redis 3.0 及其以前版本，Redis 的 IO 模型采用的是纯粹的单线程模型。即所有客户端的请求全部由一个线程处理。</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223082516763.png" alt="image-20240223082516763"></p>
-<p>每个客户端若要向 Redis 提交请求，都需要与 Redis 建立一个 socket 连接，并向事件分发器注册一个事件。</p>
-<p>一旦该事件发生就表明该连接已经就绪。而一旦连接就绪，事件分发器就会感知到，然后获取客户端通过该连接发送的请求，并将由该事件分发器所绑定的这个唯一的线程来处理。</p>
-<p>如果该线程还在处理多个任务，则将该任务写入到任务队列等待线程处理。只所以称为事件分发器，是因为它会根据不同的就绪事件，将任务交由不同的事件处理器去处理</p>
-<p><strong>&#x3D;&#x3D;Redis 的单线程模型采用了多路复用技术。&#x3D;&#x3D;</strong></p>
-<p>对于多路复用器的多路选择算法常见的有三种：select 模型、poll 模型、epoll 模型。</p>
-<ol>
-<li><p>poll 模型的选择算法：采用的是轮询算法。该模型对客户端的就绪处理是有延迟的。</p>
-</li>
-<li><p>epoll 模型的选择算法：采用的是回调方式。根据就绪事件发生后的处理方式的不同，又可分为 LT 模型与 ET 模型。</p>
-</li>
-</ol>
-<h3 id="2-混合线程模型"><a href="#2-混合线程模型" class="headerlink" title="2.混合线程模型"></a>2.混合线程模型</h3><p>从 Redis 4.0 版本开始，Redis 中就开始加入了多线程元素。处理客户端请求的仍是单线</p>
-<p>程模型，但对于一些比较耗时但又不影响对客户端的响应的操作，就由后台其它线程来处理。</p>
-<p>例如，持久化、对 AOF 的 rewrite、对失效连接的清理等</p>
-<h3 id="3-多线程模型"><a href="#3-多线程模型" class="headerlink" title="3.多线程模型"></a>3.<strong>多线程模型</strong></h3><p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083447687.png" alt="image-20240223083447687"></p>
-<p>内存响应时间(RT)100ns</p>
-<p>Redis 每秒处理读写请求 达到:1s&#x2F;100ns &#x3D; &#x3D;1kw次,实际情况是,redis8w&#x2F;qps,读11w&#x2F;qps,差距那么大的原因 就是redis的单线程</p>
-<p>是将单线程和多线程各取其优点.</p>
-<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083854779.png" alt="image-20240223083854779"></p>
-]]></content>
-      <categories>
-        <category>中间件</category>
-        <category>Redis</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>SpringBoot</title>
-    <url>/2024/02/23/SpringBoot/</url>
-    <content><![CDATA[<blockquote>
-<p>这个是从原理开始讲的，这个我不照着写，我就是学</p>
-</blockquote>
-<p>springboot内置了tomcat，所以可以直接打包成jar包</p>
-<h1 id="什么是tomcat"><a href="#什么是tomcat" class="headerlink" title="什么是tomcat"></a>什么是tomcat</h1><p>Tomcat是常见的免费的web服务器。</p>
-<h2 id="1-不使用tomcat访问html"><a href="#1-不使用tomcat访问html" class="headerlink" title="1. 不使用tomcat访问html"></a>1. 不使用tomcat访问html</h2><p>可以在浏览器的地址里看到 file:d:&#x2F;test.html 这样的格式，是通过打开本地文件的形式打开的</p>
-<p>但是我们平时上网看到的html网址一般都是: <a href="https://link.zhihu.com/?target=http://12306.com/index.html">http://12306.com/index.html</a> 这样的形式<br>这是因为有web服务器的存在</p>
-<h2 id="2-使用tomcat后，访问html"><a href="#2-使用tomcat后，访问html" class="headerlink" title="2.使用tomcat后，访问html"></a>2.使用tomcat后，访问html</h2><p>使用tomcat后，可以像127.0.0.1:8080&#x2F;test.html这样访问一个网站，而不是访问一个html文件。因为tomcat本身就是一个web服务器，test.html部署在了这个web服务器上</p>
-<p><img src="/../blog_images/SpringBoot/2018120522281643.gif" alt="img"></p>
-<h1 id="SpringBoot启动"><a href="#SpringBoot启动" class="headerlink" title="SpringBoot启动"></a>SpringBoot启动</h1>]]></content>
-      <tags>
-        <tag>Java体系知识</tag>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>dlyk_part1</title>
-    <url>/2024/02/18/dlyk-part1/</url>
-    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/dlyk-part1/image-20240218015738084.png" alt="image-20240218015738084"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240218015750388.png" alt="image-20240218015750388"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152352894.png" alt="image-20240221152352894"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152403852.png" alt="image-20240221152403852"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152414970.png" alt="image-20240221152414970"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152423433.png" alt="image-20240221152423433"></p>
-<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
-<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
-<p> （1） node.js是一个开源的跨平台的JavaScript运行时环境，类似java的jvm</p>
-<p> （2） npm JavaScript依赖包管理器 ，全世界都可以用这个来共享javascript包，负责前端项目的打包，插件的下载 node package manager </p>
-<p> （3）Vite 是快速构建前端Vue项目的脚手架，可以理解为开发Spring boot的Spring initializr的快速构建工具。（之前是用vue-cil的）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vite@latest//</span><br></pre></td></tr></table></figure>
-
-<h1 id="三、启动之前的项目"><a href="#三、启动之前的项目" class="headerlink" title="三、启动之前的项目"></a>三、启动之前的项目</h1><p>用的是jdk17 ；</p>
-<p>前端跑起来需要进入package.json 在scripts 处 跑dev</p>
-<h2 id="1-admin的密码"><a href="#1-admin的密码" class="headerlink" title="1. admin的密码"></a>1. admin的密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> t_user</span><br><span class="line"><span class="keyword">SET</span> login_pwd <span class="operator">=</span> <span class="string">&#x27;$2a$10$t1ZZqt3jgYNabcSS1NMZ/uqGALlCF/VH5wSL3CYduABGeVvKFVEi6&#x27;</span>  <span class="comment">-- 这里替换为新密码的哈希值</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>哈希代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PasswordEncoderExample</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 BCryptPasswordEncoder</span></span><br><span class="line">        <span class="type">PasswordEncoder</span> <span class="variable">encoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 编码密码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rawPassword</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">encodedPassword</span> <span class="operator">=</span> encoder.encode(rawPassword);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印编码后的密码</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Encoded Password: &quot;</span> + encodedPassword);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
-<p>后端的端口：8088 在application.yml中修改</p>
-<p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
-]]></content>
-      <categories>
-        <category>Java项目</category>
-        <category>动力云客</category>
       </categories>
   </entry>
   <entry>
@@ -2934,6 +3045,166 @@
       </categories>
   </entry>
   <entry>
+    <title>Redis-记录</title>
+    <url>/2024/02/21/Redis-%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="第一章-Redis-概述"><a href="#第一章-Redis-概述" class="headerlink" title="第一章 Redis 概述"></a>第一章 Redis 概述</h1><h2 id="一、Redis-Remote-Dictionary-Server-远程字典服务"><a href="#一、Redis-Remote-Dictionary-Server-远程字典服务" class="headerlink" title="一、Redis(Remote Dictionary Server)远程字典服务"></a>一、Redis(Remote Dictionary Server)远程字典服务</h2><ol>
+<li><p>使用 &#x3D;&#x3D;ANSI C 语言&#x3D;&#x3D;编写、&#x3D;&#x3D;支持网络、可基于内存亦可持久化的日志型、NoSQL 开源内存数据库&#x3D;&#x3D;，其提供多种语言的 API。</p>
+</li>
+<li><p>Redis被称为字典服务的原因在于，redis是一个key-value的存储系统。</p>
+<blockquote>
+<p>支持存储的value类型有很多，包括String（字符串）、List（链表）、Set（集合）、Zset（sorted set– 有序集合）和哈希类型等</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="二、NoSQL"><a href="#二、NoSQL" class="headerlink" title="二、NoSQL"></a>二、NoSQL</h2><p>Nosql（non-relational，Not Only SQL），泛指的是非关系型的数据库。</p>
+<blockquote>
+<p>比如社交类的等等</p>
+</blockquote>
+<p>&#x3D;&#x3D;NoSQL 数据库的产生就是为了解决大规模数据集合多重数据种类带来的挑战，特别是大数据应用难题&#x3D;&#x3D;</p>
+<p>传统方法不适合这种情况。</p>
+<h3 id="1-键值存储数据库"><a href="#1-键值存储数据库" class="headerlink" title="1. 键值存储数据库"></a>1. 键值存储数据库</h3><p>类似Map的key-value对。</p>
+<blockquote>
+<p>典型代表redis</p>
+</blockquote>
+<h3 id="2-列存储数据库"><a href="#2-列存储数据库" class="headerlink" title="2. 列存储数据库"></a>2. 列存储数据库</h3><p>注意的是 ，关系数据库是行关系库，其存在的问题在于，按照行存储的数据在物理层面占用的是连续的存储空间，&#x3D;&#x3D;是不适合海量的数据存储&#x3D;&#x3D;的。</p>
+<p>而按列存储则可以实现一个分布式存储，适合海量的存储</p>
+<blockquote>
+<p>典型的代表就是HBase</p>
+</blockquote>
+<h3 id="3-文档型数据库"><a href="#3-文档型数据库" class="headerlink" title="3. 文档型数据库"></a>3. 文档型数据库</h3><p>NoSQL与关系型数据的结合，最想关系型数据库的NoSQL</p>
+<blockquote>
+<p>典型代表就是MongoDB。</p>
+</blockquote>
+<h3 id="4-图像（Graph）数据库"><a href="#4-图像（Graph）数据库" class="headerlink" title="4. 图像（Graph）数据库"></a>4. 图像（Graph）数据库</h3><blockquote>
+<p>用于存放一个节点关系的数据库，例如描述不同人间的关系。典型代表是 Neo4J。</p>
+</blockquote>
+<h2 id="三、Redis的用途"><a href="#三、Redis的用途" class="headerlink" title="三、Redis的用途"></a>三、Redis的用途</h2><h3 id="1-数据缓存"><a href="#1-数据缓存" class="headerlink" title="1.数据缓存"></a>1.数据缓存</h3><p>Redis在生产中用的最多的场景：&#x3D;&#x3D;数据缓存&#x3D;&#x3D;。</p>
+<p>正常情况下，用户-&gt;服务器-&gt;数据库 （query），然后再返回。</p>
+<p>但是当用户很多的时候，就是高并发的时候，解决不了了。</p>
+<p>因此提出解决方案： 用户-&gt;服务器-&gt;缓存-&gt; 数据库 （query）</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223001703204.png" alt="image-20240223001703204"></p>
+<p>这样DBMS压力就会减轻。</p>
+<blockquote>
+<p>即客户端从 DBMS 中查询出的数据首先写入到 Redis 中，后续无论哪个客户端再需要访问该数据，直接读取 Redis 中的即可，不仅减小了 RT，而且降低了 DBMS 的压力。</p>
+<p>而且，DBMS一般存放在磁盘中，而Redis作为内存数据库是放在内存中的，且直接通过key来查询，缓存层的查询非常的快，高并发的问题可以解决。</p>
+</blockquote>
+<h4 id="数据不一致问题？："><a href="#数据不一致问题？：" class="headerlink" title="数据不一致问题？："></a>数据不一致问题？：</h4><p>当一个用户提出要修改，修改了DBMS，没有修改缓存层，就会存在一个脏数据&#x2F;</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223074739083.png" alt="image-20240223074739083"></p>
+<p>预热：服务器不是刚开就提供服务，会有一个预热，把一些基础数据先保存到缓存中</p>
+<h2 id="四、Redis-特性"><a href="#四、Redis-特性" class="headerlink" title="四、Redis 特性"></a>四、<strong>Redis</strong> <strong>特性</strong></h2><h3 id="1-性能极高："><a href="#1-性能极高：" class="headerlink" title="1.性能极高："></a>1.性能极高：</h3><p>Redis 读的速度可以达到 11w 次&#x2F;s，写的速度可以达到 8w 次&#x2F;s。只所以具有，这么高的性能，因为以下几点原因：</p>
+<p>1）Redis 的所有操作都是在内存中发生的。</p>
+<p>2）Redis 是用 C 语言开发的。</p>
+<p>3）Redis 源码非常精细（集性能与优雅于一身）。</p>
+<h3 id="2-简单稳定"><a href="#2-简单稳定" class="headerlink" title="2.简单稳定"></a>2.简单稳定</h3><p>Redis 源码很少。早期版本只有 2w 行左右。从 3.0 版本开始，增加了集群功能，代码变为了 5w 行左右。</p>
+<h3 id="3-持久化"><a href="#3-持久化" class="headerlink" title="3.持久化"></a>3.持久化</h3><p>数据缓存是暂时的，要保存到磁盘，才能保证数据安全。Redis 内存中的数据可以进行持久化，其有两种方式：RDB 与 AOF。</p>
+<h3 id="4-高可用集群"><a href="#4-高可用集群" class="headerlink" title="4.高可用集群"></a>4.高可用集群</h3><p>Redis 提供了高可用的主从集群功能，可以确保系统的安全性</p>
+<h3 id="5-丰富的数据类型"><a href="#5-丰富的数据类型" class="headerlink" title="5.丰富的数据类型"></a>5.丰富的数据类型</h3><p>Redis 是一个 key-value 存储系统。支持存储的 value 类型很多，包括String(字符串)、List(链表)、Set(集合)、Zset(sorted set –有序集合)和 Hash（哈希类型）等，还有 BitMap、HyperLogLog、Geospatial 类型</p>
+<ol>
+<li><p> BitMap：一般用于大数据量的二值性统计。<br>比如员工是否打卡</p>
+</li>
+<li><p> HyperLogLog：其是 Hyperlog Log，用于对数据量超级庞大的日志做去重统计。</p>
+</li>
+<li><p> Geospatial：地理空间，其主要用于地理位置相关的计算。</p>
+<p>比如“附近的人”</p>
+</li>
+</ol>
+<h3 id="6-强大的功能"><a href="#6-强大的功能" class="headerlink" title="6.强大的功能"></a>6.强大的功能</h3><p>Redis 提供了数据过期功能、发布&#x2F;订阅功能、简单事务功能，还支持 Lua脚本扩展功能。</p>
+<h3 id="7-客户端语言广泛"><a href="#7-客户端语言广泛" class="headerlink" title="7.客户端语言广泛"></a>7.客户端语言广泛</h3><p>Redis提供了简单的 TCP 通信协议，编程语言可以方便地的接入 Redis。所以，有很多的开源社区、大公司等开发出了很多语言的 Redis 客户端。</p>
+<h3 id="8-支持-ACL-权限控制"><a href="#8-支持-ACL-权限控制" class="headerlink" title="8.支持 ACL 权限控制"></a>8.支持 ACL 权限控制</h3><p>之前的权限控制非常笨拙。从 Redis6 开始引入了 ACL 模块，可以为不同用户定制不同的用户权限。</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223081342029.png" alt="image-20240223081342029"></p>
+<blockquote>
+<p>linux 的drwxr-xr-x ：d表示目录&#x2F;l表示链接，rwx表示用户（创建者User）读写可执行；Group r-x后三位表示和创建者同组用户读可执行。Other r-x</p>
+</blockquote>
+<h3 id="9-支持多线程-IO-模型"><a href="#9-支持多线程-IO-模型" class="headerlink" title="9.支持多线程 IO 模型"></a>9.支持多线程 IO 模型</h3><p>Redis 之前版本采用的是单线程模型，从 6.0 版本开始支持了多线程模型。</p>
+<h2 id="五-Redis-的-IO-模型"><a href="#五-Redis-的-IO-模型" class="headerlink" title="五.Redis 的 IO 模型"></a>五.<strong>Redis</strong> <strong>的</strong> <strong>IO</strong> <strong>模型</strong></h2><p>单线程模型 多线程模型 混合模型</p>
+<p>Redis 客户端提交的各种请求是如何最终被 Redis 处理的？Redis 处理客户端请求所采用的处理架构，称为 Redis 的 IO 模型。不同版本的 Redis 采用的 IO 模型是不同的。</p>
+<h3 id="1-单线程模型"><a href="#1-单线程模型" class="headerlink" title="1.单线程模型"></a>1.<strong>单线程模型</strong></h3><blockquote>
+<p>性能还是很强,写8w&#x2F;qps,读11w&#x2F;qps–&gt;内存\单线程可维护性比较高(多线程存在线程切换问题,顾及到数据安全问题\死锁问题)</p>
+<p>问题:持久化等操作和客户端没太多联系,但是又比较费时,于是提出了混合线程模型</p>
+</blockquote>
+<p>对于 Redis 3.0 及其以前版本，Redis 的 IO 模型采用的是纯粹的单线程模型。即所有客户端的请求全部由一个线程处理。</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223082516763.png" alt="image-20240223082516763"></p>
+<p>每个客户端若要向 Redis 提交请求，都需要与 Redis 建立一个 socket 连接，并向事件分发器注册一个事件。</p>
+<p>一旦该事件发生就表明该连接已经就绪。而一旦连接就绪，事件分发器就会感知到，然后获取客户端通过该连接发送的请求，并将由该事件分发器所绑定的这个唯一的线程来处理。</p>
+<p>如果该线程还在处理多个任务，则将该任务写入到任务队列等待线程处理。只所以称为事件分发器，是因为它会根据不同的就绪事件，将任务交由不同的事件处理器去处理</p>
+<p><strong>&#x3D;&#x3D;Redis 的单线程模型采用了多路复用技术。&#x3D;&#x3D;</strong></p>
+<p>对于多路复用器的多路选择算法常见的有三种：select 模型、poll 模型、epoll 模型。</p>
+<ol>
+<li><p>poll 模型的选择算法：采用的是轮询算法。该模型对客户端的就绪处理是有延迟的。</p>
+</li>
+<li><p>epoll 模型的选择算法：采用的是回调方式。根据就绪事件发生后的处理方式的不同，又可分为 LT 模型与 ET 模型。</p>
+</li>
+</ol>
+<h3 id="2-混合线程模型"><a href="#2-混合线程模型" class="headerlink" title="2.混合线程模型"></a>2.混合线程模型</h3><p>从 Redis 4.0 版本开始，Redis 中就开始加入了多线程元素。处理客户端请求的仍是单线</p>
+<p>程模型，但对于一些比较耗时但又不影响对客户端的响应的操作，就由后台其它线程来处理。</p>
+<p>例如，持久化、对 AOF 的 rewrite、对失效连接的清理等</p>
+<h3 id="3-多线程模型"><a href="#3-多线程模型" class="headerlink" title="3.多线程模型"></a>3.<strong>多线程模型</strong></h3><p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083447687.png" alt="image-20240223083447687"></p>
+<p>内存响应时间(RT)100ns</p>
+<p>Redis 每秒处理读写请求 达到:1s&#x2F;100ns &#x3D; &#x3D;1kw次,实际情况是,redis8w&#x2F;qps,读11w&#x2F;qps,差距那么大的原因 就是redis的单线程</p>
+<p>是将单线程和多线程各取其优点.</p>
+<p><img src="/../blog_images/Redis-%E8%AE%B0%E5%BD%95/image-20240223083854779.png" alt="image-20240223083854779"></p>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>Redis</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SpringBoot</title>
+    <url>/2024/02/23/SpringBoot/</url>
+    <content><![CDATA[<blockquote>
+<p>这个是从原理开始讲的，这个我不照着写，我就是学</p>
+</blockquote>
+<p>springboot内置了tomcat，所以可以直接打包成jar包</p>
+<h1 id="什么是tomcat"><a href="#什么是tomcat" class="headerlink" title="什么是tomcat"></a>什么是tomcat</h1><p>Tomcat是常见的免费的web服务器。</p>
+<h2 id="1-不使用tomcat访问html"><a href="#1-不使用tomcat访问html" class="headerlink" title="1. 不使用tomcat访问html"></a>1. 不使用tomcat访问html</h2><p>可以在浏览器的地址里看到 file:d:&#x2F;test.html 这样的格式，是通过打开本地文件的形式打开的</p>
+<p>但是我们平时上网看到的html网址一般都是: <a href="https://link.zhihu.com/?target=http://12306.com/index.html">http://12306.com/index.html</a> 这样的形式<br>这是因为有web服务器的存在</p>
+<h2 id="2-使用tomcat后，访问html"><a href="#2-使用tomcat后，访问html" class="headerlink" title="2.使用tomcat后，访问html"></a>2.使用tomcat后，访问html</h2><p>使用tomcat后，可以像127.0.0.1:8080&#x2F;test.html这样访问一个网站，而不是访问一个html文件。因为tomcat本身就是一个web服务器，test.html部署在了这个web服务器上</p>
+<p><img src="/../blog_images/SpringBoot/2018120522281643.gif" alt="img"></p>
+<h1 id="SpringBoot启动"><a href="#SpringBoot启动" class="headerlink" title="SpringBoot启动"></a>SpringBoot启动</h1>]]></content>
+      <tags>
+        <tag>Java体系知识</tag>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringSecurity</title>
+    <url>/2024/02/23/SpringSecurity/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>dlyk_part1</title>
+    <url>/2024/02/18/dlyk-part1/</url>
+    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/dlyk-part1/image-20240218015738084.png" alt="image-20240218015738084"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240218015750388.png" alt="image-20240218015750388"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152352894.png" alt="image-20240221152352894"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152403852.png" alt="image-20240221152403852"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152414970.png" alt="image-20240221152414970"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152423433.png" alt="image-20240221152423433"></p>
+<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
+<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
+<p> （1） node.js是一个开源的跨平台的JavaScript运行时环境，类似java的jvm</p>
+<p> （2） npm JavaScript依赖包管理器 ，全世界都可以用这个来共享javascript包，负责前端项目的打包，插件的下载 node package manager </p>
+<p> （3）Vite 是快速构建前端Vue项目的脚手架，可以理解为开发Spring boot的Spring initializr的快速构建工具。（之前是用vue-cil的）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vite@latest//</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、启动之前的项目"><a href="#三、启动之前的项目" class="headerlink" title="三、启动之前的项目"></a>三、启动之前的项目</h1><p>用的是jdk17 ；</p>
+<p>前端跑起来需要进入package.json 在scripts 处 跑dev</p>
+<h2 id="1-admin的密码"><a href="#1-admin的密码" class="headerlink" title="1. admin的密码"></a>1. admin的密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> t_user</span><br><span class="line"><span class="keyword">SET</span> login_pwd <span class="operator">=</span> <span class="string">&#x27;$2a$10$t1ZZqt3jgYNabcSS1NMZ/uqGALlCF/VH5wSL3CYduABGeVvKFVEi6&#x27;</span>  <span class="comment">-- 这里替换为新密码的哈希值</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>哈希代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PasswordEncoderExample</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 BCryptPasswordEncoder</span></span><br><span class="line">        <span class="type">PasswordEncoder</span> <span class="variable">encoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 编码密码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rawPassword</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">encodedPassword</span> <span class="operator">=</span> encoder.encode(rawPassword);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印编码后的密码</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Encoded Password: &quot;</span> + encodedPassword);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
+<p>后端的端口：8088 在application.yml中修改</p>
+<p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
+]]></content>
+      <categories>
+        <category>Java项目</category>
+        <category>动力云客</category>
+      </categories>
+  </entry>
+  <entry>
     <title>dlyk-part2-front-1</title>
     <url>/2024/02/18/dlyk-part2-front-1/</url>
     <content><![CDATA[<h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="一-、-登录界面"><a href="#一-、-登录界面" class="headerlink" title="一 、 登录界面"></a>一 、 登录界面</h2><h3 id="（1）用vite脚手架创建项目"><a href="#（1）用vite脚手架创建项目" class="headerlink" title="（1）用vite脚手架创建项目"></a>（1）用vite脚手架创建项目</h3><blockquote>
@@ -3074,9 +3345,68 @@
       </categories>
   </entry>
   <entry>
-    <title>SpringSecurity</title>
-    <url>/2024/02/23/SpringSecurity/</url>
-    <content><![CDATA[]]></content>
+    <title>dlyk-part3</title>
+    <url>/2024/02/22/dlyk-part3/</url>
+    <content><![CDATA[<h1 id="一、创建DashboardView-vue界面"><a href="#一、创建DashboardView-vue界面" class="headerlink" title="一、创建DashboardView.vue界面"></a>一、创建DashboardView.vue界面</h1><p> 这个我没有全听，就是复制过来了，大致理解了 p28-29</p>
+<h2 id="1-布局"><a href="#1-布局" class="headerlink" title="1. 布局"></a>1. 布局</h2><h2 id="2-菜单制作"><a href="#2-菜单制作" class="headerlink" title="2.菜单制作"></a>2.菜单制作</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-menu</span><br><span class="line">    active-text-color=&quot;#ffd04b&quot;</span><br><span class="line">    background-color=&quot;#334157&quot;</span><br><span class="line">    class=&quot;el-menu-vertical-demo&quot;</span><br><span class="line">    :default-active=&quot;currentRouterPath&quot;</span><br><span class="line">    text-color=&quot;#fff&quot;</span><br><span class="line">    style=&quot;border-right: solid 0px;&quot;</span><br><span class="line">    :collapse=&quot;isCollapse&quot;</span><br><span class="line">    :collapse-transition=&quot;false&quot;</span><br><span class="line">    :router=&quot;true&quot;</span><br><span class="line">    :unique-opened=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;el-sub-menu :index=&quot;index&quot; v-for=&quot;(menuPermission, index) in user.menuPermissionList&quot; :key=&quot;menuPermission.id&quot;&gt;</span><br><span class="line">    &lt;template #title&gt;</span><br><span class="line">      &lt;el-icon&gt;&lt;component :is=&quot;menuPermission.icon&quot;&gt;&lt;/component&gt;&lt;/el-icon&gt;</span><br><span class="line">      &lt;span&gt; &#123;&#123;menuPermission.name&#125;&#125; &lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;el-menu-item v-for=&quot;subPermission in menuPermission.subPermissionList&quot; :key=&quot;subPermission.id&quot; :index=&quot;subPermission.url&quot;&gt;</span><br><span class="line">      &lt;el-icon&gt;&lt;component :is=&quot;subPermission.icon&quot;&gt;&lt;/component&gt;&lt;/el-icon&gt;</span><br><span class="line">      &#123;&#123;subPermission.name&#125;&#125;</span><br><span class="line">    &lt;/el-menu-item&gt;</span><br><span class="line">  &lt;/el-sub-menu&gt;</span><br><span class="line">&lt;/el-menu&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-菜单加入图标-美观"><a href="#3-菜单加入图标-美观" class="headerlink" title="3.菜单加入图标&#x2F;美观"></a>3.菜单加入图标&#x2F;美观</h2><h3 id="（1）-安装图标"><a href="#（1）-安装图标" class="headerlink" title="（1） 安装图标"></a>（1） 安装图标</h3><p>npm install @element-plus&#x2F;icons-vue –save</p>
+<h3 id="（2）注册所有图标，在main-js中注册："><a href="#（2）注册所有图标，在main-js中注册：" class="headerlink" title="（2）注册所有图标，在main.js中注册："></a>（2）注册所有图标，在main.js中注册：</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp这个是一个函数</span></span><br><span class="line"><span class="comment">//import &#x27;./style.css&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span><span class="comment">//从一个单文件组件中导入根组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ElementPlus</span> <span class="keyword">from</span> <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"><span class="comment">//从router.js导入组件</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router/router.js&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="title class_">ElementPlusIconsVue</span> <span class="keyword">from</span> <span class="string">&#x27;@element-plus/icons-vue&#x27;</span></span><br><span class="line"><span class="comment">//在这里先创建了，然后再后续的操作</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key, component] <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">entries</span>(<span class="title class_">ElementPlusIconsVue</span>)) &#123;</span><br><span class="line"></span><br><span class="line">    app.<span class="title function_">component</span>(key, component)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> loginView <span class="keyword">from</span> <span class="string">&quot;./view/LoginView.vue&quot;</span>;</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title class_">ElementPlus</span>).<span class="title function_">use</span>(router).<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>)<span class="comment">//创建一个vue对象//挂载到页面的#app这个id下</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）使用图标，复制图标的代码，粘贴到项目中即可；"><a href="#（3）使用图标，复制图标的代码，粘贴到项目中即可；" class="headerlink" title="（3）使用图标，复制图标的代码，粘贴到项目中即可；"></a>（3）使用图标，复制图标的代码，粘贴到项目中即可；</h3><blockquote>
+<p><a href="https://element-plus.gitee.io/zh-CN/component/icon.html#icon-collection">Icon 图标 | Element Plus (gitee.io)</a></p>
+</blockquote>
+<p><el-icon><Plus /></el-icon></p>
+<p><el-icon><Minus /></el-icon></p>
+<p><el-icon><CirclePlus /></el-icon></p>
+<p>Vue中：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$refs 拿到页面上ref属性的那个dom元素；</span><br><span class="line"></span><br><span class="line">$router vue路由对象，里面提供了一些方法供什么使用；</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/dlyk-part3/image-20240222220629465.png" alt="image-20240222220629465"></p>
+<h3 id="（4）添加图标的动作"><a href="#（4）添加图标的动作" class="headerlink" title="（4）添加图标的动作"></a>（4）添加图标的动作</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;el-icon <span class="keyword">class</span>=<span class="string">&quot;show&quot;</span> @click=<span class="string">&quot;showMenu&quot;</span>&gt;<span class="language-xml"><span class="tag">&lt;<span class="name">Fold</span> /&gt;</span></span>&lt;/el-icon&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">methods : &#123;</span><br><span class="line">  <span class="comment">//左侧菜单左右展开和折叠</span></span><br><span class="line">  <span class="title function_">showMenu</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isCollapse</span> = !<span class="variable language_">this</span>.<span class="property">isCollapse</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>isCollapse定义</p>
+<p><img src="/../blog_images/dlyk-part3/image-20240222221224747.png" alt="image-20240222221224747"></p>
+<p>设置变量：</p>
+<p><img src="/../blog_images/dlyk-part3/image-20240222221302322.png" alt="image-20240222221302322"></p>
+<p>调整宽度</p>
+<p><img src="/../blog_images/dlyk-part3/image-20240222221350959.png" alt="image-20240222221350959"></p>
+<h2 id="4-加入下拉菜单、vue函数钩子"><a href="#4-加入下拉菜单、vue函数钩子" class="headerlink" title="4.加入下拉菜单、vue函数钩子"></a>4.加入下拉菜单、vue函数钩子</h2><blockquote>
+<p>函数钩子:就是在渲染页面的时候，就把用户的名字等信息获得到，然后再渲染到页面当中去</p>
+</blockquote>
+<h3 id="（1）写script"><a href="#（1）写script" class="headerlink" title="（1）写script"></a>（1）写script</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">写script</span><br><span class="line">//vue的生命周期中的一个函数钩子，该钩子是在页面渲染后执行</span><br><span class="line">mounted() &#123;</span><br><span class="line">  //加载当前登录用户</span><br><span class="line">  this.loadLoginUser();</span><br><span class="line">  this.loadCurrentRouterPath();</span><br><span class="line">&#125;,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="（2）写templete-显示"><a href="#（2）写templete-显示" class="headerlink" title="（2）写templete 显示"></a>（2）写templete 显示</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">写templete 显示</span><br><span class="line">&lt;!--右侧：上--&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">el-header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">el-icon</span> <span class="attr">class</span>=<span class="string">&quot;show&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;showMenu&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">Fold</span> /&gt;</span><span class="tag">&lt;/<span class="name">el-icon</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">el-dropdown</span> <span class="attr">:hide-on-click</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;el-dropdown-link&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;&#123; user.name &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">el-icon</span> <span class="attr">class</span>=<span class="string">&quot;el-icon--right&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">arrow-down</span> /&gt;</span><span class="tag">&lt;/<span class="name">el-icon</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">template</span> #<span class="attr">dropdown</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">el-dropdown-menu</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-dropdown-item</span>&gt;</span>我的资料<span class="tag">&lt;/<span class="name">el-dropdown-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-dropdown-item</span>&gt;</span>修改密码<span class="tag">&lt;/<span class="name">el-dropdown-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-dropdown-item</span> <span class="attr">divided</span> @<span class="attr">click</span>=<span class="string">&quot;logout&quot;</span>&gt;</span>退出登录<span class="tag">&lt;/<span class="name">el-dropdown-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">el-dropdown-menu</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">el-dropdown</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">el-header</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="（3）写方法"><a href="#（3）写方法" class="headerlink" title="（3）写方法"></a>（3）写方法</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">写方法！</span><br><span class="line">methods : &#123;</span><br><span class="line">  <span class="comment">//左侧菜单左右展开和折叠</span></span><br><span class="line">  <span class="title function_">showMenu</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isCollapse</span> = !<span class="variable language_">this</span>.<span class="property">isCollapse</span>;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//加载当前登录用户</span></span><br><span class="line">  <span class="title function_">loadLoginUser</span>(<span class="params"></span>) &#123;</span><br><span class="line">      </span><br><span class="line">    <span class="title function_">doGet</span>(<span class="string">&quot;/api/login/info&quot;</span>, &#123;&#125;).<span class="title function_">then</span>( <span class="function">(<span class="params">resp</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(resp)</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">user</span> = resp.<span class="property">data</span>.<span class="property">data</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//退出登录</span></span><br><span class="line">  <span class="title function_">logout</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">doGet</span>(<span class="string">&quot;/api/logout&quot;</span>, &#123;&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">resp</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (resp.<span class="property">data</span>.<span class="property">code</span> === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="title function_">removeToken</span>();</span><br><span class="line">        <span class="title function_">messageTip</span>(<span class="string">&quot;退出成功&quot;</span>, <span class="string">&quot;success&quot;</span>);</span><br><span class="line">        <span class="comment">//跳到登录页</span></span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&quot;/&quot;</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">messageConfirm</span>(<span class="string">&quot;退出异常，是否要强制退出？&quot;</span>).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">//用户点击“确定”按钮就会触发then函数</span></span><br><span class="line">          <span class="comment">//既然后端验证token未通过，那么前端的token肯定是有问题的，那没必要存储在浏览器中，直接删除一下</span></span><br><span class="line">          <span class="title function_">removeToken</span>();</span><br><span class="line">          <span class="comment">//跳到登录页</span></span><br><span class="line">          <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&quot;/&quot;</span>;</span><br><span class="line">        &#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">//用户点击“取消”按钮就会触发then函数</span></span><br><span class="line">          <span class="title function_">messageTip</span>(<span class="string">&quot;取消强制退出&quot;</span>, <span class="string">&quot;warning&quot;</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//加载当前路由路径</span></span><br><span class="line">  <span class="title function_">loadCurrentRouterPath</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> path = <span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">path</span>; <span class="comment">//   /dashboard/activity/add</span></span><br><span class="line">    <span class="keyword">let</span> arr = path.<span class="title function_">split</span>(<span class="string">&quot;/&quot;</span>); <span class="comment">//   [  ,dashboard, activity, add]</span></span><br><span class="line">    <span class="keyword">if</span> (arr.<span class="property">length</span> &gt; <span class="number">3</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">currentRouterPath</span> = <span class="string">&quot;/&quot;</span> + arr[<span class="number">1</span>] + <span class="string">&quot;/&quot;</span> + arr[<span class="number">2</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">currentRouterPath</span> = path;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>   &#x3D;&#x3D;<strong>下面这个调用的就是httpRequest.js里面的doGet的axios</strong>&#x3D;&#x3D;   </p>
+<pre><code>doGet(&quot;/api/login/info&quot;, &#123;&#125;).then( (resp) =&gt; &#123;
+  console.log(resp)
+  this.user = resp.data.data;
+&#125;)
+</code></pre>
+<p>  ！！**&#x3D;&#x3D;因此要写后端的接口&#x3D;&#x3D;**，UserController</p>
+<h2 id="5-获取登录人信息后端代码实现"><a href="#5-获取登录人信息后端代码实现" class="headerlink" title="5.获取登录人信息后端代码实现"></a>5.获取登录人信息后端代码实现</h2><img src="../blog_images/dlyk-part3/image-20240222222945744.png" alt="image-20240222222945744" style="zoom:50%;" />
+
+<img src="../blog_images/dlyk-part3/image-20240222223051935.png" alt="image-20240222223051935" style="zoom:50%;" />
+
+<h3 id="（1）编写UserController-java"><a href="#（1）编写UserController-java" class="headerlink" title="（1）编写UserController.java"></a>（1）编写UserController.java</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//UserController.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.bjpowernode.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.model.TUser;</span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.result.CodeEnum;</span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.result.R;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    因为是查询请求 所以写getmapping</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;/api/login/info&quot;)</span></span><br><span class="line"><span class="comment">//    登录后的用户信息怎么拿？</span></span><br><span class="line">    <span class="keyword">public</span> R <span class="title function_">loginInfo</span><span class="params">(Authentication authentication)</span>&#123;</span><br><span class="line">        <span class="type">TUser</span> <span class="variable">tUser</span> <span class="operator">=</span> (TUser)authentication.getPrincipal() ;</span><br><span class="line">        <span class="keyword">return</span> R.OK(tUser);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        public static R OK(Object data) &#123;</span></span><br><span class="line"><span class="comment">//            return R.builder()</span></span><br><span class="line"><span class="comment">//                    .code(CodeEnum.OK.getCode())</span></span><br><span class="line"><span class="comment">//                    .msg(CodeEnum.OK.getMsg())</span></span><br><span class="line"><span class="comment">//                    .data(data)</span></span><br><span class="line"><span class="comment">//                    .build();</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）apifox测试成功"><a href="#（2）apifox测试成功" class="headerlink" title="（2）apifox测试成功"></a>（2）apifox测试成功</h3><p><img src="/../blog_images/dlyk-part3/image-20240222224207981.png" alt="image-20240222224207981"></p>
+<h3 id="（3）前台调用测试"><a href="#（3）前台调用测试" class="headerlink" title="（3）前台调用测试"></a>（3）前台调用测试</h3><p>没改 嗯，不一定能成</p>
+<h1 id="二、用JWT替换sessionP36"><a href="#二、用JWT替换sessionP36" class="headerlink" title="二、用JWT替换sessionP36"></a>二、用JWT替换sessionP36</h1>]]></content>
+      <tags>
+        <tag>Java项目</tag>
+        <tag>动力云客</tag>
+      </tags>
   </entry>
   <entry>
     <title>dlyk-part2-front-2</title>
@@ -3230,69 +3560,5 @@
         <category>Java项目</category>
         <category>动力云客</category>
       </categories>
-  </entry>
-  <entry>
-    <title>dlyk-part3</title>
-    <url>/2024/02/22/dlyk-part3/</url>
-    <content><![CDATA[<h1 id="一、创建DashboardView-vue界面"><a href="#一、创建DashboardView-vue界面" class="headerlink" title="一、创建DashboardView.vue界面"></a>一、创建DashboardView.vue界面</h1><p> 这个我没有全听，就是复制过来了，大致理解了 p28-29</p>
-<h2 id="1-布局"><a href="#1-布局" class="headerlink" title="1. 布局"></a>1. 布局</h2><h2 id="2-菜单制作"><a href="#2-菜单制作" class="headerlink" title="2.菜单制作"></a>2.菜单制作</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-menu</span><br><span class="line">    active-text-color=&quot;#ffd04b&quot;</span><br><span class="line">    background-color=&quot;#334157&quot;</span><br><span class="line">    class=&quot;el-menu-vertical-demo&quot;</span><br><span class="line">    :default-active=&quot;currentRouterPath&quot;</span><br><span class="line">    text-color=&quot;#fff&quot;</span><br><span class="line">    style=&quot;border-right: solid 0px;&quot;</span><br><span class="line">    :collapse=&quot;isCollapse&quot;</span><br><span class="line">    :collapse-transition=&quot;false&quot;</span><br><span class="line">    :router=&quot;true&quot;</span><br><span class="line">    :unique-opened=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;el-sub-menu :index=&quot;index&quot; v-for=&quot;(menuPermission, index) in user.menuPermissionList&quot; :key=&quot;menuPermission.id&quot;&gt;</span><br><span class="line">    &lt;template #title&gt;</span><br><span class="line">      &lt;el-icon&gt;&lt;component :is=&quot;menuPermission.icon&quot;&gt;&lt;/component&gt;&lt;/el-icon&gt;</span><br><span class="line">      &lt;span&gt; &#123;&#123;menuPermission.name&#125;&#125; &lt;/span&gt;</span><br><span class="line">    &lt;/template&gt;</span><br><span class="line">    &lt;el-menu-item v-for=&quot;subPermission in menuPermission.subPermissionList&quot; :key=&quot;subPermission.id&quot; :index=&quot;subPermission.url&quot;&gt;</span><br><span class="line">      &lt;el-icon&gt;&lt;component :is=&quot;subPermission.icon&quot;&gt;&lt;/component&gt;&lt;/el-icon&gt;</span><br><span class="line">      &#123;&#123;subPermission.name&#125;&#125;</span><br><span class="line">    &lt;/el-menu-item&gt;</span><br><span class="line">  &lt;/el-sub-menu&gt;</span><br><span class="line">&lt;/el-menu&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-菜单加入图标-美观"><a href="#3-菜单加入图标-美观" class="headerlink" title="3.菜单加入图标&#x2F;美观"></a>3.菜单加入图标&#x2F;美观</h2><h3 id="（1）-安装图标"><a href="#（1）-安装图标" class="headerlink" title="（1） 安装图标"></a>（1） 安装图标</h3><p>npm install @element-plus&#x2F;icons-vue –save</p>
-<h3 id="（2）注册所有图标，在main-js中注册："><a href="#（2）注册所有图标，在main-js中注册：" class="headerlink" title="（2）注册所有图标，在main.js中注册："></a>（2）注册所有图标，在main.js中注册：</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; createApp &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span><span class="comment">//createApp这个是一个函数</span></span><br><span class="line"><span class="comment">//import &#x27;./style.css&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span><span class="comment">//从一个单文件组件中导入根组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ElementPlus</span> <span class="keyword">from</span> <span class="string">&#x27;element-plus&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-plus/dist/index.css&#x27;</span></span><br><span class="line"><span class="comment">//从router.js导入组件</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router/router.js&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="title class_">ElementPlusIconsVue</span> <span class="keyword">from</span> <span class="string">&#x27;@element-plus/icons-vue&#x27;</span></span><br><span class="line"><span class="comment">//在这里先创建了，然后再后续的操作</span></span><br><span class="line"><span class="keyword">let</span> app = <span class="title function_">createApp</span>(<span class="title class_">App</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key, component] <span class="keyword">of</span> <span class="title class_">Object</span>.<span class="title function_">entries</span>(<span class="title class_">ElementPlusIconsVue</span>)) &#123;</span><br><span class="line"></span><br><span class="line">    app.<span class="title function_">component</span>(key, component)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">import</span> loginView <span class="keyword">from</span> <span class="string">&quot;./view/LoginView.vue&quot;</span>;</span><br><span class="line">app.<span class="title function_">use</span>(<span class="title class_">ElementPlus</span>).<span class="title function_">use</span>(router).<span class="title function_">mount</span>(<span class="string">&#x27;#app&#x27;</span>)<span class="comment">//创建一个vue对象//挂载到页面的#app这个id下</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="（3）使用图标，复制图标的代码，粘贴到项目中即可；"><a href="#（3）使用图标，复制图标的代码，粘贴到项目中即可；" class="headerlink" title="（3）使用图标，复制图标的代码，粘贴到项目中即可；"></a>（3）使用图标，复制图标的代码，粘贴到项目中即可；</h3><blockquote>
-<p><a href="https://element-plus.gitee.io/zh-CN/component/icon.html#icon-collection">Icon 图标 | Element Plus (gitee.io)</a></p>
-</blockquote>
-<p><el-icon><Plus /></el-icon></p>
-<p><el-icon><Minus /></el-icon></p>
-<p><el-icon><CirclePlus /></el-icon></p>
-<p>Vue中：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$refs 拿到页面上ref属性的那个dom元素；</span><br><span class="line"></span><br><span class="line">$router vue路由对象，里面提供了一些方法供什么使用；</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/dlyk-part3/image-20240222220629465.png" alt="image-20240222220629465"></p>
-<h3 id="（4）添加图标的动作"><a href="#（4）添加图标的动作" class="headerlink" title="（4）添加图标的动作"></a>（4）添加图标的动作</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;el-icon <span class="keyword">class</span>=<span class="string">&quot;show&quot;</span> @click=<span class="string">&quot;showMenu&quot;</span>&gt;<span class="language-xml"><span class="tag">&lt;<span class="name">Fold</span> /&gt;</span></span>&lt;/el-icon&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">methods : &#123;</span><br><span class="line">  <span class="comment">//左侧菜单左右展开和折叠</span></span><br><span class="line">  <span class="title function_">showMenu</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isCollapse</span> = !<span class="variable language_">this</span>.<span class="property">isCollapse</span>;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-
-<p>isCollapse定义</p>
-<p><img src="/../blog_images/dlyk-part3/image-20240222221224747.png" alt="image-20240222221224747"></p>
-<p>设置变量：</p>
-<p><img src="/../blog_images/dlyk-part3/image-20240222221302322.png" alt="image-20240222221302322"></p>
-<p>调整宽度</p>
-<p><img src="/../blog_images/dlyk-part3/image-20240222221350959.png" alt="image-20240222221350959"></p>
-<h2 id="4-加入下拉菜单、vue函数钩子"><a href="#4-加入下拉菜单、vue函数钩子" class="headerlink" title="4.加入下拉菜单、vue函数钩子"></a>4.加入下拉菜单、vue函数钩子</h2><blockquote>
-<p>函数钩子:就是在渲染页面的时候，就把用户的名字等信息获得到，然后再渲染到页面当中去</p>
-</blockquote>
-<h3 id="（1）写script"><a href="#（1）写script" class="headerlink" title="（1）写script"></a>（1）写script</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">写script</span><br><span class="line">//vue的生命周期中的一个函数钩子，该钩子是在页面渲染后执行</span><br><span class="line">mounted() &#123;</span><br><span class="line">  //加载当前登录用户</span><br><span class="line">  this.loadLoginUser();</span><br><span class="line">  this.loadCurrentRouterPath();</span><br><span class="line">&#125;,</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="（2）写templete-显示"><a href="#（2）写templete-显示" class="headerlink" title="（2）写templete 显示"></a>（2）写templete 显示</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">写templete 显示</span><br><span class="line">&lt;!--右侧：上--&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">el-header</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">el-icon</span> <span class="attr">class</span>=<span class="string">&quot;show&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;showMenu&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">Fold</span> /&gt;</span><span class="tag">&lt;/<span class="name">el-icon</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">el-dropdown</span> <span class="attr">:hide-on-click</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;el-dropdown-link&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;&#123; user.name &#125;&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">el-icon</span> <span class="attr">class</span>=<span class="string">&quot;el-icon--right&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">arrow-down</span> /&gt;</span><span class="tag">&lt;/<span class="name">el-icon</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">template</span> #<span class="attr">dropdown</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">el-dropdown-menu</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-dropdown-item</span>&gt;</span>我的资料<span class="tag">&lt;/<span class="name">el-dropdown-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-dropdown-item</span>&gt;</span>修改密码<span class="tag">&lt;/<span class="name">el-dropdown-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">el-dropdown-item</span> <span class="attr">divided</span> @<span class="attr">click</span>=<span class="string">&quot;logout&quot;</span>&gt;</span>退出登录<span class="tag">&lt;/<span class="name">el-dropdown-item</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">el-dropdown-menu</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">el-dropdown</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">el-header</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="（3）写方法"><a href="#（3）写方法" class="headerlink" title="（3）写方法"></a>（3）写方法</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">写方法！</span><br><span class="line">methods : &#123;</span><br><span class="line">  <span class="comment">//左侧菜单左右展开和折叠</span></span><br><span class="line">  <span class="title function_">showMenu</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">isCollapse</span> = !<span class="variable language_">this</span>.<span class="property">isCollapse</span>;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//加载当前登录用户</span></span><br><span class="line">  <span class="title function_">loadLoginUser</span>(<span class="params"></span>) &#123;</span><br><span class="line">      </span><br><span class="line">    <span class="title function_">doGet</span>(<span class="string">&quot;/api/login/info&quot;</span>, &#123;&#125;).<span class="title function_">then</span>( <span class="function">(<span class="params">resp</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(resp)</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">user</span> = resp.<span class="property">data</span>.<span class="property">data</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//退出登录</span></span><br><span class="line">  <span class="title function_">logout</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">doGet</span>(<span class="string">&quot;/api/logout&quot;</span>, &#123;&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">resp</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (resp.<span class="property">data</span>.<span class="property">code</span> === <span class="number">200</span>) &#123;</span><br><span class="line">        <span class="title function_">removeToken</span>();</span><br><span class="line">        <span class="title function_">messageTip</span>(<span class="string">&quot;退出成功&quot;</span>, <span class="string">&quot;success&quot;</span>);</span><br><span class="line">        <span class="comment">//跳到登录页</span></span><br><span class="line">        <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&quot;/&quot;</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">messageConfirm</span>(<span class="string">&quot;退出异常，是否要强制退出？&quot;</span>).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">//用户点击“确定”按钮就会触发then函数</span></span><br><span class="line">          <span class="comment">//既然后端验证token未通过，那么前端的token肯定是有问题的，那没必要存储在浏览器中，直接删除一下</span></span><br><span class="line">          <span class="title function_">removeToken</span>();</span><br><span class="line">          <span class="comment">//跳到登录页</span></span><br><span class="line">          <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&quot;/&quot;</span>;</span><br><span class="line">        &#125;).<span class="title function_">catch</span>(<span class="function">() =&gt;</span> &#123; <span class="comment">//用户点击“取消”按钮就会触发then函数</span></span><br><span class="line">          <span class="title function_">messageTip</span>(<span class="string">&quot;取消强制退出&quot;</span>, <span class="string">&quot;warning&quot;</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">//加载当前路由路径</span></span><br><span class="line">  <span class="title function_">loadCurrentRouterPath</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> path = <span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">path</span>; <span class="comment">//   /dashboard/activity/add</span></span><br><span class="line">    <span class="keyword">let</span> arr = path.<span class="title function_">split</span>(<span class="string">&quot;/&quot;</span>); <span class="comment">//   [  ,dashboard, activity, add]</span></span><br><span class="line">    <span class="keyword">if</span> (arr.<span class="property">length</span> &gt; <span class="number">3</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">currentRouterPath</span> = <span class="string">&quot;/&quot;</span> + arr[<span class="number">1</span>] + <span class="string">&quot;/&quot;</span> + arr[<span class="number">2</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">currentRouterPath</span> = path;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>   &#x3D;&#x3D;<strong>下面这个调用的就是httpRequest.js里面的doGet的axios</strong>&#x3D;&#x3D;   </p>
-<pre><code>doGet(&quot;/api/login/info&quot;, &#123;&#125;).then( (resp) =&gt; &#123;
-  console.log(resp)
-  this.user = resp.data.data;
-&#125;)
-</code></pre>
-<p>  ！！**&#x3D;&#x3D;因此要写后端的接口&#x3D;&#x3D;**，UserController</p>
-<h2 id="5-获取登录人信息后端代码实现"><a href="#5-获取登录人信息后端代码实现" class="headerlink" title="5.获取登录人信息后端代码实现"></a>5.获取登录人信息后端代码实现</h2><img src="../blog_images/dlyk-part3/image-20240222222945744.png" alt="image-20240222222945744" style="zoom:50%;" />
-
-<img src="../blog_images/dlyk-part3/image-20240222223051935.png" alt="image-20240222223051935" style="zoom:50%;" />
-
-<h3 id="（1）编写UserController-java"><a href="#（1）编写UserController-java" class="headerlink" title="（1）编写UserController.java"></a>（1）编写UserController.java</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//UserController.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.bjpowernode.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.model.TUser;</span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.result.CodeEnum;</span><br><span class="line"><span class="keyword">import</span> com.bjpowernode.result.R;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.core.Authentication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    因为是查询请求 所以写getmapping</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;/api/login/info&quot;)</span></span><br><span class="line"><span class="comment">//    登录后的用户信息怎么拿？</span></span><br><span class="line">    <span class="keyword">public</span> R <span class="title function_">loginInfo</span><span class="params">(Authentication authentication)</span>&#123;</span><br><span class="line">        <span class="type">TUser</span> <span class="variable">tUser</span> <span class="operator">=</span> (TUser)authentication.getPrincipal() ;</span><br><span class="line">        <span class="keyword">return</span> R.OK(tUser);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        public static R OK(Object data) &#123;</span></span><br><span class="line"><span class="comment">//            return R.builder()</span></span><br><span class="line"><span class="comment">//                    .code(CodeEnum.OK.getCode())</span></span><br><span class="line"><span class="comment">//                    .msg(CodeEnum.OK.getMsg())</span></span><br><span class="line"><span class="comment">//                    .data(data)</span></span><br><span class="line"><span class="comment">//                    .build();</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="（2）apifox测试成功"><a href="#（2）apifox测试成功" class="headerlink" title="（2）apifox测试成功"></a>（2）apifox测试成功</h3><p><img src="/../blog_images/dlyk-part3/image-20240222224207981.png" alt="image-20240222224207981"></p>
-<h3 id="（3）前台调用测试"><a href="#（3）前台调用测试" class="headerlink" title="（3）前台调用测试"></a>（3）前台调用测试</h3><p>没改 嗯，不一定能成</p>
-<h1 id="二、用JWT替换sessionP36"><a href="#二、用JWT替换sessionP36" class="headerlink" title="二、用JWT替换sessionP36"></a>二、用JWT替换sessionP36</h1>]]></content>
-      <tags>
-        <tag>Java项目</tag>
-        <tag>动力云客</tag>
-      </tags>
   </entry>
 </search>

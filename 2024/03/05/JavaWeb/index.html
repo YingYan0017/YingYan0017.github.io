@@ -64,8 +64,19 @@
 <meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306150855385.png">
 <meta property="og:image" content="http://example.com/2024/03/05/blog_images/JavaWeb/image-20240306151151217.png">
 <meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306151429294.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306152052414.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306152643855.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306153107242.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306153320104.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306153733135.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306154922588.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306202824520.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306204830544.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306204605470.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306205013500.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb/image-20240306205150673.png">
 <meta property="article:published_time" content="2024-03-05T06:27:47.000Z">
-<meta property="article:modified_time" content="2024-03-06T07:14:41.420Z">
+<meta property="article:modified_time" content="2024-03-06T12:54:57.049Z">
 <meta property="article:author" content="lolo">
 <meta property="article:tag" content="JavaWeb">
 <meta property="article:tag" content="JavaWeb基础">
@@ -265,7 +276,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-06 15:14:41" itemprop="dateModified" datetime="2024-03-06T15:14:41+08:00">2024-03-06</time>
+      <time title="修改时间：2024-03-06 20:54:57" itemprop="dateModified" datetime="2024-03-06T20:54:57+08:00">2024-03-06</time>
     </span>
 
   
@@ -601,8 +612,113 @@
 <p>获取请求参数，需要HttpServletRequest 对象手动获取</p>
 </blockquote>
 <p><img src="/../blog_images/JavaWeb/image-20240306151429294.png" alt="image-20240306151429294"></p>
-<p>​	SpringBoot方式</p>
-<h3 id="实体参数"><a href="#实体参数" class="headerlink" title="实体参数"></a>实体参数</h3><h3 id="数组集合参数"><a href="#数组集合参数" class="headerlink" title="数组集合参数"></a>数组集合参数</h3><h3 id="日期参数"><a href="#日期参数" class="headerlink" title="日期参数"></a>日期参数</h3><h3 id="Json参数"><a href="#Json参数" class="headerlink" title="Json参数"></a>Json参数</h3><h3 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h3><h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h2 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h2>
+<h4 id="SpringBoot方式"><a href="#SpringBoot方式" class="headerlink" title="SpringBoot方式"></a>SpringBoot方式</h4><blockquote>
+<p>简单参数：参数名与形参变量名相同，定义形参即可接收参数。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(String name , Integer age)</span>&#123;</span><br><span class="line">    System.out.println(name+<span class="string">&quot;  :  &quot;</span>+age);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>简单参数：如果方法形参名称与请求参数名称不匹配，可以使用 @RequestParam 完成映射。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(<span class="meta">@RequestParam(name = &quot;name&quot;)</span> String username , Integer age)</span>&#123;</span><br><span class="line">	System.out.println(username + <span class="string">&quot; : &quot;</span> + age);</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>@RequestParam中的required属性默认为true，代表该请求参数必须传递，如果不传递将报错。 如果该参数是可选的，可以将required属性设置为false。</p>
+<h3 id="实体参数"><a href="#实体参数" class="headerlink" title="实体参数"></a>实体参数</h3><blockquote>
+<p>简单实体对象：请求参数名与形参对象属性名相同，定义POJO接收即可</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306152052414.png" alt="image-20240306152052414"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simplePojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simplePojo</span><span class="params">(User user)</span>&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>复杂实体对象：请求参数名与形参对象属性名相同，按照对象层次结构关系即可接收嵌套POJO属性参数。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306152643855.png" alt="image-20240306152643855"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/complexPojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">complexPojo</span><span class="params">(User user)</span>&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String province;</span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="数组集合参数"><a href="#数组集合参数" class="headerlink" title="数组集合参数"></a>数组集合参数</h3><h4 id="数组参数"><a href="#数组参数" class="headerlink" title="数组参数"></a>数组参数</h4><blockquote>
+<p>数组参数：请求参数名与形参数组名称相同且请求参数为多个，定义数组类型形参即可接收参数</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306153107242.png" alt="image-20240306153107242"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam</span><span class="params">(String[] hobby)</span>&#123;</span><br><span class="line">    System.out.println(Arrays.toString(hobby));</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="集合参数-RequestParam"><a href="#集合参数-RequestParam" class="headerlink" title="集合参数@RequestParam"></a>集合参数@RequestParam</h4><blockquote>
+<p>集合参数：<strong>请求参数名与形参集合名称相同且请求参数为多个，@RequestParam 绑定参数关系</strong> </p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306153320104.png" alt="image-20240306153320104"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/listParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">listParam</span><span class="params">(<span class="meta">@RequestParam</span> List&lt;String&gt; hobby)</span>&#123;</span><br><span class="line">    System.out.println(hobby);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>==<strong>数组：请求参数名与形参中数组变量名相同，可以直接使用数组封装</strong>==</p>
+<p>==<strong>集合：请求参数名与形参中集合变量名相同，通过@RequestParam绑定参数关系</strong>==</p>
+<h3 id="日期参数-DateTimeFormat"><a href="#日期参数-DateTimeFormat" class="headerlink" title="日期参数@DateTimeFormat"></a>日期参数@DateTimeFormat</h3><blockquote>
+<p>日期参数：使用 @DateTimeFormat 注解完成日期参数格式转换 </p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306153733135.png" alt="image-20240306153733135"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/dateParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">dateParam</span><span class="params">(<span class="meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span> LocalDateTime updateTime)</span>&#123;</span><br><span class="line">    System.out.println(updateTime);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Json参数"><a href="#Json参数" class="headerlink" title="Json参数"></a>Json参数</h3><blockquote>
+<p>JSON参数：JSON数据键名与形参对象属性名相同，定义POJO类型形参即可接收参数，需要使用 @RequestBody 标识</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306154922588.png" alt="image-20240306154922588"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/jsonParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">jsonParam</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span>&#123;</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;    </span><br><span class="line">    <span class="keyword">private</span> String province;    </span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h3><blockquote>
+<p>路径参数：通过请求URL直接传递参数，使用{…}来标识该路径参数，需要使用 @PathVariable 获取路径参数</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/path/&#123;id&#125;/&#123;name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">pathParam2</span><span class="params">(<span class="meta">@PathVariable</span> Integer id, <span class="meta">@PathVariable</span> String name)</span>&#123;</span><br><span class="line">    System.out.println(id+ <span class="string">&quot; : &quot;</span> +name);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb/image-20240306202824520.png" alt="image-20240306202824520"></p>
+<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h3 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h3><blockquote>
+<p>位置：Controller类上/方法上</p>
+<p>作用：将方法返回值直接响应，若返回值类型是 实体对象/集合 ，转JSON格式响应</p>
+<p>说明：@RestController = @Controller + @ResponseBody ;</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306204830544.png" alt="image-20240306204830544"></p>
+<h3 id="统一响应结果"><a href="#统一响应结果" class="headerlink" title="统一响应结果"></a>统一响应结果</h3><p><img src="/../blog_images/JavaWeb/image-20240306204605470.png" alt="image-20240306204605470"></p>
+<h2 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h2><blockquote>
+<p>三层架构</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306205013500.png" alt="image-20240306205013500"></p>
+<blockquote>
+<p>controller：控制层，接收前端发送的请求，对请求进行处理，并响应数据。</p>
+<p>service：业务逻辑层，处理具体的业务逻辑。</p>
+<p>dao：数据访问层(Data Access Object)（持久层），负责数据访问操作，包括数据的增、删、改、查。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb/image-20240306205150673.png" alt="image-20240306205150673"></p>
+<p>控制反转： Inversion Of Control，简称IOC。对象的创建控制权由程序自身转移到外部（容器），这种思想称为控制反转。<br>依赖注入： Dependency Injection，简称DI。容器为应用程序提供运行时，所依赖的资源，称之为依赖注入。<br>Bean对象：IOC容器中创建、管理的对象，称之为bean。</p>
+<h2 id="IOC详解"><a href="#IOC详解" class="headerlink" title="IOC详解"></a>IOC详解</h2><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>说明</th>
+<th>位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Component</td>
+<td>声明bean的基础注解</td>
+<td>不属于以下三类时，用此注解</td>
+</tr>
+<tr>
+<td>@Controller</td>
+<td>@Component的衍生注解</td>
+<td>标注在控制器类上</td>
+</tr>
+<tr>
+<td>@Service</td>
+<td>@Component的衍生注解</td>
+<td>标注在业务类上</td>
+</tr>
+<tr>
+<td>@Repository</td>
+<td>@Component的衍生注解</td>
+<td>标注在数据访问类上（由于与mybatis整合，用的少）</td>
+</tr>
+</tbody></table>
+<p>声明bean的时候，可以通过value属性指定bean的名字，如果没有指定，默认为类名首字母小写。</p>
+<p>使用以上四个注解都可以声明bean，但是在springboot集成web开发中，声明控制器bean只能用@Controller。</p>
+
     </div>
 
     

@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -156,7 +156,7 @@
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -173,511 +173,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/05/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/JavaWeb%20-%20%E5%89%AF%E6%9C%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/05/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/JavaWeb%20-%20%E5%89%AF%E6%9C%AC/" class="post-title-link" itemprop="url">JavaWeb</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-05 14:27:47" itemprop="dateCreated datePublished" datetime="2024-03-05T14:27:47+08:00">2024-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-06 20:54:57" itemprop="dateModified" datetime="2024-03-06T20:54:57+08:00">2024-03-06</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/../blog_images/JavaWeb/image-20240305150715516.png" alt="image-20240305150715516"></p>
-<blockquote>
-<p>缩减一下，直接就ajax和axios，Vue</p>
-</blockquote>
-<h1 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h1><h2 id="1-JS引入方式"><a href="#1-JS引入方式" class="headerlink" title="1.JS引入方式"></a>1.JS引入方式</h2><p>内部脚本：将JS代码定义在html页面的*<script></script>*中</p>
-<p>​		建议：将*<script></script><em>放在</em><body>*的底部</p>
-<p>外部脚本：将JS代码定义在js文件中，通过*<script></script>*标签引入</p>
-<p>​		注意：通过*<script>*标签引入外部js文件时，标签不可以自闭合</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用 window.alert() 写入警告框</span><br><span class="line">使用 document.write() 写入 HTML 输出</span><br><span class="line">使用 console.log() 写入浏览器控制台</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><p>JavaScript 中用 <strong>var</strong> 关键字（variable 的缩写）来声明变量 。</p>
-<p>JavaScript 是一门弱类型语言，变量可以存放不同类型的值 。</p>
-<p>变量名需要遵循如下规则：</p>
-<p>​	Ø组成字符可以是任何字母、数字、下划线（_）或美元符号（$）</p>
-<p>​	Ø数字不能开头</p>
-<p>​	Ø建议使用驼峰命名</p>
-<blockquote>
-<p>ECMAScript 6 新增了 let 关键字来定义变量。它的用法类似于 var，但是所声明的变量，只在 let 关键字所在的代码块内有效，且不允许重复声明。</p>
-</blockquote>
-<blockquote>
-<p>ECMAScript 6 新增了 const 关键字，用来声明一个只读的常量。一旦声明，常量的值就不能改变。</p>
-</blockquote>
-<p><strong>•var：声明变量，全局作用域/函数作用域，允许重复声明</strong></p>
-<p><strong>• let：声明变量，块级作用域，不允许重复声明</strong></p>
-<p><strong>• const：声明常量，一旦声明，常量的值不能改变</strong></p>
-<h2 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3.数据类型"></a>3.数据类型</h2><p>JavaScript中分为：<strong>原始类型 和 引用类型</strong>。</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306105949534.png" alt="image-20240306105949534"></p>
-<p>var 变量名 = new Array(元素列表); </p>
-<p><img src="/../blog_images/JavaWeb/image-20240306110748714.png" alt="image-20240306110748714"></p>
-<h2 id="4-BOW"><a href="#4-BOW" class="headerlink" title="4.BOW"></a>4.BOW</h2><p>Browser Object Model 浏览器对象模型，允许JavaScript与浏览器对话， JavaScript 将浏览器的各个组成部分封装为对象。</p>
-<p>location地址对象：就是那个框</p>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>history：对 History 对象的只读引用。请参阅 <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_history.asp">History </a><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_history.asp">对象</a>。</p>
-<p>location：用于窗口或框架的 Location 对象。请参阅 <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_location.asp">Location </a><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_location.asp">对象</a>。</p>
-<p>navigator：对 Navigator 对象的只读引用。请参阅 <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_navigator.asp">Navigator </a><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_navigator.asp">对象</a>。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>alert()：显示带有一段消息和一个确认按钮的警告框。</p>
-<p>confirm()：显示带有一段消息以及确认按钮和取消按钮的对话框。</p>
-<p>setInterval()：按照指定的周期（以毫秒计）来调用函数或计算表达式。</p>
-<p>setTimeout()：在指定的毫秒数后调用函数或计算表达式。</p>
-<h2 id="5-DOM（概念：Document-Object-Model-，文档对象模型）"><a href="#5-DOM（概念：Document-Object-Model-，文档对象模型）" class="headerlink" title="5.DOM（概念：Document Object Model ，文档对象模型）"></a>5.DOM（概念：Document Object Model ，文档对象模型）</h2><p><img src="/../blog_images/JavaWeb/image-20240306111613344.png" alt="image-20240306111613344"></p>
-<h2 id="6-事件监听"><a href="#6-事件监听" class="headerlink" title="6.事件监听"></a>6.事件监听</h2><p>事件：HTML事件是发生在HTML元素上的 “事情”。比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">按钮被点击</span><br><span class="line"></span><br><span class="line">鼠标移动到元素上</span><br><span class="line"></span><br><span class="line">按下键盘按键</span><br></pre></td></tr></table></figure>
-
-<p>事件监听：JavaScript可以在事件被侦测到时 执行代码。</p>
-<h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><h4 id="方式一：通过-HTML标签中的事件属性进行绑定"><a href="#方式一：通过-HTML标签中的事件属性进行绑定" class="headerlink" title="方式一：通过 HTML标签中的事件属性进行绑定"></a>方式一：通过 HTML标签中的事件属性进行绑定</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;button&quot;</span> onclick=<span class="string">&quot;on()&quot;</span> value=<span class="string">&quot;按钮1&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function <span class="title function_">on</span><span class="params">()</span>&#123;</span><br><span class="line">        alert(<span class="string">&#x27;我被点击了!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="方式二：通过-DOM-元素属性绑定"><a href="#方式二：通过-DOM-元素属性绑定" class="headerlink" title="方式二：通过 DOM 元素属性绑定"></a>方式二：通过 DOM 元素属性绑定</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;按钮2&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">  document.getElementById(&#x27;btn&#x27;).onclick=function()&#123;</span><br><span class="line"></span><br><span class="line">    alert(&#x27;我被点击了!&#x27;);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="常见事件"><a href="#常见事件" class="headerlink" title="常见事件"></a>常见事件</h3><p><img src="/../blog_images/JavaWeb/image-20240306112610533.png" alt="image-20240306112610533"></p>
-<h2 id="7-Vue"><a href="#7-Vue" class="headerlink" title="7.Vue"></a>7.Vue</h2><p>Vue 是一套前端框架，免除原生JavaScript中的DOM操作，简化书写。</p>
-<p>基于MVVM(Model-View-ViewModel)思想，实现数据的双向绑定，将编程的关注点放在数据上。</p>
-<p>官网： <a target="_blank" rel="noopener" href="https://v2.cn.vuejs.org/">https://v2.cn.vuejs.org/</a></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306112707334.png" alt="image-20240306112707334"></p>
-<h3 id="Vue快速入门"><a href="#Vue快速入门" class="headerlink" title="Vue快速入门"></a>Vue快速入门</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="/../blog_images/JavaWeb/image-20240306112754269.png" alt="image-20240306112754269"></h3><h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><p>指令：HTML 标签上带有 v- 前缀 的特殊属性，不同指令具有不同含义。例如：v-if，v-for…</p>
-<p>常用指令</p>
-<table>
-<thead>
-<tr>
-<th><strong>指令</strong></th>
-<th><strong>作用</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>v-bind</td>
-<td>为HTML标签绑定属性值，如设置 href , css样式等</td>
-</tr>
-<tr>
-<td>v-model</td>
-<td>在表单元素上创建双向数据绑定</td>
-</tr>
-<tr>
-<td>v-on</td>
-<td>为HTML标签绑定事件</td>
-</tr>
-<tr>
-<td>v-if</td>
-<td>条件性的渲染某元素，判定为true时渲染,否则不渲染</td>
-</tr>
-<tr>
-<td>v-else-if</td>
-<td></td>
-</tr>
-<tr>
-<td>v-else</td>
-<td></td>
-</tr>
-<tr>
-<td>v-show</td>
-<td>根据条件展示某元素，区别在于切换的是display属性的值</td>
-</tr>
-<tr>
-<td>v-for</td>
-<td>列表渲染，遍历容器的元素或者对象的属性</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th><strong>指令</strong></th>
-<th><strong>作用</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>v-bind</td>
-<td>为HTML标签绑定属性值，如设置 href , css样式等</td>
-</tr>
-<tr>
-<td>v-model</td>
-<td>在表单元素上创建双向数据绑定</td>
-</tr>
-</tbody></table>
-<p>通过v-bind或者v-model绑定的变量，必须在数据模型中声明。</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306113353512.png" alt="image-20240306113353512"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306113419926.png" alt="image-20240306113419926"></p>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>生命周期：指一个对象从创建到销毁的整个过程。</p>
-<p>生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法(钩子)。</p>
-<table>
-<thead>
-<tr>
-<th><strong>状态</strong></th>
-<th><strong>阶段周期</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>beforeCreate</td>
-<td>创建前</td>
-</tr>
-<tr>
-<td>created</td>
-<td>创建后</td>
-</tr>
-<tr>
-<td>beforeMount</td>
-<td>挂载前</td>
-</tr>
-<tr>
-<td>mounted</td>
-<td>挂载完成</td>
-</tr>
-<tr>
-<td>beforeUpdate</td>
-<td>更新前</td>
-</tr>
-<tr>
-<td>updated</td>
-<td>更新后</td>
-</tr>
-<tr>
-<td>beforeDestroy</td>
-<td>销毁前</td>
-</tr>
-<tr>
-<td>destroyed</td>
-<td>销毁后</td>
-</tr>
-</tbody></table>
-<p><img src="/../blog_images/JavaWeb/image-20240306114312596.png" alt="image-20240306114312596"></p>
-<p><strong>生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法(钩子)</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">        el: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;,</span><br><span class="line">        mounted() &#123;</span><br><span class="line">            console.log(<span class="string">&quot;Vue挂载完毕,发送请求获取数据&quot;</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">           </span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>mounted：挂载完成，Vue初始化成功，HTML页面渲染成功。（发送请求到服务端，加载数据）</p>
-<h1 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h1><p>Maven是apache旗下的一个开源项目，是一款用于管理和构建java项目的工具。</p>
-<blockquote>
-<p>基于项目对象模型(POM)的概念，通过一小段描述信息来管理项目的构建。</p>
-</blockquote>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>  <strong>依赖管理</strong>：方便快捷的管理项目依赖的资源(jar包)，避免版本冲突问题</p>
-<p>  <strong>统一项目结构</strong>：提供标准、统一的项目结构</p>
-<p>  <strong>项目构建</strong>：标准跨平台（Linux、Windows、MacOS）的自动化项目构建方式</p>
-<p>清理、编译、测试、打包、发布</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306132942342.png" alt="image-20240306132942342"></p>
-<h2 id="Maven概述"><a href="#Maven概述" class="headerlink" title="Maven概述"></a>Maven概述</h2><p><img src="/../blog_images/JavaWeb/image-20240306134710518.png" alt="image-20240306134710518"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306134742641.png" alt="image-20240306134742641"></p>
-<h3 id="Maven坐标"><a href="#Maven坐标" class="headerlink" title="Maven坐标"></a>Maven坐标</h3><p>Maven 中的坐标是资源的唯一标识，通过该坐标可以唯一定位资源位置。</p>
-<p>使用坐标来定义项目或引入项目中需要的依赖。</p>
-<h4 id="Maven-坐标主要组成"><a href="#Maven-坐标主要组成" class="headerlink" title="Maven 坐标主要组成"></a>Maven 坐标主要组成</h4><p>groupId：定义当前Maven项目隶属组织名称（通常是域名反写，例如：com.itheima）</p>
-<p>artifactId：定义当前Maven项目名称（通常是模块名称，例如 order-service、goods-service）</p>
-<p>version：定义当前项目版本号</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306135618173.png" alt="image-20240306135618173"></p>
-<h4 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h4><p>依赖：指当前项目运行所需要的jar包，一个项目中可以引入多个依赖。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.在 pom.xml 中编写 &lt;dependencies&gt; 标签</span><br><span class="line"></span><br><span class="line">2.在 &lt;dependencies&gt; 标签中 使用 &lt;dependency&gt; 引入坐标</span><br><span class="line"></span><br><span class="line">3.定义坐标的 groupId，artifactId，version</span><br><span class="line"></span><br><span class="line">4.点击刷新按钮，引入最新加入的坐标</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;        </span><br><span class="line">    	&lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;        </span><br><span class="line">    	&lt;artifactId&gt;logback-classic&lt;/artifactId&gt;      </span><br><span class="line">    	&lt;version&gt;1.2.3&lt;/version&gt;    </span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-
-<h5 id="依赖具有传递性"><a href="#依赖具有传递性" class="headerlink" title="依赖具有传递性"></a>依赖具有传递性</h5><blockquote>
-<p>直接依赖：在当前项目中通过依赖配置建立的依赖关系</p>
-<p>间接依赖：被依赖的资源如果依赖其他资源，当前项目间接依赖其他资源</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306140113368.png" alt="image-20240306140113368"></p>
-<h5 id="排除依赖"><a href="#排除依赖" class="headerlink" title="排除依赖"></a>排除依赖</h5><blockquote>
-<p>排除依赖指主动断开依赖的资源，被排除的资源无需指定版本。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306140209596.png" alt="image-20240306140209596"></p>
-<h4 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h4><p>依赖的jar包，默认情况下，可以在任何地方使用。可以通过</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scope&gt;…&lt;/ scope &gt; </span><br></pre></td></tr></table></figure>
-
-<p>设置其作用范围。</p>
-<p><strong>作用范围：</strong></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306140857607.png" alt="image-20240306140857607"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306140907131.png" alt="image-20240306140907131"></p>
-<table>
-<thead>
-<tr>
-<th><strong>scope****值</strong></th>
-<th><strong>主程序</strong></th>
-<th><strong>测试程序</strong></th>
-<th><strong>打包（运行）</strong></th>
-<th><strong>范例</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>compile（默认）</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-<td>log4j</td>
-</tr>
-<tr>
-<td>test</td>
-<td>-</td>
-<td>Y</td>
-<td>-</td>
-<td>junit</td>
-</tr>
-<tr>
-<td>provided</td>
-<td>Y</td>
-<td>Y</td>
-<td>-</td>
-<td>servlet-api</td>
-</tr>
-<tr>
-<td>runtime</td>
-<td>-</td>
-<td>Y</td>
-<td>Y</td>
-<td>jdbc驱动</td>
-</tr>
-</tbody></table>
-<h4 id="生命周期-1"><a href="#生命周期-1" class="headerlink" title="生命周期"></a>生命周期</h4><blockquote>
-<p>Maven的生命周期就是为了对所有的maven项目构建过程进行抽象和统一。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306141128223.png" alt="image-20240306141128223"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306141920091.png" alt="image-20240306141920091"></p>
-<p>Maven中有3套相互独立的生命周期：</p>
-<blockquote>
-<p>在同一套生命周期中，当运行后面的阶段时，前面的阶段都会运行。</p>
-</blockquote>
-<ul>
-<li>clean：清理工作。</li>
-<li>default：核心工作，如：编译、测试、打包、安装、部署等。</li>
-<li>site：生成报告、发布站点等。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clean：移除上一次构建生成的文件</span><br><span class="line">compile：编译项目源代码</span><br><span class="line">test：使用合适的单元测试框架运行测试(junit)</span><br><span class="line">package：将编译后的文件打包，如：jar、war等</span><br><span class="line">install：安装项目到本地仓库</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb/image-20240306142550365.png" alt="image-20240306142550365"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306142605065.png" alt="image-20240306142605065"></p>
-<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><p><img src="/../blog_images/JavaWeb/image-20240306142800941.png" alt="image-20240306142800941"></p>
-<blockquote>
-<p>Spring Framework配置比较繁琐，入门的难度比较大</p>
-<p>Sprint Boot简化配置，快速入门</p>
-</blockquote>
-<h2 id="SpringBootWeb入门"><a href="#SpringBootWeb入门" class="headerlink" title="SpringBootWeb入门"></a>SpringBootWeb入门</h2><h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><p><img src="/../blog_images/JavaWeb/image-20240306143624478.png" alt="image-20240306143624478"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306143813629.png" alt="image-20240306143813629"></p>
-<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><h4 id="HTTP-概述"><a href="#HTTP-概述" class="headerlink" title="HTTP-概述"></a>HTTP-概述</h4><p><img src="/../blog_images/JavaWeb/image-20240306143950651.png" alt="image-20240306143950651"></p>
-<blockquote>
-<p>Hyper Text Transfer Protocol，超文本传输协议，规定了浏览器和服务器之间数据传输的规则。 </p>
-</blockquote>
-<h4 id="HTTP-请求协议"><a href="#HTTP-请求协议" class="headerlink" title="HTTP-请求协议"></a>HTTP-请求协议</h4><p><img src="/../blog_images/JavaWeb/image-20240306144631222.png" alt="image-20240306144631222"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306144652867.png" alt="image-20240306144652867"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306144754893.png" alt="image-20240306144754893"></p>
-<h4 id="HTTP-响应协议"><a href="#HTTP-响应协议" class="headerlink" title="HTTP-响应协议"></a>HTTP-响应协议</h4><p><img src="/../blog_images/JavaWeb/image-20240306144904417.png" alt="image-20240306144904417"></p>
-<table>
-<thead>
-<tr>
-<th>200</th>
-<th>客户端请求成功。</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>404</td>
-<td>请求资源不存在，般是URL输入有误，或者网站资源被删除了。</td>
-</tr>
-<tr>
-<td>500</td>
-<td>服务器发生不可预期的错误。</td>
-</tr>
-</tbody></table>
-<h4 id="HTTP-协议解析"><a href="#HTTP-协议解析" class="headerlink" title="HTTP-协议解析"></a>HTTP-协议解析</h4><h1 id="Web服务器-Tomcat"><a href="#Web服务器-Tomcat" class="headerlink" title="Web服务器-Tomcat"></a>Web服务器-Tomcat</h1><blockquote>
-<p>Web服务器 对HTTP协议操作进行封装，简化web程序开发</p>
-<p>部署web项目，对外提供网上信息浏览服务。</p>
-</blockquote>
-<h2 id="Tomcat简介"><a href="#Tomcat简介" class="headerlink" title="Tomcat简介"></a>Tomcat简介</h2><blockquote>
-<p>一个轻量级的web服务器，支持servlet、jsp等少量javaEE规范。</p>
-<p>也被称为web容器、servlet容器。</p>
-</blockquote>
-<ul>
-<li>概念： Tomcat是Apache 软件基金会一个核心项目，是一个开源免费的轻量级Web服务器，支持Servlet/JSP少量JavaEE规范。</li>
-<li>JavaEE：Java Enterprise Edition，Java企业版。指Java企业级开发的技术规范总和。包<strong>含13项技术规范：JDBC、JNDI、EJB、RMI、JSP、Servlet、XML、JMS、Java IDL、JTS、JTA、JavaMail、JAF</strong></li>
-<li><strong>Tomcat 也被称为 Web容器、Servlet容器。Servlet程序需要依赖于 Tomcat才能运行</strong> </li>
-<li>官网：<a target="_blank" rel="noopener" href="https://tomcat.apache.org/">https://tomcat.apache.org/</a></li>
-</ul>
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/../blog_images/JavaWeb/image-20240306150115020.png" alt="image-20240306150115020"></h3><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
-<li>起步依赖</li>
-</ol>
-<p><img src="/../blog_images/JavaWeb/image-20240306150153737.png" alt="image-20240306150153737"></p>
-<ol start="2">
-<li>内嵌Tomcat服务器</li>
-</ol>
-<p><img src="/../blog_images/JavaWeb/image-20240306150215953.png" alt="image-20240306150215953"></p>
-<h1 id="Web后端开发-请求响应"><a href="#Web后端开发-请求响应" class="headerlink" title="Web后端开发-请求响应"></a>Web后端开发-请求响应</h1><p><img src="/../blog_images/JavaWeb/image-20240306150713034.png" alt="image-20240306150713034"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306150724281.png" alt="image-20240306150724281"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306150855385.png" alt="image-20240306150855385"></p>
-<h2 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h2><h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><h4 id="前后端分离开发"><a href="#前后端分离开发" class="headerlink" title="前后端分离开发"></a>前后端分离开发</h4><blockquote>
-<p>当前最为流行的开发模式：前后端分离</p>
-</blockquote>
-<img src="../blog_images/JavaWeb/image-20240306151151217.png" alt="image-20240306151151217" style="zoom:50%;" />
-
-<h4 id="Postman-1"><a href="#Postman-1" class="headerlink" title="Postman"></a>Postman</h4><p>postman是一款功能强大的网页调试与发送网页HTTP请求的Chrome插件。</p>
-<p>作用：常用于进行接口测试</p>
-<h3 id="简单参数"><a href="#简单参数" class="headerlink" title="简单参数"></a>简单参数</h3><h4 id="原始方式"><a href="#原始方式" class="headerlink" title="原始方式"></a>原始方式</h4><blockquote>
-<p>获取请求参数，需要HttpServletRequest 对象手动获取</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306151429294.png" alt="image-20240306151429294"></p>
-<h4 id="SpringBoot方式"><a href="#SpringBoot方式" class="headerlink" title="SpringBoot方式"></a>SpringBoot方式</h4><blockquote>
-<p>简单参数：参数名与形参变量名相同，定义形参即可接收参数。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(String name , Integer age)</span>&#123;</span><br><span class="line">    System.out.println(name+<span class="string">&quot;  :  &quot;</span>+age);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>简单参数：如果方法形参名称与请求参数名称不匹配，可以使用 @RequestParam 完成映射。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(<span class="meta">@RequestParam(name = &quot;name&quot;)</span> String username , Integer age)</span>&#123;</span><br><span class="line">	System.out.println(username + <span class="string">&quot; : &quot;</span> + age);</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>@RequestParam中的required属性默认为true，代表该请求参数必须传递，如果不传递将报错。 如果该参数是可选的，可以将required属性设置为false。</p>
-<h3 id="实体参数"><a href="#实体参数" class="headerlink" title="实体参数"></a>实体参数</h3><blockquote>
-<p>简单实体对象：请求参数名与形参对象属性名相同，定义POJO接收即可</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306152052414.png" alt="image-20240306152052414"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simplePojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simplePojo</span><span class="params">(User user)</span>&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>复杂实体对象：请求参数名与形参对象属性名相同，按照对象层次结构关系即可接收嵌套POJO属性参数。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306152643855.png" alt="image-20240306152643855"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/complexPojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">complexPojo</span><span class="params">(User user)</span>&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String province;</span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="数组集合参数"><a href="#数组集合参数" class="headerlink" title="数组集合参数"></a>数组集合参数</h3><h4 id="数组参数"><a href="#数组参数" class="headerlink" title="数组参数"></a>数组参数</h4><blockquote>
-<p>数组参数：请求参数名与形参数组名称相同且请求参数为多个，定义数组类型形参即可接收参数</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306153107242.png" alt="image-20240306153107242"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam</span><span class="params">(String[] hobby)</span>&#123;</span><br><span class="line">    System.out.println(Arrays.toString(hobby));</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="集合参数-RequestParam"><a href="#集合参数-RequestParam" class="headerlink" title="集合参数@RequestParam"></a>集合参数@RequestParam</h4><blockquote>
-<p>集合参数：<strong>请求参数名与形参集合名称相同且请求参数为多个，@RequestParam 绑定参数关系</strong> </p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306153320104.png" alt="image-20240306153320104"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/listParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">listParam</span><span class="params">(<span class="meta">@RequestParam</span> List&lt;String&gt; hobby)</span>&#123;</span><br><span class="line">    System.out.println(hobby);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>==<strong>数组：请求参数名与形参中数组变量名相同，可以直接使用数组封装</strong>==</p>
-<p>==<strong>集合：请求参数名与形参中集合变量名相同，通过@RequestParam绑定参数关系</strong>==</p>
-<h3 id="日期参数-DateTimeFormat"><a href="#日期参数-DateTimeFormat" class="headerlink" title="日期参数@DateTimeFormat"></a>日期参数@DateTimeFormat</h3><blockquote>
-<p>日期参数：使用 @DateTimeFormat 注解完成日期参数格式转换 </p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306153733135.png" alt="image-20240306153733135"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/dateParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">dateParam</span><span class="params">(<span class="meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span> LocalDateTime updateTime)</span>&#123;</span><br><span class="line">    System.out.println(updateTime);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="Json参数"><a href="#Json参数" class="headerlink" title="Json参数"></a>Json参数</h3><blockquote>
-<p>JSON参数：JSON数据键名与形参对象属性名相同，定义POJO类型形参即可接收参数，需要使用 @RequestBody 标识</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306154922588.png" alt="image-20240306154922588"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/jsonParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">jsonParam</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span>&#123;</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;    </span><br><span class="line">    <span class="keyword">private</span> String province;    </span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h3><blockquote>
-<p>路径参数：通过请求URL直接传递参数，使用{…}来标识该路径参数，需要使用 @PathVariable 获取路径参数</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/path/&#123;id&#125;/&#123;name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">pathParam2</span><span class="params">(<span class="meta">@PathVariable</span> Integer id, <span class="meta">@PathVariable</span> String name)</span>&#123;</span><br><span class="line">    System.out.println(id+ <span class="string">&quot; : &quot;</span> +name);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb/image-20240306202824520.png" alt="image-20240306202824520"></p>
-<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h3 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h3><blockquote>
-<p>位置：Controller类上/方法上</p>
-<p>作用：将方法返回值直接响应，若返回值类型是 实体对象/集合 ，转JSON格式响应</p>
-<p>说明：@RestController = @Controller + @ResponseBody ;</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306204830544.png" alt="image-20240306204830544"></p>
-<h3 id="统一响应结果"><a href="#统一响应结果" class="headerlink" title="统一响应结果"></a>统一响应结果</h3><p><img src="/../blog_images/JavaWeb/image-20240306204605470.png" alt="image-20240306204605470"></p>
-<h2 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h2><blockquote>
-<p>三层架构</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306205013500.png" alt="image-20240306205013500"></p>
-<blockquote>
-<p>controller：控制层，接收前端发送的请求，对请求进行处理，并响应数据。</p>
-<p>service：业务逻辑层，处理具体的业务逻辑。</p>
-<p>dao：数据访问层(Data Access Object)（持久层），负责数据访问操作，包括数据的增、删、改、查。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306205150673.png" alt="image-20240306205150673"></p>
-<p>控制反转： Inversion Of Control，简称IOC。对象的创建控制权由程序自身转移到外部（容器），这种思想称为控制反转。<br>依赖注入： Dependency Injection，简称DI。容器为应用程序提供运行时，所依赖的资源，称之为依赖注入。<br>Bean对象：IOC容器中创建、管理的对象，称之为bean。</p>
-<h2 id="IOC详解"><a href="#IOC详解" class="headerlink" title="IOC详解"></a>IOC详解</h2><table>
-<thead>
-<tr>
-<th>注解</th>
-<th>说明</th>
-<th>位置</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@Component</td>
-<td>声明bean的基础注解</td>
-<td>不属于以下三类时，用此注解</td>
-</tr>
-<tr>
-<td>@Controller</td>
-<td>@Component的衍生注解</td>
-<td>标注在控制器类上</td>
-</tr>
-<tr>
-<td>@Service</td>
-<td>@Component的衍生注解</td>
-<td>标注在业务类上</td>
-</tr>
-<tr>
-<td>@Repository</td>
-<td>@Component的衍生注解</td>
-<td>标注在数据访问类上（由于与mybatis整合，用的少）</td>
-</tr>
-</tbody></table>
-<p>声明bean的时候，可以通过value属性指定bean的名字，如果没有指定，默认为类名首字母小写。</p>
-<p>使用以上四个注解都可以声明bean，但是在springboot集成web开发中，声明控制器bean只能用@Controller。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -3894,6 +3389,74 @@
 <h2 id="2-使用tomcat后，访问html"><a href="#2-使用tomcat后，访问html" class="headerlink" title="2.使用tomcat后，访问html"></a>2.使用tomcat后，访问html</h2><p>使用tomcat后，可以像127.0.0.1:8080&#x2F;test.html这样访问一个网站，而不是访问一个html文件。因为tomcat本身就是一个web服务器，test.html部署在了这个web服务器上</p>
 <p><img src="/../blog_images/SpringBoot/2018120522281643.gif" alt="img"></p>
 <h1 id="SpringBoot启动"><a href="#SpringBoot启动" class="headerlink" title="SpringBoot启动"></a>SpringBoot启动</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/23/SpringSecurity/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/23/SpringSecurity/" class="post-title-link" itemprop="url">SpringSecurity</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-02-23 10:50:27" itemprop="dateCreated datePublished" datetime="2024-02-23T10:50:27+08:00">2024-02-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
       
     </div>
 

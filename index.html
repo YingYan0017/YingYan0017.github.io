@@ -212,7 +212,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-03-11 16:50:10 / 修改时间：16:52:08" itemprop="dateCreated datePublished" datetime="2024-03-11T16:50:10+08:00">2024-03-11</time>
+      <time title="创建时间：2024-03-11 16:50:10 / 修改时间：20:15:01" itemprop="dateCreated datePublished" datetime="2024-03-11T16:50:10+08:00">2024-03-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -224,7 +224,7 @@
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/Maven/" itemprop="url" rel="index"><span itemprop="name">Maven</span></a>
+          <a href="/categories/JavaWeb/Maven%E9%AB%98%E7%BA%A7/" itemprop="url" rel="index"><span itemprop="name">Maven高级</span></a>
         </span>
     </span>
 
@@ -238,7 +238,86 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <h1 id="分模块设计与开发"><a href="#分模块设计与开发" class="headerlink" title="分模块设计与开发"></a>分模块设计与开发</h1><p>如果都是一个整体，不便维护，难以复用</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311165526006.png" alt="image-20240311165526006"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311170348905.png" alt="image-20240311170348905"></p>
+<h2 id="分模块设计"><a href="#分模块设计" class="headerlink" title="分模块设计"></a>分模块设计</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311171016127.png" alt="image-20240311171016127"></p>
+<p>直接在tlias-web-management里引入tlias-pojo和tlias-utils的依赖</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">创建maven模块 tlias-pojo，存放实体类。</span><br><span class="line"></span><br><span class="line">创建maven模块 tlias-utils，存放相关工具类。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311171024408.png" alt="image-20240311171024408"></p>
+<h3 id="step1：创建maven模块tlias-pojo，存放实体类"><a href="#step1：创建maven模块tlias-pojo，存放实体类" class="headerlink" title="step1：创建maven模块tlias-pojo，存放实体类"></a>step1：创建maven模块tlias-pojo，存放实体类</h3><img src="../blog_images/JavaWeb-Maven/image-20240311171425231.png" alt="image-20240311171425231" style="zoom:50%;" />
+
+<img src="../blog_images/JavaWeb-Maven/image-20240311171559834.png" alt="image-20240311171559834" style="zoom:50%;" />
+
+<img src="../blog_images/JavaWeb-Maven/image-20240311171641900.png" alt="image-20240311171641900" style="zoom:33%;" />
+
+<h3 id="step2：在主程序中引用模块"><a href="#step2：在主程序中引用模块" class="headerlink" title="step2：在主程序中引用模块"></a>step2：在主程序中引用模块</h3><p><img src="/../blog_images/JavaWeb-Maven/image-20240311172832257.png" alt="image-20240311172832257"></p>
+<h1 id="继承与聚合"><a href="#继承与聚合" class="headerlink" title="继承与聚合"></a>继承与聚合</h1><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><strong>概念：</strong>继承描述的是两个工程之间的关系，和java中的继承相似，子工程可以继承父工程中的配置信息，常见于依赖关系的继承。</p>
+<p><strong>作用：</strong>简化依赖配置，统一管理依赖</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">实现：&lt;parent&gt;...&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311191546007.png" alt="image-20240311191546007"></p>
+<h3 id="继承关系实现"><a href="#继承关系实现" class="headerlink" title="继承关系实现"></a>继承关系实现</h3><p>① 创建maven模块 tlias-parent ，该工程为父工程，设置打包方式pom(默认jar)。</p>
+<blockquote>
+<p>打包方式：</p>
+<p>jar：普通模块打包，springboot项目基本都是jar包（内嵌tomcat运行）</p>
+<p>war：普通web程序打包，需要部署在外部的tomcat服务器中运行</p>
+<p>pom：父工程或聚合工程，该模块不写代码，仅进行依赖管理</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.7</span><span class="number">.5</span>&lt;/version&gt;</span><br><span class="line">    &lt;relativePath/&gt;</span><br><span class="line"> &lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;groupId&gt;com.itheima&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tlias-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.0</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>② 在子工程的pom.xml文件中，配置继承关系</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194125306.png" alt="image-20240311194125306"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在子工程中，配置了继承关系之后，坐标中的groupId是可以省略的，因为会自动继承父工程的 。</span><br><span class="line"></span><br><span class="line">relativePath指定父工程的pom文件的相对位置（如果不指定，将从本地仓库/远程仓库查找该工程）。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192123449.png" alt="image-20240311192123449"></p>
+<p>③ 在父工程中配置各个工程共有的依赖（子工程会自动继承父工程的依赖）。</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192033341.png" alt="image-20240311192033341"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>        </span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ps:若父子工程都配置了同一个依赖的不同版本，以子工程的为准。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194512198.png" alt="image-20240311194512198"></p>
+<h3 id="版本锁定"><a href="#版本锁定" class="headerlink" title="版本锁定"></a>版本锁定</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在maven中，可以在父工程的pom文件中通过 &lt;dependencyManagement&gt; 来统一管理依赖版本</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195137523.png" alt="image-20240311195137523"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195305186.png" alt="image-20240311195305186"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195401893.png" alt="image-20240311195401893"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311200349898.png" alt="image-20240311200349898"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencyManagement&gt; 与 &lt;dependencies&gt;的区别是什么?</span><br><span class="line">&lt;dependencies&gt; 是直接依赖,在父工程配置了依赖,子工程会直接继承下来。 </span><br><span class="line">&lt;dependencyManagement&gt; 是统一管理依赖版本,不会直接依赖，还需要在子工程中引入所需依赖(无需指定版本)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311200842420.png" alt="image-20240311200842420"></p>
+<p>要把几个模块全部安装到本地之后才能打包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">聚合</span><br><span class="line">      将多个模块组织成一个整体，同时进行项目的构建。</span><br><span class="line">聚合工程</span><br><span class="line">      一个不具有业务功能的“空”工程（有且仅有一个pom文件）</span><br><span class="line">作用</span><br><span class="line">      快速构建项目（无需根据依赖关系手动构建，直接在聚合工程上构建即可）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maven中可以通过 &lt;modules&gt; 设置当前聚合工程所包含的子模块名称</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--聚合--&gt;</span>父工程（聚合工程）</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-pojo<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-utils<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-web-management<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>l聚合工程中所包含的模块，在构建时，会自动根据模块间的依赖关系设置构建顺序，与聚合工程中模块的配置书写位置无关。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>聚合用于快速构建项目</li>
+<li>继承用于简化依赖配置、统一管理依赖</li>
+</ul>
+<h3 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h3><ul>
+<li>聚合与继承的pom.xml文件打包方式均为pom，可以将两种关系制作到同一个pom文件中</li>
+<li>聚合与继承均属于设计型模块，并无实际的模块内容</li>
+</ul>
+<h3 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h3><ul>
+<li>聚合是在聚合工程中配置关系，聚合可以感知到参与聚合的模块有哪些</li>
+<li>继承是在子模块中配置关系，父模块无法感知哪些子模块继承了自己</li>
+</ul>
+<h1 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h1><p>私服是一种特殊的远程仓库，它是架设在局域网内的仓库服务，用来代理位于外部的中央仓库，用于解决团队内部的资源共享与资源同步问题。</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201437607.png" alt="image-20240311201437607"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201447693.png" alt="image-20240311201447693"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201500467.png" alt="image-20240311201500467"></p>
+
       
     </div>
 

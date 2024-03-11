@@ -10,145 +10,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>JavaWeb-Mybatis</title>
-    <url>/2024/03/07/JavaWeb-Mybatis/</url>
-    <content><![CDATA[<h1 id="什么是Mybatis"><a href="#什么是Mybatis" class="headerlink" title="什么是Mybatis?"></a>什么是Mybatis?</h1><p>数据层又叫做持久层</p>
-<p>MyBatis是一款优秀的 <strong>持久层</strong> 框架，用于简化JDBC的开发。</p>
-<h1 id="Mybatis入门"><a href="#Mybatis入门" class="headerlink" title="Mybatis入门"></a>Mybatis入门</h1><h2 id="mybatis快速入门"><a href="#mybatis快速入门" class="headerlink" title="mybatis快速入门"></a>mybatis快速入门</h2><p>使用Mybatis查询所有用户数据</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307163841670.png" alt="image-20240307163841670"></p>
-<p>Mapper层：mybatis的接口层。加mapper注释，数据访问层dao层的接口，</p>
-<blockquote>
-<p>要执行语句那句select语句时，只需要使用list方法，就会默认的调用这个语句，sql语句的访问结果就会默认的封装到这个方法里</p>
-</blockquote>
-<h3 id="step1：准备数据库"><a href="#step1：准备数据库" class="headerlink" title="step1：准备数据库"></a>step1：准备数据库</h3><p>运行sql语句创建数据库</p>
-<h3 id="step2：创建springboot项目，点上mybatis之类的tool"><a href="#step2：创建springboot项目，点上mybatis之类的tool" class="headerlink" title="step2：创建springboot项目，点上mybatis之类的tool"></a>step2：创建springboot项目，点上mybatis之类的tool</h3><h3 id="step3：连接数据库"><a href="#step3：连接数据库" class="headerlink" title="step3：连接数据库"></a>step3：连接数据库</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307171742192.png" alt="image-20240307171742192"></p>
-<h3 id="step4：创建实体类pojo"><a href="#step4：创建实体类pojo" class="headerlink" title="step4：创建实体类pojo"></a>step4：创建实体类pojo</h3><p>可以直接用mybatis-generator生成</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173829357.png" alt="image-20240307173829357"></p>
-<h3 id="step5：创建mapper接口层"><a href="#step5：创建mapper接口层" class="headerlink" title="step5：创建mapper接口层"></a>step5：创建mapper接口层</h3><p>@Mapper&#x2F;&#x2F;在运行时，会自动生成该接口的实现类对象（代理对象），并且将该对象交给IOC容器管理</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.demo5.mapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.ljy.demo5.Pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Select;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span><span class="comment">//在运行时，会自动生成该接口的实现类对象（代理对象），并且将该对象交给IOC容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部的用户信息</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from user&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">list</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173836328.png" alt="image-20240307173836328"></p>
-<h3 id="step6：测试"><a href="#step6：测试" class="headerlink" title="step6：测试"></a>step6：测试</h3><p>在test项目里测试</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span><span class="comment">//springboot整合单元测试的注解</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Demo5ApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testListUser</span><span class="params">()</span>&#123;</span><br><span class="line">       List&lt;User&gt; list = userMapper.list();</span><br><span class="line">       list.stream().forEach(user -&gt; &#123;</span><br><span class="line">          System.out.println(user);</span><br><span class="line">       &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173935097.png" alt="image-20240307173935097"></p>
-<h2 id="JDBC介绍"><a href="#JDBC介绍" class="headerlink" title="JDBC介绍"></a>JDBC介绍</h2><p>java database connectivity，就是使用java语言操作关系型数据库的一套API，这是一套规范，sun公司提供的</p>
-<p>各个厂商提供jdbc的实现，这个叫做jdbc的驱动、数据库的驱动</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307174626361.png" alt="image-20240307174626361"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175035561.png" alt="image-20240307175035561"></p>
-<h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3><blockquote>
-<p>数据库连接池是一个容器，负责分配、管理数据库连接（connection）</p>
-</blockquote>
-<p>它允许应用程序重复使用一个现有的数据库连接，而不是再重新创建一个新的</p>
-<p>释放空闲时间超过最大空闲时间的连接，来避免因为没有释放连接而引起的数据库连接遗漏。</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175453352.png" alt="image-20240307175453352"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175644217.png" alt="image-20240307175644217"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175738544.png" alt="image-20240307175738544"></p>
-<h4 id="切换Druid数据库连接池"><a href="#切换Druid数据库连接池" class="headerlink" title="切换Druid数据库连接池"></a>切换Druid数据库连接池</h4><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175836059.png" alt="image-20240307175836059"></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">pom.xml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring.datasource.druid.driver-class-name</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">spring.datasource.druid.url</span>=<span class="string">jdbc:mysql://localhost:3306/mybatis</span></span><br><span class="line"><span class="attr">spring.datasource.druid.username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">spring.datasource.druid.password</span>=<span class="string">1234</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>1.数据库连接池</p>
-<p>l是一个容器，负责分配、管理数据库连接(Connection)</p>
-<p>l优势：资源复用、提升系统响应速度</p>
-<p>l接口：DataSource</p>
-<p>l产品：C3P0、DBCP、Druid、Hikari</p>
-<h2 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h2><blockquote>
-<p><strong>Lombok是一个实用的Java类库，能通过注解的形式自动生成构造器、getter&#x2F;setter、equals、hashcode、toString等方法，并可以自动化生成日志变量，简化java开发、提高效率。</strong></p>
-</blockquote>
-<p><strong><img src="/../blog_images/JavaWeb-Mybatis/image-20240307180112001.png" alt="image-20240307180112001"></strong></p>
-<table>
-<thead>
-<tr>
-<th><strong>注解</strong></th>
-<th><strong>作用</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@Getter&#x2F;@Setter</td>
-<td>为所有的属性提供get&#x2F;set方法</td>
-</tr>
-<tr>
-<td>@ToString</td>
-<td>会给类自动生成易阅读的  toString 方法</td>
-</tr>
-<tr>
-<td>@EqualsAndHashCode</td>
-<td>根据类所拥有的非静态字段自动重写 equals 方法和  hashCode 方法</td>
-</tr>
-<tr>
-<td>@Data</td>
-<td>提供了更综合的生成代码功能（@Getter  + @Setter + @ToString + @EqualsAndHashCode）</td>
-</tr>
-<tr>
-<td>@NoArgsConstructor</td>
-<td>为实体类生成无参的构造器方法</td>
-</tr>
-<tr>
-<td>@AllArgsConstructor</td>
-<td>为实体类生成除了static修饰的字段之外带有各参数的构造器方法。</td>
-</tr>
-</tbody></table>
-<p>Lombok会在编译时，自动生成对应的java代码。我们使用lombok时，还需要安装一个lombok的插件(idea自带)。</p>
-<h1 id="Mybatis基础增删改查"><a href="#Mybatis基础增删改查" class="headerlink" title="Mybatis基础增删改查"></a><strong>M</strong>ybatis基础增删改查</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>按照之前的准备</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307201152408.png" alt="image-20240307201152408"></p>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>按照ID删除数据</p>
-<p>@Delete注释</p>
-<h3 id="占位符-id"><a href="#占位符-id" class="headerlink" title="占位符 #{id}"></a>占位符 #{id}</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Delete(&quot;delete from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;    </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202608039.png" alt="image-20240307202608039"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202628672.png" alt="image-20240307202628672"></p>
-<h3 id="预编译sql语句"><a href="#预编译sql语句" class="headerlink" title="预编译sql语句"></a>预编译sql语句</h3><ul>
-<li>性能更高</li>
-<li>更安全(防止SQL注入)</li>
-</ul>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202803149.png" alt="image-20240307202803149"></p>
-<h4 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h4><p>通过操作输入的数据来修改事先定义好的SQL语句，以达到执行代码对服务器进行攻击的方法。</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307203932583.png" alt="image-20240307203932583"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307204228284.png" alt="image-20240307204228284"></p>
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新增员工</span></span><br><span class="line"><span class="meta">@Insert(&quot;insert into emp(username,name ,gender,image,job,entrydate,dept_id,create_time,update_time)&quot;+</span></span><br><span class="line"><span class="meta">        &quot; values (#&#123;username&#125;,#&#123;name&#125;,#&#123;gender&#125;,#&#123;image&#125;,#&#123;job&#125;,#&#123;entrydate&#125;,#&#123;deptId&#125;,#&#123;createTime&#125;,#&#123;updateTime&#125;)&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insert</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testInsert</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Emp</span>();</span><br><span class="line">    emp.setUsername(<span class="string">&quot;Tom&quot;</span>);</span><br><span class="line">    emp.setName(<span class="string">&quot;汤姆&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="主键返回-Options-keyProperty-”id”"><a href="#主键返回-Options-keyProperty-”id”" class="headerlink" title="主键返回@Options(keyProperty&#x3D;”id”)"></a>主键返回@Options(keyProperty&#x3D;”id”)</h3><blockquote>
-<p> 描述：在数据添加成功后，需要获取插入数据库数据的主键。如：添加套餐数据时，还需要维护套餐菜品关系表数据。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307205557662.png" alt="image-20240307205557662"></p>
-<h2 id="更新-修改"><a href="#更新-修改" class="headerlink" title="更新(修改)"></a>更新(修改)</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//更新员工</span></span><br><span class="line"><span class="meta">@Update(&quot;update emp set username = #&#123;username&#125;, name = #&#123;name&#125;, gender = #&#123;gender&#125;, image = #&#123;image&#125;,&quot; +</span></span><br><span class="line"><span class="meta">        &quot; job = #&#123;job&#125;, entrydate = #&#123;entrydate&#125;, dept_id = #&#123;deptId&#125;,update_time = #&#123;updateTime&#125; where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//构造员工对象</span></span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Emp</span>();</span><br><span class="line">    emp.setId(<span class="number">18</span>);</span><br><span class="line">    emp.setUsername(<span class="string">&quot;Tom1&quot;</span>);</span><br><span class="line">    emp.setName(<span class="string">&quot;汤姆1&quot;</span>);</span><br><span class="line">    emp.setImage(<span class="string">&quot;1.jpg&quot;</span>);</span><br><span class="line">    emp.setGender((<span class="type">short</span>)<span class="number">1</span>);</span><br><span class="line">    emp.setJob((<span class="type">short</span>)<span class="number">1</span>);</span><br><span class="line">    emp.setEntrydate(LocalDate.of(<span class="number">2000</span>,<span class="number">1</span>,<span class="number">1</span>));</span><br><span class="line">    emp.setUpdateTime(LocalDateTime.now());</span><br><span class="line">    emp.setDeptId(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行更新员工操作</span></span><br><span class="line">    empMapper.update(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;select * from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetById</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> empMapper.getById(<span class="number">18</span>);</span><br><span class="line">    System.out.println(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307210950229.png" alt="image-20240307210950229"></p>
-<h3 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307211215522.png" alt="image-20240307211215522"></p>
-<h3 id="解决一"><a href="#解决一" class="headerlink" title="解决一"></a>解决一</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307213019502.png" alt="image-20240307213019502"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//方案三: 开启mybatis的驼峰命名自动映射开关 --- a_cloumn ------&gt; aColumn</span></span><br><span class="line"><span class="comment">//根据ID查询员工</span></span><br><span class="line"><span class="meta">@Select(&quot;select * from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="MybatisXML映射文件"><a href="#MybatisXML映射文件" class="headerlink" title="MybatisXML映射文件"></a>MybatisXML映射文件</h1><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307215655415.png" alt="image-20240307215655415"></p>
-<p>xml映射文件</p>
-<h1 id="Mybatis动态SQL"><a href="#Mybatis动态SQL" class="headerlink" title="Mybatis动态SQL"></a>Mybatis动态SQL</h1><p>随着用户的输入或者外部的变化而变化SQL语句，我们称为动态SQL</p>
-<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;if&gt;：用于判断条件是否成立。使用test属性进行条件判断，如果条件为true，则拼接SQL。</span><br><span class="line"></span><br><span class="line">&lt;where&gt;：where 元素只会在子元素有内容的情况下才插入where子句。而且会自动去除子句的开头的AND 或OR。</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240308165208370.png" alt="image-20240308165208370"></p>
-<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><h1 id="Springboot案例"><a href="#Springboot案例" class="headerlink" title="Springboot案例"></a>Springboot案例</h1><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309135242851.png" alt="image-20240309135242851"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309135953209.png" alt="image-20240309135953209"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309140016098.png" alt="image-20240309140016098"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309140549167.png" alt="image-20240309140549167"></p>
-<h1 id="分页参数"><a href="#分页参数" class="headerlink" title="分页参数"></a>分页参数</h1><h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="表单项"><a href="#表单项" class="headerlink" title="表单项"></a>表单项</h2><p>文件上传</p>
-]]></content>
-      <categories>
-        <category>JavaWeb</category>
-        <category>Mybatis</category>
-      </categories>
-  </entry>
-  <entry>
     <title></title>
     <url>/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
     <content><![CDATA[<h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
@@ -327,10 +188,228 @@
   <entry>
     <title>JavaWeb-Maven</title>
     <url>/2024/03/11/JavaWeb-Maven/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="分模块设计与开发"><a href="#分模块设计与开发" class="headerlink" title="分模块设计与开发"></a>分模块设计与开发</h1><p>如果都是一个整体，不便维护，难以复用</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311165526006.png" alt="image-20240311165526006"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311170348905.png" alt="image-20240311170348905"></p>
+<h2 id="分模块设计"><a href="#分模块设计" class="headerlink" title="分模块设计"></a>分模块设计</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311171016127.png" alt="image-20240311171016127"></p>
+<p>直接在tlias-web-management里引入tlias-pojo和tlias-utils的依赖</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">创建maven模块 tlias-pojo，存放实体类。</span><br><span class="line"></span><br><span class="line">创建maven模块 tlias-utils，存放相关工具类。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311171024408.png" alt="image-20240311171024408"></p>
+<h3 id="step1：创建maven模块tlias-pojo，存放实体类"><a href="#step1：创建maven模块tlias-pojo，存放实体类" class="headerlink" title="step1：创建maven模块tlias-pojo，存放实体类"></a>step1：创建maven模块tlias-pojo，存放实体类</h3><img src="../blog_images/JavaWeb-Maven/image-20240311171425231.png" alt="image-20240311171425231" style="zoom:50%;" />
+
+<img src="../blog_images/JavaWeb-Maven/image-20240311171559834.png" alt="image-20240311171559834" style="zoom:50%;" />
+
+<img src="../blog_images/JavaWeb-Maven/image-20240311171641900.png" alt="image-20240311171641900" style="zoom:33%;" />
+
+<h3 id="step2：在主程序中引用模块"><a href="#step2：在主程序中引用模块" class="headerlink" title="step2：在主程序中引用模块"></a>step2：在主程序中引用模块</h3><p><img src="/../blog_images/JavaWeb-Maven/image-20240311172832257.png" alt="image-20240311172832257"></p>
+<h1 id="继承与聚合"><a href="#继承与聚合" class="headerlink" title="继承与聚合"></a>继承与聚合</h1><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><strong>概念：</strong>继承描述的是两个工程之间的关系，和java中的继承相似，子工程可以继承父工程中的配置信息，常见于依赖关系的继承。</p>
+<p><strong>作用：</strong>简化依赖配置，统一管理依赖</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">实现：&lt;parent&gt;...&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311191546007.png" alt="image-20240311191546007"></p>
+<h3 id="继承关系实现"><a href="#继承关系实现" class="headerlink" title="继承关系实现"></a>继承关系实现</h3><p>① 创建maven模块 tlias-parent ，该工程为父工程，设置打包方式pom(默认jar)。</p>
+<blockquote>
+<p>打包方式：</p>
+<p>jar：普通模块打包，springboot项目基本都是jar包（内嵌tomcat运行）</p>
+<p>war：普通web程序打包，需要部署在外部的tomcat服务器中运行</p>
+<p>pom：父工程或聚合工程，该模块不写代码，仅进行依赖管理</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.7</span><span class="number">.5</span>&lt;/version&gt;</span><br><span class="line">    &lt;relativePath/&gt;</span><br><span class="line"> &lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;groupId&gt;com.itheima&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tlias-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.0</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>② 在子工程的pom.xml文件中，配置继承关系</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194125306.png" alt="image-20240311194125306"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在子工程中，配置了继承关系之后，坐标中的groupId是可以省略的，因为会自动继承父工程的 。</span><br><span class="line"></span><br><span class="line">relativePath指定父工程的pom文件的相对位置（如果不指定，将从本地仓库/远程仓库查找该工程）。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192123449.png" alt="image-20240311192123449"></p>
+<p>③ 在父工程中配置各个工程共有的依赖（子工程会自动继承父工程的依赖）。</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192033341.png" alt="image-20240311192033341"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>        </span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ps:若父子工程都配置了同一个依赖的不同版本，以子工程的为准。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194512198.png" alt="image-20240311194512198"></p>
+<h3 id="版本锁定"><a href="#版本锁定" class="headerlink" title="版本锁定"></a>版本锁定</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在maven中，可以在父工程的pom文件中通过 &lt;dependencyManagement&gt; 来统一管理依赖版本</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195137523.png" alt="image-20240311195137523"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195305186.png" alt="image-20240311195305186"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195401893.png" alt="image-20240311195401893"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311200349898.png" alt="image-20240311200349898"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependencyManagement&gt; 与 &lt;dependencies&gt;的区别是什么?</span><br><span class="line">&lt;dependencies&gt; 是直接依赖,在父工程配置了依赖,子工程会直接继承下来。 </span><br><span class="line">&lt;dependencyManagement&gt; 是统一管理依赖版本,不会直接依赖，还需要在子工程中引入所需依赖(无需指定版本)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311200842420.png" alt="image-20240311200842420"></p>
+<p>要把几个模块全部安装到本地之后才能打包</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">聚合</span><br><span class="line">      将多个模块组织成一个整体，同时进行项目的构建。</span><br><span class="line">聚合工程</span><br><span class="line">      一个不具有业务功能的“空”工程（有且仅有一个pom文件）</span><br><span class="line">作用</span><br><span class="line">      快速构建项目（无需根据依赖关系手动构建，直接在聚合工程上构建即可）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">maven中可以通过 &lt;modules&gt; 设置当前聚合工程所包含的子模块名称</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--聚合--&gt;</span>父工程（聚合工程）</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-pojo<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-utils<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-web-management<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>l聚合工程中所包含的模块，在构建时，会自动根据模块间的依赖关系设置构建顺序，与聚合工程中模块的配置书写位置无关。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>聚合用于快速构建项目</li>
+<li>继承用于简化依赖配置、统一管理依赖</li>
+</ul>
+<h3 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h3><ul>
+<li>聚合与继承的pom.xml文件打包方式均为pom，可以将两种关系制作到同一个pom文件中</li>
+<li>聚合与继承均属于设计型模块，并无实际的模块内容</li>
+</ul>
+<h3 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h3><ul>
+<li>聚合是在聚合工程中配置关系，聚合可以感知到参与聚合的模块有哪些</li>
+<li>继承是在子模块中配置关系，父模块无法感知哪些子模块继承了自己</li>
+</ul>
+<h1 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h1><p>私服是一种特殊的远程仓库，它是架设在局域网内的仓库服务，用来代理位于外部的中央仓库，用于解决团队内部的资源共享与资源同步问题。</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201437607.png" alt="image-20240311201437607"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201447693.png" alt="image-20240311201447693"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201500467.png" alt="image-20240311201500467"></p>
+]]></content>
       <categories>
         <category>JavaWeb</category>
-        <category>Maven</category>
+        <category>Maven高级</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>JavaWeb-Mybatis</title>
+    <url>/2024/03/07/JavaWeb-Mybatis/</url>
+    <content><![CDATA[<h1 id="什么是Mybatis"><a href="#什么是Mybatis" class="headerlink" title="什么是Mybatis?"></a>什么是Mybatis?</h1><p>数据层又叫做持久层</p>
+<p>MyBatis是一款优秀的 <strong>持久层</strong> 框架，用于简化JDBC的开发。</p>
+<h1 id="Mybatis入门"><a href="#Mybatis入门" class="headerlink" title="Mybatis入门"></a>Mybatis入门</h1><h2 id="mybatis快速入门"><a href="#mybatis快速入门" class="headerlink" title="mybatis快速入门"></a>mybatis快速入门</h2><p>使用Mybatis查询所有用户数据</p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307163841670.png" alt="image-20240307163841670"></p>
+<p>Mapper层：mybatis的接口层。加mapper注释，数据访问层dao层的接口，</p>
+<blockquote>
+<p>要执行语句那句select语句时，只需要使用list方法，就会默认的调用这个语句，sql语句的访问结果就会默认的封装到这个方法里</p>
+</blockquote>
+<h3 id="step1：准备数据库"><a href="#step1：准备数据库" class="headerlink" title="step1：准备数据库"></a>step1：准备数据库</h3><p>运行sql语句创建数据库</p>
+<h3 id="step2：创建springboot项目，点上mybatis之类的tool"><a href="#step2：创建springboot项目，点上mybatis之类的tool" class="headerlink" title="step2：创建springboot项目，点上mybatis之类的tool"></a>step2：创建springboot项目，点上mybatis之类的tool</h3><h3 id="step3：连接数据库"><a href="#step3：连接数据库" class="headerlink" title="step3：连接数据库"></a>step3：连接数据库</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307171742192.png" alt="image-20240307171742192"></p>
+<h3 id="step4：创建实体类pojo"><a href="#step4：创建实体类pojo" class="headerlink" title="step4：创建实体类pojo"></a>step4：创建实体类pojo</h3><p>可以直接用mybatis-generator生成</p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173829357.png" alt="image-20240307173829357"></p>
+<h3 id="step5：创建mapper接口层"><a href="#step5：创建mapper接口层" class="headerlink" title="step5：创建mapper接口层"></a>step5：创建mapper接口层</h3><p>@Mapper&#x2F;&#x2F;在运行时，会自动生成该接口的实现类对象（代理对象），并且将该对象交给IOC容器管理</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.demo5.mapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.ljy.demo5.Pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Select;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span><span class="comment">//在运行时，会自动生成该接口的实现类对象（代理对象），并且将该对象交给IOC容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部的用户信息</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from user&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">list</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173836328.png" alt="image-20240307173836328"></p>
+<h3 id="step6：测试"><a href="#step6：测试" class="headerlink" title="step6：测试"></a>step6：测试</h3><p>在test项目里测试</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span><span class="comment">//springboot整合单元测试的注解</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Demo5ApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testListUser</span><span class="params">()</span>&#123;</span><br><span class="line">       List&lt;User&gt; list = userMapper.list();</span><br><span class="line">       list.stream().forEach(user -&gt; &#123;</span><br><span class="line">          System.out.println(user);</span><br><span class="line">       &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果</p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173935097.png" alt="image-20240307173935097"></p>
+<h2 id="JDBC介绍"><a href="#JDBC介绍" class="headerlink" title="JDBC介绍"></a>JDBC介绍</h2><p>java database connectivity，就是使用java语言操作关系型数据库的一套API，这是一套规范，sun公司提供的</p>
+<p>各个厂商提供jdbc的实现，这个叫做jdbc的驱动、数据库的驱动</p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307174626361.png" alt="image-20240307174626361"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175035561.png" alt="image-20240307175035561"></p>
+<h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3><blockquote>
+<p>数据库连接池是一个容器，负责分配、管理数据库连接（connection）</p>
+</blockquote>
+<p>它允许应用程序重复使用一个现有的数据库连接，而不是再重新创建一个新的</p>
+<p>释放空闲时间超过最大空闲时间的连接，来避免因为没有释放连接而引起的数据库连接遗漏。</p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175453352.png" alt="image-20240307175453352"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175644217.png" alt="image-20240307175644217"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175738544.png" alt="image-20240307175738544"></p>
+<h4 id="切换Druid数据库连接池"><a href="#切换Druid数据库连接池" class="headerlink" title="切换Druid数据库连接池"></a>切换Druid数据库连接池</h4><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175836059.png" alt="image-20240307175836059"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">pom.xml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring.datasource.druid.driver-class-name</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">spring.datasource.druid.url</span>=<span class="string">jdbc:mysql://localhost:3306/mybatis</span></span><br><span class="line"><span class="attr">spring.datasource.druid.username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">spring.datasource.druid.password</span>=<span class="string">1234</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>1.数据库连接池</p>
+<p>l是一个容器，负责分配、管理数据库连接(Connection)</p>
+<p>l优势：资源复用、提升系统响应速度</p>
+<p>l接口：DataSource</p>
+<p>l产品：C3P0、DBCP、Druid、Hikari</p>
+<h2 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h2><blockquote>
+<p><strong>Lombok是一个实用的Java类库，能通过注解的形式自动生成构造器、getter&#x2F;setter、equals、hashcode、toString等方法，并可以自动化生成日志变量，简化java开发、提高效率。</strong></p>
+</blockquote>
+<p><strong><img src="/../blog_images/JavaWeb-Mybatis/image-20240307180112001.png" alt="image-20240307180112001"></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>注解</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Getter&#x2F;@Setter</td>
+<td>为所有的属性提供get&#x2F;set方法</td>
+</tr>
+<tr>
+<td>@ToString</td>
+<td>会给类自动生成易阅读的  toString 方法</td>
+</tr>
+<tr>
+<td>@EqualsAndHashCode</td>
+<td>根据类所拥有的非静态字段自动重写 equals 方法和  hashCode 方法</td>
+</tr>
+<tr>
+<td>@Data</td>
+<td>提供了更综合的生成代码功能（@Getter  + @Setter + @ToString + @EqualsAndHashCode）</td>
+</tr>
+<tr>
+<td>@NoArgsConstructor</td>
+<td>为实体类生成无参的构造器方法</td>
+</tr>
+<tr>
+<td>@AllArgsConstructor</td>
+<td>为实体类生成除了static修饰的字段之外带有各参数的构造器方法。</td>
+</tr>
+</tbody></table>
+<p>Lombok会在编译时，自动生成对应的java代码。我们使用lombok时，还需要安装一个lombok的插件(idea自带)。</p>
+<h1 id="Mybatis基础增删改查"><a href="#Mybatis基础增删改查" class="headerlink" title="Mybatis基础增删改查"></a><strong>M</strong>ybatis基础增删改查</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>按照之前的准备</p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307201152408.png" alt="image-20240307201152408"></p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>按照ID删除数据</p>
+<p>@Delete注释</p>
+<h3 id="占位符-id"><a href="#占位符-id" class="headerlink" title="占位符 #{id}"></a>占位符 #{id}</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Delete(&quot;delete from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;    </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202608039.png" alt="image-20240307202608039"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202628672.png" alt="image-20240307202628672"></p>
+<h3 id="预编译sql语句"><a href="#预编译sql语句" class="headerlink" title="预编译sql语句"></a>预编译sql语句</h3><ul>
+<li>性能更高</li>
+<li>更安全(防止SQL注入)</li>
+</ul>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202803149.png" alt="image-20240307202803149"></p>
+<h4 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h4><p>通过操作输入的数据来修改事先定义好的SQL语句，以达到执行代码对服务器进行攻击的方法。</p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307203932583.png" alt="image-20240307203932583"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307204228284.png" alt="image-20240307204228284"></p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//新增员工</span></span><br><span class="line"><span class="meta">@Insert(&quot;insert into emp(username,name ,gender,image,job,entrydate,dept_id,create_time,update_time)&quot;+</span></span><br><span class="line"><span class="meta">        &quot; values (#&#123;username&#125;,#&#123;name&#125;,#&#123;gender&#125;,#&#123;image&#125;,#&#123;job&#125;,#&#123;entrydate&#125;,#&#123;deptId&#125;,#&#123;createTime&#125;,#&#123;updateTime&#125;)&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insert</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testInsert</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Emp</span>();</span><br><span class="line">    emp.setUsername(<span class="string">&quot;Tom&quot;</span>);</span><br><span class="line">    emp.setName(<span class="string">&quot;汤姆&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="主键返回-Options-keyProperty-”id”"><a href="#主键返回-Options-keyProperty-”id”" class="headerlink" title="主键返回@Options(keyProperty&#x3D;”id”)"></a>主键返回@Options(keyProperty&#x3D;”id”)</h3><blockquote>
+<p> 描述：在数据添加成功后，需要获取插入数据库数据的主键。如：添加套餐数据时，还需要维护套餐菜品关系表数据。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307205557662.png" alt="image-20240307205557662"></p>
+<h2 id="更新-修改"><a href="#更新-修改" class="headerlink" title="更新(修改)"></a>更新(修改)</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//更新员工</span></span><br><span class="line"><span class="meta">@Update(&quot;update emp set username = #&#123;username&#125;, name = #&#123;name&#125;, gender = #&#123;gender&#125;, image = #&#123;image&#125;,&quot; +</span></span><br><span class="line"><span class="meta">        &quot; job = #&#123;job&#125;, entrydate = #&#123;entrydate&#125;, dept_id = #&#123;deptId&#125;,update_time = #&#123;updateTime&#125; where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//构造员工对象</span></span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Emp</span>();</span><br><span class="line">    emp.setId(<span class="number">18</span>);</span><br><span class="line">    emp.setUsername(<span class="string">&quot;Tom1&quot;</span>);</span><br><span class="line">    emp.setName(<span class="string">&quot;汤姆1&quot;</span>);</span><br><span class="line">    emp.setImage(<span class="string">&quot;1.jpg&quot;</span>);</span><br><span class="line">    emp.setGender((<span class="type">short</span>)<span class="number">1</span>);</span><br><span class="line">    emp.setJob((<span class="type">short</span>)<span class="number">1</span>);</span><br><span class="line">    emp.setEntrydate(LocalDate.of(<span class="number">2000</span>,<span class="number">1</span>,<span class="number">1</span>));</span><br><span class="line">    emp.setUpdateTime(LocalDateTime.now());</span><br><span class="line">    emp.setDeptId(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行更新员工操作</span></span><br><span class="line">    empMapper.update(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;select * from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetById</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> empMapper.getById(<span class="number">18</span>);</span><br><span class="line">    System.out.println(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307210950229.png" alt="image-20240307210950229"></p>
+<h3 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307211215522.png" alt="image-20240307211215522"></p>
+<h3 id="解决一"><a href="#解决一" class="headerlink" title="解决一"></a>解决一</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307213019502.png" alt="image-20240307213019502"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//方案三: 开启mybatis的驼峰命名自动映射开关 --- a_cloumn ------&gt; aColumn</span></span><br><span class="line"><span class="comment">//根据ID查询员工</span></span><br><span class="line"><span class="meta">@Select(&quot;select * from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="MybatisXML映射文件"><a href="#MybatisXML映射文件" class="headerlink" title="MybatisXML映射文件"></a>MybatisXML映射文件</h1><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307215655415.png" alt="image-20240307215655415"></p>
+<p>xml映射文件</p>
+<h1 id="Mybatis动态SQL"><a href="#Mybatis动态SQL" class="headerlink" title="Mybatis动态SQL"></a>Mybatis动态SQL</h1><p>随着用户的输入或者外部的变化而变化SQL语句，我们称为动态SQL</p>
+<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;if&gt;：用于判断条件是否成立。使用test属性进行条件判断，如果条件为true，则拼接SQL。</span><br><span class="line"></span><br><span class="line">&lt;where&gt;：where 元素只会在子元素有内容的情况下才插入where子句。而且会自动去除子句的开头的AND 或OR。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240308165208370.png" alt="image-20240308165208370"></p>
+<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><h1 id="Springboot案例"><a href="#Springboot案例" class="headerlink" title="Springboot案例"></a>Springboot案例</h1><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309135242851.png" alt="image-20240309135242851"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309135953209.png" alt="image-20240309135953209"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309140016098.png" alt="image-20240309140016098"></p>
+<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309140549167.png" alt="image-20240309140549167"></p>
+<h1 id="分页参数"><a href="#分页参数" class="headerlink" title="分页参数"></a>分页参数</h1><h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="表单项"><a href="#表单项" class="headerlink" title="表单项"></a>表单项</h2><p>文件上传</p>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+        <category>Mybatis</category>
       </categories>
   </entry>
   <entry>
@@ -444,6 +523,111 @@
       <categories>
         <category>JavaWeb</category>
         <category>Springboot2</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>JavaWeb-mysql</title>
+    <url>/2024/03/07/JavaWeb-mysql/</url>
+    <content><![CDATA[<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="Mysql概述"><a href="#Mysql概述" class="headerlink" title="Mysql概述"></a>Mysql概述</h2><table>
+<thead>
+<tr>
+<th><strong>分类</strong></th>
+<th><strong>全称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DDL</td>
+<td>Data Definition  Language</td>
+<td>数据定义语言，用来定义数据库对象(数据库，表，字段)</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>Data Manipulation  Language</td>
+<td>数据操作语言，用来对数据库表中的数据进行增删改</td>
+</tr>
+<tr>
+<td>DQL</td>
+<td>Data Query Language</td>
+<td>数据查询语言，用来查询数据库中表的记录</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>Data Control  Language</td>
+<td>数据控制语言，用来创建数据库用户、控制数据库的访问权限</td>
+</tr>
+</tbody></table>
+<p><img src="/../blog_images/JavaWeb-mysql/image-20240307132823507.png" alt="image-20240307132823507"></p>
+<h2 id="数据库设计-DDL"><a href="#数据库设计-DDL" class="headerlink" title="数据库设计-DDL"></a>数据库设计-DDL</h2><table>
+<thead>
+<tr>
+<th><strong>约束</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>关键字</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>非空约束</td>
+<td>限制该字段值不能为null</td>
+<td>not null</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td>保证字段的所有数据都是唯一、不重复的</td>
+<td>unique</td>
+</tr>
+<tr>
+<td>主键约束</td>
+<td>主键是一行数据的唯一标识，要求非空且唯一</td>
+<td>primary key</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td>保存数据时，如果未指定该字段值，则采用默认值</td>
+<td>default</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td>让两张表的数据建立连接，保证数据的一致性和完整性</td>
+<td>foreign key</td>
+</tr>
+</tbody></table>
+<p>MySQL中的数据类型有很多，主要分为三类：数值类型、字符串类型、日期时间类型。</p>
+<h2 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h2><p><img src="/../blog_images/JavaWeb-mysql/image-20240307135013214.png" alt="image-20240307135013214"></p>
+<p>create_time：记录的是当前这条数据插入的时间。 update_time：记录当前这条数据最后更新的时间</p>
+<p><img src="/../blog_images/JavaWeb-mysql/image-20240307135215533.png" alt="image-20240307135215533"></p>
+<h2 id="表（创建、查询、修改、删除）"><a href="#表（创建、查询、修改、删除）" class="headerlink" title="表（创建、查询、修改、删除）"></a>表（创建、查询、修改、删除）</h2><h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><h2 id="数据库操作-DML"><a href="#数据库操作-DML" class="headerlink" title="数据库操作-DML"></a>数据库操作-DML</h2><p>DML的英文全称是data Manipulation Language(数据操作语言)，用来对数据库中表的数据记录进行增删改查操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">添加数据(INSERT)</span><br><span class="line">修改数据(UPDATE)</span><br><span class="line">删除数据(DELETE)</span><br></pre></td></tr></table></figure>
+
+<h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h3><p>指定字段添加数据：insert into 表名 (字段名1, 字段名2) values (值1, 值2);</p>
+<p>全部字段添加数据：insert into 表名 values (值1, 值2, …);</p>
+<p>批量添加数据（指定字段）：insert into 表名 (字段名1, 字段名2) values (值1, 值2), (值1, 值2);</p>
+<p>批量添加数据（全部字段）：insert into 表名 values (值1, 值2, …), (值1, 值2, …);</p>
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>修改数据：update 表名 set 字段名1 &#x3D; 值1 , 字段名2 &#x3D; 值2 , …. [ where 条件 ] ;</p>
+<blockquote>
+<p>修改语句的条件可以有，也可以没有，如果没有条件，则会修改整张表的所有数据。</p>
+</blockquote>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>删除数据：delete from 表名 [ where 条件 ];</p>
+<blockquote>
+<p>1.DELETE 语句的条件可以有，也可以没有，如果没有条件，则会删除整张表的所有数据。</p>
+<p>2.DELETE 语句不能删除某一个字段的值(如果要操作，可以使用UPDATE，将该字段的值置为NULL)。</p>
+</blockquote>
+<h2 id="数据库操作-DQL-SELECT"><a href="#数据库操作-DQL-SELECT" class="headerlink" title="数据库操作-DQL SELECT"></a>数据库操作-DQL SELECT</h2><p>DQL英文全称是Data Query Language(数据查询语言)，用来查询数据库表中的记录。</p>
+<p>查询多个字段：select 字段1, 字段2, 字段3 from  表名;</p>
+<p>查询所有字段（通配符）：select *  from  表名;</p>
+<p>设置别名：select 字段1 [ as 别名1 ] , 字段2 [ as 别名2 ]  from  表名;</p>
+<p>去除重复记录：select distinct 字段列表 from  表名;</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>事务</strong> 是一组操作的集合，它是一个不可分割的工作单位。事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作 要么同时成功，要么同时失败。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开启事务：start transaction; / begin ;</span><br><span class="line">提交事务：commit;</span><br><span class="line">回滚事务：rollback;</span><br></pre></td></tr></table></figure>
+
+<h3 id="四大特性-ACID"><a href="#四大特性-ACID" class="headerlink" title="四大特性(ACID)"></a>四大特性(ACID)</h3><p><img src="/../blog_images/JavaWeb-mysql/image-20240307152341854.png" alt="image-20240307152341854"></p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>一对一</p>
+<p>一对多</p>
+<p>多对对</p>
+<h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2>]]></content>
+      <categories>
+        <category>JavaWeb</category>
+        <category>mysql</category>
       </categories>
   </entry>
   <entry>
@@ -697,111 +881,6 @@
       <categories>
         <category>JavaWeb</category>
         <category>表单拦截</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>JavaWeb-mysql</title>
-    <url>/2024/03/07/JavaWeb-mysql/</url>
-    <content><![CDATA[<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="Mysql概述"><a href="#Mysql概述" class="headerlink" title="Mysql概述"></a>Mysql概述</h2><table>
-<thead>
-<tr>
-<th><strong>分类</strong></th>
-<th><strong>全称</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DDL</td>
-<td>Data Definition  Language</td>
-<td>数据定义语言，用来定义数据库对象(数据库，表，字段)</td>
-</tr>
-<tr>
-<td>DML</td>
-<td>Data Manipulation  Language</td>
-<td>数据操作语言，用来对数据库表中的数据进行增删改</td>
-</tr>
-<tr>
-<td>DQL</td>
-<td>Data Query Language</td>
-<td>数据查询语言，用来查询数据库中表的记录</td>
-</tr>
-<tr>
-<td>DCL</td>
-<td>Data Control  Language</td>
-<td>数据控制语言，用来创建数据库用户、控制数据库的访问权限</td>
-</tr>
-</tbody></table>
-<p><img src="/../blog_images/JavaWeb-mysql/image-20240307132823507.png" alt="image-20240307132823507"></p>
-<h2 id="数据库设计-DDL"><a href="#数据库设计-DDL" class="headerlink" title="数据库设计-DDL"></a>数据库设计-DDL</h2><table>
-<thead>
-<tr>
-<th><strong>约束</strong></th>
-<th><strong>描述</strong></th>
-<th><strong>关键字</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>非空约束</td>
-<td>限制该字段值不能为null</td>
-<td>not null</td>
-</tr>
-<tr>
-<td>唯一约束</td>
-<td>保证字段的所有数据都是唯一、不重复的</td>
-<td>unique</td>
-</tr>
-<tr>
-<td>主键约束</td>
-<td>主键是一行数据的唯一标识，要求非空且唯一</td>
-<td>primary key</td>
-</tr>
-<tr>
-<td>默认约束</td>
-<td>保存数据时，如果未指定该字段值，则采用默认值</td>
-<td>default</td>
-</tr>
-<tr>
-<td>外键约束</td>
-<td>让两张表的数据建立连接，保证数据的一致性和完整性</td>
-<td>foreign key</td>
-</tr>
-</tbody></table>
-<p>MySQL中的数据类型有很多，主要分为三类：数值类型、字符串类型、日期时间类型。</p>
-<h2 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h2><p><img src="/../blog_images/JavaWeb-mysql/image-20240307135013214.png" alt="image-20240307135013214"></p>
-<p>create_time：记录的是当前这条数据插入的时间。 update_time：记录当前这条数据最后更新的时间</p>
-<p><img src="/../blog_images/JavaWeb-mysql/image-20240307135215533.png" alt="image-20240307135215533"></p>
-<h2 id="表（创建、查询、修改、删除）"><a href="#表（创建、查询、修改、删除）" class="headerlink" title="表（创建、查询、修改、删除）"></a>表（创建、查询、修改、删除）</h2><h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><h2 id="数据库操作-DML"><a href="#数据库操作-DML" class="headerlink" title="数据库操作-DML"></a>数据库操作-DML</h2><p>DML的英文全称是data Manipulation Language(数据操作语言)，用来对数据库中表的数据记录进行增删改查操作</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">添加数据(INSERT)</span><br><span class="line">修改数据(UPDATE)</span><br><span class="line">删除数据(DELETE)</span><br></pre></td></tr></table></figure>
-
-<h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h3><p>指定字段添加数据：insert into 表名 (字段名1, 字段名2) values (值1, 值2);</p>
-<p>全部字段添加数据：insert into 表名 values (值1, 值2, …);</p>
-<p>批量添加数据（指定字段）：insert into 表名 (字段名1, 字段名2) values (值1, 值2), (值1, 值2);</p>
-<p>批量添加数据（全部字段）：insert into 表名 values (值1, 值2, …), (值1, 值2, …);</p>
-<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>修改数据：update 表名 set 字段名1 &#x3D; 值1 , 字段名2 &#x3D; 值2 , …. [ where 条件 ] ;</p>
-<blockquote>
-<p>修改语句的条件可以有，也可以没有，如果没有条件，则会修改整张表的所有数据。</p>
-</blockquote>
-<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>删除数据：delete from 表名 [ where 条件 ];</p>
-<blockquote>
-<p>1.DELETE 语句的条件可以有，也可以没有，如果没有条件，则会删除整张表的所有数据。</p>
-<p>2.DELETE 语句不能删除某一个字段的值(如果要操作，可以使用UPDATE，将该字段的值置为NULL)。</p>
-</blockquote>
-<h2 id="数据库操作-DQL-SELECT"><a href="#数据库操作-DQL-SELECT" class="headerlink" title="数据库操作-DQL SELECT"></a>数据库操作-DQL SELECT</h2><p>DQL英文全称是Data Query Language(数据查询语言)，用来查询数据库表中的记录。</p>
-<p>查询多个字段：select 字段1, 字段2, 字段3 from  表名;</p>
-<p>查询所有字段（通配符）：select *  from  表名;</p>
-<p>设置别名：select 字段1 [ as 别名1 ] , 字段2 [ as 别名2 ]  from  表名;</p>
-<p>去除重复记录：select distinct 字段列表 from  表名;</p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>事务</strong> 是一组操作的集合，它是一个不可分割的工作单位。事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作 要么同时成功，要么同时失败。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开启事务：start transaction; / begin ;</span><br><span class="line">提交事务：commit;</span><br><span class="line">回滚事务：rollback;</span><br></pre></td></tr></table></figure>
-
-<h3 id="四大特性-ACID"><a href="#四大特性-ACID" class="headerlink" title="四大特性(ACID)"></a>四大特性(ACID)</h3><p><img src="/../blog_images/JavaWeb-mysql/image-20240307152341854.png" alt="image-20240307152341854"></p>
-<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>一对一</p>
-<p>一对多</p>
-<p>多对对</p>
-<h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2>]]></content>
-      <categories>
-        <category>JavaWeb</category>
-        <category>mysql</category>
       </categories>
   </entry>
   <entry>
@@ -1498,66 +1577,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Java基础知识7-注解</title>
-    <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="注解概述"><a href="#注解概述" class="headerlink" title="注解概述"></a>注解概述</h1><h2 id="什么是注解？"><a href="#什么是注解？" class="headerlink" title="什么是注解？"></a>什么是注解？</h2><p>①注解是JDK1.5才引入的。</p>
-<p>②注解可以标注在 类上，属性上，方法上 等。</p>
-<p><strong>&#x3D;&#x3D;③注解可以做到在不改变代码逻辑的前提下在代码中嵌入补充信息。&#x3D;&#x3D;</strong></p>
-<h2 id="注解与注释"><a href="#注解与注释" class="headerlink" title="注解与注释"></a>注解与注释</h2><p>①注释：给程序员看的，编译器编译时会忽略注释。</p>
-<p><strong>②注解：给编译器看的，或给其它程序看的，程序根据有没有这个注解来决定不同的处理方式。</strong></p>
-<h2 id="注解的重要性"><a href="#注解的重要性" class="headerlink" title="注解的重要性"></a>注解的重要性</h2><p>①框架是如何实现的：框架 &#x3D; 反射 + 注解 + 设计模式。</p>
-<h1 id="Java预置注解"><a href="#Java预置注解" class="headerlink" title="Java预置注解"></a>Java预置注解</h1><h2 id="①-Deprecated"><a href="#①-Deprecated" class="headerlink" title="①@Deprecated"></a>①@Deprecated</h2><p>用来标记过时的元素，在编译阶段遇到这个注解时会发出提醒警告，告诉开发者正在调用一个<strong>过时的元素比如过时的类</strong>、<strong>过时的方法、过时的属性等。</strong></p>
-<p>forRemoval属性值表示如果是true就是已移除</p>
-<h2 id="②-Override"><a href="#②-Override" class="headerlink" title="②@Override"></a>②@Override</h2><p><strong>修饰实例方法，则该方法必须是个重写方法，否则就会编译失败。</strong></p>
-<h2 id="③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"><a href="#③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。" class="headerlink" title="③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"></a>③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;rawtypes&quot;)</span>：抑制未使用泛型的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;resource&quot;)</span>：抑制未关闭资源的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;deprecation&quot;)</span>：抑制使用了已过时资源时的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;all&quot;)</span>：抑制所有警告</span><br></pre></td></tr></table></figure>
-
-<h2 id="④-FunctionalInterface-“函数式接口”的注解"><a href="#④-FunctionalInterface-“函数式接口”的注解" class="headerlink" title="④@FunctionalInterface “函数式接口”的注解"></a>④@FunctionalInterface “函数式接口”的注解</h2><p>**&#x3D;&#x3D;“函数式接口”的注解，这个是 JDK1.8 版本引入的新特性。&#x3D;&#x3D;**：函数式接口 有且只能存在一个抽象方法</p>
-<p><strong>&#x3D;&#x3D;这个注解是专门用来标注接口的&#x3D;&#x3D;</strong></p>
-<p><strong>使用@FunctionalInterface标注的接口，则该接口就有且只能存在一个抽象方法，否则就会发生编译错误。</strong></p>
-<p><strong>（注意：接口中的默认方法或静态方法可以有多个。）</strong></p>
-<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223802741.png" alt="image-20240304223802741" style="zoom:50%;" />
-
-<h1 id="自定义注解Annotation"><a href="#自定义注解Annotation" class="headerlink" title="自定义注解Annotation"></a>自定义注解Annotation</h1><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223916674.png" alt="image-20240304223916674" style="zoom:50%;" />
-
-<p>注解的属性是以方法这种签名实现的</p>
-<h2 id="自定义注解（注解属于引用数据类型）"><a href="#自定义注解（注解属于引用数据类型）" class="headerlink" title="自定义注解（注解属于引用数据类型）"></a>自定义注解（注解属于引用数据类型）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223840432.png" alt="image-20240304223840432"></p>
-<p><strong>①使用 @interface 来定义注解。</strong></p>
-<p>②默认情况下注解可以出现在类上、方法上、属性上、构造方法上、方法参数上等……</p>
-<p>③所有自定义的注解，它的父类是：java.lang.annotation.Annotation</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.SOURCE) // @MyAnnotation 注解保留在源码中。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.CLASS) // @MyAnnotation 注解保留在字节码中，这是默认的行为，但不能被反射。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.RUNTIME) // @MyAnnotation 注解保留在字节码中，并且在运行时可以被反射。</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="注解也可以定义属性"><a href="#注解也可以定义属性" class="headerlink" title="注解也可以定义属性"></a>注解也可以定义属性</h2><p>①注解也可以定义属性，不过属性定义时，属性名后面必须加一个小括号。</p>
-<p>②属性的类型只能是：</p>
-<p>byte，short，int，long，float，double，boolean，char</p>
-<p>String、Class、枚举类型、注解类型</p>
-<p>以上所有类型的一维数组形式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这是一个数据库信息的注解（自定义的注解）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DataBaseInfo &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注解也可以定义属性，但是属性定义时有要求，属性名后面必须添加：()</span></span><br><span class="line"><span class="comment">     * 语法：</span></span><br><span class="line"><span class="comment">     *      属性的类型 属性的名字();</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String <span class="title function_">driver</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>; <span class="comment">// 使用 default 关键字来指定属性的默认值。</span></span><br><span class="line">    String <span class="title function_">url</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">user</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">password</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">byte</span> <span class="title function_">b</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">short</span> <span class="title function_">s</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">i</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="title function_">l</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0L</span>;</span><br><span class="line">    <span class="type">float</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0F</span>;</span><br><span class="line">    <span class="type">double</span> <span class="title function_">d</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">flag</span><span class="params">()</span> <span class="keyword">default</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">char</span> <span class="title function_">c</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    Class <span class="title function_">clazz</span><span class="params">()</span> <span class="keyword">default</span> String.class;</span><br><span class="line">    Season <span class="title function_">season</span><span class="params">()</span> <span class="keyword">default</span> Season.SPRING;</span><br><span class="line">    MyAnnotation <span class="title function_">myAnnotation</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 可以是一维数组形式</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] names();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注解的属性的数据类型，必须是以上的几种类型，或者这几种类型的一维数组，不能是其他类型。</span></span><br><span class="line">    <span class="comment">//Object obj();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 语法规则：如果这个注解中有属性，那么使用的时候，必须给属性赋值。没有赋值则报错。</span></span><br><span class="line"><span class="comment">// 除非你定义注解的时候给属性指定了默认值。</span></span><br><span class="line"><span class="comment">// 怎么给属性赋值？语法：@DataBaseInfo(属性名=值,属性名=值,属性名=值,属性名=值,属性名=值)</span></span><br><span class="line"><span class="meta">@DataBaseInfo(</span></span><br><span class="line"><span class="meta">        //driver=&quot;oracle.jdbc.driver.OracleDriver&quot;,</span></span><br><span class="line"><span class="meta">        url=&quot;jdbc:mysql://localhost:3306/powernode&quot;,</span></span><br><span class="line"><span class="meta">        user=&quot;root&quot;,</span></span><br><span class="line"><span class="meta">        password=&quot;123456&quot;,</span></span><br><span class="line"><span class="meta">        myAnnotation=@MyAnnotation,</span></span><br><span class="line"><span class="meta">        names=&#123;&quot;zhangsan&quot;, &quot;lisi&quot;, &quot;wangwu&quot;&#125;,</span></span><br><span class="line"><span class="meta">        flag=true,</span></span><br><span class="line"><span class="meta">        i=100,</span></span><br><span class="line"><span class="meta">        clazz=Integer.class,</span></span><br><span class="line"><span class="meta">        season=Season.WINTER)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">connDB</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="注解的使用"><a href="#注解的使用" class="headerlink" title="注解的使用"></a>注解的使用</h2><p>①注解在使用时必须给属性赋值，除非你使用了default关键字为属性指定了默认值。</p>
-<p><strong>②如果属性只有一个，并且属性名是value时，使用注解时value可以省略不写。</strong></p>
-<p><strong>③如果属性是一个数组，使用注解时，数组值只有一个，数组的大括号是可以省略的。</strong></p>
-<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>①用来标注注解的注解叫做元注解。(也是JDK内置的注解。)</p>
-<p>②常用的元注解：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Retention：设置注解的保持性</span><br><span class="line"></span><br><span class="line">	@Target：设置注解可以出现的位置</span><br><span class="line"></span><br><span class="line">	@Documented：设置注解是否可以生成到帮助文档中</span><br><span class="line"></span><br><span class="line">	@Inherited：设置注解是否支持继承</span><br><span class="line"></span><br><span class="line">	@Repeatable：设置注解在某一个元素上是否可以重复使用（Java8的新特性。</span><br></pre></td></tr></table></figure>
-
-
-
-<p>@Retention</p>
-<p>①Retention英文意思有保留、保持的意思，它表示注解存在阶段是保留在源代码（编译期），字节码（类加载）或者运行时（JVM中运行）。</p>
-<p>②在@Retention注解中使用枚举RetentionPolicy来表示注解保留时期。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span>：注解仅存在于源代码中，在字节码文件中不包含。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.CLASS)</span>：注解在字节码文件中存在，但运行时无法获得（默认）。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span>：注解在字节码文件中存在，且运行时可通过反射获取。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java体系知识</category>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java基础知识6-反射</title>
     <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866-%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h1 id="反射机制概述"><a href="#反射机制概述" class="headerlink" title="反射机制概述"></a>反射机制概述</h1><blockquote>
@@ -1741,6 +1760,66 @@
 <h2 id="通过反射获取构造函数的泛型"><a href="#通过反射获取构造函数的泛型" class="headerlink" title="通过反射获取构造函数的泛型"></a>通过反射获取构造函数的泛型</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">User</span><span class="params">(Map&lt;String ,Integer&gt; map)</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class&lt;User&gt; userClass = User.class;</span><br><span class="line">Constructor&lt;User&gt; con = userClass.getDeclaredConstructor(Map.class);</span><br><span class="line">Type[] genericParameterTypes = con.getGenericParameterTypes();</span><br><span class="line"><span class="keyword">for</span>(Type g :genericParameterTypes)&#123;</span><br><span class="line">    <span class="keyword">if</span>(g <span class="keyword">instanceof</span> ParameterizedType)&#123;</span><br><span class="line">        <span class="type">ParameterizedType</span> <span class="variable">parameterizedType</span> <span class="operator">=</span> (ParameterizedType) g;</span><br><span class="line">        Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</span><br><span class="line">        <span class="keyword">for</span>(Type a : actualTypeArguments)&#123;</span><br><span class="line">            System.out.println(a.getTypeName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java体系知识</category>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Java基础知识7-注解</title>
+    <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="注解概述"><a href="#注解概述" class="headerlink" title="注解概述"></a>注解概述</h1><h2 id="什么是注解？"><a href="#什么是注解？" class="headerlink" title="什么是注解？"></a>什么是注解？</h2><p>①注解是JDK1.5才引入的。</p>
+<p>②注解可以标注在 类上，属性上，方法上 等。</p>
+<p><strong>&#x3D;&#x3D;③注解可以做到在不改变代码逻辑的前提下在代码中嵌入补充信息。&#x3D;&#x3D;</strong></p>
+<h2 id="注解与注释"><a href="#注解与注释" class="headerlink" title="注解与注释"></a>注解与注释</h2><p>①注释：给程序员看的，编译器编译时会忽略注释。</p>
+<p><strong>②注解：给编译器看的，或给其它程序看的，程序根据有没有这个注解来决定不同的处理方式。</strong></p>
+<h2 id="注解的重要性"><a href="#注解的重要性" class="headerlink" title="注解的重要性"></a>注解的重要性</h2><p>①框架是如何实现的：框架 &#x3D; 反射 + 注解 + 设计模式。</p>
+<h1 id="Java预置注解"><a href="#Java预置注解" class="headerlink" title="Java预置注解"></a>Java预置注解</h1><h2 id="①-Deprecated"><a href="#①-Deprecated" class="headerlink" title="①@Deprecated"></a>①@Deprecated</h2><p>用来标记过时的元素，在编译阶段遇到这个注解时会发出提醒警告，告诉开发者正在调用一个<strong>过时的元素比如过时的类</strong>、<strong>过时的方法、过时的属性等。</strong></p>
+<p>forRemoval属性值表示如果是true就是已移除</p>
+<h2 id="②-Override"><a href="#②-Override" class="headerlink" title="②@Override"></a>②@Override</h2><p><strong>修饰实例方法，则该方法必须是个重写方法，否则就会编译失败。</strong></p>
+<h2 id="③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"><a href="#③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。" class="headerlink" title="③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"></a>③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;rawtypes&quot;)</span>：抑制未使用泛型的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;resource&quot;)</span>：抑制未关闭资源的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;deprecation&quot;)</span>：抑制使用了已过时资源时的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;all&quot;)</span>：抑制所有警告</span><br></pre></td></tr></table></figure>
+
+<h2 id="④-FunctionalInterface-“函数式接口”的注解"><a href="#④-FunctionalInterface-“函数式接口”的注解" class="headerlink" title="④@FunctionalInterface “函数式接口”的注解"></a>④@FunctionalInterface “函数式接口”的注解</h2><p>**&#x3D;&#x3D;“函数式接口”的注解，这个是 JDK1.8 版本引入的新特性。&#x3D;&#x3D;**：函数式接口 有且只能存在一个抽象方法</p>
+<p><strong>&#x3D;&#x3D;这个注解是专门用来标注接口的&#x3D;&#x3D;</strong></p>
+<p><strong>使用@FunctionalInterface标注的接口，则该接口就有且只能存在一个抽象方法，否则就会发生编译错误。</strong></p>
+<p><strong>（注意：接口中的默认方法或静态方法可以有多个。）</strong></p>
+<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223802741.png" alt="image-20240304223802741" style="zoom:50%;" />
+
+<h1 id="自定义注解Annotation"><a href="#自定义注解Annotation" class="headerlink" title="自定义注解Annotation"></a>自定义注解Annotation</h1><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223916674.png" alt="image-20240304223916674" style="zoom:50%;" />
+
+<p>注解的属性是以方法这种签名实现的</p>
+<h2 id="自定义注解（注解属于引用数据类型）"><a href="#自定义注解（注解属于引用数据类型）" class="headerlink" title="自定义注解（注解属于引用数据类型）"></a>自定义注解（注解属于引用数据类型）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223840432.png" alt="image-20240304223840432"></p>
+<p><strong>①使用 @interface 来定义注解。</strong></p>
+<p>②默认情况下注解可以出现在类上、方法上、属性上、构造方法上、方法参数上等……</p>
+<p>③所有自定义的注解，它的父类是：java.lang.annotation.Annotation</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.SOURCE) // @MyAnnotation 注解保留在源码中。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.CLASS) // @MyAnnotation 注解保留在字节码中，这是默认的行为，但不能被反射。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.RUNTIME) // @MyAnnotation 注解保留在字节码中，并且在运行时可以被反射。</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注解也可以定义属性"><a href="#注解也可以定义属性" class="headerlink" title="注解也可以定义属性"></a>注解也可以定义属性</h2><p>①注解也可以定义属性，不过属性定义时，属性名后面必须加一个小括号。</p>
+<p>②属性的类型只能是：</p>
+<p>byte，short，int，long，float，double，boolean，char</p>
+<p>String、Class、枚举类型、注解类型</p>
+<p>以上所有类型的一维数组形式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这是一个数据库信息的注解（自定义的注解）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DataBaseInfo &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注解也可以定义属性，但是属性定义时有要求，属性名后面必须添加：()</span></span><br><span class="line"><span class="comment">     * 语法：</span></span><br><span class="line"><span class="comment">     *      属性的类型 属性的名字();</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String <span class="title function_">driver</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>; <span class="comment">// 使用 default 关键字来指定属性的默认值。</span></span><br><span class="line">    String <span class="title function_">url</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">user</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">password</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">byte</span> <span class="title function_">b</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">short</span> <span class="title function_">s</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">i</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="title function_">l</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0L</span>;</span><br><span class="line">    <span class="type">float</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0F</span>;</span><br><span class="line">    <span class="type">double</span> <span class="title function_">d</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">flag</span><span class="params">()</span> <span class="keyword">default</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">char</span> <span class="title function_">c</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    Class <span class="title function_">clazz</span><span class="params">()</span> <span class="keyword">default</span> String.class;</span><br><span class="line">    Season <span class="title function_">season</span><span class="params">()</span> <span class="keyword">default</span> Season.SPRING;</span><br><span class="line">    MyAnnotation <span class="title function_">myAnnotation</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 可以是一维数组形式</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] names();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注解的属性的数据类型，必须是以上的几种类型，或者这几种类型的一维数组，不能是其他类型。</span></span><br><span class="line">    <span class="comment">//Object obj();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 语法规则：如果这个注解中有属性，那么使用的时候，必须给属性赋值。没有赋值则报错。</span></span><br><span class="line"><span class="comment">// 除非你定义注解的时候给属性指定了默认值。</span></span><br><span class="line"><span class="comment">// 怎么给属性赋值？语法：@DataBaseInfo(属性名=值,属性名=值,属性名=值,属性名=值,属性名=值)</span></span><br><span class="line"><span class="meta">@DataBaseInfo(</span></span><br><span class="line"><span class="meta">        //driver=&quot;oracle.jdbc.driver.OracleDriver&quot;,</span></span><br><span class="line"><span class="meta">        url=&quot;jdbc:mysql://localhost:3306/powernode&quot;,</span></span><br><span class="line"><span class="meta">        user=&quot;root&quot;,</span></span><br><span class="line"><span class="meta">        password=&quot;123456&quot;,</span></span><br><span class="line"><span class="meta">        myAnnotation=@MyAnnotation,</span></span><br><span class="line"><span class="meta">        names=&#123;&quot;zhangsan&quot;, &quot;lisi&quot;, &quot;wangwu&quot;&#125;,</span></span><br><span class="line"><span class="meta">        flag=true,</span></span><br><span class="line"><span class="meta">        i=100,</span></span><br><span class="line"><span class="meta">        clazz=Integer.class,</span></span><br><span class="line"><span class="meta">        season=Season.WINTER)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">connDB</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注解的使用"><a href="#注解的使用" class="headerlink" title="注解的使用"></a>注解的使用</h2><p>①注解在使用时必须给属性赋值，除非你使用了default关键字为属性指定了默认值。</p>
+<p><strong>②如果属性只有一个，并且属性名是value时，使用注解时value可以省略不写。</strong></p>
+<p><strong>③如果属性是一个数组，使用注解时，数组值只有一个，数组的大括号是可以省略的。</strong></p>
+<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>①用来标注注解的注解叫做元注解。(也是JDK内置的注解。)</p>
+<p>②常用的元注解：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Retention：设置注解的保持性</span><br><span class="line"></span><br><span class="line">	@Target：设置注解可以出现的位置</span><br><span class="line"></span><br><span class="line">	@Documented：设置注解是否可以生成到帮助文档中</span><br><span class="line"></span><br><span class="line">	@Inherited：设置注解是否支持继承</span><br><span class="line"></span><br><span class="line">	@Repeatable：设置注解在某一个元素上是否可以重复使用（Java8的新特性。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>@Retention</p>
+<p>①Retention英文意思有保留、保持的意思，它表示注解存在阶段是保留在源代码（编译期），字节码（类加载）或者运行时（JVM中运行）。</p>
+<p>②在@Retention注解中使用枚举RetentionPolicy来表示注解保留时期。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span>：注解仅存在于源代码中，在字节码文件中不包含。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.CLASS)</span>：注解在字节码文件中存在，但运行时无法获得（默认）。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span>：注解在字节码文件中存在，且运行时可通过反射获取。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>Java体系知识</category>
@@ -3207,11 +3286,6 @@
       </categories>
   </entry>
   <entry>
-    <title>SpringSecurity</title>
-    <url>/2024/02/23/SpringSecurity/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>Java基础部分4-集合</title>
     <url>/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h2><h3 id="①什么是集合，有什么用？"><a href="#①什么是集合，有什么用？" class="headerlink" title="①什么是集合，有什么用？"></a>①什么是集合，有什么用？</h3><p>1.集合是一种容器，用来组织和管理数据的。非常重要。</p>
@@ -3968,6 +4042,43 @@
       </tags>
   </entry>
   <entry>
+    <title>SpringSecurity</title>
+    <url>/2024/02/23/SpringSecurity/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>dlyk_part1</title>
+    <url>/2024/02/18/dlyk-part1/</url>
+    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/dlyk-part1/image-20240218015738084.png" alt="image-20240218015738084"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240218015750388.png" alt="image-20240218015750388"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152352894.png" alt="image-20240221152352894"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152403852.png" alt="image-20240221152403852"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152414970.png" alt="image-20240221152414970"></p>
+<p><img src="/../blog_images/dlyk-part1/image-20240221152423433.png" alt="image-20240221152423433"></p>
+<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
+<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
+<p> （1） node.js是一个开源的跨平台的JavaScript运行时环境，类似java的jvm</p>
+<p> （2） npm JavaScript依赖包管理器 ，全世界都可以用这个来共享javascript包，负责前端项目的打包，插件的下载 node package manager </p>
+<p> （3）Vite 是快速构建前端Vue项目的脚手架，可以理解为开发Spring boot的Spring initializr的快速构建工具。（之前是用vue-cil的）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vite@latest//</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、启动之前的项目"><a href="#三、启动之前的项目" class="headerlink" title="三、启动之前的项目"></a>三、启动之前的项目</h1><p>用的是jdk17 ；</p>
+<p>前端跑起来需要进入package.json 在scripts 处 跑dev</p>
+<h2 id="1-admin的密码"><a href="#1-admin的密码" class="headerlink" title="1. admin的密码"></a>1. admin的密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> t_user</span><br><span class="line"><span class="keyword">SET</span> login_pwd <span class="operator">=</span> <span class="string">&#x27;$2a$10$t1ZZqt3jgYNabcSS1NMZ/uqGALlCF/VH5wSL3CYduABGeVvKFVEi6&#x27;</span>  <span class="comment">-- 这里替换为新密码的哈希值</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>哈希代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PasswordEncoderExample</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 BCryptPasswordEncoder</span></span><br><span class="line">        <span class="type">PasswordEncoder</span> <span class="variable">encoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 编码密码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rawPassword</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">encodedPassword</span> <span class="operator">=</span> encoder.encode(rawPassword);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印编码后的密码</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Encoded Password: &quot;</span> + encodedPassword);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
+<p>后端的端口：8088 在application.yml中修改</p>
+<p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
+]]></content>
+      <categories>
+        <category>Java项目</category>
+        <category>动力云客</category>
+      </categories>
+  </entry>
+  <entry>
     <title>dlyk-part2-front-1</title>
     <url>/2024/02/18/dlyk-part2-front-1/</url>
     <content><![CDATA[<h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><h2 id="一-、-登录界面"><a href="#一-、-登录界面" class="headerlink" title="一 、 登录界面"></a>一 、 登录界面</h2><h3 id="（1）用vite脚手架创建项目"><a href="#（1）用vite脚手架创建项目" class="headerlink" title="（1）用vite脚手架创建项目"></a>（1）用vite脚手架创建项目</h3><blockquote>
@@ -4101,38 +4212,6 @@
 
 <p>此外 ，由于mapper的xml（sql语句文件）与mapper不在一个文件夹下面，所以需要指定一下，在application.yml中指定</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">mybatis:</span><br><span class="line">  mapper-locations: classpath:mapper/*.xml</span><br><span class="line">  configuration:</span><br><span class="line">    #??????sql??</span><br><span class="line">    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Java项目</category>
-        <category>动力云客</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>dlyk_part1</title>
-    <url>/2024/02/18/dlyk-part1/</url>
-    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/dlyk-part1/image-20240218015738084.png" alt="image-20240218015738084"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240218015750388.png" alt="image-20240218015750388"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152352894.png" alt="image-20240221152352894"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152403852.png" alt="image-20240221152403852"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152414970.png" alt="image-20240221152414970"></p>
-<p><img src="/../blog_images/dlyk-part1/image-20240221152423433.png" alt="image-20240221152423433"></p>
-<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
-<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
-<p> （1） node.js是一个开源的跨平台的JavaScript运行时环境，类似java的jvm</p>
-<p> （2） npm JavaScript依赖包管理器 ，全世界都可以用这个来共享javascript包，负责前端项目的打包，插件的下载 node package manager </p>
-<p> （3）Vite 是快速构建前端Vue项目的脚手架，可以理解为开发Spring boot的Spring initializr的快速构建工具。（之前是用vue-cil的）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm create vite@latest//</span><br></pre></td></tr></table></figure>
-
-<h1 id="三、启动之前的项目"><a href="#三、启动之前的项目" class="headerlink" title="三、启动之前的项目"></a>三、启动之前的项目</h1><p>用的是jdk17 ；</p>
-<p>前端跑起来需要进入package.json 在scripts 处 跑dev</p>
-<h2 id="1-admin的密码"><a href="#1-admin的密码" class="headerlink" title="1. admin的密码"></a>1. admin的密码</h2><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> t_user</span><br><span class="line"><span class="keyword">SET</span> login_pwd <span class="operator">=</span> <span class="string">&#x27;$2a$10$t1ZZqt3jgYNabcSS1NMZ/uqGALlCF/VH5wSL3CYduABGeVvKFVEi6&#x27;</span>  <span class="comment">-- 这里替换为新密码的哈希值</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>哈希代码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PasswordEncoderExample</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 创建 BCryptPasswordEncoder</span></span><br><span class="line">        <span class="type">PasswordEncoder</span> <span class="variable">encoder</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BCryptPasswordEncoder</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 编码密码</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">rawPassword</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;</span><br><span class="line">        <span class="type">String</span> <span class="variable">encodedPassword</span> <span class="operator">=</span> encoder.encode(rawPassword);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印编码后的密码</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Encoded Password: &quot;</span> + encodedPassword);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-端口"><a href="#2-端口" class="headerlink" title="2. 端口"></a>2. 端口</h2><p>前端的端口：8080 在vite.config.js中修改</p>
-<p>后端的端口：8088 在application.yml中修改</p>
-<p><img src="/../blog_images/dlyk-part1/image-20240218232659713.png" alt="image-20240218232659713"></p>
 ]]></content>
       <categories>
         <category>Java项目</category>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="配置优先级 从上至下优先级  命令行参数&gt;java系统属性 Bean管理Spring项目启动时，会把bean都创建好放到IOC容器当中，如果想要主动获取这些bean：      bean的获取 在spring容器中，bean默认是单例的    作用域 说明    singleton 容器内同  名称 的 bean 只有一个实例（单例）（默认）   prototype 每次使用该  bean">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb-Springboot-2">
+<meta property="og:url" content="http://example.com/2024/03/11/JavaWeb-Springboot-2/index.html">
+<meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="配置优先级 从上至下优先级  命令行参数&gt;java系统属性 Bean管理Spring项目启动时，会把bean都创建好放到IOC容器当中，如果想要主动获取这些bean：      bean的获取 在spring容器中，bean默认是单例的    作用域 说明    singleton 容器内同  名称 的 bean 只有一个实例（单例）（默认）   prototype 每次使用该  bean">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311131236747.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311131859933.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311133629292.png">
+<meta property="og:image" content="http://example.com/2024/03/11/blog_images/JavaWeb-Springboot-2/image-20240311134105870.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311134034393.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311141158692.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311142532205.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311145118080.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311145621804.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311150440558.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311150642205.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311150707450.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311155050608.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311155517846.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311155831161.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311160715872.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311160922672.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311162501274.png">
+<meta property="og:image" content="http://example.com/2024/03/11/blog_images/JavaWeb-Springboot-2/image-20240311162756249.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311162942568.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311164359672.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311164625979.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311164645808.png">
+<meta property="og:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311164810304.png">
+<meta property="article:published_time" content="2024-03-11T04:38:22.000Z">
+<meta property="article:modified_time" content="2024-03-11T08:48:10.375Z">
+<meta property="article:author" content="lolo">
+<meta property="article:tag" content="JavaWeb">
+<meta property="article:tag" content="Springboot2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog_images/JavaWeb-Springboot-2/image-20240311131236747.png">
+
+
+<link rel="canonical" href="http://example.com/2024/03/11/JavaWeb-Springboot-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/03/11/JavaWeb-Springboot-2/","path":"2024/03/11/JavaWeb-Springboot-2/","title":"JavaWeb-Springboot-2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaWeb-Springboot-2 | Loloooo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Loloooo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">2.</span> <span class="nav-text">配置优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bean%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">Bean管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bean%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="nav-number">3.1.</span> <span class="nav-text">bean的获取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.1.1.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9bean"><span class="nav-number">3.2.</span> <span class="nav-text">第三方bean</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringBoot%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">SpringBoot原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E6%AD%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">4.1.</span> <span class="nav-text">起步依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">自动配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AComponentScan%EF%BC%88%E4%BD%BF%E7%94%A8%E7%B9%81%E7%90%90%EF%BC%8C%E6%95%88%E7%8E%87%E4%BD%8E%EF%BC%89"><span class="nav-number">4.2.1.</span> <span class="nav-text">方案一：ComponentScan（使用繁琐，效率低）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A-Import-%E5%AF%BC%E5%85%A5%E3%80%82"><span class="nav-number">4.2.2.</span> <span class="nav-text">方案二：@Import 导入。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E8%B7%9F%E8%B8%AA"><span class="nav-number">4.2.3.</span> <span class="nav-text">源码跟踪</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBootApplication"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">@SpringBootApplication</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conditional"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">@Conditional</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89starter"><span class="nav-number">4.3.</span> <span class="nav-text">自定义starter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">5.1.</span> <span class="nav-text">三层架构</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lolo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/11/JavaWeb-Springboot-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaWeb-Springboot-2 | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaWeb-Springboot-2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-11 12:38:22 / 修改时间：16:48:10" itemprop="dateCreated datePublished" datetime="2024-03-11T12:38:22+08:00">2024-03-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h1><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131236747.png" alt="image-20240311131236747"></p>
+<p>从上至下优先级</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131859933.png" alt="image-20240311131859933"></p>
+<p>命令行参数&gt;java系统属性</p>
+<h1 id="Bean管理"><a href="#Bean管理" class="headerlink" title="Bean管理"></a>Bean管理</h1><p>Spring项目启动时，会把bean都创建好放到IOC容器当中，如果想要主动获取这些bean：</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311133629292.png" alt="image-20240311133629292"></p>
+<img src="../blog_images/JavaWeb-Springboot-2/image-20240311134105870.png" alt="image-20240311134105870" style="zoom:33%;" />
+
+
+
+<h2 id="bean的获取"><a href="#bean的获取" class="headerlink" title="bean的获取"></a>bean的获取</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311134034393.png" alt="image-20240311134034393"></p>
+<p>在spring容器中，bean默认是单例的</p>
+<table>
+<thead>
+<tr>
+<th><strong>作用域</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>singleton</td>
+<td>容器内同  名称 的 bean 只有一个实例（单例）（默认）</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>每次使用该  bean 时会创建新的实例（非单例）</td>
+</tr>
+<tr>
+<td>request</td>
+<td>每个请求范围内会创建新的实例（web环境中，了解）</td>
+</tr>
+<tr>
+<td>session</td>
+<td>每个会话范围内会创建新的实例（web环境中，了解）</td>
+</tr>
+<tr>
+<td>application</td>
+<td>每个应用范围内会创建新的实例（web环境中，了解）</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/depts&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>默认singleton的bean，在容器启动时被创建，可以使用@Lazy注解来延迟初始化（延迟到第一次使用时）。</p>
+<p>prototype的bean，每一次使用该bean的时候都会创建一个新的实例。</p>
+<p>实际开发当中，绝大部分的Bean是单例的，也就是说绝大部分Bean不需要配置scope属性。</p>
+<h2 id="第三方bean"><a href="#第三方bean" class="headerlink" title="第三方bean"></a>第三方bean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果要管理的bean对象来自于第三方（不是自定义的，是无法用@Component以及衍生注解声明bean的，就是需要用到@Bean注解）</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311141158692.png" alt="image-20240311141158692"></p>
+<p>一、用启动类，不建议</p>
+<p>二、用第三方bean对象</p>
+<p>用配置类声明第三方bean对象</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311142532205.png" alt="image-20240311142532205"></p>
+<p>通过 @Bean注解的name&#x2F;value属性指定bean名称，如果没有指定，默认是方法名</p>
+<h1 id="SpringBoot原理"><a href="#SpringBoot原理" class="headerlink" title="SpringBoot原理"></a>SpringBoot原理</h1><h2 id="起步依赖"><a href="#起步依赖" class="headerlink" title="起步依赖"></a>起步依赖</h2><p>Maven存在一个依赖传递，只要提供一个起步依赖</p>
+<h2 id="自动配置"><a href="#自动配置" class="headerlink" title="自动配置"></a>自动配置</h2><p>SpringBoot的自动配置就是当spring容器启动之后，一些配置类，bean对象就自动的存入了IOC容器中，不需要我们手动去声明</p>
+<p>当想要实现从另外一个项目引入</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145118080.png" alt="image-20240311145118080"></p>
+<p>springboot只能扫描到启动类及其子包，扫描不到其他的包</p>
+<h3 id="方案一：ComponentScan（使用繁琐，效率低）"><a href="#方案一：ComponentScan（使用繁琐，效率低）" class="headerlink" title="方案一：ComponentScan（使用繁琐，效率低）"></a>方案一：ComponentScan（使用繁琐，效率低）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ComponentScan(&#123;&quot;com.example&quot;,&quot;com.itheima&quot;&#125;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringbootWebConfig2Application</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145621804.png" alt="image-20240311145621804"></p>
+<h3 id="方案二：-Import-导入。"><a href="#方案二：-Import-导入。" class="headerlink" title="方案二：@Import 导入。"></a>方案二：@Import 导入。</h3><p><strong>使用@Import导入的类会被Spring加载到IOC容器中，导入形式主要有以下几种</strong>：</p>
+<ul>
+<li>导入 普通类</li>
+<li>导入 配置类</li>
+<li>导入 ImportSelector 接口实现类</li>
+</ul>
+<p>@EnableXxxx注解，封装@Import注解 </p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150440558.png" alt="image-20240311150440558"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150642205.png" alt="image-20240311150642205"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150707450.png" alt="image-20240311150707450"></p>
+<h3 id="源码跟踪"><a href="#源码跟踪" class="headerlink" title="源码跟踪"></a>源码跟踪</h3><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h4><p>——-&gt; </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfigration</span></span><br><span class="line">这个注解只是封装了一个注解<span class="meta">@Configuration</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line">用来scan子包之类的;组件扫描，默认扫描当前引导类所在包及其子包。</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line">自动配置的核心注解--》底层封装的<span class="meta">@import</span>注解</span><br><span class="line">--》<span class="meta">@Import(AutoConfigurationTmportSelector.class)</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155050608.png" alt="image-20240311155050608"></p>
+<h4 id="Conditional"><a href="#Conditional" class="headerlink" title="@Conditional"></a><strong>@Conditional</strong></h4><blockquote>
+<p> 以conditional开头的注解都是条件装配的注解</p>
+</blockquote>
+<p><strong>作用：</strong>按照一定的条件进行判断，在满足给定条件后才会注册对应的bean对象到Spring IOC容器中。</p>
+<p><strong>位置：</strong>方法、类</p>
+<p>@Conditional 本身是一个父注解，派生出大量的子注解：</p>
+<ul>
+<li><strong>@ConditionalOnClass：</strong>判断环境中是否有对应字节码文件，才注册bean到IOC容器。</li>
+<li><strong>@ConditionalOnMissingBean：</strong>判断环境中没有对应的bean（类型 或 名称） ，才注册bean到IOC容器。</li>
+<li><strong>@ConditionalOnProperty：</strong>判断配置文件中有对应属性和值，才注册bean到IOC容器。</li>
+</ul>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155517846.png" alt="image-20240311155517846"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155831161.png" alt="image-20240311155831161"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(name = &quot;io.jsonwebtoken.Jwts&quot;)</span> <span class="comment">//当前环境存在指定的这个类时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span> <span class="comment">//当不存在当前类型的bean时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//指定的类型（value属性）或者 名称（name属性）</span></span><br><span class="line"><span class="comment">//通常用来设置一个默认的bean对象</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(name = &quot;name&quot;,havingValue = &quot;itheima&quot;)</span> <span class="comment">//配置文件中存在对应的属性和值，才注册bean到IOC容器。</span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//name表示配置项的名字，havingValue表示配置项的值</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160715872.png" alt="image-20240311160715872"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160922672.png" alt="image-20240311160922672"></p>
+<h2 id="自定义starter"><a href="#自定义starter" class="headerlink" title="自定义starter"></a>自定义starter</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162501274.png" alt="image-20240311162501274"></p>
+<p><strong>需求：自定义aliyun-oss-spring-boot-starter，完成阿里云OSS操作工具类 AliyunOSSUtils 的自动配置。</strong></p>
+<p><strong>目标：引入起步依赖引入之后，要想使用阿里云OSS，注入 AliyunOSSUtils直接使用即可。</strong></p>
+<img src="../blog_images/JavaWeb-Springboot-2/image-20240311162756249.png" alt="image-20240311162756249" style="zoom:33%;" />
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162942568.png" alt="image-20240311162942568"></p>
+<p>不想听了</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164359672.png" alt="image-20240311164359672"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164625979.png" alt="image-20240311164625979"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164645808.png" alt="image-20240311164645808"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164810304.png" alt="image-20240311164810304"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaWeb/" rel="tag"># JavaWeb</a>
+              <a href="/tags/Springboot2/" rel="tag"># Springboot2</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/09/JavaWeb-Springboot/" rel="prev" title="JavaWeb-Springboot">
+                  <i class="fa fa-angle-left"></i> JavaWeb-Springboot
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lolo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

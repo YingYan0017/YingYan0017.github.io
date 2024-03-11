@@ -286,7 +286,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-11 10:25:34" itemprop="dateModified" datetime="2024-03-11T10:25:34+08:00">2024-03-11</time>
+      <time title="修改时间：2024-03-11 11:04:10" itemprop="dateModified" datetime="2024-03-11T11:04:10+08:00">2024-03-11</time>
     </span>
 
   
@@ -499,7 +499,7 @@
 <h5 id="1-不同切面类中，默认按照切面类的类名字母排序："><a href="#1-不同切面类中，默认按照切面类的类名字母排序：" class="headerlink" title="1.不同切面类中，默认按照切面类的类名字母排序："></a>1.不同切面类中，默认按照切面类的类名字母排序：</h5><p>​	目标方法前的通知方法：字母排名靠前的先执行</p>
 <p>​	目标方法后的通知方法：字母排名靠前的后执行</p>
 <h5 id="2-在切面类上添加order注解"><a href="#2-在切面类上添加order注解" class="headerlink" title="2.在切面类上添加order注解"></a>2.在切面类上添加order注解</h5><p><img src="/../blog_images/JavaWeb-Springboot/image-20240311101259010.png" alt="image-20240311101259010"></p>
-<h4 id="切入点表达式"><a href="#切入点表达式" class="headerlink" title="切入点表达式"></a>切入点表达式</h4><p>切入点表达式：描述切入点方法的一种表达式</p>
+<h4 id="切入点表达式"><a href="#切入点表达式" class="headerlink" title="切入点表达式"></a>切入点表达式</h4><h5 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h5><p>切入点表达式：描述切入点方法的一种表达式</p>
 <p>作用：主要用来决定项目中的哪些方法需要加入通知</p>
 <p>常见形式：</p>
 <blockquote>
@@ -517,7 +517,27 @@
 <p>throws 异常：可省略（注意是方法上声明抛出的异常，不是实际抛出的异常）</p>
 <p><img src="/../blog_images/JavaWeb-Springboot/image-20240311101845730.png" alt="image-20240311101845730"></p>
 <p><img src="/../blog_images/JavaWeb-Springboot/image-20240311102223113.png" alt="image-20240311102223113"></p>
-<h4 id="连接点"><a href="#连接点" class="headerlink" title="连接点"></a>连接点</h4>
+<h5 id="annotation-……"><a href="#annotation-……" class="headerlink" title="@annotation(……)"></a>@annotation(……)</h5><blockquote>
+<p>定义注解，这个注解起到一个标识的作用</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311105248945.png" alt="image-20240311105248945"></p>
+<p>@annotation 切入点表达式，用于匹配标识有特定注解的方法。</p>
+<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311105423424.png" alt="image-20240311105423424"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311105605500.png" alt="image-20240311105605500"></p>
+<h4 id="连接点"><a href="#连接点" class="headerlink" title="连接点"></a>连接点</h4><p>可以被AOP控制的方法</p>
+<p>在Spring中用JoinPoint抽象了连接点，用它可以获得方法执行时的相关信息，比如目标类名，方法名。</p>
+<blockquote>
+<p>就是把之前的那些给抽象了</p>
+</blockquote>
+<blockquote>
+<p>对于 @Around 通知，获取连接点信息只能使用 ProceedingJoinPoint</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;execution(* com.itheima.service.DeptService.*(..))&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> joinPoint.getTarget().getClass().getName(); <span class="comment">//获取目标类名</span></span><br><span class="line">    <span class="type">Signature</span> <span class="variable">signature</span> <span class="operator">=</span> joinPoint.getSignature(); <span class="comment">//获取目标方法签名	</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName(); <span class="comment">//获取目标方法名</span></span><br><span class="line">    Object[] args = joinPoint.getArgs(); <span class="comment">//获取目标方法运行参数</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">res</span> <span class="operator">=</span> joinPoint.proceed(); <span class="comment">//执行原始方法,获取返回值（环绕通知）</span></span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311110305088.png" alt="image-20240311110305088"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before(&quot;execution(* com.itheima.service.DeptService.*(..))&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> joinPoint.getTarget().getClass().getName(); <span class="comment">//获取目标类名</span></span><br><span class="line">    <span class="type">Signature</span> <span class="variable">signature</span> <span class="operator">=</span> joinPoint.getSignature(); <span class="comment">//获取目标方法签名</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName(); <span class="comment">//获取目标方法名</span></span><br><span class="line">    Object[] args = joinPoint.getArgs(); <span class="comment">//获取目标方法运行参数 </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 

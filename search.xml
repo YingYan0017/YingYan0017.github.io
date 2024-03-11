@@ -10,6 +10,94 @@
 ]]></content>
   </entry>
   <entry>
+    <title>JavaWeb-Maven</title>
+    <url>/2024/03/11/JavaWeb-Maven/</url>
+    <content><![CDATA[<h1 id="分模块设计与开发"><a href="#分模块设计与开发" class="headerlink" title="分模块设计与开发"></a>分模块设计与开发</h1><p>如果都是一个整体，不便维护，难以复用</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311165526006.png" alt="image-20240311165526006"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311170348905.png" alt="image-20240311170348905"></p>
+<h2 id="分模块设计"><a href="#分模块设计" class="headerlink" title="分模块设计"></a>分模块设计</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311171016127.png" alt="image-20240311171016127"></p>
+<p>直接在tlias-web-management里引入tlias-pojo和tlias-utils的依赖</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">创建maven模块 tlias-pojo，存放实体类。</span><br><span class="line"></span><br><span class="line">创建maven模块 tlias-utils，存放相关工具类。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311171024408.png" alt="image-20240311171024408"></p>
+<h3 id="step1：创建maven模块tlias-pojo，存放实体类"><a href="#step1：创建maven模块tlias-pojo，存放实体类" class="headerlink" title="step1：创建maven模块tlias-pojo，存放实体类"></a>step1：创建maven模块tlias-pojo，存放实体类</h3><img src="../blog_images/JavaWeb-Maven/image-20240311171425231.png" alt="image-20240311171425231" style="zoom:50%;" />
+
+<img src="../blog_images/JavaWeb-Maven/image-20240311171559834.png" alt="image-20240311171559834" style="zoom:50%;" />
+
+<img src="../blog_images/JavaWeb-Maven/image-20240311171641900.png" alt="image-20240311171641900" style="zoom:33%;" />
+
+<h3 id="step2：在主程序中引用模块"><a href="#step2：在主程序中引用模块" class="headerlink" title="step2：在主程序中引用模块"></a>step2：在主程序中引用模块</h3><p><img src="/../blog_images/JavaWeb-Maven/image-20240311172832257.png" alt="image-20240311172832257"></p>
+<h1 id="继承与聚合"><a href="#继承与聚合" class="headerlink" title="继承与聚合"></a>继承与聚合</h1><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><strong>概念：</strong>继承描述的是两个工程之间的关系，和java中的继承相似，子工程可以继承父工程中的配置信息，常见于依赖关系的继承。</p>
+<p><strong>作用：</strong>简化依赖配置，统一管理依赖</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">实现：&lt;parent&gt;...&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311191546007.png" alt="image-20240311191546007"></p>
+<h3 id="继承关系实现"><a href="#继承关系实现" class="headerlink" title="继承关系实现"></a>继承关系实现</h3><p>① 创建maven模块 tlias-parent ，该工程为父工程，设置打包方式pom(默认jar)。</p>
+<blockquote>
+<p>打包方式：</p>
+<p>jar：普通模块打包，springboot项目基本都是jar包（内嵌tomcat运行）</p>
+<p>war：普通web程序打包，需要部署在外部的tomcat服务器中运行</p>
+<p>pom：父工程或聚合工程，该模块不写代码，仅进行依赖管理</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.7</span><span class="number">.5</span>&lt;/version&gt;</span><br><span class="line">    &lt;relativePath/&gt;</span><br><span class="line"> &lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;groupId&gt;com.itheima&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tlias-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.0</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>② 在子工程的pom.xml文件中，配置继承关系</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194125306.png" alt="image-20240311194125306"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在子工程中，配置了继承关系之后，坐标中的groupId是可以省略的，因为会自动继承父工程的 。</span><br><span class="line"></span><br><span class="line">relativePath指定父工程的pom文件的相对位置（如果不指定，将从本地仓库/远程仓库查找该工程）。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192123449.png" alt="image-20240311192123449"></p>
+<p>③ 在父工程中配置各个工程共有的依赖（子工程会自动继承父工程的依赖）。</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192033341.png" alt="image-20240311192033341"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>        </span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ps:若父子工程都配置了同一个依赖的不同版本，以子工程的为准。</p>
+</blockquote>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194512198.png" alt="image-20240311194512198"></p>
+<h3 id="版本锁定"><a href="#版本锁定" class="headerlink" title="版本锁定"></a>版本锁定</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在maven中，可以在父工程的pom文件中通过 &lt;dependencyManagement&gt; 来统一管理依赖版本</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195137523.png" alt="image-20240311195137523"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195305186.png" alt="image-20240311195305186"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195401893.png" alt="image-20240311195401893"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311200349898.png" alt="image-20240311200349898"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependencyManagement&gt; 与 &lt;dependencies&gt;的区别是什么?</span><br><span class="line">&lt;dependencies&gt; 是直接依赖,在父工程配置了依赖,子工程会直接继承下来。 </span><br><span class="line">&lt;dependencyManagement&gt; 是统一管理依赖版本,不会直接依赖，还需要在子工程中引入所需依赖(无需指定版本)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311200842420.png" alt="image-20240311200842420"></p>
+<p>要把几个模块全部安装到本地之后才能打包</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">聚合</span><br><span class="line">      将多个模块组织成一个整体，同时进行项目的构建。</span><br><span class="line">聚合工程</span><br><span class="line">      一个不具有业务功能的“空”工程（有且仅有一个pom文件）</span><br><span class="line">作用</span><br><span class="line">      快速构建项目（无需根据依赖关系手动构建，直接在聚合工程上构建即可）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">maven中可以通过 &lt;modules&gt; 设置当前聚合工程所包含的子模块名称</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--聚合--&gt;</span>父工程（聚合工程）</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-pojo<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-utils<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-web-management<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>l聚合工程中所包含的模块，在构建时，会自动根据模块间的依赖关系设置构建顺序，与聚合工程中模块的配置书写位置无关。</p>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>聚合用于快速构建项目</li>
+<li>继承用于简化依赖配置、统一管理依赖</li>
+</ul>
+<h3 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h3><ul>
+<li>聚合与继承的pom.xml文件打包方式均为pom，可以将两种关系制作到同一个pom文件中</li>
+<li>聚合与继承均属于设计型模块，并无实际的模块内容</li>
+</ul>
+<h3 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h3><ul>
+<li>聚合是在聚合工程中配置关系，聚合可以感知到参与聚合的模块有哪些</li>
+<li>继承是在子模块中配置关系，父模块无法感知哪些子模块继承了自己</li>
+</ul>
+<h1 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h1><p>私服是一种特殊的远程仓库，它是架设在局域网内的仓库服务，用来代理位于外部的中央仓库，用于解决团队内部的资源共享与资源同步问题。</p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201437607.png" alt="image-20240311201437607"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201447693.png" alt="image-20240311201447693"></p>
+<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201500467.png" alt="image-20240311201500467"></p>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+        <category>Maven高级</category>
+      </categories>
+  </entry>
+  <entry>
     <title></title>
     <url>/2024/02/18/Java%20%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86/</url>
     <content><![CDATA[<h1 id="Java-基础部分"><a href="#Java-基础部分" class="headerlink" title="Java 基础部分"></a>Java 基础部分</h1><h2 id="P18"><a href="#P18" class="headerlink" title="P18"></a>P18</h2><h3 id="一、基础知识细节"><a href="#一、基础知识细节" class="headerlink" title="一、基础知识细节"></a>一、基础知识细节</h3><ol>
@@ -322,94 +410,6 @@
       <categories>
         <category>JavaWeb</category>
         <category>Mybatis</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>JavaWeb-Maven</title>
-    <url>/2024/03/11/JavaWeb-Maven/</url>
-    <content><![CDATA[<h1 id="分模块设计与开发"><a href="#分模块设计与开发" class="headerlink" title="分模块设计与开发"></a>分模块设计与开发</h1><p>如果都是一个整体，不便维护，难以复用</p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311165526006.png" alt="image-20240311165526006"></p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311170348905.png" alt="image-20240311170348905"></p>
-<h2 id="分模块设计"><a href="#分模块设计" class="headerlink" title="分模块设计"></a>分模块设计</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311171016127.png" alt="image-20240311171016127"></p>
-<p>直接在tlias-web-management里引入tlias-pojo和tlias-utils的依赖</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">创建maven模块 tlias-pojo，存放实体类。</span><br><span class="line"></span><br><span class="line">创建maven模块 tlias-utils，存放相关工具类。</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311171024408.png" alt="image-20240311171024408"></p>
-<h3 id="step1：创建maven模块tlias-pojo，存放实体类"><a href="#step1：创建maven模块tlias-pojo，存放实体类" class="headerlink" title="step1：创建maven模块tlias-pojo，存放实体类"></a>step1：创建maven模块tlias-pojo，存放实体类</h3><img src="../blog_images/JavaWeb-Maven/image-20240311171425231.png" alt="image-20240311171425231" style="zoom:50%;" />
-
-<img src="../blog_images/JavaWeb-Maven/image-20240311171559834.png" alt="image-20240311171559834" style="zoom:50%;" />
-
-<img src="../blog_images/JavaWeb-Maven/image-20240311171641900.png" alt="image-20240311171641900" style="zoom:33%;" />
-
-<h3 id="step2：在主程序中引用模块"><a href="#step2：在主程序中引用模块" class="headerlink" title="step2：在主程序中引用模块"></a>step2：在主程序中引用模块</h3><p><img src="/../blog_images/JavaWeb-Maven/image-20240311172832257.png" alt="image-20240311172832257"></p>
-<h1 id="继承与聚合"><a href="#继承与聚合" class="headerlink" title="继承与聚合"></a>继承与聚合</h1><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><strong>概念：</strong>继承描述的是两个工程之间的关系，和java中的继承相似，子工程可以继承父工程中的配置信息，常见于依赖关系的继承。</p>
-<p><strong>作用：</strong>简化依赖配置，统一管理依赖</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">实现：&lt;parent&gt;...&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311191546007.png" alt="image-20240311191546007"></p>
-<h3 id="继承关系实现"><a href="#继承关系实现" class="headerlink" title="继承关系实现"></a>继承关系实现</h3><p>① 创建maven模块 tlias-parent ，该工程为父工程，设置打包方式pom(默认jar)。</p>
-<blockquote>
-<p>打包方式：</p>
-<p>jar：普通模块打包，springboot项目基本都是jar包（内嵌tomcat运行）</p>
-<p>war：普通web程序打包，需要部署在外部的tomcat服务器中运行</p>
-<p>pom：父工程或聚合工程，该模块不写代码，仅进行依赖管理</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">2.7</span><span class="number">.5</span>&lt;/version&gt;</span><br><span class="line">    &lt;relativePath/&gt;</span><br><span class="line"> &lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;groupId&gt;com.itheima&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tlias-parent&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.0</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>② 在子工程的pom.xml文件中，配置继承关系</p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194125306.png" alt="image-20240311194125306"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在子工程中，配置了继承关系之后，坐标中的groupId是可以省略的，因为会自动继承父工程的 。</span><br><span class="line"></span><br><span class="line">relativePath指定父工程的pom文件的相对位置（如果不指定，将从本地仓库/远程仓库查找该工程）。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192123449.png" alt="image-20240311192123449"></p>
-<p>③ 在父工程中配置各个工程共有的依赖（子工程会自动继承父工程的依赖）。</p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311192033341.png" alt="image-20240311192033341"></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span>        </span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.24<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>ps:若父子工程都配置了同一个依赖的不同版本，以子工程的为准。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311194512198.png" alt="image-20240311194512198"></p>
-<h3 id="版本锁定"><a href="#版本锁定" class="headerlink" title="版本锁定"></a>版本锁定</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">在maven中，可以在父工程的pom文件中通过 &lt;dependencyManagement&gt; 来统一管理依赖版本</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195137523.png" alt="image-20240311195137523"></p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195305186.png" alt="image-20240311195305186"></p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311195401893.png" alt="image-20240311195401893"></p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311200349898.png" alt="image-20240311200349898"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&lt;dependencyManagement&gt; 与 &lt;dependencies&gt;的区别是什么?</span><br><span class="line">&lt;dependencies&gt; 是直接依赖,在父工程配置了依赖,子工程会直接继承下来。 </span><br><span class="line">&lt;dependencyManagement&gt; 是统一管理依赖版本,不会直接依赖，还需要在子工程中引入所需依赖(无需指定版本)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p><img src="/../blog_images/JavaWeb-Maven/image-20240311200842420.png" alt="image-20240311200842420"></p>
-<p>要把几个模块全部安装到本地之后才能打包</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">聚合</span><br><span class="line">      将多个模块组织成一个整体，同时进行项目的构建。</span><br><span class="line">聚合工程</span><br><span class="line">      一个不具有业务功能的“空”工程（有且仅有一个pom文件）</span><br><span class="line">作用</span><br><span class="line">      快速构建项目（无需根据依赖关系手动构建，直接在聚合工程上构建即可）</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">maven中可以通过 &lt;modules&gt; 设置当前聚合工程所包含的子模块名称</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--聚合--&gt;</span>父工程（聚合工程）</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-pojo<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-utils<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>../tlias-web-management<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>l聚合工程中所包含的模块，在构建时，会自动根据模块间的依赖关系设置构建顺序，与聚合工程中模块的配置书写位置无关。</p>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
-<li>聚合用于快速构建项目</li>
-<li>继承用于简化依赖配置、统一管理依赖</li>
-</ul>
-<h3 id="相同点："><a href="#相同点：" class="headerlink" title="相同点："></a>相同点：</h3><ul>
-<li>聚合与继承的pom.xml文件打包方式均为pom，可以将两种关系制作到同一个pom文件中</li>
-<li>聚合与继承均属于设计型模块，并无实际的模块内容</li>
-</ul>
-<h3 id="不同点："><a href="#不同点：" class="headerlink" title="不同点："></a>不同点：</h3><ul>
-<li>聚合是在聚合工程中配置关系，聚合可以感知到参与聚合的模块有哪些</li>
-<li>继承是在子模块中配置关系，父模块无法感知哪些子模块继承了自己</li>
-</ul>
-<h1 id="私服"><a href="#私服" class="headerlink" title="私服"></a>私服</h1><p>私服是一种特殊的远程仓库，它是架设在局域网内的仓库服务，用来代理位于外部的中央仓库，用于解决团队内部的资源共享与资源同步问题。</p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201437607.png" alt="image-20240311201437607"></p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201447693.png" alt="image-20240311201447693"></p>
-<p><img src="/../blog_images/JavaWeb-Maven/image-20240311201500467.png" alt="image-20240311201500467"></p>
-]]></content>
-      <categories>
-        <category>JavaWeb</category>
-        <category>Maven高级</category>
       </categories>
   </entry>
   <entry>
@@ -1577,6 +1577,66 @@
       </categories>
   </entry>
   <entry>
+    <title>Java基础知识7-注解</title>
+    <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="注解概述"><a href="#注解概述" class="headerlink" title="注解概述"></a>注解概述</h1><h2 id="什么是注解？"><a href="#什么是注解？" class="headerlink" title="什么是注解？"></a>什么是注解？</h2><p>①注解是JDK1.5才引入的。</p>
+<p>②注解可以标注在 类上，属性上，方法上 等。</p>
+<p><strong>&#x3D;&#x3D;③注解可以做到在不改变代码逻辑的前提下在代码中嵌入补充信息。&#x3D;&#x3D;</strong></p>
+<h2 id="注解与注释"><a href="#注解与注释" class="headerlink" title="注解与注释"></a>注解与注释</h2><p>①注释：给程序员看的，编译器编译时会忽略注释。</p>
+<p><strong>②注解：给编译器看的，或给其它程序看的，程序根据有没有这个注解来决定不同的处理方式。</strong></p>
+<h2 id="注解的重要性"><a href="#注解的重要性" class="headerlink" title="注解的重要性"></a>注解的重要性</h2><p>①框架是如何实现的：框架 &#x3D; 反射 + 注解 + 设计模式。</p>
+<h1 id="Java预置注解"><a href="#Java预置注解" class="headerlink" title="Java预置注解"></a>Java预置注解</h1><h2 id="①-Deprecated"><a href="#①-Deprecated" class="headerlink" title="①@Deprecated"></a>①@Deprecated</h2><p>用来标记过时的元素，在编译阶段遇到这个注解时会发出提醒警告，告诉开发者正在调用一个<strong>过时的元素比如过时的类</strong>、<strong>过时的方法、过时的属性等。</strong></p>
+<p>forRemoval属性值表示如果是true就是已移除</p>
+<h2 id="②-Override"><a href="#②-Override" class="headerlink" title="②@Override"></a>②@Override</h2><p><strong>修饰实例方法，则该方法必须是个重写方法，否则就会编译失败。</strong></p>
+<h2 id="③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"><a href="#③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。" class="headerlink" title="③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"></a>③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;rawtypes&quot;)</span>：抑制未使用泛型的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;resource&quot;)</span>：抑制未关闭资源的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;deprecation&quot;)</span>：抑制使用了已过时资源时的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;all&quot;)</span>：抑制所有警告</span><br></pre></td></tr></table></figure>
+
+<h2 id="④-FunctionalInterface-“函数式接口”的注解"><a href="#④-FunctionalInterface-“函数式接口”的注解" class="headerlink" title="④@FunctionalInterface “函数式接口”的注解"></a>④@FunctionalInterface “函数式接口”的注解</h2><p>**&#x3D;&#x3D;“函数式接口”的注解，这个是 JDK1.8 版本引入的新特性。&#x3D;&#x3D;**：函数式接口 有且只能存在一个抽象方法</p>
+<p><strong>&#x3D;&#x3D;这个注解是专门用来标注接口的&#x3D;&#x3D;</strong></p>
+<p><strong>使用@FunctionalInterface标注的接口，则该接口就有且只能存在一个抽象方法，否则就会发生编译错误。</strong></p>
+<p><strong>（注意：接口中的默认方法或静态方法可以有多个。）</strong></p>
+<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223802741.png" alt="image-20240304223802741" style="zoom:50%;" />
+
+<h1 id="自定义注解Annotation"><a href="#自定义注解Annotation" class="headerlink" title="自定义注解Annotation"></a>自定义注解Annotation</h1><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223916674.png" alt="image-20240304223916674" style="zoom:50%;" />
+
+<p>注解的属性是以方法这种签名实现的</p>
+<h2 id="自定义注解（注解属于引用数据类型）"><a href="#自定义注解（注解属于引用数据类型）" class="headerlink" title="自定义注解（注解属于引用数据类型）"></a>自定义注解（注解属于引用数据类型）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223840432.png" alt="image-20240304223840432"></p>
+<p><strong>①使用 @interface 来定义注解。</strong></p>
+<p>②默认情况下注解可以出现在类上、方法上、属性上、构造方法上、方法参数上等……</p>
+<p>③所有自定义的注解，它的父类是：java.lang.annotation.Annotation</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.SOURCE) // @MyAnnotation 注解保留在源码中。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.CLASS) // @MyAnnotation 注解保留在字节码中，这是默认的行为，但不能被反射。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.RUNTIME) // @MyAnnotation 注解保留在字节码中，并且在运行时可以被反射。</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注解也可以定义属性"><a href="#注解也可以定义属性" class="headerlink" title="注解也可以定义属性"></a>注解也可以定义属性</h2><p>①注解也可以定义属性，不过属性定义时，属性名后面必须加一个小括号。</p>
+<p>②属性的类型只能是：</p>
+<p>byte，short，int，long，float，double，boolean，char</p>
+<p>String、Class、枚举类型、注解类型</p>
+<p>以上所有类型的一维数组形式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这是一个数据库信息的注解（自定义的注解）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DataBaseInfo &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注解也可以定义属性，但是属性定义时有要求，属性名后面必须添加：()</span></span><br><span class="line"><span class="comment">     * 语法：</span></span><br><span class="line"><span class="comment">     *      属性的类型 属性的名字();</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String <span class="title function_">driver</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>; <span class="comment">// 使用 default 关键字来指定属性的默认值。</span></span><br><span class="line">    String <span class="title function_">url</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">user</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">password</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">byte</span> <span class="title function_">b</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">short</span> <span class="title function_">s</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">i</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="title function_">l</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0L</span>;</span><br><span class="line">    <span class="type">float</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0F</span>;</span><br><span class="line">    <span class="type">double</span> <span class="title function_">d</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">flag</span><span class="params">()</span> <span class="keyword">default</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">char</span> <span class="title function_">c</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    Class <span class="title function_">clazz</span><span class="params">()</span> <span class="keyword">default</span> String.class;</span><br><span class="line">    Season <span class="title function_">season</span><span class="params">()</span> <span class="keyword">default</span> Season.SPRING;</span><br><span class="line">    MyAnnotation <span class="title function_">myAnnotation</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 可以是一维数组形式</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] names();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注解的属性的数据类型，必须是以上的几种类型，或者这几种类型的一维数组，不能是其他类型。</span></span><br><span class="line">    <span class="comment">//Object obj();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 语法规则：如果这个注解中有属性，那么使用的时候，必须给属性赋值。没有赋值则报错。</span></span><br><span class="line"><span class="comment">// 除非你定义注解的时候给属性指定了默认值。</span></span><br><span class="line"><span class="comment">// 怎么给属性赋值？语法：@DataBaseInfo(属性名=值,属性名=值,属性名=值,属性名=值,属性名=值)</span></span><br><span class="line"><span class="meta">@DataBaseInfo(</span></span><br><span class="line"><span class="meta">        //driver=&quot;oracle.jdbc.driver.OracleDriver&quot;,</span></span><br><span class="line"><span class="meta">        url=&quot;jdbc:mysql://localhost:3306/powernode&quot;,</span></span><br><span class="line"><span class="meta">        user=&quot;root&quot;,</span></span><br><span class="line"><span class="meta">        password=&quot;123456&quot;,</span></span><br><span class="line"><span class="meta">        myAnnotation=@MyAnnotation,</span></span><br><span class="line"><span class="meta">        names=&#123;&quot;zhangsan&quot;, &quot;lisi&quot;, &quot;wangwu&quot;&#125;,</span></span><br><span class="line"><span class="meta">        flag=true,</span></span><br><span class="line"><span class="meta">        i=100,</span></span><br><span class="line"><span class="meta">        clazz=Integer.class,</span></span><br><span class="line"><span class="meta">        season=Season.WINTER)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">connDB</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="注解的使用"><a href="#注解的使用" class="headerlink" title="注解的使用"></a>注解的使用</h2><p>①注解在使用时必须给属性赋值，除非你使用了default关键字为属性指定了默认值。</p>
+<p><strong>②如果属性只有一个，并且属性名是value时，使用注解时value可以省略不写。</strong></p>
+<p><strong>③如果属性是一个数组，使用注解时，数组值只有一个，数组的大括号是可以省略的。</strong></p>
+<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>①用来标注注解的注解叫做元注解。(也是JDK内置的注解。)</p>
+<p>②常用的元注解：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Retention：设置注解的保持性</span><br><span class="line"></span><br><span class="line">	@Target：设置注解可以出现的位置</span><br><span class="line"></span><br><span class="line">	@Documented：设置注解是否可以生成到帮助文档中</span><br><span class="line"></span><br><span class="line">	@Inherited：设置注解是否支持继承</span><br><span class="line"></span><br><span class="line">	@Repeatable：设置注解在某一个元素上是否可以重复使用（Java8的新特性。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>@Retention</p>
+<p>①Retention英文意思有保留、保持的意思，它表示注解存在阶段是保留在源代码（编译期），字节码（类加载）或者运行时（JVM中运行）。</p>
+<p>②在@Retention注解中使用枚举RetentionPolicy来表示注解保留时期。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span>：注解仅存在于源代码中，在字节码文件中不包含。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.CLASS)</span>：注解在字节码文件中存在，但运行时无法获得（默认）。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span>：注解在字节码文件中存在，且运行时可通过反射获取。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java体系知识</category>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java基础知识6-反射</title>
     <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%866-%E5%8F%8D%E5%B0%84/</url>
     <content><![CDATA[<h1 id="反射机制概述"><a href="#反射机制概述" class="headerlink" title="反射机制概述"></a>反射机制概述</h1><blockquote>
@@ -1760,66 +1820,6 @@
 <h2 id="通过反射获取构造函数的泛型"><a href="#通过反射获取构造函数的泛型" class="headerlink" title="通过反射获取构造函数的泛型"></a>通过反射获取构造函数的泛型</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">User</span><span class="params">(Map&lt;String ,Integer&gt; map)</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class&lt;User&gt; userClass = User.class;</span><br><span class="line">Constructor&lt;User&gt; con = userClass.getDeclaredConstructor(Map.class);</span><br><span class="line">Type[] genericParameterTypes = con.getGenericParameterTypes();</span><br><span class="line"><span class="keyword">for</span>(Type g :genericParameterTypes)&#123;</span><br><span class="line">    <span class="keyword">if</span>(g <span class="keyword">instanceof</span> ParameterizedType)&#123;</span><br><span class="line">        <span class="type">ParameterizedType</span> <span class="variable">parameterizedType</span> <span class="operator">=</span> (ParameterizedType) g;</span><br><span class="line">        Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();</span><br><span class="line">        <span class="keyword">for</span>(Type a : actualTypeArguments)&#123;</span><br><span class="line">            System.out.println(a.getTypeName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Java体系知识</category>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java基础知识7-注解</title>
-    <url>/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<h1 id="注解概述"><a href="#注解概述" class="headerlink" title="注解概述"></a>注解概述</h1><h2 id="什么是注解？"><a href="#什么是注解？" class="headerlink" title="什么是注解？"></a>什么是注解？</h2><p>①注解是JDK1.5才引入的。</p>
-<p>②注解可以标注在 类上，属性上，方法上 等。</p>
-<p><strong>&#x3D;&#x3D;③注解可以做到在不改变代码逻辑的前提下在代码中嵌入补充信息。&#x3D;&#x3D;</strong></p>
-<h2 id="注解与注释"><a href="#注解与注释" class="headerlink" title="注解与注释"></a>注解与注释</h2><p>①注释：给程序员看的，编译器编译时会忽略注释。</p>
-<p><strong>②注解：给编译器看的，或给其它程序看的，程序根据有没有这个注解来决定不同的处理方式。</strong></p>
-<h2 id="注解的重要性"><a href="#注解的重要性" class="headerlink" title="注解的重要性"></a>注解的重要性</h2><p>①框架是如何实现的：框架 &#x3D; 反射 + 注解 + 设计模式。</p>
-<h1 id="Java预置注解"><a href="#Java预置注解" class="headerlink" title="Java预置注解"></a>Java预置注解</h1><h2 id="①-Deprecated"><a href="#①-Deprecated" class="headerlink" title="①@Deprecated"></a>①@Deprecated</h2><p>用来标记过时的元素，在编译阶段遇到这个注解时会发出提醒警告，告诉开发者正在调用一个<strong>过时的元素比如过时的类</strong>、<strong>过时的方法、过时的属性等。</strong></p>
-<p>forRemoval属性值表示如果是true就是已移除</p>
-<h2 id="②-Override"><a href="#②-Override" class="headerlink" title="②@Override"></a>②@Override</h2><p><strong>修饰实例方法，则该方法必须是个重写方法，否则就会编译失败。</strong></p>
-<h2 id="③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"><a href="#③-SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。" class="headerlink" title="③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。"></a>③@SuppressWarnings（抑制警告的注解）：在实际开发中，建议尽量不要忽略警告，而是真正的去解决警告。</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;rawtypes&quot;)</span>：抑制未使用泛型的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;resource&quot;)</span>：抑制未关闭资源的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;deprecation&quot;)</span>：抑制使用了已过时资源时的警告</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;all&quot;)</span>：抑制所有警告</span><br></pre></td></tr></table></figure>
-
-<h2 id="④-FunctionalInterface-“函数式接口”的注解"><a href="#④-FunctionalInterface-“函数式接口”的注解" class="headerlink" title="④@FunctionalInterface “函数式接口”的注解"></a>④@FunctionalInterface “函数式接口”的注解</h2><p>**&#x3D;&#x3D;“函数式接口”的注解，这个是 JDK1.8 版本引入的新特性。&#x3D;&#x3D;**：函数式接口 有且只能存在一个抽象方法</p>
-<p><strong>&#x3D;&#x3D;这个注解是专门用来标注接口的&#x3D;&#x3D;</strong></p>
-<p><strong>使用@FunctionalInterface标注的接口，则该接口就有且只能存在一个抽象方法，否则就会发生编译错误。</strong></p>
-<p><strong>（注意：接口中的默认方法或静态方法可以有多个。）</strong></p>
-<img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223802741.png" alt="image-20240304223802741" style="zoom:50%;" />
-
-<h1 id="自定义注解Annotation"><a href="#自定义注解Annotation" class="headerlink" title="自定义注解Annotation"></a>自定义注解Annotation</h1><img src="../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223916674.png" alt="image-20240304223916674" style="zoom:50%;" />
-
-<p>注解的属性是以方法这种签名实现的</p>
-<h2 id="自定义注解（注解属于引用数据类型）"><a href="#自定义注解（注解属于引用数据类型）" class="headerlink" title="自定义注解（注解属于引用数据类型）"></a>自定义注解（注解属于引用数据类型）</h2><p><img src="/../blog_images/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%867-%E6%B3%A8%E8%A7%A3/image-20240304223840432.png" alt="image-20240304223840432"></p>
-<p><strong>①使用 @interface 来定义注解。</strong></p>
-<p>②默认情况下注解可以出现在类上、方法上、属性上、构造方法上、方法参数上等……</p>
-<p>③所有自定义的注解，它的父类是：java.lang.annotation.Annotation</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.SOURCE) // @MyAnnotation 注解保留在源码中。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.CLASS) // @MyAnnotation 注解保留在字节码中，这是默认的行为，但不能被反射。</span></span><br><span class="line"><span class="comment">//@Retention(value= RetentionPolicy.RUNTIME) // @MyAnnotation 注解保留在字节码中，并且在运行时可以被反射。</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MyAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@MyAnnotation</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@MyAnnotation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="注解也可以定义属性"><a href="#注解也可以定义属性" class="headerlink" title="注解也可以定义属性"></a>注解也可以定义属性</h2><p>①注解也可以定义属性，不过属性定义时，属性名后面必须加一个小括号。</p>
-<p>②属性的类型只能是：</p>
-<p>byte，short，int，long，float，double，boolean，char</p>
-<p>String、Class、枚举类型、注解类型</p>
-<p>以上所有类型的一维数组形式</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 这是一个数据库信息的注解（自定义的注解）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> DataBaseInfo &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注解也可以定义属性，但是属性定义时有要求，属性名后面必须添加：()</span></span><br><span class="line"><span class="comment">     * 语法：</span></span><br><span class="line"><span class="comment">     *      属性的类型 属性的名字();</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String <span class="title function_">driver</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>; <span class="comment">// 使用 default 关键字来指定属性的默认值。</span></span><br><span class="line">    String <span class="title function_">url</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">user</span><span class="params">()</span>;</span><br><span class="line">    String <span class="title function_">password</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">byte</span> <span class="title function_">b</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">short</span> <span class="title function_">s</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">i</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="title function_">l</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0L</span>;</span><br><span class="line">    <span class="type">float</span> <span class="title function_">f</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0F</span>;</span><br><span class="line">    <span class="type">double</span> <span class="title function_">d</span><span class="params">()</span> <span class="keyword">default</span> <span class="number">0.0</span>;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">flag</span><span class="params">()</span> <span class="keyword">default</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="type">char</span> <span class="title function_">c</span><span class="params">()</span> <span class="keyword">default</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    Class <span class="title function_">clazz</span><span class="params">()</span> <span class="keyword">default</span> String.class;</span><br><span class="line">    Season <span class="title function_">season</span><span class="params">()</span> <span class="keyword">default</span> Season.SPRING;</span><br><span class="line">    MyAnnotation <span class="title function_">myAnnotation</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 可以是一维数组形式</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    String[] names();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注解的属性的数据类型，必须是以上的几种类型，或者这几种类型的一维数组，不能是其他类型。</span></span><br><span class="line">    <span class="comment">//Object obj();</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 语法规则：如果这个注解中有属性，那么使用的时候，必须给属性赋值。没有赋值则报错。</span></span><br><span class="line"><span class="comment">// 除非你定义注解的时候给属性指定了默认值。</span></span><br><span class="line"><span class="comment">// 怎么给属性赋值？语法：@DataBaseInfo(属性名=值,属性名=值,属性名=值,属性名=值,属性名=值)</span></span><br><span class="line"><span class="meta">@DataBaseInfo(</span></span><br><span class="line"><span class="meta">        //driver=&quot;oracle.jdbc.driver.OracleDriver&quot;,</span></span><br><span class="line"><span class="meta">        url=&quot;jdbc:mysql://localhost:3306/powernode&quot;,</span></span><br><span class="line"><span class="meta">        user=&quot;root&quot;,</span></span><br><span class="line"><span class="meta">        password=&quot;123456&quot;,</span></span><br><span class="line"><span class="meta">        myAnnotation=@MyAnnotation,</span></span><br><span class="line"><span class="meta">        names=&#123;&quot;zhangsan&quot;, &quot;lisi&quot;, &quot;wangwu&quot;&#125;,</span></span><br><span class="line"><span class="meta">        flag=true,</span></span><br><span class="line"><span class="meta">        i=100,</span></span><br><span class="line"><span class="meta">        clazz=Integer.class,</span></span><br><span class="line"><span class="meta">        season=Season.WINTER)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">connDB</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="注解的使用"><a href="#注解的使用" class="headerlink" title="注解的使用"></a>注解的使用</h2><p>①注解在使用时必须给属性赋值，除非你使用了default关键字为属性指定了默认值。</p>
-<p><strong>②如果属性只有一个，并且属性名是value时，使用注解时value可以省略不写。</strong></p>
-<p><strong>③如果属性是一个数组，使用注解时，数组值只有一个，数组的大括号是可以省略的。</strong></p>
-<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>①用来标注注解的注解叫做元注解。(也是JDK内置的注解。)</p>
-<p>②常用的元注解：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Retention：设置注解的保持性</span><br><span class="line"></span><br><span class="line">	@Target：设置注解可以出现的位置</span><br><span class="line"></span><br><span class="line">	@Documented：设置注解是否可以生成到帮助文档中</span><br><span class="line"></span><br><span class="line">	@Inherited：设置注解是否支持继承</span><br><span class="line"></span><br><span class="line">	@Repeatable：设置注解在某一个元素上是否可以重复使用（Java8的新特性。</span><br></pre></td></tr></table></figure>
-
-
-
-<p>@Retention</p>
-<p>①Retention英文意思有保留、保持的意思，它表示注解存在阶段是保留在源代码（编译期），字节码（类加载）或者运行时（JVM中运行）。</p>
-<p>②在@Retention注解中使用枚举RetentionPolicy来表示注解保留时期。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.SOURCE)</span>：注解仅存在于源代码中，在字节码文件中不包含。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.CLASS)</span>：注解在字节码文件中存在，但运行时无法获得（默认）。</span><br><span class="line"></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span>：注解在字节码文件中存在，且运行时可通过反射获取。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
         <category>Java体系知识</category>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Linux下安装使用Redis  1. 打开&#x2F;关闭redis命令1234redis-cli -a 123456 -p 6379quit&#x2F;&#x2F;退出redis-cli -a 123456 shutdown&#x2F;&#x2F;单实例关闭 redis-cli -a 123456 shutdown &#x2F;&#x2F;多实例关闭  Redis的十大数据结构1. String 字符串2.List 列表3.Hash哈希表4.Set集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://example.com/2024/03/31/Redis/index.html">
+<meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="Linux下安装使用Redis  1. 打开&#x2F;关闭redis命令1234redis-cli -a 123456 -p 6379quit&#x2F;&#x2F;退出redis-cli -a 123456 shutdown&#x2F;&#x2F;单实例关闭 redis-cli -a 123456 shutdown &#x2F;&#x2F;多实例关闭  Redis的十大数据结构1. String 字符串2.List 列表3.Hash哈希表4.Set集合">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331183148156.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331183151856.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331174848465.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331181959700.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331182938441.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331183123246.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331183849993.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331184034033.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331194044855.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331194106413.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331194142112.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331194937034.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331195300058.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331201214038.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331201351026.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331201559339.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331201925609.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331202135633.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331202408163.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331202503414.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331202637152.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331203248639.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331203424491.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331203632378.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331203807798.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331203900374.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331204001831.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331204104566.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331204313354.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331204340967.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331204227917.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331204829210.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331205105464.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331205144592.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis/image-20240331205332306.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331205619186.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331205705964.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis/image-20240331205758175.png">
+<meta property="article:published_time" content="2024-03-31T09:13:55.000Z">
+<meta property="article:modified_time" content="2024-03-31T13:11:39.917Z">
+<meta property="article:author" content="lolo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog_images/Redis/image-20240331183148156.png">
+
+
+<link rel="canonical" href="http://example.com/2024/03/31/Redis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/03/31/Redis/","path":"2024/03/31/Redis/","title":"Redis"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Redis | Loloooo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Loloooo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux%E4%B8%8B%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8Redis"><span class="nav-number">1.</span> <span class="nav-text">Linux下安装使用Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%89%93%E5%BC%80-%E5%85%B3%E9%97%ADredis%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">1. 打开&#x2F;关闭redis命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E7%9A%84%E5%8D%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">Redis的十大数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-String-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.1.</span> <span class="nav-text">1. String 字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-List-%E5%88%97%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">2.List 列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Hash%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">2.3.</span> <span class="nav-text">3.Hash哈希表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Set%E9%9B%86%E5%90%88"><span class="nav-number">2.4.</span> <span class="nav-text">4.Set集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-ZSet-redis%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88"><span class="nav-number">2.5.</span> <span class="nav-text">5.ZSet redis有序集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-GEO-%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4"><span class="nav-number">2.6.</span> <span class="nav-text">6.GEO 地理空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-HyperLogLog-%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="nav-number">2.7.</span> <span class="nav-text">7.HyperLogLog 基数统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-bitmap%E4%BD%8D%E5%9B%BE"><span class="nav-number">2.8.</span> <span class="nav-text">8.bitmap位图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-bitfield%E4%BD%8D%E5%9F%9F"><span class="nav-number">2.9.</span> <span class="nav-text">9.bitfield位域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Stream%E6%B5%81"><span class="nav-number">2.10.</span> <span class="nav-text">10.Stream流</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">Redis基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">3.1.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B8%B8%E7%94%A8"><span class="nav-number">3.1.1.</span> <span class="nav-text">最常用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%97%B6%E8%AE%BE%E7%BD%AE-%E8%8E%B7%E5%8F%96%E5%A4%9A%E4%B8%AA%E9%94%AE%E5%80%BC"><span class="nav-number">3.1.2.</span> <span class="nav-text">同时设置&#x2F;获取多个键值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%8C%BA%E9%97%B4%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84%E5%80%BC"><span class="nav-number">3.1.3.</span> <span class="nav-text">获取指定区间范围内的值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GETRANGE-k1-0-1"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">GETRANGE k1 0 -1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SETRANGE-k1-xxyy"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">SETRANGE k1 xxyy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E7%9A%84%E5%A2%9E%E5%87%8F"><span class="nav-number">3.1.4.</span> <span class="nav-text">数值的增减</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#INCR-K1"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">INCR K1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DECR"><span class="nav-number">3.1.4.2.</span> <span class="nav-text">DECR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DECRBY-k1-5"><span class="nav-number">3.1.4.3.</span> <span class="nav-text">DECRBY k1 5</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="nav-number">3.1.5.</span> <span class="nav-text">分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setex-k1-15-hello"><span class="nav-number">3.1.5.1.</span> <span class="nav-text">setex k1 15 hello</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getset"><span class="nav-number">3.1.6.</span> <span class="nav-text">getset</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List-Redis-%E5%88%97%E8%A1%A8"><span class="nav-number">3.2.</span> <span class="nav-text">List Redis 列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lpush-rpush-lrange"><span class="nav-number">3.2.1.</span> <span class="nav-text">lpush&#x2F;rpush&#x2F;lrange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lpop-rpop"><span class="nav-number">3.2.2.</span> <span class="nav-text">lpop&#x2F;rpop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lindex-%E6%8C%89%E7%85%A7%E7%B4%A2%E5%BC%95%E7%9A%84%E4%B8%8B%E6%A0%87%E8%8E%B7%E5%BE%97%E5%85%83%E7%B4%A0%EF%BC%88%E4%BB%8E%E4%B8%8A%E8%87%B3%E4%B8%8B%EF%BC%89"><span class="nav-number">3.2.3.</span> <span class="nav-text">lindex 按照索引的下标获得元素（从上至下）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#llen-%E8%8E%B7%E5%8F%96%E5%88%97%E8%A1%A8%E4%B8%AD%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%AA%E6%95%B0"><span class="nav-number">3.2.4.</span> <span class="nav-text">llen 获取列表中元素的个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lrem-key-%E6%95%B0%E5%AD%97N%E7%BB%99%E5%AE%9A%E5%80%BCv1-%EF%BC%88%E5%88%A0%E9%99%A4N%E4%B8%AA%E5%80%BC%E7%AD%89%E4%BA%8EV1%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%89%E3%80%81"><span class="nav-number">3.2.5.</span> <span class="nav-text">lrem key 数字N给定值v1 （删除N个值等于V1的元素）、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ltrim-key-%E5%BC%80%E5%A7%8Bindex-%E7%BB%93%E6%9D%9Findex-%EF%BC%8C%E6%88%AA%E5%8F%96%E6%8C%87%E5%AE%9A%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84%E5%80%BC%E5%86%8D%E8%B5%8B%E5%80%BC%E7%BB%99key"><span class="nav-number">3.2.6.</span> <span class="nav-text">ltrim key 开始index 结束index ，截取指定范围内的值再赋值给key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpoplpush-%E6%BA%90%E5%88%97%E8%A1%A8-%E7%9B%AE%E7%9A%84%E5%88%97%E8%A1%A8"><span class="nav-number">3.2.7.</span> <span class="nav-text">rpoplpush 源列表 目的列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lset-key-index-value"><span class="nav-number">3.2.8.</span> <span class="nav-text">lset key index value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linset-key-before-after-%E5%B7%B2%E6%9C%89%E7%9A%84%E5%80%BC%E6%8F%92%E5%85%A5%E6%96%B0%E7%9A%84%E5%80%BC"><span class="nav-number">3.2.9.</span> <span class="nav-text">linset key before &#x2F;after 已有的值插入新的值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash%EF%BC%88%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">Hash（）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hset-hget-hmset-hmget-hgetall-hdel"><span class="nav-number">3.3.1.</span> <span class="nav-text">hset&#x2F;hget&#x2F;hmset&#x2F;hmget&#x2F;hgetall&#x2F;hdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hlen-%E8%8E%B7%E5%8F%96%E6%9F%90%E4%B8%AAkey%E4%B8%AD%E7%9A%84%E5%85%A8%E9%83%A8%E7%9A%84%E6%95%B0%E9%87%8F"><span class="nav-number">3.3.2.</span> <span class="nav-text">hlen 获取某个key中的全部的数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexists-key-%E5%88%A4%E6%96%AD%E5%9C%A8key%E9%87%8C%E9%9D%A2%E7%9A%84%E6%9F%90%E4%B8%AA%E5%80%BC%E7%9A%84key"><span class="nav-number">3.3.3.</span> <span class="nav-text">hexists key 判断在key里面的某个值的key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hkeys-hvals"><span class="nav-number">3.3.4.</span> <span class="nav-text">hkeys&#x2F;hvals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hincrby-hincrbyfloat"><span class="nav-number">3.3.5.</span> <span class="nav-text">hincrby&#x2F;hincrbyfloat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hsetnx-%EF%BC%88%E5%B0%B1%E6%98%AFset%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.3.6.</span> <span class="nav-text">hsetnx （就是set的性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-number">3.4.</span> <span class="nav-text">set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SADD-%E8%87%AA%E5%8A%A8%E5%8E%BB%E9%87%8D"><span class="nav-number">3.4.1.</span> <span class="nav-text">SADD 自动去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMEMEBERS-set1%E9%81%8D%E5%8E%86"><span class="nav-number">3.4.2.</span> <span class="nav-text">SMEMEBERS set1遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97"><span class="nav-number">3.4.3.</span> <span class="nav-text">集合运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zset%EF%BC%88sorted-set-%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88"><span class="nav-number">3.5.</span> <span class="nav-text">Zset（sorted set)有序集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bitmap"><span class="nav-number">3.6.</span> <span class="nav-text">bitmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HyperLogLog"><span class="nav-number">3.7.</span> <span class="nav-text">HyperLogLog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GEO"><span class="nav-number">3.8.</span> <span class="nav-text">GEO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stream%EF%BC%88redis-%E7%89%88%E6%9C%AC%E7%9A%84MQ%EF%BC%89%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">3.9.</span> <span class="nav-text">Stream（redis 版本的MQ）消息中间件</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lolo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/31/Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Redis | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-31 17:13:55 / 修改时间：21:11:39" itemprop="dateCreated datePublished" datetime="2024-03-31T17:13:55+08:00">2024-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Linux下安装使用Redis"><a href="#Linux下安装使用Redis" class="headerlink" title="Linux下安装使用Redis"></a>Linux下安装使用Redis</h1><p><img src="/../blog_images/Redis/image-20240331183148156.png" alt="image-20240331183148156"></p>
+<p><img src="/../blog_images/Redis/image-20240331183151856.png" alt="image-20240331183151856"></p>
+<h2 id="1-打开-关闭redis命令"><a href="#1-打开-关闭redis命令" class="headerlink" title="1. 打开&#x2F;关闭redis命令"></a>1. 打开&#x2F;关闭redis命令</h2><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -a <span class="number">123456</span> -p <span class="number">6379</span></span><br><span class="line">quit//退出</span><br><span class="line">redis-cli -a <span class="number">123456</span> shutdown//单实例关闭</span><br><span class="line"> redis-cli -a <span class="number">123456</span> shutdown //多实例关闭</span><br></pre></td></tr></table></figure>
+
+<h1 id="Redis的十大数据结构"><a href="#Redis的十大数据结构" class="headerlink" title="Redis的十大数据结构"></a>Redis的十大数据结构</h1><h2 id="1-String-字符串"><a href="#1-String-字符串" class="headerlink" title="1. String 字符串"></a>1. String 字符串</h2><h2 id="2-List-列表"><a href="#2-List-列表" class="headerlink" title="2.List 列表"></a>2.List 列表</h2><h2 id="3-Hash哈希表"><a href="#3-Hash哈希表" class="headerlink" title="3.Hash哈希表"></a>3.Hash哈希表</h2><h2 id="4-Set集合"><a href="#4-Set集合" class="headerlink" title="4.Set集合"></a>4.Set集合</h2><h2 id="5-ZSet-redis有序集合"><a href="#5-ZSet-redis有序集合" class="headerlink" title="5.ZSet redis有序集合"></a>5.ZSet redis有序集合</h2><h2 id="6-GEO-地理空间"><a href="#6-GEO-地理空间" class="headerlink" title="6.GEO 地理空间"></a>6.GEO 地理空间</h2><h2 id="7-HyperLogLog-基数统计"><a href="#7-HyperLogLog-基数统计" class="headerlink" title="7.HyperLogLog 基数统计"></a>7.HyperLogLog 基数统计</h2><h2 id="8-bitmap位图"><a href="#8-bitmap位图" class="headerlink" title="8.bitmap位图"></a>8.bitmap位图</h2><h2 id="9-bitfield位域"><a href="#9-bitfield位域" class="headerlink" title="9.bitfield位域"></a>9.bitfield位域</h2><h2 id="10-Stream流"><a href="#10-Stream流" class="headerlink" title="10.Stream流"></a>10.Stream流</h2><h1 id="Redis基础操作"><a href="#Redis基础操作" class="headerlink" title="Redis基础操作"></a>Redis基础操作</h1><p><img src="/../blog_images/Redis/image-20240331174848465.png" alt="image-20240331174848465"></p>
+<p>del key 是原子的</p>
+<p>unlink key 是非阻塞删除</p>
+<p>redis默认是16个库，默认使用的是0号库</p>
+<p>keepTTL</p>
+<p><img src="/../blog_images/Redis/image-20240331181959700.png" alt="image-20240331181959700"></p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="最常用"><a href="#最常用" class="headerlink" title="最常用"></a>最常用</h3><p>set、get、ttl</p>
+<h3 id="同时设置-获取多个键值"><a href="#同时设置-获取多个键值" class="headerlink" title="同时设置&#x2F;获取多个键值"></a>同时设置&#x2F;获取多个键值</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MSET Key value [key value]</span><br><span class="line">MGET key [key ...]</span><br><span class="line">mset/mget/msetnx</span><br><span class="line">msetnx:不存在的时候才创建，此外，这个命令有点像事务的完整性，只有全部成功才会创建</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Redis/image-20240331182938441.png" alt="image-20240331182938441"></p>
+<p><img src="/../blog_images/Redis/image-20240331183123246.png" alt="image-20240331183123246"></p>
+<h3 id="获取指定区间范围内的值"><a href="#获取指定区间范围内的值" class="headerlink" title="获取指定区间范围内的值"></a>获取指定区间范围内的值</h3><h4 id="GETRANGE-k1-0-1"><a href="#GETRANGE-k1-0-1" class="headerlink" title="GETRANGE k1 0 -1"></a>GETRANGE k1 0 -1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GETRANGE k1 0 -1</span><br><span class="line">// 对于string就是获得子串 类似于substring</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Redis/image-20240331183849993.png" alt="image-20240331183849993"></p>
+<h4 id="SETRANGE-k1-xxyy"><a href="#SETRANGE-k1-xxyy" class="headerlink" title="SETRANGE k1 xxyy"></a>SETRANGE k1 xxyy</h4><p>从第一位开始， 用‘xxyy’全部覆盖</p>
+<p><img src="/../blog_images/Redis/image-20240331184034033.png" alt="image-20240331184034033"></p>
+<h3 id="数值的增减"><a href="#数值的增减" class="headerlink" title="数值的增减"></a>数值的增减</h3><h4 id="INCR-K1"><a href="#INCR-K1" class="headerlink" title="INCR K1"></a>INCR K1</h4><p>表示自增1</p>
+<h4 id="DECR"><a href="#DECR" class="headerlink" title="DECR"></a>DECR</h4><p>表示自减</p>
+<h4 id="DECRBY-k1-5"><a href="#DECRBY-k1-5" class="headerlink" title="DECRBY k1 5"></a>DECRBY k1 5</h4><p><img src="/../blog_images/Redis/image-20240331194044855.png" alt="image-20240331194044855"></p>
+<p><img src="/../blog_images/Redis/image-20240331194106413.png" alt="image-20240331194106413"></p>
+<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><p><img src="/../blog_images/Redis/image-20240331194142112.png" alt="image-20240331194142112"></p>
+<p>之前的sync&#x2F;lock&#x2F;unlock 只能在<strong>一个jvm</strong>中保证加锁，</p>
+<p><img src="/../blog_images/Redis/image-20240331194937034.png" alt="image-20240331194937034"></p>
+<h4 id="setex-k1-15-hello"><a href="#setex-k1-15-hello" class="headerlink" title="setex k1 15 hello"></a>setex k1 15 hello</h4><p>设置 key 过期时间 value</p>
+<img src="../blog_images/Redis/image-20240331195300058.png" alt="image-20240331195300058" style="zoom:50%;" />
+
+<h3 id="getset"><a href="#getset" class="headerlink" title="getset"></a>getset</h3><p>先get再set</p>
+<h2 id="List-Redis-列表"><a href="#List-Redis-列表" class="headerlink" title="List Redis 列表"></a>List Redis 列表</h2><p>底层是一个&#x3D;&#x3D;双端链表&#x3D;&#x3D;的结构，大概有40多个亿，主要功能有push&#x2F;pop等，一般用在栈、队列、消息队列等场景中。</p>
+<p>left和right都可以加入</p>
+<p>如果键不存在，就创建一个新的连别</p>
+<p>如果键存在，就新增内容</p>
+<p>如果值全部被移除了，对应的键也会消失</p>
+<blockquote>
+<p>对于两端的操作性能是很强的，对于索引下标的操作中间的节点性能就会比较差</p>
+</blockquote>
+<h3 id="lpush-rpush-lrange"><a href="#lpush-rpush-lrange" class="headerlink" title="lpush&#x2F;rpush&#x2F;lrange"></a>lpush&#x2F;rpush&#x2F;lrange</h3><p><img src="/../blog_images/Redis/image-20240331201214038.png" alt="image-20240331201214038"></p>
+<h3 id="lpop-rpop"><a href="#lpop-rpop" class="headerlink" title="lpop&#x2F;rpop"></a>lpop&#x2F;rpop</h3><p><img src="/../blog_images/Redis/image-20240331201351026.png" alt="image-20240331201351026"></p>
+<h3 id="lindex-按照索引的下标获得元素（从上至下）"><a href="#lindex-按照索引的下标获得元素（从上至下）" class="headerlink" title="lindex 按照索引的下标获得元素（从上至下）"></a>lindex 按照索引的下标获得元素（从上至下）</h3><p><img src="/../blog_images/Redis/image-20240331201559339.png" alt="image-20240331201559339"></p>
+<h3 id="llen-获取列表中元素的个数"><a href="#llen-获取列表中元素的个数" class="headerlink" title="llen 获取列表中元素的个数"></a>llen 获取列表中元素的个数</h3><h3 id="lrem-key-数字N给定值v1-（删除N个值等于V1的元素）、"><a href="#lrem-key-数字N给定值v1-（删除N个值等于V1的元素）、" class="headerlink" title="lrem key 数字N给定值v1 （删除N个值等于V1的元素）、"></a>lrem key 数字N给定值v1 （删除N个值等于V1的元素）、</h3><img src="../blog_images/Redis/image-20240331201925609.png" alt="image-20240331201925609" style="zoom:50%;" />
+
+<p>删除list1里面三个值为1的元素</p>
+<h3 id="ltrim-key-开始index-结束index-，截取指定范围内的值再赋值给key"><a href="#ltrim-key-开始index-结束index-，截取指定范围内的值再赋值给key" class="headerlink" title="ltrim key 开始index 结束index ，截取指定范围内的值再赋值给key"></a>ltrim key 开始index 结束index ，截取指定范围内的值再赋值给key</h3><p><img src="/../blog_images/Redis/image-20240331202135633.png" alt="image-20240331202135633"></p>
+<h3 id="rpoplpush-源列表-目的列表"><a href="#rpoplpush-源列表-目的列表" class="headerlink" title="rpoplpush 源列表 目的列表"></a>rpoplpush 源列表 目的列表</h3><p><img src="/../blog_images/Redis/image-20240331202408163.png" alt="image-20240331202408163"></p>
+<h3 id="lset-key-index-value"><a href="#lset-key-index-value" class="headerlink" title="lset key index value"></a>lset key index value</h3><p><img src="/../blog_images/Redis/image-20240331202503414.png" alt="image-20240331202503414"></p>
+<h3 id="linset-key-before-after-已有的值插入新的值"><a href="#linset-key-before-after-已有的值插入新的值" class="headerlink" title="linset key before &#x2F;after 已有的值插入新的值"></a>linset key before &#x2F;after 已有的值插入新的值</h3><p><img src="/../blog_images/Redis/image-20240331202637152.png" alt="image-20240331202637152"></p>
+<h2 id="Hash（）"><a href="#Hash（）" class="headerlink" title="Hash（）"></a>Hash（）</h2><p>kv键值对的结构不变，但是v是一个新的键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String , Map&lt;Object,Object&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="hset-hget-hmset-hmget-hgetall-hdel"><a href="#hset-hget-hmset-hmget-hgetall-hdel" class="headerlink" title="hset&#x2F;hget&#x2F;hmset&#x2F;hmget&#x2F;hgetall&#x2F;hdel"></a>hset&#x2F;hget&#x2F;hmset&#x2F;hmget&#x2F;hgetall&#x2F;hdel</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hset key 字段1 value1 字段2 value2 字段3 value3...</span><br></pre></td></tr></table></figure>
+
+<img src="../blog_images/Redis/image-20240331203248639.png" alt="image-20240331203248639" style="zoom:33%;" />
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">没有什么区别</span><br><span class="line">hmset/hmget</span><br></pre></td></tr></table></figure>
+
+<img src="../blog_images/Redis/image-20240331203424491.png" alt="image-20240331203424491" style="zoom:33%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hgetall/hdel</span><br></pre></td></tr></table></figure>
+
+<p>hgetall类似于遍历，hdel就是删掉</p>
+<img src="../blog_images/Redis/image-20240331203632378.png" alt="image-20240331203632378" style="zoom:50%;" />
+
+<h3 id="hlen-获取某个key中的全部的数量"><a href="#hlen-获取某个key中的全部的数量" class="headerlink" title="hlen 获取某个key中的全部的数量"></a>hlen 获取某个key中的全部的数量</h3><img src="../blog_images/Redis/image-20240331203807798.png" alt="image-20240331203807798" style="zoom:33%;" />
+
+<h3 id="hexists-key-判断在key里面的某个值的key"><a href="#hexists-key-判断在key里面的某个值的key" class="headerlink" title="hexists key 判断在key里面的某个值的key"></a>hexists key 判断在key里面的某个值的key</h3><p><img src="/../blog_images/Redis/image-20240331203900374.png" alt="image-20240331203900374"></p>
+<h3 id="hkeys-hvals"><a href="#hkeys-hvals" class="headerlink" title="hkeys&#x2F;hvals"></a>hkeys&#x2F;hvals</h3><p>罗列key和value</p>
+<img src="../blog_images/Redis/image-20240331204001831.png" alt="image-20240331204001831" style="zoom:33%;" />
+
+<h3 id="hincrby-hincrbyfloat"><a href="#hincrby-hincrbyfloat" class="headerlink" title="hincrby&#x2F;hincrbyfloat"></a>hincrby&#x2F;hincrbyfloat</h3><p>增加</p>
+<p><img src="/../blog_images/Redis/image-20240331204104566.png" alt="image-20240331204104566"></p>
+<p><img src="/../blog_images/Redis/image-20240331204313354.png" alt="image-20240331204313354"></p>
+<h3 id="hsetnx-（就是set的性质"><a href="#hsetnx-（就是set的性质" class="headerlink" title="hsetnx （就是set的性质"></a>hsetnx （就是set的性质</h3><p><img src="/../blog_images/Redis/image-20240331204340967.png" alt="image-20240331204340967"></p>
+<img src="../blog_images/Redis/image-20240331204227917.png" alt="image-20240331204227917" style="zoom:50%;" />
+
+<p>购物车</p>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>单个值可以有多个value ，但是每个值都不能重复</p>
+<p><img src="/../blog_images/Redis/image-20240331204829210.png" alt="image-20240331204829210"></p>
+<h3 id="SADD-自动去重"><a href="#SADD-自动去重" class="headerlink" title="SADD 自动去重"></a>SADD 自动去重</h3><p><img src="/../blog_images/Redis/image-20240331205105464.png" alt="image-20240331205105464"></p>
+<h3 id="SMEMEBERS-set1遍历"><a href="#SMEMEBERS-set1遍历" class="headerlink" title="SMEMEBERS set1遍历"></a>SMEMEBERS set1遍历</h3><img src="../blog_images/Redis/image-20240331205144592.png" alt="image-20240331205144592" style="zoom:33%;" />
+
+
+
+<img src="../blog_images/Redis/image-20240331205332306.png" alt="image-20240331205332306" style="zoom:33%;" />
+
+<h3 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h3><p><img src="/../blog_images/Redis/image-20240331205619186.png" alt="image-20240331205619186"></p>
+<p><img src="/../blog_images/Redis/image-20240331205705964.png" alt="image-20240331205705964"></p>
+<p><img src="/../blog_images/Redis/image-20240331205758175.png" alt="image-20240331205758175"></p>
+<h2 id="Zset（sorted-set-有序集合"><a href="#Zset（sorted-set-有序集合" class="headerlink" title="Zset（sorted set)有序集合"></a>Zset（sorted set)有序集合</h2><h2 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h2><h2 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h2><h2 id="GEO"><a href="#GEO" class="headerlink" title="GEO"></a>GEO</h2><h2 id="Stream（redis-版本的MQ）消息中间件"><a href="#Stream（redis-版本的MQ）消息中间件" class="headerlink" title="Stream（redis 版本的MQ）消息中间件"></a>Stream（redis 版本的MQ）消息中间件</h2><blockquote>
+<p>MQ 包含Kafka RabbitMQ rocketmq等</p>
+<p>先去学了MQ</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/18/Docker/" rel="prev" title="Docker">
+                  <i class="fa fa-angle-left"></i> Docker
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/03/31/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/" rel="next" title="Redis-持久化">
+                  Redis-持久化 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lolo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

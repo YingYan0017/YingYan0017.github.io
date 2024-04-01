@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="持久化就是把数据写到磁盘里面。在实际的应用场景中，会存在服务器突然的宕机，数据全部打到mysql上，这个对于我们来说是灾难性的，所以我们需要让redis可以自己把数据写到服务器中  RDB(Redis DataBase)RDB持久性以指定的时间间隔执行数据集的时间点快照。 实现类似于照片记录效果的方式，就是把某个时刻的数据与状态以文件的形式写到了磁盘的上面，也就是快照。这样一来，即使是服务器故障宕">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis-持久化">
+<meta property="og:url" content="http://example.com/2024/03/31/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/index.html">
+<meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="持久化就是把数据写到磁盘里面。在实际的应用场景中，会存在服务器突然的宕机，数据全部打到mysql上，这个对于我们来说是灾难性的，所以我们需要让redis可以自己把数据写到服务器中  RDB(Redis DataBase)RDB持久性以指定的时间间隔执行数据集的时间点快照。 实现类似于照片记录效果的方式，就是把某个时刻的数据与状态以文件的形式写到了磁盘的上面，也就是快照。这样一来，即使是服务器故障宕">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331212516033.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331213643968.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331213709629.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331230827587.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331231302890.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232230372.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232606065.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232850986.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232902475.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331233019774.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234106128.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234255878.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234309380.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234534060.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234747105.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234813084.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234853713.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095600434.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095655676.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095950257.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401101931550.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401104852636.png">
+<meta property="og:image" content="http://example.com/2024/03/31/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401104918329.png">
+<meta property="article:published_time" content="2024-03-31T13:15:11.000Z">
+<meta property="article:modified_time" content="2024-04-01T02:49:22.896Z">
+<meta property="article:author" content="lolo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331212516033.png">
+
+
+<link rel="canonical" href="http://example.com/2024/03/31/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/03/31/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/","path":"2024/03/31/Redis-持久化/","title":"Redis-持久化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Redis-持久化 | Loloooo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Loloooo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RDB-Redis-DataBase"><span class="nav-number">1.1.</span> <span class="nav-text">RDB(Redis DataBase)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis6%E4%B8%8ERedis7"><span class="nav-number">1.1.1.</span> <span class="nav-text">Redis6与Redis7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91"><span class="nav-number">1.1.2.</span> <span class="nav-text">自动触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E8%A7%A6%E5%8F%91"><span class="nav-number">1.1.3.</span> <span class="nav-text">手动触发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#save"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">save</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bgsave%EF%BC%88%E9%BB%98%E8%AE%A4%EF%BC%89"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">bgsave（默认）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lastsave"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">lastsave</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB-%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.4.</span> <span class="nav-text">RDB 优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%A6%81%E7%94%A8%E5%BF%AB%E7%85%A7"><span class="nav-number">1.1.5.</span> <span class="nav-text">如何禁用快照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDB%E4%BC%98%E5%8C%96%E9%85%8D%E7%BD%AE%E9%A1%B9%E8%AF%A6%E8%A7%A3snapshotting%E6%A8%A1%E5%9D%97"><span class="nav-number">1.1.6.</span> <span class="nav-text">RDB优化配置项详解snapshotting模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.7.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF-Append-Only-file"><span class="nav-number">1.2.</span> <span class="nav-text">AOF(Append Only file)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5"><span class="nav-number">1.2.1.</span> <span class="nav-text">三种写回策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Always"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Always</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#everysec"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">everysec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#no"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">no</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis6%E4%B8%8Eredis7"><span class="nav-number">1.2.2.</span> <span class="nav-text">redis6与redis7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%E7%BC%BA%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">优点缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A%E6%9B%B4%E5%A5%BD%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%95%B0%E6%8D%AE%E4%B8%8D%E8%A2%AB%E4%B8%A2%E5%A4%B1%EF%BC%8C%E6%80%A7%E8%83%BD%E9%AB%98%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%81%9A%E7%B4%A7%E6%80%A5%E6%81%A2%E5%A4%8D"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">优点：更好的保护数据不被丢失，性能高，可以做紧急恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9-1"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOF%E9%87%8D%E5%86%99%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">AOF重写机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDB-AOP%E6%B7%B7%E5%90%88%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">RDB-AOP混合持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AF%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">纯缓存模式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lolo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/31/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Redis-持久化 | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis-持久化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-31 21:15:11" itemprop="dateCreated datePublished" datetime="2024-03-31T21:15:11+08:00">2024-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-01 10:49:22" itemprop="dateModified" datetime="2024-04-01T10:49:22+08:00">2024-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h1><p>就是把数据写到磁盘里面。在实际的应用场景中，会存在服务器突然的宕机，数据全部打到mysql上，这个对于我们来说是灾难性的，所以我们需要让redis可以自己把数据写到服务器中</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331212516033.png" alt="image-20240331212516033"></p>
+<h2 id="RDB-Redis-DataBase"><a href="#RDB-Redis-DataBase" class="headerlink" title="RDB(Redis DataBase)"></a>RDB(Redis DataBase)</h2><p>RDB持久性以指定的时间间隔执行数据集的时间点快照。</p>
+<p>实现类似于照片记录效果的方式，就是把某个时刻的数据与状态以文件的形式写到了磁盘的上面，也就是快照。这样一来，即使是服务器故障宕机，快照文件也不会丢失，数据的可靠性也得到了保证。</p>
+<p>&#x3D;&#x3D;这个快照文件也被称为了RDB文件（dump.rdb),其中，RDB就是Redis Database的缩写&#x3D;&#x3D;</p>
+<p>会直接去读这个dump.rdb文件，重新写回redis的缓存里</p>
+<h3 id="Redis6与Redis7"><a href="#Redis6与Redis7" class="headerlink" title="Redis6与Redis7"></a>Redis6与Redis7</h3><p>在Redis7里面，把持久话RDB的保存规则发生了改变，尤其是时间记录额度的变化</p>
+<p>vim redis7.conf,因为底层做了优化，所以不需要像之前一样记录的那么频繁了</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331213643968.png" alt="image-20240331213643968"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331213709629.png" alt="image-20240331213709629"></p>
+<h3 id="自动触发"><a href="#自动触发" class="headerlink" title="自动触发"></a>自动触发</h3><p>redis 默认使用</p>
+<p>**<img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331230827587.png" alt="image-20240331230827587"><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331231302890.png" alt="image-20240331231302890"> </p>
+<p>执行flashall&#x2F;flushdb命令也会产生dump.rdb文件，但是里里面是空的，没有意义</p>
+<h3 id="手动触发"><a href="#手动触发" class="headerlink" title="手动触发"></a>手动触发</h3><p>满足不了要求，但是希望是立马就备份，产生rdb文件，就需要开启手动的备份</p>
+<p>redis提供了两个命令来生成RDB文件，分别是save喝bdsave</p>
+<p>相当于在后台开启了一个子进程，可以立即的开启备份</p>
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232230372.png" alt="image-20240331232230372" style="zoom: 25%;" />
+
+<p>生产上只能用bgsave，绝对不能用save</p>
+<h4 id="save"><a href="#save" class="headerlink" title="save"></a>save</h4><p>在主程序中执行回阻塞当前的redis服务器，直到持久化工作完成执行save命令期间，redis是不能处理其他命令的，线上是禁止使用的</p>
+<h4 id="bgsave（默认）"><a href="#bgsave（默认）" class="headerlink" title="bgsave（默认）"></a>bgsave（默认）</h4><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232606065.png" alt="image-20240331232606065"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232850986.png" alt="image-20240331232850986"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232902475.png" alt="image-20240331232902475"></p>
+<p><strong>什么是fork</strong></p>
+<p>在Linux系统中，fork会产生一个与父进程完全向同伴的一个子进程，但是子进程会在此后多会exec系统调用，处于效率考虑，尽量的避免膨胀</p>
+<h4 id="lastsave"><a href="#lastsave" class="headerlink" title="lastsave"></a>lastsave</h4><p>可以通过lastsave命令去获取最后一次成功执行快照的时间</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331233019774.png" alt="image-20240331233019774"></p>
+<h3 id="RDB-优缺点"><a href="#RDB-优缺点" class="headerlink" title="RDB 优缺点"></a>RDB 优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>适合大规模的数据恢复</li>
+<li>按照业务定时进行备份</li>
+<li>对于数据的完整性喝一致性的要求不高</li>
+<li>RDB文件在内存中的加载速度要比AOF快得多</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>如果你需要在redis停止工作时，比如断电之后，把损失降低到最低，那么rdb并不好</p>
+<p>RDB需要经常的fork()以便使用子进程在磁盘上持久话，如果数据集很大，fork()可能会很耗时，并且数据集很大而且CPU性能不是很好的时候，可能会导致Redis停止为客户端服务几毫秒甚至于疫苗</p>
+<p>如何检查并修复我们的RDB文件</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234106128.png" alt="image-20240331234106128"> </p>
+<h3 id="如何禁用快照"><a href="#如何禁用快照" class="headerlink" title="如何禁用快照"></a>如何禁用快照</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234255878.png" alt="image-20240331234255878"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234309380.png" alt="image-20240331234309380"></p>
+<h3 id="RDB优化配置项详解snapshotting模块"><a href="#RDB优化配置项详解snapshotting模块" class="headerlink" title="RDB优化配置项详解snapshotting模块"></a>RDB优化配置项详解snapshotting模块</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234534060.png" alt="image-20240331234534060"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234747105.png" alt="image-20240331234747105"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234813084.png" alt="image-20240331234813084"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234853713.png" alt="image-20240331234853713"></p>
+<h2 id="AOF-Append-Only-file"><a href="#AOF-Append-Only-file" class="headerlink" title="AOF(Append Only file)"></a>AOF(Append Only file)</h2><p>如果宕掉了，就load 数据 写回实例里。会以日志的形式记录下每个写的操作，然后将Redis执行过的所有写指令记录下来，（读操作不记录），只允许追加文件不允许改写文件，redis在启动之初会读取该文件重新构建数据。</p>
+<p>—&#x3D;&#x3D;redis重启的话就会根据日志文件的内任凭将写指令从前到后执行一次以完成数据的恢复工作&#x3D;&#x3D;</p>
+<p>默认情况下使用的AOF，开启AOF功能需要配置appendonly yes</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095600434.png" alt="image-20240401095600434"></p>
+<h3 id="三种写回策略"><a href="#三种写回策略" class="headerlink" title="三种写回策略"></a>三种写回策略</h3><h4 id="Always"><a href="#Always" class="headerlink" title="Always"></a>Always</h4><h4 id="everysec"><a href="#everysec" class="headerlink" title="everysec"></a>everysec</h4><h4 id="no"><a href="#no" class="headerlink" title="no"></a>no</h4><img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095655676.png" alt="image-20240401095655676" style="zoom:33%;" />
+
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095950257.png" alt="image-20240401095950257" style="zoom:33%;" />
+
+<h3 id="redis6与redis7"><a href="#redis6与redis7" class="headerlink" title="redis6与redis7"></a>redis6与redis7</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401101931550.png" alt="image-20240401101931550"></p>
+<h3 id="优点缺点"><a href="#优点缺点" class="headerlink" title="优点缺点"></a>优点缺点</h3><h4 id="优点：更好的保护数据不被丢失，性能高，可以做紧急恢复"><a href="#优点：更好的保护数据不被丢失，性能高，可以做紧急恢复" class="headerlink" title="优点：更好的保护数据不被丢失，性能高，可以做紧急恢复"></a>优点：更好的保护数据不被丢失，性能高，可以做紧急恢复</h4><ul>
+<li>使用AOF redis更加的持久，你可以设计不同的fsync策略（三种写回策略），即使是每秒写入，写入的性能依旧是不错的，fsync是使用后台线程执行的，当没有fsync正在进行的时候，主线程会努力的执行写入，只会丢失一秒钟的写入。</li>
+<li>AOF日志是一个仅附加日志，因此不会出现寻道问题，也不会在断电的时候出现损坏的问题，即使由于某种原因，磁盘已经满了或者其他的原因日志以写一般的命令结尾，redis-check-aof也能很轻松的修复。</li>
+<li>当AOF变得太大的时候，redis能够在后台重写AOF，重写是完全安全的，因为当redis继续附加到旧文件时，会创建当前数据集所需的最少操作集生成一个全新的文件，一旦第二个文件准备就绪，redis就会切换两者并开始附加到新的那一个。</li>
+<li>AOF以易于理解喝解析的格式依次包含所有操作的日志，您甚至可以轻松的导出AOF文件，如歌不小心使用了flushall命令刷新了所有的内容，只要在此期间内没有执行日志重写工作，您仍然可以通过停止服务器，删除最新命令并重新启动redis来保存数据集。</li>
+</ul>
+<p>打开appendonly.aof.1.incr.aof里面一定有个flushall，把这个命令删掉</p>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>相同数据集的数据而言aof文件要远大于rdb文件，恢复速度要慢于rdb</li>
+<li>aof运行的效率要慢于rdb，每秒同步策略的效率较好，不同步效率与rdb相同</li>
+</ul>
+<h4 id="AOF重写机制"><a href="#AOF重写机制" class="headerlink" title="AOF重写机制"></a>AOF重写机制</h4><p>由于AOF持久话是redis不断将写命令记录到AOF文件中，随着redis的不断的进行，AOF的文件就会越来越大，占用的服务器内存越大，以及AOF恢复时间要求越长。</p>
+<p>&#x3D;&#x3D;为了解决这个问题，redis新增了重写机制，当AOF的文件的大小超过了所设定的峰值时，redis就会自动的<strong>启动AOF文件内容压缩，只保留恢复数据的最小指令集</strong>，或者<strong>手动使用命令bgrewriteaof</strong>&#x3D;&#x3D;</p>
+<p><strong>峰值</strong></p>
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401104852636.png" alt="image-20240401104852636" style="zoom:33%;" />
+
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401104918329.png" alt="image-20240401104918329" style="zoom:33%;" />
+
+<h2 id="RDB-AOP混合持久化"><a href="#RDB-AOP混合持久化" class="headerlink" title="RDB-AOP混合持久化"></a>RDB-AOP混合持久化</h2><h2 id="纯缓存模式"><a href="#纯缓存模式" class="headerlink" title="纯缓存模式"></a>纯缓存模式</h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/31/Redis/" rel="prev" title="Redis">
+                  <i class="fa fa-angle-left"></i> Redis
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lolo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

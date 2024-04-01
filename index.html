@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -173,6 +173,75 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/01/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/" class="post-title-link" itemprop="url">Redis-高级篇</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-01 23:07:17 / 修改时间：23:07:24" itemprop="dateCreated datePublished" datetime="2024-04-01T23:07:17+08:00">2024-04-01</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -212,7 +281,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-04-01 21:31:35 / 修改时间：21:31:54" itemprop="dateCreated datePublished" datetime="2024-04-01T21:31:35+08:00">2024-04-01</time>
+      <time title="创建时间：2024-04-01 21:31:35 / 修改时间：23:05:31" itemprop="dateCreated datePublished" datetime="2024-04-01T21:31:35+08:00">2024-04-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,7 +307,58 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <h1 id="Redis集群"><a href="#Redis集群" class="headerlink" title="Redis集群"></a>Redis集群</h1><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401213935236.png" alt="image-20240401213935236" style="zoom:25%;" />
+
+<blockquote>
+<p>集群:由于数据量过大,单个master复制集难以承担,因此需要对多个复制集进行集群,形成水平扩展每个复制集只负责存储整个数据集的一部分,这就是redis的集群,其作用是提供在多个redis节点间共享数据的程序集</p>
+</blockquote>
+<p>考集群的算法和架构拓扑安装</p>
+<p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401214301548.png" alt="image-20240401214301548"></p>
+<p><strong>&#x3D;&#x3D;Redis集群是一个提供在多个Redis节点间共享数据的程序集&#x3D;&#x3D;</strong></p>
+<p><strong>&#x3D;&#x3D;Redis集群可以支持多个Master&#x3D;&#x3D;</strong></p>
+<h2 id="干什么"><a href="#干什么" class="headerlink" title="干什么"></a>干什么</h2><p><strong>redis集群支持多个Master,每个Master又可以挂载多个slave</strong></p>
+<ul>
+<li>读写分离</li>
+<li>支持数据的高可用</li>
+<li>支持海量数据的读写存储操作</li>
+</ul>
+<p><strong>由于cluster自带的故障转移机制,内置了高可用的支持,无需再去使用哨兵的功能</strong></p>
+<p><strong>客户端与redis的节点连接,不再需要连接集群中的所有节点,只需要任意连接集群中的一个可用节点即可</strong></p>
+<p><strong>槽位slot负责分配到各个物理服务节点,又对应的集群来负责维护节点,插槽和数据之间的关系.</strong></p>
+<h1 id="集群算法-分片-槽位slot"><a href="#集群算法-分片-槽位slot" class="headerlink" title="集群算法 分片 槽位slot"></a>集群算法 分片 槽位slot</h1><h2 id="槽位slot"><a href="#槽位slot" class="headerlink" title="槽位slot"></a>槽位slot</h2><p>集群的密钥空间被分为16384个槽位,有效设置了16384个主节点的集群大小上限(但是建议,最大的节点大小约为1000个节点)</p>
+<p>redis有16384个哈希槽,每个key通过CRC16校验后对16384取模来决定防止在哪个槽,集群的每个节点负责一部分hash槽.</p>
+<img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401220220448.png" alt="image-20240401220220448" style="zoom:33%;" />
+
+<h2 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h2><h3 id="1-定义-使用redis集群时我们会将存储的数据分散到多台redis机器中-这称为分片"><a href="#1-定义-使用redis集群时我们会将存储的数据分散到多台redis机器中-这称为分片" class="headerlink" title="1. 定义:使用redis集群时我们会将存储的数据分散到多台redis机器中,这称为分片."></a>1. 定义:使用redis集群时我们会将存储的数据分散到多台redis机器中,这称为分片.</h3><blockquote>
+<p>集群中的每个redis实例都被认为是整个数据的一个分片</p>
+</blockquote>
+<h3 id="2-如何找到给定key的一个分片"><a href="#2-如何找到给定key的一个分片" class="headerlink" title="2.如何找到给定key的一个分片"></a><strong>2.如何找到给定key的一个分片</strong></h3><blockquote>
+<p>为了找到给定key的分片,我们对key进行CRC16(KEY)算法处理并通过对总分片数量取模.然后,<strong>使用确定性哈希函数</strong>,这意味着给定的key<strong>将多次始终映射到同一个分片</strong>,我们可以推断将来读取特定key的位置</p>
+</blockquote>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401221138492.png" alt="image-20240401221138492"></p>
+<h1 id="slot槽位映射-一般业界有三种解决方案"><a href="#slot槽位映射-一般业界有三种解决方案" class="headerlink" title="slot槽位映射,一般业界有三种解决方案"></a>slot槽位映射,一般业界有三种解决方案</h1><h2 id="redis集群分片之hash取余分区算法"><a href="#redis集群分片之hash取余分区算法" class="headerlink" title="redis集群分片之hash取余分区算法"></a>redis集群分片之hash取余分区算法</h2><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401221729042.png" alt="image-20240401221729042" >
+
+
+
+<h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223213985.png" alt="image-20240401223213985" style="zoom:25%;" />
+
+
+
+<p>分布式缓存数据变更与映射问题,某个机器宕机了,分母的数量就改变了,自然取余就不可以了</p>
+<h4 id="能干啥"><a href="#能干啥" class="headerlink" title="能干啥"></a>能干啥</h4><ul>
+<li>提出了一致性hash解决方案</li>
+<li>目的是当服务器个数发生变动时,尽量减少影响客户端到服务器的映射关系</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="算法构建一致性哈希环"><a href="#算法构建一致性哈希环" class="headerlink" title="算法构建一致性哈希环"></a>算法构建一致性哈希环</h4><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223306047.png" alt="image-20240401223306047" style="zoom:25%;" /> 
+
+<h4 id="服务器IP节点映射"><a href="#服务器IP节点映射" class="headerlink" title="服务器IP节点映射"></a>服务器IP节点映射</h4><p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223600375.png" alt="image-20240401223600375"></p>
+<h4 id="key落到服务器的落键规则"><a href="#key落到服务器的落键规则" class="headerlink" title="key落到服务器的落键规则"></a>key落到服务器的落键规则</h4><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223814591.png" alt="image-20240401223814591" style="zoom:33%;" />
+
+<p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223833557.png" alt="image-20240401223833557"></p>
+<h2 id="哈希槽分区"><a href="#哈希槽分区" class="headerlink" title="哈希槽分区"></a>哈希槽分区</h2><p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401224030139.png" alt="image-20240401224030139"></p>
+<p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401224227090.png" alt=" "></p>
+<p>一定要-c 这个指令是值用集群的形式来运行 ,</p>
+
       
     </div>
 
@@ -1294,179 +1414,6 @@
 <hr>
 <p>著作权归JavaGuide(javaguide.cn)所有 基于MIT协议 原文链接：<a target="_blank" rel="noopener" href="https://javaguide.cn/tools/docker/docker-intro.html">https://javaguide.cn/tools/docker/docker-intro.html</a></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/17/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/17/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/" class="post-title-link" itemprop="url">Java微服务3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-17 21:42:41" itemprop="dateCreated datePublished" datetime="2024-03-17T21:42:41+08:00">2024-03-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-18 13:54:48" itemprop="dateModified" datetime="2024-03-18T13:54:48+08:00">2024-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">Java体系知识</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="服务保护和分布式事务"><a href="#服务保护和分布式事务" class="headerlink" title="服务保护和分布式事务"></a>服务保护和分布式事务</h1><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317214812012.png" alt="image-20240317214812012">有个服务很高 一个服务就所有的线程和进程全占了</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215027907.png" alt="image-20240317215027907"></p>
-<h2 id="雪崩问题"><a href="#雪崩问题" class="headerlink" title="雪崩问题"></a>雪崩问题</h2><p>微服务调用链路中的某个服务故障，引起整个链路中的所有微服务都不可用，这就是雪崩。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215511651.png" alt="image-20240317215511651"></p>
-<h3 id="雪崩问题产生的原因是什么？"><a href="#雪崩问题产生的原因是什么？" class="headerlink" title="雪崩问题产生的原因是什么？"></a>雪崩问题产生的原因是什么？</h3><ul>
-<li>微服务相互调用，服务提供者出现故障或阻塞。</li>
-<li>服务调用者没有做好异常处理，导致自身故障。</li>
-<li>调用链中的所有服务级联失败，导致整个集群故障</li>
-</ul>
-<h3 id="解决问题的思路有哪些？"><a href="#解决问题的思路有哪些？" class="headerlink" title="解决问题的思路有哪些？"></a>解决问题的思路有哪些？</h3><ul>
-<li>尽量避免服务出现故障或阻塞。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">保证代码的健壮性；</span><br><span class="line"></span><br><span class="line">保证网络畅通；</span><br><span class="line"></span><br><span class="line">能应对较高的并发请求；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>服务调用者做好远程调用异常的后备方案，避免故障扩散</li>
-</ul>
-<h3 id="服务保护方案"><a href="#服务保护方案" class="headerlink" title="服务保护方案"></a>服务保护方案</h3><h4 id="请求限流"><a href="#请求限流" class="headerlink" title="- 请求限流"></a>- 请求限流</h4><p>限制访问接口的请求的并发量，避免服务因流量激增出现故障。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220549992.png" alt="image-20240317220549992"></p>
-<h4 id="线程隔离"><a href="#线程隔离" class="headerlink" title="线程隔离"></a>线程隔离</h4><p>线程隔离：也叫做舱壁模式，模拟船舱隔板的防水原理。通过限定每个业务能使用的线程数量而将故障业务隔离，避免故障扩散。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220702031.png" alt="image-20240317220702031"></p>
-<h3 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h3><p>服务熔断：由<strong>断路器</strong>统计请求的异常比例或慢&#x3D;&#x3D;调用比例&#x3D;&#x3D;，如果超出阈值则会<strong>熔断</strong>该业务，则拦截该接口的请求。</p>
-<p>熔断期间，所有请求快速失败，全都走fallback逻辑。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317223937333.png" alt="image-20240317223937333"></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>请求限流</strong>：限制流量在服务可以处理的范围，避免因突发流量而故障</p>
-<p><strong>线程隔离</strong>：控制业务可用的线程数量，将故障隔离在一定范围</p>
-<p><strong>失败处理</strong>：定义fallback逻辑，让业务失败时不再抛出异常，而是走fallback逻辑</p>
-<p><strong>服务熔断</strong>：将异常比例过高的接口断开，拒绝所有请求，直接走fallback</p>
-<h3 id="服务保护技术"><a href="#服务保护技术" class="headerlink" title="服务保护技术"></a>服务保护技术</h3><table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Sentinel</strong></th>
-<th><strong>Hystrix</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>线程隔离</td>
-<td>信号量隔离</td>
-<td>线程池隔离&#x2F;信号量隔离</td>
-</tr>
-<tr>
-<td>熔断策略</td>
-<td>基于慢调用比例或异常比例</td>
-<td>基于异常比率</td>
-</tr>
-<tr>
-<td>限流</td>
-<td>基于 QPS，支持流量整形</td>
-<td>有限的支持</td>
-</tr>
-<tr>
-<td>Fallback</td>
-<td>支持</td>
-<td>支持</td>
-</tr>
-<tr>
-<td>控制台</td>
-<td>开箱即用，可配置规则、查看秒级监控、机器发现等</td>
-<td>不完善</td>
-</tr>
-<tr>
-<td>配置方式</td>
-<td>基于控制台，重启后失效</td>
-<td>基于注解或配置文件，永久生效</td>
-</tr>
-</tbody></table>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：<a target="_blank" rel="noopener" href="https://sentinelguard.io/zh-cn/index.html"> https://sentinelguard.io/zh-cn/index.html</a></p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224540969.png" alt="image-20240317224540969"></p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="step1-导包"><a href="#step1-导包" class="headerlink" title="step1 导包"></a>step1 导包</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224630323.png" alt="image-20240317224630323"></p>
-<h4 id="step2-配置控制台"><a href="#step2-配置控制台" class="headerlink" title="step2 配置控制台"></a>step2 配置控制台</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224644608.png" alt="image-20240317224644608"></p>
-<h4 id="step3-重启访问"><a href="#step3-重启访问" class="headerlink" title="step3 重启访问"></a>step3 重启访问</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224807401.png" alt="image-20240317224807401"></p>
-<h3 id="簇点链路"><a href="#簇点链路" class="headerlink" title="簇点链路"></a><strong>簇点链路</strong></h3><p>就是单机调用链路。是一次请求进入服务后经过的每一个被Sentinel监控的资源链。默认Sentinel会监控SpringMVC的每一个Endpoint（http接口）。限流、熔断等都是针对簇点链路中的<strong>资源</strong>设置的。而资源名默认就是接口的请求路径：</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224937069.png" alt="image-20240317224937069"></p>
-<p>熔断什么的都是针对簇点资源做的</p>
-<p>Restful风格的API请求路径一般都相同，这会导致簇点资源名称重复。因此我们要修改配置，把<strong>请求方式+请求路径</strong>作为簇点资源名称：</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317225139867.png" alt="image-20240317225139867"></p>
-<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p>在分布式系统中，如果一个业务需要多个服务合作完成，而且每一个服务都有事务，&#x3D;&#x3D;多个事务必须同时成功或失败，这样的事务就是<strong>分布式事务</strong>。其中的每个服务的事务就是一个<strong>分支事务</strong>。整个业务称为<strong>全局事务</strong>。&#x3D;&#x3D;</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095044645.png" alt="image-20240318095044645"></p>
-<h3 id="初识Seata"><a href="#初识Seata" class="headerlink" title="初识Seata"></a>初识Seata</h3><p>解决分布式事务，各个子事务之间必须能感知到彼此的事务状态，才能保证状态一致。</p>
-<p>Seata事务管理中有三个重要的角色：</p>
-<p>•<strong>TC (Transaction Coordinator) -</strong> <strong>事务协调者：</strong>维护全局和分支事务的状态，协调全局事务提交或回滚。</p>
-<p>•<strong>TM (Transaction Manager) -</strong> <strong>事务管理器：</strong>定义全局事务的范围、开始全局事务、提交或回滚全局事务。</p>
-<p>•<strong>RM (Resource Manager) -</strong> <strong>资源管理器：</strong>管理分支事务，与TC交谈以注册分支事务和报告分支事务的状态</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095501708.png" alt="image-20240318095501708"></p>
-<h3 id="部署TC服务"><a href="#部署TC服务" class="headerlink" title="部署TC服务"></a>部署TC服务</h3><h3 id="微服务集成Seata"><a href="#微服务集成Seata" class="headerlink" title="微服务集成Seata"></a>微服务集成Seata</h3><h3 id="XA模式"><a href="#XA模式" class="headerlink" title="XA模式"></a>XA模式</h3><h3 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h3>
       
     </div>
 

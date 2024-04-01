@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2024/02/18/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/</url>
+    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015738084.png" alt="image-20240218015738084"></p>
+<p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015750388.png" alt="image-20240218015750388"></p>
+<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
+<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Docker</title>
     <url>/2024/03/18/Docker/</url>
     <content><![CDATA[<h1 id="一、容器"><a href="#一、容器" class="headerlink" title="一、容器"></a>一、容器</h1><h2 id="什么是容器"><a href="#什么是容器" class="headerlink" title="什么是容器"></a>什么是容器</h2><p>将软件打包成标准化单元，以用于开发、交付与部署</p>
@@ -42,15 +51,6 @@
         <category>中间件</category>
         <category>Docker</category>
       </categories>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/02/18/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/</url>
-    <content><![CDATA[<h1 id="一、技术的版本控制"><a href="#一、技术的版本控制" class="headerlink" title="一、技术的版本控制"></a>一、技术的版本控制</h1><p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015738084.png" alt="image-20240218015738084"></p>
-<p><img src="/../blog_images/20240217%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A31/image-20240218015750388.png" alt="image-20240218015750388"></p>
-<h1 id="二、动力云客的项目概述"><a href="#二、动力云客的项目概述" class="headerlink" title="二、动力云客的项目概述"></a>二、动力云客的项目概述</h1><p>这个项目就是一个商业的集合营销销售为一体的客户关系管理系统，采用信息化、数字化的方式来进行营销和看客户管理。</p>
-<h2 id="1-项目数据库：Mysql一个数据库"><a href="#1-项目数据库：Mysql一个数据库" class="headerlink" title="1.项目数据库：Mysql一个数据库"></a>1.项目数据库：Mysql一个数据库</h2><h2 id="2-前端项目："><a href="#2-前端项目：" class="headerlink" title="2.前端项目："></a>2.前端项目：</h2><p> 这是一个前后端分离的项目 （前端vue–&gt;（ajax axios） http请求–&gt;后端项目（spring boot）</p>
-]]></content>
   </entry>
   <entry>
     <title></title>
@@ -456,6 +456,119 @@
       </categories>
   </entry>
   <entry>
+    <title>JavaWeb-Springboot-2</title>
+    <url>/2024/03/11/JavaWeb-Springboot-2/</url>
+    <content><![CDATA[<h1 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h1><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131236747.png" alt="image-20240311131236747"></p>
+<p>从上至下优先级</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131859933.png" alt="image-20240311131859933"></p>
+<p>命令行参数&gt;java系统属性</p>
+<h1 id="Bean管理"><a href="#Bean管理" class="headerlink" title="Bean管理"></a>Bean管理</h1><p>Spring项目启动时，会把bean都创建好放到IOC容器当中，如果想要主动获取这些bean：</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311133629292.png" alt="image-20240311133629292"></p>
+<img src="../blog_images/JavaWeb-Springboot-2/image-20240311134105870.png" alt="image-20240311134105870" style="zoom:33%;" />
+
+
+
+<h2 id="bean的获取"><a href="#bean的获取" class="headerlink" title="bean的获取"></a>bean的获取</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311134034393.png" alt="image-20240311134034393"></p>
+<p>在spring容器中，bean默认是单例的</p>
+<table>
+<thead>
+<tr>
+<th><strong>作用域</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>singleton</td>
+<td>容器内同  名称 的 bean 只有一个实例（单例）（默认）</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>每次使用该  bean 时会创建新的实例（非单例）</td>
+</tr>
+<tr>
+<td>request</td>
+<td>每个请求范围内会创建新的实例（web环境中，了解）</td>
+</tr>
+<tr>
+<td>session</td>
+<td>每个会话范围内会创建新的实例（web环境中，了解）</td>
+</tr>
+<tr>
+<td>application</td>
+<td>每个应用范围内会创建新的实例（web环境中，了解）</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/depts&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>默认singleton的bean，在容器启动时被创建，可以使用@Lazy注解来延迟初始化（延迟到第一次使用时）。</p>
+<p>prototype的bean，每一次使用该bean的时候都会创建一个新的实例。</p>
+<p>实际开发当中，绝大部分的Bean是单例的，也就是说绝大部分Bean不需要配置scope属性。</p>
+<h2 id="第三方bean"><a href="#第三方bean" class="headerlink" title="第三方bean"></a>第三方bean</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果要管理的bean对象来自于第三方（不是自定义的，是无法用@Component以及衍生注解声明bean的，就是需要用到@Bean注解）</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311141158692.png" alt="image-20240311141158692"></p>
+<p>一、用启动类，不建议</p>
+<p>二、用第三方bean对象</p>
+<p>用配置类声明第三方bean对象</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311142532205.png" alt="image-20240311142532205"></p>
+<p>通过 @Bean注解的name&#x2F;value属性指定bean名称，如果没有指定，默认是方法名</p>
+<h1 id="SpringBoot原理"><a href="#SpringBoot原理" class="headerlink" title="SpringBoot原理"></a>SpringBoot原理</h1><h2 id="起步依赖"><a href="#起步依赖" class="headerlink" title="起步依赖"></a>起步依赖</h2><p>Maven存在一个依赖传递，只要提供一个起步依赖</p>
+<h2 id="自动配置"><a href="#自动配置" class="headerlink" title="自动配置"></a>自动配置</h2><p>SpringBoot的自动配置就是当spring容器启动之后，一些配置类，bean对象就自动的存入了IOC容器中，不需要我们手动去声明</p>
+<p>当想要实现从另外一个项目引入</p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145118080.png" alt="image-20240311145118080"></p>
+<p>springboot只能扫描到启动类及其子包，扫描不到其他的包</p>
+<h3 id="方案一：ComponentScan（使用繁琐，效率低）"><a href="#方案一：ComponentScan（使用繁琐，效率低）" class="headerlink" title="方案一：ComponentScan（使用繁琐，效率低）"></a>方案一：ComponentScan（使用繁琐，效率低）</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ComponentScan(&#123;&quot;com.example&quot;,&quot;com.itheima&quot;&#125;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringbootWebConfig2Application</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145621804.png" alt="image-20240311145621804"></p>
+<h3 id="方案二：-Import-导入。"><a href="#方案二：-Import-导入。" class="headerlink" title="方案二：@Import 导入。"></a>方案二：@Import 导入。</h3><p><strong>使用@Import导入的类会被Spring加载到IOC容器中，导入形式主要有以下几种</strong>：</p>
+<ul>
+<li>导入 普通类</li>
+<li>导入 配置类</li>
+<li>导入 ImportSelector 接口实现类</li>
+</ul>
+<p>@EnableXxxx注解，封装@Import注解 </p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150440558.png" alt="image-20240311150440558"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150642205.png" alt="image-20240311150642205"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150707450.png" alt="image-20240311150707450"></p>
+<h3 id="源码跟踪"><a href="#源码跟踪" class="headerlink" title="源码跟踪"></a>源码跟踪</h3><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h4><p>——-&gt; </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfigration</span></span><br><span class="line">这个注解只是封装了一个注解<span class="meta">@Configuration</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line">用来scan子包之类的;组件扫描，默认扫描当前引导类所在包及其子包。</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line">自动配置的核心注解--》底层封装的<span class="meta">@import</span>注解</span><br><span class="line">--》<span class="meta">@Import(AutoConfigurationTmportSelector.class)</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155050608.png" alt="image-20240311155050608"></p>
+<h4 id="Conditional"><a href="#Conditional" class="headerlink" title="@Conditional"></a><strong>@Conditional</strong></h4><blockquote>
+<p> 以conditional开头的注解都是条件装配的注解</p>
+</blockquote>
+<p><strong>作用：</strong>按照一定的条件进行判断，在满足给定条件后才会注册对应的bean对象到Spring IOC容器中。</p>
+<p><strong>位置：</strong>方法、类</p>
+<p>@Conditional 本身是一个父注解，派生出大量的子注解：</p>
+<ul>
+<li><strong>@ConditionalOnClass：</strong>判断环境中是否有对应字节码文件，才注册bean到IOC容器。</li>
+<li><strong>@ConditionalOnMissingBean：</strong>判断环境中没有对应的bean（类型 或 名称） ，才注册bean到IOC容器。</li>
+<li><strong>@ConditionalOnProperty：</strong>判断配置文件中有对应属性和值，才注册bean到IOC容器。</li>
+</ul>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155517846.png" alt="image-20240311155517846"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155831161.png" alt="image-20240311155831161"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(name = &quot;io.jsonwebtoken.Jwts&quot;)</span> <span class="comment">//当前环境存在指定的这个类时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span> <span class="comment">//当不存在当前类型的bean时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//指定的类型（value属性）或者 名称（name属性）</span></span><br><span class="line"><span class="comment">//通常用来设置一个默认的bean对象</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(name = &quot;name&quot;,havingValue = &quot;itheima&quot;)</span> <span class="comment">//配置文件中存在对应的属性和值，才注册bean到IOC容器。</span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//name表示配置项的名字，havingValue表示配置项的值</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160715872.png" alt="image-20240311160715872"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160922672.png" alt="image-20240311160922672"></p>
+<h2 id="自定义starter"><a href="#自定义starter" class="headerlink" title="自定义starter"></a>自定义starter</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162501274.png" alt="image-20240311162501274"></p>
+<p><strong>需求：自定义aliyun-oss-spring-boot-starter，完成阿里云OSS操作工具类 AliyunOSSUtils 的自动配置。</strong></p>
+<p><strong>目标：引入起步依赖引入之后，要想使用阿里云OSS，注入 AliyunOSSUtils直接使用即可。</strong></p>
+<img src="../blog_images/JavaWeb-Springboot-2/image-20240311162756249.png" alt="image-20240311162756249" style="zoom:33%;" />
+
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162942568.png" alt="image-20240311162942568"></p>
+<p>不想听了</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164359672.png" alt="image-20240311164359672"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164625979.png" alt="image-20240311164625979"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164645808.png" alt="image-20240311164645808"></p>
+<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164810304.png" alt="image-20240311164810304"></p>
+]]></content>
+      <categories>
+        <category>JavaWeb</category>
+        <category>Springboot2</category>
+      </categories>
+  </entry>
+  <entry>
     <title>JavaWeb-Springboot</title>
     <url>/2024/03/09/JavaWeb-Springboot/</url>
     <content><![CDATA[<h1 id="表单校验、拦截"><a href="#表单校验、拦截" class="headerlink" title="表单校验、拦截"></a>表单校验、拦截</h1><p><img src="/../blog_images/JavaWeb-Springboot/image-20240309155641073.png" alt="image-20240309155641073"></p>
@@ -709,116 +822,108 @@
       </categories>
   </entry>
   <entry>
-    <title>JavaWeb-Springboot-2</title>
-    <url>/2024/03/11/JavaWeb-Springboot-2/</url>
-    <content><![CDATA[<h1 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h1><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131236747.png" alt="image-20240311131236747"></p>
-<p>从上至下优先级</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131859933.png" alt="image-20240311131859933"></p>
-<p>命令行参数&gt;java系统属性</p>
-<h1 id="Bean管理"><a href="#Bean管理" class="headerlink" title="Bean管理"></a>Bean管理</h1><p>Spring项目启动时，会把bean都创建好放到IOC容器当中，如果想要主动获取这些bean：</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311133629292.png" alt="image-20240311133629292"></p>
-<img src="../blog_images/JavaWeb-Springboot-2/image-20240311134105870.png" alt="image-20240311134105870" style="zoom:33%;" />
-
-
-
-<h2 id="bean的获取"><a href="#bean的获取" class="headerlink" title="bean的获取"></a>bean的获取</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311134034393.png" alt="image-20240311134034393"></p>
-<p>在spring容器中，bean默认是单例的</p>
-<table>
+    <title>JavaWeb-mysql</title>
+    <url>/2024/03/07/JavaWeb-mysql/</url>
+    <content><![CDATA[<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="Mysql概述"><a href="#Mysql概述" class="headerlink" title="Mysql概述"></a>Mysql概述</h2><table>
 <thead>
 <tr>
-<th><strong>作用域</strong></th>
+<th><strong>分类</strong></th>
+<th><strong>全称</strong></th>
 <th><strong>说明</strong></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>singleton</td>
-<td>容器内同  名称 的 bean 只有一个实例（单例）（默认）</td>
+<td>DDL</td>
+<td>Data Definition  Language</td>
+<td>数据定义语言，用来定义数据库对象(数据库，表，字段)</td>
 </tr>
 <tr>
-<td>prototype</td>
-<td>每次使用该  bean 时会创建新的实例（非单例）</td>
+<td>DML</td>
+<td>Data Manipulation  Language</td>
+<td>数据操作语言，用来对数据库表中的数据进行增删改</td>
 </tr>
 <tr>
-<td>request</td>
-<td>每个请求范围内会创建新的实例（web环境中，了解）</td>
+<td>DQL</td>
+<td>Data Query Language</td>
+<td>数据查询语言，用来查询数据库中表的记录</td>
 </tr>
 <tr>
-<td>session</td>
-<td>每个会话范围内会创建新的实例（web环境中，了解）</td>
-</tr>
-<tr>
-<td>application</td>
-<td>每个应用范围内会创建新的实例（web环境中，了解）</td>
+<td>DCL</td>
+<td>Data Control  Language</td>
+<td>数据控制语言，用来创建数据库用户、控制数据库的访问权限</td>
 </tr>
 </tbody></table>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/depts&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/../blog_images/JavaWeb-mysql/image-20240307132823507.png" alt="image-20240307132823507"></p>
+<h2 id="数据库设计-DDL"><a href="#数据库设计-DDL" class="headerlink" title="数据库设计-DDL"></a>数据库设计-DDL</h2><table>
+<thead>
+<tr>
+<th><strong>约束</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>关键字</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>非空约束</td>
+<td>限制该字段值不能为null</td>
+<td>not null</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td>保证字段的所有数据都是唯一、不重复的</td>
+<td>unique</td>
+</tr>
+<tr>
+<td>主键约束</td>
+<td>主键是一行数据的唯一标识，要求非空且唯一</td>
+<td>primary key</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td>保存数据时，如果未指定该字段值，则采用默认值</td>
+<td>default</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td>让两张表的数据建立连接，保证数据的一致性和完整性</td>
+<td>foreign key</td>
+</tr>
+</tbody></table>
+<p>MySQL中的数据类型有很多，主要分为三类：数值类型、字符串类型、日期时间类型。</p>
+<h2 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h2><p><img src="/../blog_images/JavaWeb-mysql/image-20240307135013214.png" alt="image-20240307135013214"></p>
+<p>create_time：记录的是当前这条数据插入的时间。 update_time：记录当前这条数据最后更新的时间</p>
+<p><img src="/../blog_images/JavaWeb-mysql/image-20240307135215533.png" alt="image-20240307135215533"></p>
+<h2 id="表（创建、查询、修改、删除）"><a href="#表（创建、查询、修改、删除）" class="headerlink" title="表（创建、查询、修改、删除）"></a>表（创建、查询、修改、删除）</h2><h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><h2 id="数据库操作-DML"><a href="#数据库操作-DML" class="headerlink" title="数据库操作-DML"></a>数据库操作-DML</h2><p>DML的英文全称是data Manipulation Language(数据操作语言)，用来对数据库中表的数据记录进行增删改查操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">添加数据(INSERT)</span><br><span class="line">修改数据(UPDATE)</span><br><span class="line">删除数据(DELETE)</span><br></pre></td></tr></table></figure>
 
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>默认singleton的bean，在容器启动时被创建，可以使用@Lazy注解来延迟初始化（延迟到第一次使用时）。</p>
-<p>prototype的bean，每一次使用该bean的时候都会创建一个新的实例。</p>
-<p>实际开发当中，绝大部分的Bean是单例的，也就是说绝大部分Bean不需要配置scope属性。</p>
-<h2 id="第三方bean"><a href="#第三方bean" class="headerlink" title="第三方bean"></a>第三方bean</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>如果要管理的bean对象来自于第三方（不是自定义的，是无法用@Component以及衍生注解声明bean的，就是需要用到@Bean注解）</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311141158692.png" alt="image-20240311141158692"></p>
-<p>一、用启动类，不建议</p>
-<p>二、用第三方bean对象</p>
-<p>用配置类声明第三方bean对象</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311142532205.png" alt="image-20240311142532205"></p>
-<p>通过 @Bean注解的name&#x2F;value属性指定bean名称，如果没有指定，默认是方法名</p>
-<h1 id="SpringBoot原理"><a href="#SpringBoot原理" class="headerlink" title="SpringBoot原理"></a>SpringBoot原理</h1><h2 id="起步依赖"><a href="#起步依赖" class="headerlink" title="起步依赖"></a>起步依赖</h2><p>Maven存在一个依赖传递，只要提供一个起步依赖</p>
-<h2 id="自动配置"><a href="#自动配置" class="headerlink" title="自动配置"></a>自动配置</h2><p>SpringBoot的自动配置就是当spring容器启动之后，一些配置类，bean对象就自动的存入了IOC容器中，不需要我们手动去声明</p>
-<p>当想要实现从另外一个项目引入</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145118080.png" alt="image-20240311145118080"></p>
-<p>springboot只能扫描到启动类及其子包，扫描不到其他的包</p>
-<h3 id="方案一：ComponentScan（使用繁琐，效率低）"><a href="#方案一：ComponentScan（使用繁琐，效率低）" class="headerlink" title="方案一：ComponentScan（使用繁琐，效率低）"></a>方案一：ComponentScan（使用繁琐，效率低）</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ComponentScan(&#123;&quot;com.example&quot;,&quot;com.itheima&quot;&#125;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringbootWebConfig2Application</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145621804.png" alt="image-20240311145621804"></p>
-<h3 id="方案二：-Import-导入。"><a href="#方案二：-Import-导入。" class="headerlink" title="方案二：@Import 导入。"></a>方案二：@Import 导入。</h3><p><strong>使用@Import导入的类会被Spring加载到IOC容器中，导入形式主要有以下几种</strong>：</p>
-<ul>
-<li>导入 普通类</li>
-<li>导入 配置类</li>
-<li>导入 ImportSelector 接口实现类</li>
-</ul>
-<p>@EnableXxxx注解，封装@Import注解 </p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150440558.png" alt="image-20240311150440558"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150642205.png" alt="image-20240311150642205"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150707450.png" alt="image-20240311150707450"></p>
-<h3 id="源码跟踪"><a href="#源码跟踪" class="headerlink" title="源码跟踪"></a>源码跟踪</h3><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h4><p>——-&gt; </p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfigration</span></span><br><span class="line">这个注解只是封装了一个注解<span class="meta">@Configuration</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line">用来scan子包之类的;组件扫描，默认扫描当前引导类所在包及其子包。</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line">自动配置的核心注解--》底层封装的<span class="meta">@import</span>注解</span><br><span class="line">--》<span class="meta">@Import(AutoConfigurationTmportSelector.class)</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155050608.png" alt="image-20240311155050608"></p>
-<h4 id="Conditional"><a href="#Conditional" class="headerlink" title="@Conditional"></a><strong>@Conditional</strong></h4><blockquote>
-<p> 以conditional开头的注解都是条件装配的注解</p>
+<h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h3><p>指定字段添加数据：insert into 表名 (字段名1, 字段名2) values (值1, 值2);</p>
+<p>全部字段添加数据：insert into 表名 values (值1, 值2, …);</p>
+<p>批量添加数据（指定字段）：insert into 表名 (字段名1, 字段名2) values (值1, 值2), (值1, 值2);</p>
+<p>批量添加数据（全部字段）：insert into 表名 values (值1, 值2, …), (值1, 值2, …);</p>
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>修改数据：update 表名 set 字段名1 &#x3D; 值1 , 字段名2 &#x3D; 值2 , …. [ where 条件 ] ;</p>
+<blockquote>
+<p>修改语句的条件可以有，也可以没有，如果没有条件，则会修改整张表的所有数据。</p>
 </blockquote>
-<p><strong>作用：</strong>按照一定的条件进行判断，在满足给定条件后才会注册对应的bean对象到Spring IOC容器中。</p>
-<p><strong>位置：</strong>方法、类</p>
-<p>@Conditional 本身是一个父注解，派生出大量的子注解：</p>
-<ul>
-<li><strong>@ConditionalOnClass：</strong>判断环境中是否有对应字节码文件，才注册bean到IOC容器。</li>
-<li><strong>@ConditionalOnMissingBean：</strong>判断环境中没有对应的bean（类型 或 名称） ，才注册bean到IOC容器。</li>
-<li><strong>@ConditionalOnProperty：</strong>判断配置文件中有对应属性和值，才注册bean到IOC容器。</li>
-</ul>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155517846.png" alt="image-20240311155517846"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155831161.png" alt="image-20240311155831161"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(name = &quot;io.jsonwebtoken.Jwts&quot;)</span> <span class="comment">//当前环境存在指定的这个类时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span> <span class="comment">//当不存在当前类型的bean时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//指定的类型（value属性）或者 名称（name属性）</span></span><br><span class="line"><span class="comment">//通常用来设置一个默认的bean对象</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(name = &quot;name&quot;,havingValue = &quot;itheima&quot;)</span> <span class="comment">//配置文件中存在对应的属性和值，才注册bean到IOC容器。</span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//name表示配置项的名字，havingValue表示配置项的值</span></span><br></pre></td></tr></table></figure>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>删除数据：delete from 表名 [ where 条件 ];</p>
+<blockquote>
+<p>1.DELETE 语句的条件可以有，也可以没有，如果没有条件，则会删除整张表的所有数据。</p>
+<p>2.DELETE 语句不能删除某一个字段的值(如果要操作，可以使用UPDATE，将该字段的值置为NULL)。</p>
+</blockquote>
+<h2 id="数据库操作-DQL-SELECT"><a href="#数据库操作-DQL-SELECT" class="headerlink" title="数据库操作-DQL SELECT"></a>数据库操作-DQL SELECT</h2><p>DQL英文全称是Data Query Language(数据查询语言)，用来查询数据库表中的记录。</p>
+<p>查询多个字段：select 字段1, 字段2, 字段3 from  表名;</p>
+<p>查询所有字段（通配符）：select *  from  表名;</p>
+<p>设置别名：select 字段1 [ as 别名1 ] , 字段2 [ as 别名2 ]  from  表名;</p>
+<p>去除重复记录：select distinct 字段列表 from  表名;</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>事务</strong> 是一组操作的集合，它是一个不可分割的工作单位。事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作 要么同时成功，要么同时失败。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开启事务：start transaction; / begin ;</span><br><span class="line">提交事务：commit;</span><br><span class="line">回滚事务：rollback;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160715872.png" alt="image-20240311160715872"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160922672.png" alt="image-20240311160922672"></p>
-<h2 id="自定义starter"><a href="#自定义starter" class="headerlink" title="自定义starter"></a>自定义starter</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162501274.png" alt="image-20240311162501274"></p>
-<p><strong>需求：自定义aliyun-oss-spring-boot-starter，完成阿里云OSS操作工具类 AliyunOSSUtils 的自动配置。</strong></p>
-<p><strong>目标：引入起步依赖引入之后，要想使用阿里云OSS，注入 AliyunOSSUtils直接使用即可。</strong></p>
-<img src="../blog_images/JavaWeb-Springboot-2/image-20240311162756249.png" alt="image-20240311162756249" style="zoom:33%;" />
-
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162942568.png" alt="image-20240311162942568"></p>
-<p>不想听了</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164359672.png" alt="image-20240311164359672"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164625979.png" alt="image-20240311164625979"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164645808.png" alt="image-20240311164645808"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164810304.png" alt="image-20240311164810304"></p>
-]]></content>
+<h3 id="四大特性-ACID"><a href="#四大特性-ACID" class="headerlink" title="四大特性(ACID)"></a>四大特性(ACID)</h3><p><img src="/../blog_images/JavaWeb-mysql/image-20240307152341854.png" alt="image-20240307152341854"></p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>一对一</p>
+<p>一对多</p>
+<p>多对对</p>
+<h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2>]]></content>
       <categories>
         <category>JavaWeb</category>
-        <category>Springboot2</category>
+        <category>mysql</category>
       </categories>
   </entry>
   <entry>
@@ -1272,111 +1377,6 @@
 <h3 id="Bean注入"><a href="#Bean注入" class="headerlink" title="Bean注入"></a>Bean注入</h3><p>@Autowired注解，默认是按照<strong>类型</strong>进行，如果存在多个相同类型的bean，将会报出如下错误：</p>
 <p><img src="/../blog_images/JavaWeb/image-20240307115609120.png" alt="image-20240307115609120"></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>JavaWeb-mysql</title>
-    <url>/2024/03/07/JavaWeb-mysql/</url>
-    <content><![CDATA[<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="Mysql概述"><a href="#Mysql概述" class="headerlink" title="Mysql概述"></a>Mysql概述</h2><table>
-<thead>
-<tr>
-<th><strong>分类</strong></th>
-<th><strong>全称</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DDL</td>
-<td>Data Definition  Language</td>
-<td>数据定义语言，用来定义数据库对象(数据库，表，字段)</td>
-</tr>
-<tr>
-<td>DML</td>
-<td>Data Manipulation  Language</td>
-<td>数据操作语言，用来对数据库表中的数据进行增删改</td>
-</tr>
-<tr>
-<td>DQL</td>
-<td>Data Query Language</td>
-<td>数据查询语言，用来查询数据库中表的记录</td>
-</tr>
-<tr>
-<td>DCL</td>
-<td>Data Control  Language</td>
-<td>数据控制语言，用来创建数据库用户、控制数据库的访问权限</td>
-</tr>
-</tbody></table>
-<p><img src="/../blog_images/JavaWeb-mysql/image-20240307132823507.png" alt="image-20240307132823507"></p>
-<h2 id="数据库设计-DDL"><a href="#数据库设计-DDL" class="headerlink" title="数据库设计-DDL"></a>数据库设计-DDL</h2><table>
-<thead>
-<tr>
-<th><strong>约束</strong></th>
-<th><strong>描述</strong></th>
-<th><strong>关键字</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>非空约束</td>
-<td>限制该字段值不能为null</td>
-<td>not null</td>
-</tr>
-<tr>
-<td>唯一约束</td>
-<td>保证字段的所有数据都是唯一、不重复的</td>
-<td>unique</td>
-</tr>
-<tr>
-<td>主键约束</td>
-<td>主键是一行数据的唯一标识，要求非空且唯一</td>
-<td>primary key</td>
-</tr>
-<tr>
-<td>默认约束</td>
-<td>保存数据时，如果未指定该字段值，则采用默认值</td>
-<td>default</td>
-</tr>
-<tr>
-<td>外键约束</td>
-<td>让两张表的数据建立连接，保证数据的一致性和完整性</td>
-<td>foreign key</td>
-</tr>
-</tbody></table>
-<p>MySQL中的数据类型有很多，主要分为三类：数值类型、字符串类型、日期时间类型。</p>
-<h2 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h2><p><img src="/../blog_images/JavaWeb-mysql/image-20240307135013214.png" alt="image-20240307135013214"></p>
-<p>create_time：记录的是当前这条数据插入的时间。 update_time：记录当前这条数据最后更新的时间</p>
-<p><img src="/../blog_images/JavaWeb-mysql/image-20240307135215533.png" alt="image-20240307135215533"></p>
-<h2 id="表（创建、查询、修改、删除）"><a href="#表（创建、查询、修改、删除）" class="headerlink" title="表（创建、查询、修改、删除）"></a>表（创建、查询、修改、删除）</h2><h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><h2 id="数据库操作-DML"><a href="#数据库操作-DML" class="headerlink" title="数据库操作-DML"></a>数据库操作-DML</h2><p>DML的英文全称是data Manipulation Language(数据操作语言)，用来对数据库中表的数据记录进行增删改查操作</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">添加数据(INSERT)</span><br><span class="line">修改数据(UPDATE)</span><br><span class="line">删除数据(DELETE)</span><br></pre></td></tr></table></figure>
-
-<h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h3><p>指定字段添加数据：insert into 表名 (字段名1, 字段名2) values (值1, 值2);</p>
-<p>全部字段添加数据：insert into 表名 values (值1, 值2, …);</p>
-<p>批量添加数据（指定字段）：insert into 表名 (字段名1, 字段名2) values (值1, 值2), (值1, 值2);</p>
-<p>批量添加数据（全部字段）：insert into 表名 values (值1, 值2, …), (值1, 值2, …);</p>
-<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>修改数据：update 表名 set 字段名1 &#x3D; 值1 , 字段名2 &#x3D; 值2 , …. [ where 条件 ] ;</p>
-<blockquote>
-<p>修改语句的条件可以有，也可以没有，如果没有条件，则会修改整张表的所有数据。</p>
-</blockquote>
-<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>删除数据：delete from 表名 [ where 条件 ];</p>
-<blockquote>
-<p>1.DELETE 语句的条件可以有，也可以没有，如果没有条件，则会删除整张表的所有数据。</p>
-<p>2.DELETE 语句不能删除某一个字段的值(如果要操作，可以使用UPDATE，将该字段的值置为NULL)。</p>
-</blockquote>
-<h2 id="数据库操作-DQL-SELECT"><a href="#数据库操作-DQL-SELECT" class="headerlink" title="数据库操作-DQL SELECT"></a>数据库操作-DQL SELECT</h2><p>DQL英文全称是Data Query Language(数据查询语言)，用来查询数据库表中的记录。</p>
-<p>查询多个字段：select 字段1, 字段2, 字段3 from  表名;</p>
-<p>查询所有字段（通配符）：select *  from  表名;</p>
-<p>设置别名：select 字段1 [ as 别名1 ] , 字段2 [ as 别名2 ]  from  表名;</p>
-<p>去除重复记录：select distinct 字段列表 from  表名;</p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>事务</strong> 是一组操作的集合，它是一个不可分割的工作单位。事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作 要么同时成功，要么同时失败。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">开启事务：start transaction; / begin ;</span><br><span class="line">提交事务：commit;</span><br><span class="line">回滚事务：rollback;</span><br></pre></td></tr></table></figure>
-
-<h3 id="四大特性-ACID"><a href="#四大特性-ACID" class="headerlink" title="四大特性(ACID)"></a>四大特性(ACID)</h3><p><img src="/../blog_images/JavaWeb-mysql/image-20240307152341854.png" alt="image-20240307152341854"></p>
-<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>一对一</p>
-<p>一对多</p>
-<p>多对对</p>
-<h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2>]]></content>
-      <categories>
-        <category>JavaWeb</category>
-        <category>mysql</category>
-      </categories>
   </entry>
   <entry>
     <title>Java基础知识5</title>
@@ -3224,6 +3224,15 @@
       </categories>
   </entry>
   <entry>
+    <title>Java多线程与并发编程</title>
+    <url>/2024/03/14/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>Java体系知识</category>
+        <category>Java多线程和并发编程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java基础部分4-集合</title>
     <url>/2024/02/28/Java%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%864-%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="集合概述"><a href="#集合概述" class="headerlink" title="集合概述"></a>集合概述</h2><h3 id="①什么是集合，有什么用？"><a href="#①什么是集合，有什么用？" class="headerlink" title="①什么是集合，有什么用？"></a>①什么是集合，有什么用？</h3><p>1.集合是一种容器，用来组织和管理数据的。非常重要。</p>
@@ -3962,103 +3971,177 @@
       </categories>
   </entry>
   <entry>
-    <title>Java多线程与并发编程</title>
-    <url>/2024/03/14/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>Java体系知识</category>
-        <category>Java多线程和并发编程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java微服务3</title>
-    <url>/2024/03/17/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/</url>
-    <content><![CDATA[<h1 id="服务保护和分布式事务"><a href="#服务保护和分布式事务" class="headerlink" title="服务保护和分布式事务"></a>服务保护和分布式事务</h1><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317214812012.png" alt="image-20240317214812012">有个服务很高 一个服务就所有的线程和进程全占了</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215027907.png" alt="image-20240317215027907"></p>
-<h2 id="雪崩问题"><a href="#雪崩问题" class="headerlink" title="雪崩问题"></a>雪崩问题</h2><p>微服务调用链路中的某个服务故障，引起整个链路中的所有微服务都不可用，这就是雪崩。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215511651.png" alt="image-20240317215511651"></p>
-<h3 id="雪崩问题产生的原因是什么？"><a href="#雪崩问题产生的原因是什么？" class="headerlink" title="雪崩问题产生的原因是什么？"></a>雪崩问题产生的原因是什么？</h3><ul>
-<li>微服务相互调用，服务提供者出现故障或阻塞。</li>
-<li>服务调用者没有做好异常处理，导致自身故障。</li>
-<li>调用链中的所有服务级联失败，导致整个集群故障</li>
-</ul>
-<h3 id="解决问题的思路有哪些？"><a href="#解决问题的思路有哪些？" class="headerlink" title="解决问题的思路有哪些？"></a>解决问题的思路有哪些？</h3><ul>
-<li>尽量避免服务出现故障或阻塞。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">保证代码的健壮性；</span><br><span class="line"></span><br><span class="line">保证网络畅通；</span><br><span class="line"></span><br><span class="line">能应对较高的并发请求；</span><br></pre></td></tr></table></figure>
-
+    <title>Java微服务</title>
+    <url>/2024/03/14/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314203146347.png" alt="image-20240314203146347"></p>
+<h1 id="微服务01"><a href="#微服务01" class="headerlink" title="微服务01"></a>微服务01</h1><blockquote>
+<p>微服务：一种软件架构风格，他是专注于单一职责的很多小型项目为基础，组合出复杂的大型项目</p>
+</blockquote>
+<h2 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h2><p>将业务的所有功能都集中在一个项目中开发，打包成一个包部署</p>
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><p>架构简单；部署成本低</p>
+<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><p>团队协作成本高；系统的发布效率低；系统可用性差</p>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><p>微服务架构，是<strong>服务化思想指导下的一套最佳实践架构方案。</strong></p>
+<p>服务化，**&#x3D;&#x3D;就是把单体架构中的功能模块拆分为多个独立项目。&#x3D;&#x3D;**</p>
 <ul>
-<li>服务调用者做好远程调用异常的后备方案，避免故障扩散</li>
+<li><p>粒度小</p>
+</li>
+<li><p>团队自治</p>
+</li>
+<li><p>服务自治：分别编译打包；分别部署；数据隔离</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314205902699.png" alt="image-20240314205902699"></p>
+</li>
 </ul>
-<h3 id="服务保护方案"><a href="#服务保护方案" class="headerlink" title="服务保护方案"></a>服务保护方案</h3><h4 id="请求限流"><a href="#请求限流" class="headerlink" title="- 请求限流"></a>- 请求限流</h4><p>限制访问接口的请求的并发量，避免服务因流量激增出现故障。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220549992.png" alt="image-20240317220549992"></p>
-<h4 id="线程隔离"><a href="#线程隔离" class="headerlink" title="线程隔离"></a>线程隔离</h4><p>线程隔离：也叫做舱壁模式，模拟船舱隔板的防水原理。通过限定每个业务能使用的线程数量而将故障业务隔离，避免故障扩散。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220702031.png" alt="image-20240317220702031"></p>
-<h3 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h3><p>服务熔断：由<strong>断路器</strong>统计请求的异常比例或慢&#x3D;&#x3D;调用比例&#x3D;&#x3D;，如果超出阈值则会<strong>熔断</strong>该业务，则拦截该接口的请求。</p>
-<p>熔断期间，所有请求快速失败，全都走fallback逻辑。</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317223937333.png" alt="image-20240317223937333"></p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>请求限流</strong>：限制流量在服务可以处理的范围，避免因突发流量而故障</p>
-<p><strong>线程隔离</strong>：控制业务可用的线程数量，将故障隔离在一定范围</p>
-<p><strong>失败处理</strong>：定义fallback逻辑，让业务失败时不再抛出异常，而是走fallback逻辑</p>
-<p><strong>服务熔断</strong>：将异常比例过高的接口断开，拒绝所有请求，直接走fallback</p>
-<h3 id="服务保护技术"><a href="#服务保护技术" class="headerlink" title="服务保护技术"></a>服务保护技术</h3><table>
+<h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><p>SpringCloud是目前国内使用最广泛的微服务框架。官网地址：<a href="https://spring.io/projects/spring-cloud%E3%80%82">https://spring.io/projects/spring-cloud。</a></p>
+<p>SpringCloud集成了各种微服务功能组件，并基于SpringBoot实现了这些组件的自动装配，从而提供了良好的开箱即用体验：</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314211045953.png" alt="image-20240314211045953"></p>
+<table>
 <thead>
 <tr>
-<th></th>
-<th><strong>Sentinel</strong></th>
-<th><strong>Hystrix</strong></th>
+<th><strong>SpringCloud****版本</strong></th>
+<th><strong>SpringBoot****版本</strong></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>线程隔离</td>
-<td>信号量隔离</td>
-<td>线程池隔离&#x2F;信号量隔离</td>
+<td><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2022.0-Release-Notes">2022.0.x</a> aka Kilburn</td>
+<td>3.0.x</td>
 </tr>
 <tr>
-<td>熔断策略</td>
-<td>基于慢调用比例或异常比例</td>
-<td>基于异常比率</td>
+<td><strong><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2021.0-Release-Notes">2021.0.x</a></strong> <strong>aka Jubilee</strong></td>
+<td><strong>2.6.x, 2.7.x (Starting with  2021.0.3)</strong></td>
 </tr>
 <tr>
-<td>限流</td>
-<td>基于 QPS，支持流量整形</td>
-<td>有限的支持</td>
+<td><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes">2020.0.x</a> aka Ilford</td>
+<td>2.4.x, 2.5.x (Starting with  2020.0.3)</td>
 </tr>
 <tr>
-<td>Fallback</td>
-<td>支持</td>
-<td>支持</td>
+<td><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-Hoxton-Release-Notes">Hoxton</a></td>
+<td>2.2.x, 2.3.x (Starting with SR5)</td>
 </tr>
 <tr>
-<td>控制台</td>
-<td>开箱即用，可配置规则、查看秒级监控、机器发现等</td>
-<td>不完善</td>
+<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Greenwich-Release-Notes">Greenwich</a></td>
+<td>2.1.x</td>
 </tr>
 <tr>
-<td>配置方式</td>
-<td>基于控制台，重启后失效</td>
-<td>基于注解或配置文件，永久生效</td>
+<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Finchley-Release-Notes">Finchley</a></td>
+<td>2.0.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Edgware-Release-Notes">Edgware</a></td>
+<td>1.5.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Dalston-Release-Notes">Dalston</a></td>
+<td>1.5.x</td>
 </tr>
 </tbody></table>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：<a href="https://sentinelguard.io/zh-cn/index.html"> https://sentinelguard.io/zh-cn/index.html</a></p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224540969.png" alt="image-20240317224540969"></p>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="step1-导包"><a href="#step1-导包" class="headerlink" title="step1 导包"></a>step1 导包</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224630323.png" alt="image-20240317224630323"></p>
-<h4 id="step2-配置控制台"><a href="#step2-配置控制台" class="headerlink" title="step2 配置控制台"></a>step2 配置控制台</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224644608.png" alt="image-20240317224644608"></p>
-<h4 id="step3-重启访问"><a href="#step3-重启访问" class="headerlink" title="step3 重启访问"></a>step3 重启访问</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224807401.png" alt="image-20240317224807401"></p>
-<h3 id="簇点链路"><a href="#簇点链路" class="headerlink" title="簇点链路"></a><strong>簇点链路</strong></h3><p>就是单机调用链路。是一次请求进入服务后经过的每一个被Sentinel监控的资源链。默认Sentinel会监控SpringMVC的每一个Endpoint（http接口）。限流、熔断等都是针对簇点链路中的<strong>资源</strong>设置的。而资源名默认就是接口的请求路径：</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224937069.png" alt="image-20240317224937069"></p>
-<p>熔断什么的都是针对簇点资源做的</p>
-<p>Restful风格的API请求路径一般都相同，这会导致簇点资源名称重复。因此我们要修改配置，把<strong>请求方式+请求路径</strong>作为簇点资源名称：</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317225139867.png" alt="image-20240317225139867"></p>
-<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p>在分布式系统中，如果一个业务需要多个服务合作完成，而且每一个服务都有事务，&#x3D;&#x3D;多个事务必须同时成功或失败，这样的事务就是<strong>分布式事务</strong>。其中的每个服务的事务就是一个<strong>分支事务</strong>。整个业务称为<strong>全局事务</strong>。&#x3D;&#x3D;</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095044645.png" alt="image-20240318095044645"></p>
-<h3 id="初识Seata"><a href="#初识Seata" class="headerlink" title="初识Seata"></a>初识Seata</h3><p>解决分布式事务，各个子事务之间必须能感知到彼此的事务状态，才能保证状态一致。</p>
-<p>Seata事务管理中有三个重要的角色：</p>
-<p>•<strong>TC (Transaction Coordinator) -</strong> <strong>事务协调者：</strong>维护全局和分支事务的状态，协调全局事务提交或回滚。</p>
-<p>•<strong>TM (Transaction Manager) -</strong> <strong>事务管理器：</strong>定义全局事务的范围、开始全局事务、提交或回滚全局事务。</p>
-<p>•<strong>RM (Resource Manager) -</strong> <strong>资源管理器：</strong>管理分支事务，与TC交谈以注册分支事务和报告分支事务的状态</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095501708.png" alt="image-20240318095501708"></p>
-<h3 id="部署TC服务"><a href="#部署TC服务" class="headerlink" title="部署TC服务"></a>部署TC服务</h3><h3 id="微服务集成Seata"><a href="#微服务集成Seata" class="headerlink" title="微服务集成Seata"></a>微服务集成Seata</h3><h3 id="XA模式"><a href="#XA模式" class="headerlink" title="XA模式"></a>XA模式</h3><h3 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h3>]]></content>
+<h2 id="微服务拆分"><a href="#微服务拆分" class="headerlink" title="微服务拆分"></a>微服务拆分</h2><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314211735588.png" alt="image-20240314211735588"></p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314211911736.png" alt="image-20240314211911736"></p>
+<h3 id="服务拆分原则"><a href="#服务拆分原则" class="headerlink" title="服务拆分原则"></a>服务拆分原则</h3><h4 id="什么时候拆分"><a href="#什么时候拆分" class="headerlink" title="什么时候拆分"></a><strong>什么时候拆分</strong></h4><p>创业型项目：先采用单体架构，快速开发，快速试错。随着规模扩大，逐渐拆分。</p>
+<p>确定的大型项目：资金充足，目标明确，可以直接选择微服务架构，避免后续拆分的麻烦。</p>
+<h4 id="怎么拆分"><a href="#怎么拆分" class="headerlink" title="怎么拆分"></a><strong>怎么拆分</strong></h4><p>从拆分目标来说，要做到：</p>
+<ul>
+<li><strong>高内聚</strong>：每个微服务的职责要尽量单一，包含的业务相互关联度高、完整度高。</li>
+<li><strong>低耦合</strong>：每个微服务的功能要相对独立，尽量减少对其它微服务的依赖。</li>
+</ul>
+<p>从拆分方式来说，一般包含两种方式：</p>
+<ul>
+<li><strong>纵向拆分</strong>：按照业务模块来拆分</li>
+<li><strong>横向拆分</strong>：抽取公共服务，提高复用性</li>
+</ul>
+<h3 id="拆分服务"><a href="#拆分服务" class="headerlink" title="拆分服务"></a>拆分服务</h3><p>独立project</p>
+<p>Maven聚合</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314214402573.png" alt="image-20240314214402573"></p>
+<p>dto ：表单交互 </p>
+<h3 id="远程调用"><a href="#远程调用" class="headerlink" title="远程调用"></a>远程调用</h3><p>Spring给我们提供了一个RestTemplate工具，可以方便的实现Http请求的发送。使用步骤如下：</p>
+<p>①注入RestTemplate到Spring容器</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315141015868.png" alt="image-20240315141015868"></p>
+<p>②发起远程调用</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315141033725.png" alt="image-20240315141033725"></p>
+<p>requestArgsConstructor注解 ，对于所有的final的字段创建构造函数</p>
+<h2 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h2><h3 id="服务远程调用时存在的问题"><a href="#服务远程调用时存在的问题" class="headerlink" title="服务远程调用时存在的问题"></a>服务远程调用时存在的问题</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315151455307.png" alt="image-20240315151455307"></p>
+<p>在远程调用的时候，不知道调哪个服务器，如果那个服务器挂了也不知道怎么换</p>
+<h2 id="注册中心原理"><a href="#注册中心原理" class="headerlink" title="注册中心原理"></a>注册中心原理</h2><h4 id="所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；"><a href="#所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；" class="headerlink" title="所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；"></a>所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；</h4><h4 id="为了实现负载均衡，可能使用了轮询等"><a href="#为了实现负载均衡，可能使用了轮询等" class="headerlink" title="为了实现负载均衡，可能使用了轮询等"></a>为了实现负载均衡，可能使用了轮询等</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315152502417.png" alt="image-20240315152502417"></p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315152553563.png" alt="image-20240315152553563"></p>
+<h4 id="心跳续约"><a href="#心跳续约" class="headerlink" title="心跳续约"></a>心跳续约</h4><p>所有的服务都会定期和注册中心请求一下，说明自己还活着</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h5 id="服务治理中的三个角色分别是什么？"><a href="#服务治理中的三个角色分别是什么？" class="headerlink" title="服务治理中的三个角色分别是什么？"></a>服务治理中的三个角色分别是什么？</h5><p>​	&#x3D;&#x3D;服务提供者：暴露服务接口，供其它服务调用&#x3D;&#x3D;</p>
+<p>​	&#x3D;&#x3D;服务消费者：调用其它服务提供的接口&#x3D;&#x3D;</p>
+<p>​	&#x3D;&#x3D;注册中心：记录并监控微服务各实例状态，推送服务变更信息&#x3D;&#x3D;</p>
+<h5 id="消费者如何知道提供者的地址？"><a href="#消费者如何知道提供者的地址？" class="headerlink" title="消费者如何知道提供者的地址？"></a>消费者如何知道提供者的地址？</h5><p>​	服务提供者会在启动时注册自己信息到注册中心，消费者可以从注册中心订阅和拉取服务信息</p>
+<h5 id="消费者如何得知服务状态变更？"><a href="#消费者如何得知服务状态变更？" class="headerlink" title="消费者如何得知服务状态变更？"></a>消费者如何得知服务状态变更？</h5><p>​	服务提供者通过心跳机制向注册中心报告自己的健康状态，当心跳异常时注册中心会将异常服务剔除，并通知订阅了该服务的消费者</p>
+<h5 id="当提供者有多个实例时，消费者该选择哪一个？"><a href="#当提供者有多个实例时，消费者该选择哪一个？" class="headerlink" title="当提供者有多个实例时，消费者该选择哪一个？"></a>当提供者有多个实例时，消费者该选择哪一个？</h5><p>​	&#x3D;&#x3D;消费者可以通过负载均衡算法，从多个实例中选择一个&#x3D;&#x3D;</p>
+<h2 id="Nacos注册中心"><a href="#Nacos注册中心" class="headerlink" title="Nacos注册中心"></a>Nacos注册中心</h2><blockquote>
+<p>Nacos是目前国内企业中占比最多的注册中心组件。它是阿里巴巴的产品，目前已经加入SpringCloudAlibaba中。</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315154400243.png" alt="image-20240315154400243"></p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315155652332.png" alt="image-20240315155652332"></p>
+<h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><blockquote>
+<p>服务注册步骤如下：</p>
+</blockquote>
+<h3 id="①引入nacos-discovery依赖："><a href="#①引入nacos-discovery依赖：" class="headerlink" title="①引入nacos discovery依赖："></a>①引入nacos discovery依赖：</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315160950577.png" alt="image-20240315160950577"></p>
+<h3 id="②配置Nacos地址"><a href="#②配置Nacos地址" class="headerlink" title="②配置Nacos地址"></a>②配置Nacos地址</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315160955964.png" alt="image-20240315160955964"></p>
+<p>注意：每个微服务都要进行一个注册</p>
+<p>在idea里配置多个启动项就能实现多个服务</p>
+<blockquote>
+<p>用云服务器的话，记得把三个端口全部开放：8848、9848、9849，要不然会报错</p>
+</blockquote>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315161713629.png" alt="image-20240315161713629"></p>
+<h2 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h2><p><strong>消费者</strong>需要连接nacos以拉取和订阅服务，因此服务发现的前两步与服务注册是一样，后面再加上服务调用即可：</p>
+<p>①引入nacos discovery依赖</p>
+<p>… </p>
+<p>②配置nacos地址</p>
+<p>… </p>
+<p>③服务发现</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315162004885.png" alt="image-20240315162004885"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> DiscoveryClient discoveryClient;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">handleCartItems</span><span class="params">(List&lt;CartVO&gt; vos)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.根据服务名称，拉取服务的实例列表</span></span><br><span class="line">    List&lt;ServiceInstance&gt; instances = discoveryClient.getInstances(<span class="string">&quot;item-service&quot;</span>);</span><br><span class="line">    <span class="comment">// 2.负载均衡，挑选一个实例   </span></span><br><span class="line">    <span class="type">ServiceInstance</span> <span class="variable">instance</span> <span class="operator">=</span> instances.get(RandomUtil.randomInt(instances.size())); </span><br><span class="line">    <span class="comment">//这个是随机负载均衡</span></span><br><span class="line">    <span class="comment">// 3.获取实例的IP和端口    </span></span><br><span class="line">    <span class="type">URI</span> <span class="variable">uri</span> <span class="operator">=</span> instance.getUri();</span><br><span class="line">   <span class="comment">// ... 略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>nacos为这些提供了API</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315170136819.png" alt="image-20240315170136819"></p>
+<h2 id="OpenFeign"><a href="#OpenFeign" class="headerlink" title="OpenFeign"></a>OpenFeign</h2><h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><p>OpenFeign是一个声明式的http客户端，是SpringCloud在Eureka公司开源的Feign基础上改造而来。官方地址：<a href="https://github.com/OpenFeign/feign">https://github.com/OpenFeign/feign</a></p>
+<p><strong>其作用就是基于SpringMVC的常见注解，帮我们优雅的实现http请求的发送。</strong></p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315171700078.png" alt="image-20240315171700078"></p>
+<h4 id="①-引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer"><a href="#①-引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer" class="headerlink" title="① 引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer"></a>① 引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--OpenFeign--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--负载均衡--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--这个依赖里面有各种负载均衡的一些，早期用ribbon，后期用这个loadbalancer--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-loadbalancer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="②通过-EnableFeignClients注解，启用OpenFeign功能"><a href="#②通过-EnableFeignClients注解，启用OpenFeign功能" class="headerlink" title="②通过@EnableFeignClients注解，启用OpenFeign功能"></a>②通过@EnableFeignClients注解，启用OpenFeign功能</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CartApplication</span> &#123; <span class="comment">// ... 略 &#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="③编写FeignClient"><a href="#③编写FeignClient" class="headerlink" title="③编写FeignClient"></a>③编写FeignClient</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FeignClient(value = &quot;item-service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ItemClient</span> &#123;</span><br><span class="line">	<span class="meta">@GetMapping(&quot;/items&quot;)</span></span><br><span class="line">    List&lt;ItemDTO&gt; <span class="title function_">queryItemByIds</span><span class="params">(<span class="meta">@RequestParam(&quot;ids&quot;)</span> Collection&lt;Long&gt; ids)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="④使用FeignClient，实现远程调用"><a href="#④使用FeignClient，实现远程调用" class="headerlink" title="④使用FeignClient，实现远程调用"></a>④使用FeignClient，实现远程调用</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;ItemDTO&gt; items = itemClient.queryItemByIds(List.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h3><p>OpenFeign对Http请求做了优雅的伪装，不过其底层发起http请求，依赖于其它的框架。这些框架可以自己选择，包括以下三种：</p>
+<ul>
+<li>HttpURLConnection：默认实现，不支持连接池</li>
+<li>Apache HttpClient ：支持连接池</li>
+<li>OKHttp：支持连接池</li>
+</ul>
+<p>具体源码可以参考<strong>FeignBlockingLoadBalancerClient</strong>类中的<strong>delegate</strong>成员变量。</p>
+<h4 id="OpenFeign整合OKHttp的步骤"><a href="#OpenFeign整合OKHttp的步骤" class="headerlink" title="OpenFeign整合OKHttp的步骤"></a>OpenFeign整合OKHttp的步骤</h4><h5 id="①引入依赖"><a href="#①引入依赖" class="headerlink" title="①引入依赖"></a>①引入依赖</h5><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--ok-http--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.github.openfeign<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>feign-okhttp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="②开启连接池功能"><a href="#②开启连接池功能" class="headerlink" title="②开启连接池功能"></a>②开启连接池功能</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">feign:  </span><br><span class="line">	okhttp:</span><br><span class="line">		enabled: <span class="literal">true</span> # 开启OKHttp连接池支持</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316093447481.png" alt="image-20240316093447481"></p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316093502128.png" alt="image-20240316093502128"></p>
+<p>当定义的FeignClient不在SpringBootApplication的扫描包范围时，这些FeignClient无法使用。有两种方式解决：</p>
+<h4 id="方式一：指定FeignClient所在包"><a href="#方式一：指定FeignClient所在包" class="headerlink" title="方式一：指定FeignClient所在包"></a>方式一：指定FeignClient所在包</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316094114690.png" alt="image-20240316094114690"></p>
+<h4 id="方式二：指定FeignClient字节码"><a href="#方式二：指定FeignClient字节码" class="headerlink" title="方式二：指定FeignClient字节码"></a>方式二：指定FeignClient字节码</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316094121599.png" alt="image-20240316094121599"></p>
+<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><p>OpenFeign只会在FeignClient所在包的日志级别为<strong>DEBUG</strong>时，才会输出日志。而且其日志级别有4级：</p>
+<p><strong>NONE</strong>：不记录任何日志信息，这是默认值。</p>
+<p><strong>BASIC</strong>：仅记录请求的方法，URL以及响应状态码和执行时间</p>
+<p><strong>HEADERS</strong>：在BASIC的基础上，额外记录了请求和响应的头信息</p>
+<p><strong>FULL</strong>：记录所有请求和响应的明细，包括头信息、请求体、元数据。</p>
+<p>由于Feign默认的日志级别就是NONE，所以默认我们看不到请求日志。</p>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><h4 id="如何利用OpenFeign实现远程调用？"><a href="#如何利用OpenFeign实现远程调用？" class="headerlink" title="如何利用OpenFeign实现远程调用？"></a>如何利用OpenFeign实现远程调用？</h4><p>•引入OpenFeign和SpringCloudLoadBalancer依赖</p>
+<p>•利用@EnableFeignClients注解开启OpenFeign功能</p>
+<p>•编写FeignClient</p>
+<h4 id="如何配置OpenFeign的连接池？"><a href="#如何配置OpenFeign的连接池？" class="headerlink" title="如何配置OpenFeign的连接池？"></a>如何配置OpenFeign的连接池？</h4><p>•引入http客户端依赖，例如OKHttp、HttpClient</p>
+<p>•配置yaml文件，打开OpenFeign连接池开关</p>
+<h4 id="OpenFeign使用的最佳实践方式是什么？"><a href="#OpenFeign使用的最佳实践方式是什么？" class="headerlink" title="OpenFeign使用的最佳实践方式是什么？"></a>OpenFeign使用的最佳实践方式是什么？</h4><p>•由服务提供者编写独立module，将FeignClient及DTO抽取</p>
+<h4 id="如何配置OpenFeign输出日志的级别？"><a href="#如何配置OpenFeign输出日志的级别？" class="headerlink" title="如何配置OpenFeign输出日志的级别？"></a>如何配置OpenFeign输出日志的级别？</h4><p>•声明类型为Logger.Level的Bean</p>
+<p>•在@FeignClient或@EnableFeignClients注解上使用</p>
+]]></content>
       <categories>
         <category>Java体系知识</category>
         <category>微服务</category>
@@ -4285,19 +4368,97 @@
       </categories>
   </entry>
   <entry>
-    <title>Redis-发布订阅</title>
-    <url>/2024/04/01/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</url>
-    <content><![CDATA[<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153705166.png" alt="image-20240401153705166"></p>
-<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153751361.png" alt="image-20240401153751361"></p>
-<img src="../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153845316.png" alt="image-20240401153845316" style="zoom:33%;" />
+    <title>Java微服务3</title>
+    <url>/2024/03/17/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/</url>
+    <content><![CDATA[<h1 id="服务保护和分布式事务"><a href="#服务保护和分布式事务" class="headerlink" title="服务保护和分布式事务"></a>服务保护和分布式事务</h1><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317214812012.png" alt="image-20240317214812012">有个服务很高 一个服务就所有的线程和进程全占了</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215027907.png" alt="image-20240317215027907"></p>
+<h2 id="雪崩问题"><a href="#雪崩问题" class="headerlink" title="雪崩问题"></a>雪崩问题</h2><p>微服务调用链路中的某个服务故障，引起整个链路中的所有微服务都不可用，这就是雪崩。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215511651.png" alt="image-20240317215511651"></p>
+<h3 id="雪崩问题产生的原因是什么？"><a href="#雪崩问题产生的原因是什么？" class="headerlink" title="雪崩问题产生的原因是什么？"></a>雪崩问题产生的原因是什么？</h3><ul>
+<li>微服务相互调用，服务提供者出现故障或阻塞。</li>
+<li>服务调用者没有做好异常处理，导致自身故障。</li>
+<li>调用链中的所有服务级联失败，导致整个集群故障</li>
+</ul>
+<h3 id="解决问题的思路有哪些？"><a href="#解决问题的思路有哪些？" class="headerlink" title="解决问题的思路有哪些？"></a>解决问题的思路有哪些？</h3><ul>
+<li>尽量避免服务出现故障或阻塞。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">保证代码的健壮性；</span><br><span class="line"></span><br><span class="line">保证网络畅通；</span><br><span class="line"></span><br><span class="line">能应对较高的并发请求；</span><br></pre></td></tr></table></figure>
 
-<img src="../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153902782.png" alt="image-20240401153902782" style="zoom:33%;" />
-
-<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153920432.png" alt="image-20240401153920432"></p>
-]]></content>
+<ul>
+<li>服务调用者做好远程调用异常的后备方案，避免故障扩散</li>
+</ul>
+<h3 id="服务保护方案"><a href="#服务保护方案" class="headerlink" title="服务保护方案"></a>服务保护方案</h3><h4 id="请求限流"><a href="#请求限流" class="headerlink" title="- 请求限流"></a>- 请求限流</h4><p>限制访问接口的请求的并发量，避免服务因流量激增出现故障。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220549992.png" alt="image-20240317220549992"></p>
+<h4 id="线程隔离"><a href="#线程隔离" class="headerlink" title="线程隔离"></a>线程隔离</h4><p>线程隔离：也叫做舱壁模式，模拟船舱隔板的防水原理。通过限定每个业务能使用的线程数量而将故障业务隔离，避免故障扩散。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220702031.png" alt="image-20240317220702031"></p>
+<h3 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h3><p>服务熔断：由<strong>断路器</strong>统计请求的异常比例或慢&#x3D;&#x3D;调用比例&#x3D;&#x3D;，如果超出阈值则会<strong>熔断</strong>该业务，则拦截该接口的请求。</p>
+<p>熔断期间，所有请求快速失败，全都走fallback逻辑。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317223937333.png" alt="image-20240317223937333"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>请求限流</strong>：限制流量在服务可以处理的范围，避免因突发流量而故障</p>
+<p><strong>线程隔离</strong>：控制业务可用的线程数量，将故障隔离在一定范围</p>
+<p><strong>失败处理</strong>：定义fallback逻辑，让业务失败时不再抛出异常，而是走fallback逻辑</p>
+<p><strong>服务熔断</strong>：将异常比例过高的接口断开，拒绝所有请求，直接走fallback</p>
+<h3 id="服务保护技术"><a href="#服务保护技术" class="headerlink" title="服务保护技术"></a>服务保护技术</h3><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Sentinel</strong></th>
+<th><strong>Hystrix</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>线程隔离</td>
+<td>信号量隔离</td>
+<td>线程池隔离&#x2F;信号量隔离</td>
+</tr>
+<tr>
+<td>熔断策略</td>
+<td>基于慢调用比例或异常比例</td>
+<td>基于异常比率</td>
+</tr>
+<tr>
+<td>限流</td>
+<td>基于 QPS，支持流量整形</td>
+<td>有限的支持</td>
+</tr>
+<tr>
+<td>Fallback</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>控制台</td>
+<td>开箱即用，可配置规则、查看秒级监控、机器发现等</td>
+<td>不完善</td>
+</tr>
+<tr>
+<td>配置方式</td>
+<td>基于控制台，重启后失效</td>
+<td>基于注解或配置文件，永久生效</td>
+</tr>
+</tbody></table>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：<a href="https://sentinelguard.io/zh-cn/index.html"> https://sentinelguard.io/zh-cn/index.html</a></p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224540969.png" alt="image-20240317224540969"></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="step1-导包"><a href="#step1-导包" class="headerlink" title="step1 导包"></a>step1 导包</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224630323.png" alt="image-20240317224630323"></p>
+<h4 id="step2-配置控制台"><a href="#step2-配置控制台" class="headerlink" title="step2 配置控制台"></a>step2 配置控制台</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224644608.png" alt="image-20240317224644608"></p>
+<h4 id="step3-重启访问"><a href="#step3-重启访问" class="headerlink" title="step3 重启访问"></a>step3 重启访问</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224807401.png" alt="image-20240317224807401"></p>
+<h3 id="簇点链路"><a href="#簇点链路" class="headerlink" title="簇点链路"></a><strong>簇点链路</strong></h3><p>就是单机调用链路。是一次请求进入服务后经过的每一个被Sentinel监控的资源链。默认Sentinel会监控SpringMVC的每一个Endpoint（http接口）。限流、熔断等都是针对簇点链路中的<strong>资源</strong>设置的。而资源名默认就是接口的请求路径：</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224937069.png" alt="image-20240317224937069"></p>
+<p>熔断什么的都是针对簇点资源做的</p>
+<p>Restful风格的API请求路径一般都相同，这会导致簇点资源名称重复。因此我们要修改配置，把<strong>请求方式+请求路径</strong>作为簇点资源名称：</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317225139867.png" alt="image-20240317225139867"></p>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p>在分布式系统中，如果一个业务需要多个服务合作完成，而且每一个服务都有事务，&#x3D;&#x3D;多个事务必须同时成功或失败，这样的事务就是<strong>分布式事务</strong>。其中的每个服务的事务就是一个<strong>分支事务</strong>。整个业务称为<strong>全局事务</strong>。&#x3D;&#x3D;</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095044645.png" alt="image-20240318095044645"></p>
+<h3 id="初识Seata"><a href="#初识Seata" class="headerlink" title="初识Seata"></a>初识Seata</h3><p>解决分布式事务，各个子事务之间必须能感知到彼此的事务状态，才能保证状态一致。</p>
+<p>Seata事务管理中有三个重要的角色：</p>
+<p>•<strong>TC (Transaction Coordinator) -</strong> <strong>事务协调者：</strong>维护全局和分支事务的状态，协调全局事务提交或回滚。</p>
+<p>•<strong>TM (Transaction Manager) -</strong> <strong>事务管理器：</strong>定义全局事务的范围、开始全局事务、提交或回滚全局事务。</p>
+<p>•<strong>RM (Resource Manager) -</strong> <strong>资源管理器：</strong>管理分支事务，与TC交谈以注册分支事务和报告分支事务的状态</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095501708.png" alt="image-20240318095501708"></p>
+<h3 id="部署TC服务"><a href="#部署TC服务" class="headerlink" title="部署TC服务"></a>部署TC服务</h3><h3 id="微服务集成Seata"><a href="#微服务集成Seata" class="headerlink" title="微服务集成Seata"></a>微服务集成Seata</h3><h3 id="XA模式"><a href="#XA模式" class="headerlink" title="XA模式"></a>XA模式</h3><h3 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h3>]]></content>
       <categories>
-        <category>中间件</category>
-        <category>Redis</category>
+        <category>Java体系知识</category>
+        <category>微服务</category>
       </categories>
   </entry>
   <entry>
@@ -4345,6 +4506,22 @@
 <li>入队：将多个命令入队到事务当中去，接到这些命令并不会立即的执行，而是会放到等待执行的事务队列中</li>
 <li>执行：由EXEC命令触发事务</li>
 </ul>
+]]></content>
+      <categories>
+        <category>中间件</category>
+        <category>Redis</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Redis-发布订阅</title>
+    <url>/2024/04/01/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/</url>
+    <content><![CDATA[<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153705166.png" alt="image-20240401153705166"></p>
+<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153751361.png" alt="image-20240401153751361"></p>
+<img src="../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153845316.png" alt="image-20240401153845316" style="zoom:33%;" />
+
+<img src="../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153902782.png" alt="image-20240401153902782" style="zoom:33%;" />
+
+<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153920432.png" alt="image-20240401153920432"></p>
 ]]></content>
       <categories>
         <category>中间件</category>
@@ -4464,183 +4641,6 @@
       <categories>
         <category>中间件</category>
         <category>Redis</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java微服务</title>
-    <url>/2024/03/14/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314203146347.png" alt="image-20240314203146347"></p>
-<h1 id="微服务01"><a href="#微服务01" class="headerlink" title="微服务01"></a>微服务01</h1><blockquote>
-<p>微服务：一种软件架构风格，他是专注于单一职责的很多小型项目为基础，组合出复杂的大型项目</p>
-</blockquote>
-<h2 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h2><p>将业务的所有功能都集中在一个项目中开发，打包成一个包部署</p>
-<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><p>架构简单；部署成本低</p>
-<h3 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h3><p>团队协作成本高；系统的发布效率低；系统可用性差</p>
-<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><p>微服务架构，是<strong>服务化思想指导下的一套最佳实践架构方案。</strong></p>
-<p>服务化，**&#x3D;&#x3D;就是把单体架构中的功能模块拆分为多个独立项目。&#x3D;&#x3D;**</p>
-<ul>
-<li><p>粒度小</p>
-</li>
-<li><p>团队自治</p>
-</li>
-<li><p>服务自治：分别编译打包；分别部署；数据隔离</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314205902699.png" alt="image-20240314205902699"></p>
-</li>
-</ul>
-<h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><p>SpringCloud是目前国内使用最广泛的微服务框架。官网地址：<a href="https://spring.io/projects/spring-cloud%E3%80%82">https://spring.io/projects/spring-cloud。</a></p>
-<p>SpringCloud集成了各种微服务功能组件，并基于SpringBoot实现了这些组件的自动装配，从而提供了良好的开箱即用体验：</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314211045953.png" alt="image-20240314211045953"></p>
-<table>
-<thead>
-<tr>
-<th><strong>SpringCloud****版本</strong></th>
-<th><strong>SpringBoot****版本</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2022.0-Release-Notes">2022.0.x</a> aka Kilburn</td>
-<td>3.0.x</td>
-</tr>
-<tr>
-<td><strong><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2021.0-Release-Notes">2021.0.x</a></strong> <strong>aka Jubilee</strong></td>
-<td><strong>2.6.x, 2.7.x (Starting with  2021.0.3)</strong></td>
-</tr>
-<tr>
-<td><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-2020.0-Release-Notes">2020.0.x</a> aka Ilford</td>
-<td>2.4.x, 2.5.x (Starting with  2020.0.3)</td>
-</tr>
-<tr>
-<td><a href="https://github.com/spring-cloud/spring-cloud-release/wiki/Spring-Cloud-Hoxton-Release-Notes">Hoxton</a></td>
-<td>2.2.x, 2.3.x (Starting with SR5)</td>
-</tr>
-<tr>
-<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Greenwich-Release-Notes">Greenwich</a></td>
-<td>2.1.x</td>
-</tr>
-<tr>
-<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Finchley-Release-Notes">Finchley</a></td>
-<td>2.0.x</td>
-</tr>
-<tr>
-<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Edgware-Release-Notes">Edgware</a></td>
-<td>1.5.x</td>
-</tr>
-<tr>
-<td><a href="https://github.com/spring-projects/spring-cloud/wiki/Spring-Cloud-Dalston-Release-Notes">Dalston</a></td>
-<td>1.5.x</td>
-</tr>
-</tbody></table>
-<h2 id="微服务拆分"><a href="#微服务拆分" class="headerlink" title="微服务拆分"></a>微服务拆分</h2><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314211735588.png" alt="image-20240314211735588"></p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314211911736.png" alt="image-20240314211911736"></p>
-<h3 id="服务拆分原则"><a href="#服务拆分原则" class="headerlink" title="服务拆分原则"></a>服务拆分原则</h3><h4 id="什么时候拆分"><a href="#什么时候拆分" class="headerlink" title="什么时候拆分"></a><strong>什么时候拆分</strong></h4><p>创业型项目：先采用单体架构，快速开发，快速试错。随着规模扩大，逐渐拆分。</p>
-<p>确定的大型项目：资金充足，目标明确，可以直接选择微服务架构，避免后续拆分的麻烦。</p>
-<h4 id="怎么拆分"><a href="#怎么拆分" class="headerlink" title="怎么拆分"></a><strong>怎么拆分</strong></h4><p>从拆分目标来说，要做到：</p>
-<ul>
-<li><strong>高内聚</strong>：每个微服务的职责要尽量单一，包含的业务相互关联度高、完整度高。</li>
-<li><strong>低耦合</strong>：每个微服务的功能要相对独立，尽量减少对其它微服务的依赖。</li>
-</ul>
-<p>从拆分方式来说，一般包含两种方式：</p>
-<ul>
-<li><strong>纵向拆分</strong>：按照业务模块来拆分</li>
-<li><strong>横向拆分</strong>：抽取公共服务，提高复用性</li>
-</ul>
-<h3 id="拆分服务"><a href="#拆分服务" class="headerlink" title="拆分服务"></a>拆分服务</h3><p>独立project</p>
-<p>Maven聚合</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240314214402573.png" alt="image-20240314214402573"></p>
-<p>dto ：表单交互 </p>
-<h3 id="远程调用"><a href="#远程调用" class="headerlink" title="远程调用"></a>远程调用</h3><p>Spring给我们提供了一个RestTemplate工具，可以方便的实现Http请求的发送。使用步骤如下：</p>
-<p>①注入RestTemplate到Spring容器</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315141015868.png" alt="image-20240315141015868"></p>
-<p>②发起远程调用</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315141033725.png" alt="image-20240315141033725"></p>
-<p>requestArgsConstructor注解 ，对于所有的final的字段创建构造函数</p>
-<h2 id="服务治理"><a href="#服务治理" class="headerlink" title="服务治理"></a>服务治理</h2><h3 id="服务远程调用时存在的问题"><a href="#服务远程调用时存在的问题" class="headerlink" title="服务远程调用时存在的问题"></a>服务远程调用时存在的问题</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315151455307.png" alt="image-20240315151455307"></p>
-<p>在远程调用的时候，不知道调哪个服务器，如果那个服务器挂了也不知道怎么换</p>
-<h2 id="注册中心原理"><a href="#注册中心原理" class="headerlink" title="注册中心原理"></a>注册中心原理</h2><h4 id="所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；"><a href="#所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；" class="headerlink" title="所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；"></a>所有的服务提供者都会在注册中心注册，然后当服务调用者要调用的时候，就会把注册的信息传输过去；</h4><h4 id="为了实现负载均衡，可能使用了轮询等"><a href="#为了实现负载均衡，可能使用了轮询等" class="headerlink" title="为了实现负载均衡，可能使用了轮询等"></a>为了实现负载均衡，可能使用了轮询等</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315152502417.png" alt="image-20240315152502417"></p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315152553563.png" alt="image-20240315152553563"></p>
-<h4 id="心跳续约"><a href="#心跳续约" class="headerlink" title="心跳续约"></a>心跳续约</h4><p>所有的服务都会定期和注册中心请求一下，说明自己还活着</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h5 id="服务治理中的三个角色分别是什么？"><a href="#服务治理中的三个角色分别是什么？" class="headerlink" title="服务治理中的三个角色分别是什么？"></a>服务治理中的三个角色分别是什么？</h5><p>​	&#x3D;&#x3D;服务提供者：暴露服务接口，供其它服务调用&#x3D;&#x3D;</p>
-<p>​	&#x3D;&#x3D;服务消费者：调用其它服务提供的接口&#x3D;&#x3D;</p>
-<p>​	&#x3D;&#x3D;注册中心：记录并监控微服务各实例状态，推送服务变更信息&#x3D;&#x3D;</p>
-<h5 id="消费者如何知道提供者的地址？"><a href="#消费者如何知道提供者的地址？" class="headerlink" title="消费者如何知道提供者的地址？"></a>消费者如何知道提供者的地址？</h5><p>​	服务提供者会在启动时注册自己信息到注册中心，消费者可以从注册中心订阅和拉取服务信息</p>
-<h5 id="消费者如何得知服务状态变更？"><a href="#消费者如何得知服务状态变更？" class="headerlink" title="消费者如何得知服务状态变更？"></a>消费者如何得知服务状态变更？</h5><p>​	服务提供者通过心跳机制向注册中心报告自己的健康状态，当心跳异常时注册中心会将异常服务剔除，并通知订阅了该服务的消费者</p>
-<h5 id="当提供者有多个实例时，消费者该选择哪一个？"><a href="#当提供者有多个实例时，消费者该选择哪一个？" class="headerlink" title="当提供者有多个实例时，消费者该选择哪一个？"></a>当提供者有多个实例时，消费者该选择哪一个？</h5><p>​	&#x3D;&#x3D;消费者可以通过负载均衡算法，从多个实例中选择一个&#x3D;&#x3D;</p>
-<h2 id="Nacos注册中心"><a href="#Nacos注册中心" class="headerlink" title="Nacos注册中心"></a>Nacos注册中心</h2><blockquote>
-<p>Nacos是目前国内企业中占比最多的注册中心组件。它是阿里巴巴的产品，目前已经加入SpringCloudAlibaba中。</p>
-</blockquote>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315154400243.png" alt="image-20240315154400243"></p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315155652332.png" alt="image-20240315155652332"></p>
-<h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><blockquote>
-<p>服务注册步骤如下：</p>
-</blockquote>
-<h3 id="①引入nacos-discovery依赖："><a href="#①引入nacos-discovery依赖：" class="headerlink" title="①引入nacos discovery依赖："></a>①引入nacos discovery依赖：</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315160950577.png" alt="image-20240315160950577"></p>
-<h3 id="②配置Nacos地址"><a href="#②配置Nacos地址" class="headerlink" title="②配置Nacos地址"></a>②配置Nacos地址</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315160955964.png" alt="image-20240315160955964"></p>
-<p>注意：每个微服务都要进行一个注册</p>
-<p>在idea里配置多个启动项就能实现多个服务</p>
-<blockquote>
-<p>用云服务器的话，记得把三个端口全部开放：8848、9848、9849，要不然会报错</p>
-</blockquote>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315161713629.png" alt="image-20240315161713629"></p>
-<h2 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h2><p><strong>消费者</strong>需要连接nacos以拉取和订阅服务，因此服务发现的前两步与服务注册是一样，后面再加上服务调用即可：</p>
-<p>①引入nacos discovery依赖</p>
-<p>… </p>
-<p>②配置nacos地址</p>
-<p>… </p>
-<p>③服务发现</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315162004885.png" alt="image-20240315162004885"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> DiscoveryClient discoveryClient;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">handleCartItems</span><span class="params">(List&lt;CartVO&gt; vos)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.根据服务名称，拉取服务的实例列表</span></span><br><span class="line">    List&lt;ServiceInstance&gt; instances = discoveryClient.getInstances(<span class="string">&quot;item-service&quot;</span>);</span><br><span class="line">    <span class="comment">// 2.负载均衡，挑选一个实例   </span></span><br><span class="line">    <span class="type">ServiceInstance</span> <span class="variable">instance</span> <span class="operator">=</span> instances.get(RandomUtil.randomInt(instances.size())); </span><br><span class="line">    <span class="comment">//这个是随机负载均衡</span></span><br><span class="line">    <span class="comment">// 3.获取实例的IP和端口    </span></span><br><span class="line">    <span class="type">URI</span> <span class="variable">uri</span> <span class="operator">=</span> instance.getUri();</span><br><span class="line">   <span class="comment">// ... 略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>nacos为这些提供了API</p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315170136819.png" alt="image-20240315170136819"></p>
-<h2 id="OpenFeign"><a href="#OpenFeign" class="headerlink" title="OpenFeign"></a>OpenFeign</h2><h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><p>OpenFeign是一个声明式的http客户端，是SpringCloud在Eureka公司开源的Feign基础上改造而来。官方地址：<a href="https://github.com/OpenFeign/feign">https://github.com/OpenFeign/feign</a></p>
-<p><strong>其作用就是基于SpringMVC的常见注解，帮我们优雅的实现http请求的发送。</strong></p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240315171700078.png" alt="image-20240315171700078"></p>
-<h4 id="①-引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer"><a href="#①-引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer" class="headerlink" title="① 引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer"></a>① 引入依赖，包括OpenFeign和负载均衡组件SpringCloudLoadBalancer</h4><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--OpenFeign--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>    </span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--负载均衡--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--这个依赖里面有各种负载均衡的一些，早期用ribbon，后期用这个loadbalancer--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-loadbalancer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="②通过-EnableFeignClients注解，启用OpenFeign功能"><a href="#②通过-EnableFeignClients注解，启用OpenFeign功能" class="headerlink" title="②通过@EnableFeignClients注解，启用OpenFeign功能"></a>②通过@EnableFeignClients注解，启用OpenFeign功能</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CartApplication</span> &#123; <span class="comment">// ... 略 &#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="③编写FeignClient"><a href="#③编写FeignClient" class="headerlink" title="③编写FeignClient"></a>③编写FeignClient</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FeignClient(value = &quot;item-service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ItemClient</span> &#123;</span><br><span class="line">	<span class="meta">@GetMapping(&quot;/items&quot;)</span></span><br><span class="line">    List&lt;ItemDTO&gt; <span class="title function_">queryItemByIds</span><span class="params">(<span class="meta">@RequestParam(&quot;ids&quot;)</span> Collection&lt;Long&gt; ids)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="④使用FeignClient，实现远程调用"><a href="#④使用FeignClient，实现远程调用" class="headerlink" title="④使用FeignClient，实现远程调用"></a>④使用FeignClient，实现远程调用</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;ItemDTO&gt; items = itemClient.queryItemByIds(List.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="连接池"><a href="#连接池" class="headerlink" title="连接池"></a>连接池</h3><p>OpenFeign对Http请求做了优雅的伪装，不过其底层发起http请求，依赖于其它的框架。这些框架可以自己选择，包括以下三种：</p>
-<ul>
-<li>HttpURLConnection：默认实现，不支持连接池</li>
-<li>Apache HttpClient ：支持连接池</li>
-<li>OKHttp：支持连接池</li>
-</ul>
-<p>具体源码可以参考<strong>FeignBlockingLoadBalancerClient</strong>类中的<strong>delegate</strong>成员变量。</p>
-<h4 id="OpenFeign整合OKHttp的步骤"><a href="#OpenFeign整合OKHttp的步骤" class="headerlink" title="OpenFeign整合OKHttp的步骤"></a>OpenFeign整合OKHttp的步骤</h4><h5 id="①引入依赖"><a href="#①引入依赖" class="headerlink" title="①引入依赖"></a>①引入依赖</h5><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--ok-http--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.github.openfeign<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>feign-okhttp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h5 id="②开启连接池功能"><a href="#②开启连接池功能" class="headerlink" title="②开启连接池功能"></a>②开启连接池功能</h5><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">feign:  </span><br><span class="line">	okhttp:</span><br><span class="line">		enabled: <span class="literal">true</span> # 开启OKHttp连接池支持</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316093447481.png" alt="image-20240316093447481"></p>
-<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316093502128.png" alt="image-20240316093502128"></p>
-<p>当定义的FeignClient不在SpringBootApplication的扫描包范围时，这些FeignClient无法使用。有两种方式解决：</p>
-<h4 id="方式一：指定FeignClient所在包"><a href="#方式一：指定FeignClient所在包" class="headerlink" title="方式一：指定FeignClient所在包"></a>方式一：指定FeignClient所在包</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316094114690.png" alt="image-20240316094114690"></p>
-<h4 id="方式二：指定FeignClient字节码"><a href="#方式二：指定FeignClient字节码" class="headerlink" title="方式二：指定FeignClient字节码"></a>方式二：指定FeignClient字节码</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A1/image-20240316094121599.png" alt="image-20240316094121599"></p>
-<h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><p>OpenFeign只会在FeignClient所在包的日志级别为<strong>DEBUG</strong>时，才会输出日志。而且其日志级别有4级：</p>
-<p><strong>NONE</strong>：不记录任何日志信息，这是默认值。</p>
-<p><strong>BASIC</strong>：仅记录请求的方法，URL以及响应状态码和执行时间</p>
-<p><strong>HEADERS</strong>：在BASIC的基础上，额外记录了请求和响应的头信息</p>
-<p><strong>FULL</strong>：记录所有请求和响应的明细，包括头信息、请求体、元数据。</p>
-<p>由于Feign默认的日志级别就是NONE，所以默认我们看不到请求日志。</p>
-<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><h4 id="如何利用OpenFeign实现远程调用？"><a href="#如何利用OpenFeign实现远程调用？" class="headerlink" title="如何利用OpenFeign实现远程调用？"></a>如何利用OpenFeign实现远程调用？</h4><p>•引入OpenFeign和SpringCloudLoadBalancer依赖</p>
-<p>•利用@EnableFeignClients注解开启OpenFeign功能</p>
-<p>•编写FeignClient</p>
-<h4 id="如何配置OpenFeign的连接池？"><a href="#如何配置OpenFeign的连接池？" class="headerlink" title="如何配置OpenFeign的连接池？"></a>如何配置OpenFeign的连接池？</h4><p>•引入http客户端依赖，例如OKHttp、HttpClient</p>
-<p>•配置yaml文件，打开OpenFeign连接池开关</p>
-<h4 id="OpenFeign使用的最佳实践方式是什么？"><a href="#OpenFeign使用的最佳实践方式是什么？" class="headerlink" title="OpenFeign使用的最佳实践方式是什么？"></a>OpenFeign使用的最佳实践方式是什么？</h4><p>•由服务提供者编写独立module，将FeignClient及DTO抽取</p>
-<h4 id="如何配置OpenFeign输出日志的级别？"><a href="#如何配置OpenFeign输出日志的级别？" class="headerlink" title="如何配置OpenFeign输出日志的级别？"></a>如何配置OpenFeign输出日志的级别？</h4><p>•声明类型为Logger.Level的Bean</p>
-<p>•在@FeignClient或@EnableFeignClients注解上使用</p>
-]]></content>
-      <categories>
-        <category>Java体系知识</category>
-        <category>微服务</category>
       </categories>
   </entry>
   <entry>
@@ -4882,31 +4882,69 @@
       </categories>
   </entry>
   <entry>
-    <title>SpringBoot</title>
-    <url>/2024/02/23/SpringBoot/</url>
-    <content><![CDATA[<blockquote>
-<p>这个是从原理开始讲的，这个我不照着写，我就是学</p>
-</blockquote>
-<p>springboot内置了tomcat，所以可以直接打包成jar包</p>
-<h1 id="什么是tomcat"><a href="#什么是tomcat" class="headerlink" title="什么是tomcat"></a>什么是tomcat</h1><p>Tomcat是常见的免费的web服务器。</p>
-<h2 id="1-不使用tomcat访问html"><a href="#1-不使用tomcat访问html" class="headerlink" title="1. 不使用tomcat访问html"></a>1. 不使用tomcat访问html</h2><p>可以在浏览器的地址里看到 file:d:&#x2F;test.html 这样的格式，是通过打开本地文件的形式打开的</p>
-<p>但是我们平时上网看到的html网址一般都是: <a href="https://link.zhihu.com/?target=http://12306.com/index.html">http://12306.com/index.html</a> 这样的形式<br>这是因为有web服务器的存在</p>
-<h2 id="2-使用tomcat后，访问html"><a href="#2-使用tomcat后，访问html" class="headerlink" title="2.使用tomcat后，访问html"></a>2.使用tomcat后，访问html</h2><p>使用tomcat后，可以像127.0.0.1:8080&#x2F;test.html这样访问一个网站，而不是访问一个html文件。因为tomcat本身就是一个web服务器，test.html部署在了这个web服务器上</p>
-<p><img src="/../blog_images/SpringBoot/2018120522281643.gif" alt="img"></p>
-<h1 id="SpringBoot启动"><a href="#SpringBoot启动" class="headerlink" title="SpringBoot启动"></a>SpringBoot启动</h1>]]></content>
-      <tags>
-        <tag>Java体系知识</tag>
-        <tag>SpringBoot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis-集群</title>
     <url>/2024/04/01/Redis-%E9%9B%86%E7%BE%A4/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="Redis集群"><a href="#Redis集群" class="headerlink" title="Redis集群"></a>Redis集群</h1><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401213935236.png" alt="image-20240401213935236" style="zoom:25%;" />
+
+<blockquote>
+<p>集群:由于数据量过大,单个master复制集难以承担,因此需要对多个复制集进行集群,形成水平扩展每个复制集只负责存储整个数据集的一部分,这就是redis的集群,其作用是提供在多个redis节点间共享数据的程序集</p>
+</blockquote>
+<p>考集群的算法和架构拓扑安装</p>
+<p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401214301548.png" alt="image-20240401214301548"></p>
+<p><strong>&#x3D;&#x3D;Redis集群是一个提供在多个Redis节点间共享数据的程序集&#x3D;&#x3D;</strong></p>
+<p><strong>&#x3D;&#x3D;Redis集群可以支持多个Master&#x3D;&#x3D;</strong></p>
+<h2 id="干什么"><a href="#干什么" class="headerlink" title="干什么"></a>干什么</h2><p><strong>redis集群支持多个Master,每个Master又可以挂载多个slave</strong></p>
+<ul>
+<li>读写分离</li>
+<li>支持数据的高可用</li>
+<li>支持海量数据的读写存储操作</li>
+</ul>
+<p><strong>由于cluster自带的故障转移机制,内置了高可用的支持,无需再去使用哨兵的功能</strong></p>
+<p><strong>客户端与redis的节点连接,不再需要连接集群中的所有节点,只需要任意连接集群中的一个可用节点即可</strong></p>
+<p><strong>槽位slot负责分配到各个物理服务节点,又对应的集群来负责维护节点,插槽和数据之间的关系.</strong></p>
+<h1 id="集群算法-分片-槽位slot"><a href="#集群算法-分片-槽位slot" class="headerlink" title="集群算法 分片 槽位slot"></a>集群算法 分片 槽位slot</h1><h2 id="槽位slot"><a href="#槽位slot" class="headerlink" title="槽位slot"></a>槽位slot</h2><p>集群的密钥空间被分为16384个槽位,有效设置了16384个主节点的集群大小上限(但是建议,最大的节点大小约为1000个节点)</p>
+<p>redis有16384个哈希槽,每个key通过CRC16校验后对16384取模来决定防止在哪个槽,集群的每个节点负责一部分hash槽.</p>
+<img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401220220448.png" alt="image-20240401220220448" style="zoom:33%;" />
+
+<h2 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h2><h3 id="1-定义-使用redis集群时我们会将存储的数据分散到多台redis机器中-这称为分片"><a href="#1-定义-使用redis集群时我们会将存储的数据分散到多台redis机器中-这称为分片" class="headerlink" title="1. 定义:使用redis集群时我们会将存储的数据分散到多台redis机器中,这称为分片."></a>1. 定义:使用redis集群时我们会将存储的数据分散到多台redis机器中,这称为分片.</h3><blockquote>
+<p>集群中的每个redis实例都被认为是整个数据的一个分片</p>
+</blockquote>
+<h3 id="2-如何找到给定key的一个分片"><a href="#2-如何找到给定key的一个分片" class="headerlink" title="2.如何找到给定key的一个分片"></a><strong>2.如何找到给定key的一个分片</strong></h3><blockquote>
+<p>为了找到给定key的分片,我们对key进行CRC16(KEY)算法处理并通过对总分片数量取模.然后,<strong>使用确定性哈希函数</strong>,这意味着给定的key<strong>将多次始终映射到同一个分片</strong>,我们可以推断将来读取特定key的位置</p>
+</blockquote>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401221138492.png" alt="image-20240401221138492"></p>
+<h1 id="slot槽位映射-一般业界有三种解决方案"><a href="#slot槽位映射-一般业界有三种解决方案" class="headerlink" title="slot槽位映射,一般业界有三种解决方案"></a>slot槽位映射,一般业界有三种解决方案</h1><h2 id="redis集群分片之hash取余分区算法"><a href="#redis集群分片之hash取余分区算法" class="headerlink" title="redis集群分片之hash取余分区算法"></a>redis集群分片之hash取余分区算法</h2><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401221729042.png" alt="image-20240401221729042" >
+
+
+
+<h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223213985.png" alt="image-20240401223213985" style="zoom:25%;" />
+
+
+
+<p>分布式缓存数据变更与映射问题,某个机器宕机了,分母的数量就改变了,自然取余就不可以了</p>
+<h4 id="能干啥"><a href="#能干啥" class="headerlink" title="能干啥"></a>能干啥</h4><ul>
+<li>提出了一致性hash解决方案</li>
+<li>目的是当服务器个数发生变动时,尽量减少影响客户端到服务器的映射关系</li>
+</ul>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="算法构建一致性哈希环"><a href="#算法构建一致性哈希环" class="headerlink" title="算法构建一致性哈希环"></a>算法构建一致性哈希环</h4><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223306047.png" alt="image-20240401223306047" style="zoom:25%;" /> 
+
+<h4 id="服务器IP节点映射"><a href="#服务器IP节点映射" class="headerlink" title="服务器IP节点映射"></a>服务器IP节点映射</h4><p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223600375.png" alt="image-20240401223600375"></p>
+<h4 id="key落到服务器的落键规则"><a href="#key落到服务器的落键规则" class="headerlink" title="key落到服务器的落键规则"></a>key落到服务器的落键规则</h4><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><img src="../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223814591.png" alt="image-20240401223814591" style="zoom:33%;" />
+
+<p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401223833557.png" alt="image-20240401223833557"></p>
+<h2 id="哈希槽分区"><a href="#哈希槽分区" class="headerlink" title="哈希槽分区"></a>哈希槽分区</h2><p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401224030139.png" alt="image-20240401224030139"></p>
+<p><img src="/../blog_images/Redis-%E9%9B%86%E7%BE%A4/image-20240401224227090.png" alt=" "></p>
+<p>一定要-c 这个指令是值用集群的形式来运行 ,</p>
+]]></content>
       <categories>
         <category>中间件</category>
         <category>Redis</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Redis-高级篇</title>
+    <url>/2024/04/01/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Redis</title>
@@ -5016,9 +5054,22 @@
       </categories>
   </entry>
   <entry>
-    <title>SpringSecurity</title>
-    <url>/2024/02/23/SpringSecurity/</url>
-    <content><![CDATA[]]></content>
+    <title>SpringBoot</title>
+    <url>/2024/02/23/SpringBoot/</url>
+    <content><![CDATA[<blockquote>
+<p>这个是从原理开始讲的，这个我不照着写，我就是学</p>
+</blockquote>
+<p>springboot内置了tomcat，所以可以直接打包成jar包</p>
+<h1 id="什么是tomcat"><a href="#什么是tomcat" class="headerlink" title="什么是tomcat"></a>什么是tomcat</h1><p>Tomcat是常见的免费的web服务器。</p>
+<h2 id="1-不使用tomcat访问html"><a href="#1-不使用tomcat访问html" class="headerlink" title="1. 不使用tomcat访问html"></a>1. 不使用tomcat访问html</h2><p>可以在浏览器的地址里看到 file:d:&#x2F;test.html 这样的格式，是通过打开本地文件的形式打开的</p>
+<p>但是我们平时上网看到的html网址一般都是: <a href="https://link.zhihu.com/?target=http://12306.com/index.html">http://12306.com/index.html</a> 这样的形式<br>这是因为有web服务器的存在</p>
+<h2 id="2-使用tomcat后，访问html"><a href="#2-使用tomcat后，访问html" class="headerlink" title="2.使用tomcat后，访问html"></a>2.使用tomcat后，访问html</h2><p>使用tomcat后，可以像127.0.0.1:8080&#x2F;test.html这样访问一个网站，而不是访问一个html文件。因为tomcat本身就是一个web服务器，test.html部署在了这个web服务器上</p>
+<p><img src="/../blog_images/SpringBoot/2018120522281643.gif" alt="img"></p>
+<h1 id="SpringBoot启动"><a href="#SpringBoot启动" class="headerlink" title="SpringBoot启动"></a>SpringBoot启动</h1>]]></content>
+      <tags>
+        <tag>Java体系知识</tag>
+        <tag>SpringBoot</tag>
+      </tags>
   </entry>
   <entry>
     <title>dlyk_part1</title>
@@ -5051,6 +5102,11 @@
         <category>Java项目</category>
         <category>动力云客</category>
       </categories>
+  </entry>
+  <entry>
+    <title>SpringSecurity</title>
+    <url>/2024/02/23/SpringSecurity/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>dlyk-part2-front-1</title>

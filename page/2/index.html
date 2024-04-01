@@ -146,7 +146,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -173,6 +173,179 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/17/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/17/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/" class="post-title-link" itemprop="url">Java微服务3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-17 21:42:41" itemprop="dateCreated datePublished" datetime="2024-03-17T21:42:41+08:00">2024-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-18 13:54:48" itemprop="dateModified" datetime="2024-03-18T13:54:48+08:00">2024-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">Java体系知识</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E4%BD%93%E7%B3%BB%E7%9F%A5%E8%AF%86/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="服务保护和分布式事务"><a href="#服务保护和分布式事务" class="headerlink" title="服务保护和分布式事务"></a>服务保护和分布式事务</h1><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317214812012.png" alt="image-20240317214812012">有个服务很高 一个服务就所有的线程和进程全占了</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215027907.png" alt="image-20240317215027907"></p>
+<h2 id="雪崩问题"><a href="#雪崩问题" class="headerlink" title="雪崩问题"></a>雪崩问题</h2><p>微服务调用链路中的某个服务故障，引起整个链路中的所有微服务都不可用，这就是雪崩。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317215511651.png" alt="image-20240317215511651"></p>
+<h3 id="雪崩问题产生的原因是什么？"><a href="#雪崩问题产生的原因是什么？" class="headerlink" title="雪崩问题产生的原因是什么？"></a>雪崩问题产生的原因是什么？</h3><ul>
+<li>微服务相互调用，服务提供者出现故障或阻塞。</li>
+<li>服务调用者没有做好异常处理，导致自身故障。</li>
+<li>调用链中的所有服务级联失败，导致整个集群故障</li>
+</ul>
+<h3 id="解决问题的思路有哪些？"><a href="#解决问题的思路有哪些？" class="headerlink" title="解决问题的思路有哪些？"></a>解决问题的思路有哪些？</h3><ul>
+<li>尽量避免服务出现故障或阻塞。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">保证代码的健壮性；</span><br><span class="line"></span><br><span class="line">保证网络畅通；</span><br><span class="line"></span><br><span class="line">能应对较高的并发请求；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>服务调用者做好远程调用异常的后备方案，避免故障扩散</li>
+</ul>
+<h3 id="服务保护方案"><a href="#服务保护方案" class="headerlink" title="服务保护方案"></a>服务保护方案</h3><h4 id="请求限流"><a href="#请求限流" class="headerlink" title="- 请求限流"></a>- 请求限流</h4><p>限制访问接口的请求的并发量，避免服务因流量激增出现故障。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220549992.png" alt="image-20240317220549992"></p>
+<h4 id="线程隔离"><a href="#线程隔离" class="headerlink" title="线程隔离"></a>线程隔离</h4><p>线程隔离：也叫做舱壁模式，模拟船舱隔板的防水原理。通过限定每个业务能使用的线程数量而将故障业务隔离，避免故障扩散。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317220702031.png" alt="image-20240317220702031"></p>
+<h3 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h3><p>服务熔断：由<strong>断路器</strong>统计请求的异常比例或慢&#x3D;&#x3D;调用比例&#x3D;&#x3D;，如果超出阈值则会<strong>熔断</strong>该业务，则拦截该接口的请求。</p>
+<p>熔断期间，所有请求快速失败，全都走fallback逻辑。</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317223937333.png" alt="image-20240317223937333"></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>请求限流</strong>：限制流量在服务可以处理的范围，避免因突发流量而故障</p>
+<p><strong>线程隔离</strong>：控制业务可用的线程数量，将故障隔离在一定范围</p>
+<p><strong>失败处理</strong>：定义fallback逻辑，让业务失败时不再抛出异常，而是走fallback逻辑</p>
+<p><strong>服务熔断</strong>：将异常比例过高的接口断开，拒绝所有请求，直接走fallback</p>
+<h3 id="服务保护技术"><a href="#服务保护技术" class="headerlink" title="服务保护技术"></a>服务保护技术</h3><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Sentinel</strong></th>
+<th><strong>Hystrix</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>线程隔离</td>
+<td>信号量隔离</td>
+<td>线程池隔离&#x2F;信号量隔离</td>
+</tr>
+<tr>
+<td>熔断策略</td>
+<td>基于慢调用比例或异常比例</td>
+<td>基于异常比率</td>
+</tr>
+<tr>
+<td>限流</td>
+<td>基于 QPS，支持流量整形</td>
+<td>有限的支持</td>
+</tr>
+<tr>
+<td>Fallback</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>控制台</td>
+<td>开箱即用，可配置规则、查看秒级监控、机器发现等</td>
+<td>不完善</td>
+</tr>
+<tr>
+<td>配置方式</td>
+<td>基于控制台，重启后失效</td>
+<td>基于注解或配置文件，永久生效</td>
+</tr>
+</tbody></table>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>Sentinel是阿里巴巴开源的一款微服务流量控制组件。官网地址：<a target="_blank" rel="noopener" href="https://sentinelguard.io/zh-cn/index.html"> https://sentinelguard.io/zh-cn/index.html</a></p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224540969.png" alt="image-20240317224540969"></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="step1-导包"><a href="#step1-导包" class="headerlink" title="step1 导包"></a>step1 导包</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224630323.png" alt="image-20240317224630323"></p>
+<h4 id="step2-配置控制台"><a href="#step2-配置控制台" class="headerlink" title="step2 配置控制台"></a>step2 配置控制台</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224644608.png" alt="image-20240317224644608"></p>
+<h4 id="step3-重启访问"><a href="#step3-重启访问" class="headerlink" title="step3 重启访问"></a>step3 重启访问</h4><p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224807401.png" alt="image-20240317224807401"></p>
+<h3 id="簇点链路"><a href="#簇点链路" class="headerlink" title="簇点链路"></a><strong>簇点链路</strong></h3><p>就是单机调用链路。是一次请求进入服务后经过的每一个被Sentinel监控的资源链。默认Sentinel会监控SpringMVC的每一个Endpoint（http接口）。限流、熔断等都是针对簇点链路中的<strong>资源</strong>设置的。而资源名默认就是接口的请求路径：</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317224937069.png" alt="image-20240317224937069"></p>
+<p>熔断什么的都是针对簇点资源做的</p>
+<p>Restful风格的API请求路径一般都相同，这会导致簇点资源名称重复。因此我们要修改配置，把<strong>请求方式+请求路径</strong>作为簇点资源名称：</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240317225139867.png" alt="image-20240317225139867"></p>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p>在分布式系统中，如果一个业务需要多个服务合作完成，而且每一个服务都有事务，&#x3D;&#x3D;多个事务必须同时成功或失败，这样的事务就是<strong>分布式事务</strong>。其中的每个服务的事务就是一个<strong>分支事务</strong>。整个业务称为<strong>全局事务</strong>。&#x3D;&#x3D;</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095044645.png" alt="image-20240318095044645"></p>
+<h3 id="初识Seata"><a href="#初识Seata" class="headerlink" title="初识Seata"></a>初识Seata</h3><p>解决分布式事务，各个子事务之间必须能感知到彼此的事务状态，才能保证状态一致。</p>
+<p>Seata事务管理中有三个重要的角色：</p>
+<p>•<strong>TC (Transaction Coordinator) -</strong> <strong>事务协调者：</strong>维护全局和分支事务的状态，协调全局事务提交或回滚。</p>
+<p>•<strong>TM (Transaction Manager) -</strong> <strong>事务管理器：</strong>定义全局事务的范围、开始全局事务、提交或回滚全局事务。</p>
+<p>•<strong>RM (Resource Manager) -</strong> <strong>资源管理器：</strong>管理分支事务，与TC交谈以注册分支事务和报告分支事务的状态</p>
+<p><img src="/../blog_images/Java%E5%BE%AE%E6%9C%8D%E5%8A%A13/image-20240318095501708.png" alt="image-20240318095501708"></p>
+<h3 id="部署TC服务"><a href="#部署TC服务" class="headerlink" title="部署TC服务"></a>部署TC服务</h3><h3 id="微服务集成Seata"><a href="#微服务集成Seata" class="headerlink" title="微服务集成Seata"></a>微服务集成Seata</h3><h3 id="XA模式"><a href="#XA模式" class="headerlink" title="XA模式"></a>XA模式</h3><h3 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h3>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2397,81 +2570,6 @@
 <h3 id="Bean注入"><a href="#Bean注入" class="headerlink" title="Bean注入"></a>Bean注入</h3><p>@Autowired注解，默认是按照<strong>类型</strong>进行，如果存在多个相同类型的bean，将会报出如下错误：</p>
 <p><img src="/../blog_images/JavaWeb/image-20240307115609120.png" alt="image-20240307115609120"></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%869-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/04/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%869-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">Java基础知识9-lambda表达式概述</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-04 15:12:40" itemprop="dateCreated datePublished" datetime="2024-03-04T15:12:40+08:00">2024-03-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-11 16:51:09" itemprop="dateModified" datetime="2024-03-11T16:51:09+08:00">2024-03-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
       
     </div>
 

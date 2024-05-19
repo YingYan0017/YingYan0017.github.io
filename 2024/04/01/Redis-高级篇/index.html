@@ -19,15 +19,39 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="redis是单线程还是多线程 在4之前是部分或者完全不支持多线程的, 版本4严格意义上也不是单线程,而是负责处理客户端请求的线程是单线程,但是开始加了一点多线程的东西(异步删除) 2020年5月版本的6和2022年的7,告别了大家印象中的单线程,用一种全新的多线程来解决问题    Redis是单线程?主要是指redis的网络IO和键值对读写是由一个线程来完成的,redis在处理客户端请求的时候包括">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Redis-高级篇">
 <meta property="og:url" content="http://example.com/2024/04/01/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/index.html">
 <meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="redis是单线程还是多线程 在4之前是部分或者完全不支持多线程的, 版本4严格意义上也不是单线程,而是负责处理客户端请求的线程是单线程,但是开始加了一点多线程的东西(异步删除) 2020年5月版本的6和2022年的7,告别了大家印象中的单线程,用一种全新的多线程来解决问题    Redis是单线程?主要是指redis的网络IO和键值对读写是由一个线程来完成的,redis在处理客户端请求的时候包括">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402094354324.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402100232629.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402103828121.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402105237690.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402105910048.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402170350161.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402170557188.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402171459395.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402171733957.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402172207532.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402172348792.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402172659202.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402174418542.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402174533926.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402175152842.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402175345171.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402202143721.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402202430812.png">
+<meta property="og:image" content="http://example.com/2024/04/01/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402202751172.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402203649521.png">
+<meta property="og:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402205831413.png">
 <meta property="article:published_time" content="2024-04-01T15:07:17.000Z">
-<meta property="article:modified_time" content="2024-04-01T15:07:24.809Z">
+<meta property="article:modified_time" content="2024-04-02T12:58:31.580Z">
 <meta property="article:author" content="lolo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402094354324.png">
 
 
 <link rel="canonical" href="http://example.com/2024/04/01/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/">
@@ -123,7 +147,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -136,6 +160,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">redis是单线程还是多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Redis是单线程?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A83-0%E4%B9%8B%E5%89%8D%E8%A6%81%E9%87%87%E7%94%A8%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">为什么在3.0之前要采用单线程?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%8A%A0%E5%85%A5%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要加入多线程?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis6-7-%E5%BC%80%E5%A7%8B%E5%85%A8%E9%9D%A2%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">Redis6&#x2F;7 开始全面多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BA%86%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">为了解决这个问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%80-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BB%BA%E7%AB%8Bsocket%E8%BF%9E%E6%8E%A5-%E5%B9%B6%E5%88%86%E9%85%8D%E5%A4%84%E7%90%86%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">阶段一:服务端和客户端建立socket连接,并分配处理线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%BA%8C-IO%E7%BA%BF%E7%A8%8B%E8%AF%BB%E5%8F%96%E5%B9%B6%E8%A7%A3%E6%9E%90%E8%AF%B7%E6%B1%82"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">阶段二:IO线程读取并解析请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E4%B8%89-%E4%B8%BB%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C%E8%AF%B7%E6%B1%82%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">阶段三:主线程执行请求操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B6%E6%AE%B5%E5%9B%9B-IO%E7%BA%BF%E7%A8%8B%E5%9B%9E%E5%86%99Socket%E5%92%8C%E4%B8%BB%E7%BA%BF%E7%A8%8B%E6%B8%85%E7%A9%BA%E5%85%A8%E5%B1%80%E9%98%9F%E5%88%97"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">阶段四:IO线程回写Socket和主线程清空全局队列</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unix%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%BA%94%E7%A7%8DIO%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">Unix网络编程中的五种IO模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Blocking-IO-%E9%98%BB%E5%A1%9EIO"><span class="nav-number">2.1.</span> <span class="nav-text">Blocking IO 阻塞IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NoneBlocking-IO-%E9%9D%9E%E9%98%BB%E5%A1%9EIO"><span class="nav-number">2.2.</span> <span class="nav-text">NoneBlocking IO 非阻塞IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO-multiplexingIO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">IO multiplexingIO多路复用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-O"><span class="nav-number">2.3.1.</span> <span class="nav-text">I&#x2F;O:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF"><span class="nav-number">2.3.2.</span> <span class="nav-text">多路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E7%94%A8"><span class="nav-number">2.3.3.</span> <span class="nav-text">复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="nav-number">2.3.4.</span> <span class="nav-text">IO多路复用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#signal-driven-IO-%E4%BF%A1%E5%8F%B7%E9%A9%B1%E5%8A%A8IO"><span class="nav-number">2.4.</span> <span class="nav-text">signal driven IO  信号驱动IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asynchronous-IO-%E5%BC%82%E6%AD%A5IO"><span class="nav-number">2.5.</span> <span class="nav-text">asynchronous IO 异步IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#file-descriptor"><span class="nav-number">2.6.</span> <span class="nav-text">file descriptor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll"><span class="nav-number">2.7.</span> <span class="nav-text">epoll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis6-7"><span class="nav-number">2.8.</span> <span class="nav-text">Redis6-7</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BIGKEY"><span class="nav-number">3.</span> <span class="nav-text">BIGKEY</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%BD%BF%E7%94%A8key-%E8%BF%99%E4%B8%AA%E6%8C%87%E4%BB%A4"><span class="nav-number">3.1.</span> <span class="nav-text">为什么不能使用key * 这个指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%94%A8keys-%E6%80%8E%E4%B9%88%E8%BF%AD%E4%BB%A3%E5%91%A2"><span class="nav-number">3.2.</span> <span class="nav-text">不用keys 怎么迭代呢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="nav-number">3.3.</span> <span class="nav-text">阿里云的开发规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bigkey%E5%AE%9A%E4%B9%89"><span class="nav-number">3.4.</span> <span class="nav-text">Bigkey定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String%E6%98%AFvalue-%E6%9C%80%E5%A4%A7512MB%E4%BD%86%E6%98%AF%E2%89%A510kb%E5%B0%B1%E6%98%AFbigkey%E4%BA%86"><span class="nav-number">3.4.1.</span> <span class="nav-text">&#x3D;&#x3D;String是value,最大512MB但是≥10kb就是bigkey了&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#list-hash-set%E4%B8%8Ezset-%E4%B8%AA%E6%95%B0%E8%B6%85%E8%BF%875000%E5%B0%B1%E6%98%AFbigkey"><span class="nav-number">3.4.2.</span> <span class="nav-text">&#x3D;&#x3D;list\hash\set与zset,个数超过5000就是bigkey&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.4.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BigKey%E7%9A%84%E5%8D%B1%E5%AE%B3"><span class="nav-number">3.5.</span> <span class="nav-text">BigKey的危害</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E4%B8%8D%E5%9D%87-%E9%9B%86%E7%BE%A4%E8%BF%81%E7%A7%BB%E5%9B%B0%E9%9A%BE"><span class="nav-number">3.5.1.</span> <span class="nav-text">内存不均,集群迁移困难</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E6%97%B6%E5%88%A0%E9%99%A4-%E5%A4%A7key%E5%88%A0%E9%99%A4%E4%BD%9C%E6%A2%97"><span class="nav-number">3.5.2.</span> <span class="nav-text">超时删除,大key删除作梗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E9%98%BB%E5%A1%9E"><span class="nav-number">3.5.3.</span> <span class="nav-text">网络流量阻塞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BigKey%E6%80%8E%E4%B9%88%E4%BA%A7%E7%94%9F%E7%9A%84"><span class="nav-number">3.6.</span> <span class="nav-text">BigKey怎么产生的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E5%88%A0%E9%99%A4"><span class="nav-number">3.7.</span> <span class="nav-text">怎么删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-%E5%BA%95%E5%B1%82%E4%BC%98%E5%8C%96%E8%BF%87-%E5%8F%AF%E7%94%A8del-%E5%A4%AA%E5%A4%A7%E7%9A%84%E5%8F%AF%E4%BB%A5%E7%94%A8unlink"><span class="nav-number">3.7.1.</span> <span class="nav-text">String  底层优化过,可用del,太大的可以用unlink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hash-%E4%BD%BF%E7%94%A8hscan-%E6%AF%8F%E6%AC%A1%E8%8E%B7%E5%8F%96%E5%B0%91%E9%87%8F%E7%9A%84field-value-%E5%86%8D%E4%BD%BF%E7%94%A8hdel%E5%88%A0%E9%99%A4%E6%AF%8F%E4%B8%AAfield"><span class="nav-number">3.7.2.</span> <span class="nav-text">hash 使用hscan 每次获取少量的field-value ,再使用hdel删除每个field</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -148,13 +173,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -213,9 +238,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-04-01 23:07:17 / 修改时间：23:07:24" itemprop="dateCreated datePublished" datetime="2024-04-01T23:07:17+08:00">2024-04-01</time>
+      <time title="创建时间：2024-04-01 23:07:17" itemprop="dateCreated datePublished" datetime="2024-04-01T23:07:17+08:00">2024-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-02 20:58:31" itemprop="dateModified" datetime="2024-04-02T20:58:31+08:00">2024-04-02</time>
     </span>
 
   
@@ -227,7 +258,108 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h1 id="redis是单线程还是多线程"><a href="#redis是单线程还是多线程" class="headerlink" title="redis是单线程还是多线程"></a>redis是单线程还是多线程</h1><ol>
+<li>在4之前是部分或者完全不支持多线程的,</li>
+<li>版本4严格意义上也不是单线程,而是负责处理客户端请求的线程是单线程,但是开始加了一点多线程的东西(异步删除)</li>
+<li>2020年5月版本的6和2022年的7,告别了大家印象中的单线程,用一种全新的多线程来解决问题</li>
+</ol>
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402094354324.png" alt="image-20240402094354324"></p>
+<hr>
+<h2 id="Redis是单线程"><a href="#Redis是单线程" class="headerlink" title="Redis是单线程?"></a>Redis是单线程?</h2><p>主要是指redis的网络IO和键值对读写是由一个线程来完成的,redis在处理客户端请求的时候包括获取(socket读), 解析,执行,内容返回(socket)写等都是由一个顺序串行的主线程处理,这就是所谓的单线程,这也是redis对外提供键值存储服务的主要流程.</p>
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402100232629.png" alt="image-20240402100232629"></p>
+<p>但是Redis的其他功能,比如持久话RDB\AOF\异步删除,集群数据同步等待,其实是由额外的线程执行的 </p>
+<p>redis命令工作线程是单线程的,但是对于整个Redis来说,是多线程的</p>
+<h3 id="为什么在3-0之前要采用单线程"><a href="#为什么在3-0之前要采用单线程" class="headerlink" title="为什么在3.0之前要采用单线程?"></a>为什么在3.0之前要采用单线程?</h3><blockquote>
+<p>单线程但是快的原因</p>
+</blockquote>
+<ul>
+<li><p>基于内存操作,Redis的所有数据都存储在内存中,因此所有的运算级别都是内存级别的,他的性能比较高</p>
+</li>
+<li><p>数据结构简单:redis的数据结构是专门设计的,而这些简单的数据结构的查找和操作的时间大部分复杂度都是O(1),因此性能是比较高的</p>
+</li>
+<li><p>多路复用和非阻塞I&#x2F;O:redis使用I&#x2F;O多礼服用的功能来监听多个socket连接客户端,这样就可以使用一个线程来连接多个请求,减少线程切换带来的开销,同时也避免了i&#x2F;o阻塞的操作</p>
+</li>
+<li><p>避免了不必要的上下文切换和多线程竞争,这就省去了多线程切换带来的时间和性能上的小号,而且单线程不会导致死锁的问题.</p>
+</li>
+<li></li>
+</ul>
+<blockquote>
+<p>采用单线程的原因</p>
+</blockquote>
+<p>Redis是基于内存操作的,因此他的瓶颈可能是机器的内存或者是网络的带宽而并非CPU,既然CPU不是瓶颈,自然就使用单线程的解决方案了,何况使用多线程会比较的麻烦.(但是从redi开始就开始支持多线程了,比如后台删除,备份等功能)</p>
+<ul>
+<li>使用单线程redis的开发和维护更加的简单,因为单线程模型方便开发和调试</li>
+<li>即使使用单线程模型也并发的解决多客户端的请求,主要使用的是IO多路复用和非组设IO</li>
+<li>对于Redis系统来说,主要的性能瓶颈是内存或者网络带宽并非CPU</li>
+</ul>
+<h2 id="为什么要加入多线程"><a href="#为什么要加入多线程" class="headerlink" title="为什么要加入多线程?"></a>为什么要加入多线程?</h2><p><strong>正常情况下使用del指令可以很快的删除数据,但是当被删除的key是一个非常大的对象的时候,例如包含了成千上万个元素的hash集合时,那么del指令就会导致redis主线程卡顿</strong></p>
+<p>由于redis是单线程的, del bigkey…</p>
+<p>等待了很久这个线程才会释放,类似加了一个synchronized的锁,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unlink key</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402103828121.png" alt="image-20240402103828121"></p>
+<h2 id="Redis6-7-开始全面多线程"><a href="#Redis6-7-开始全面多线程" class="headerlink" title="Redis6&#x2F;7 开始全面多线程"></a>Redis6&#x2F;7 开始全面多线程</h2><p>随着网络硬件的性能提升,redis的性能瓶颈有时候会出现在网络的IO处理上,也就是单个主线程处理网络请求的速度跟不上底层网络硬件的速度.</p>
+<h3 id="为了解决这个问题"><a href="#为了解决这个问题" class="headerlink" title="为了解决这个问题"></a>为了解决这个问题</h3><p>采用多个IO线程来处理网络的请求,提高网络请求处理的并行度</p>
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402105237690.png" alt="image-20240402105237690"></p>
+<img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402105910048.png" alt="image-20240402105910048" style="zoom:33%;" />
+
+<h4 id="阶段一-服务端和客户端建立socket连接-并分配处理线程"><a href="#阶段一-服务端和客户端建立socket连接-并分配处理线程" class="headerlink" title="阶段一:服务端和客户端建立socket连接,并分配处理线程"></a>阶段一:服务端和客户端建立socket连接,并分配处理线程</h4><p>首先,主线程负责接受建立连接请求,当由客户端请求和实例建立socket连接时,主线程会创建和客户端的连接,并把socket放入全局等待队列中,然后主线程通过轮询的方法把socket连接分配给io线程</p>
+<h4 id="阶段二-IO线程读取并解析请求"><a href="#阶段二-IO线程读取并解析请求" class="headerlink" title="阶段二:IO线程读取并解析请求"></a>阶段二:IO线程读取并解析请求</h4><p>主线程一旦把socket分配给IO线程,就会进入阻塞状态,等待IO线程完成客户端请求读取和解析,因为由多个IO线程在并行处理,所以这个过程很快就可以完成.</p>
+<h4 id="阶段三-主线程执行请求操作"><a href="#阶段三-主线程执行请求操作" class="headerlink" title="阶段三:主线程执行请求操作"></a>阶段三:主线程执行请求操作</h4><p>等待IO线程解析完请求,主线程还是会以单线程的方式执行这些命令操作</p>
+<h4 id="阶段四-IO线程回写Socket和主线程清空全局队列"><a href="#阶段四-IO线程回写Socket和主线程清空全局队列" class="headerlink" title="阶段四:IO线程回写Socket和主线程清空全局队列"></a>阶段四:IO线程回写Socket和主线程清空全局队列</h4><p>当主线程执行完请求操作之后,会把需要返回的结果写入缓冲区,然后主线程会阻塞等待IO线程,把这些结果回写到socket中,并返回给客户端,和IO线程读取和解析请求一样,IO线程会 写socket,也是有多个线程在并发执行,所以回写socket的速度也是很快的,等到IO线程会谢socket完毕,主线程会清空队列,等待数据库的后续请求.</p>
+<h1 id="Unix网络编程中的五种IO模型"><a href="#Unix网络编程中的五种IO模型" class="headerlink" title="Unix网络编程中的五种IO模型"></a>Unix网络编程中的五种IO模型</h1><h2 id="Blocking-IO-阻塞IO"><a href="#Blocking-IO-阻塞IO" class="headerlink" title="Blocking IO 阻塞IO"></a>Blocking IO 阻塞IO</h2><h2 id="NoneBlocking-IO-非阻塞IO"><a href="#NoneBlocking-IO-非阻塞IO" class="headerlink" title="NoneBlocking IO 非阻塞IO"></a>NoneBlocking IO 非阻塞IO</h2><h2 id="IO-multiplexingIO多路复用"><a href="#IO-multiplexingIO多路复用" class="headerlink" title="IO multiplexingIO多路复用"></a>IO multiplexingIO多路复用</h2><p>一种同步的IO模型,实现<strong>一个线程</strong>监视<strong>多个文件句柄</strong>,**一旦某个文件句柄就绪,**就能够通知到对应的应用程序进行相应的读写操作,<strong>没有文件句柄就绪的时候</strong>,就会阻塞应用程序,从而释放CPU资源.</p>
+<h3 id="I-O"><a href="#I-O" class="headerlink" title="I&#x2F;O:"></a>I&#x2F;O:</h3><p>网络I&#x2F;O,尤其在操作系统层面指数据在内核态与用户态之间的读写关系</p>
+<h3 id="多路"><a href="#多路" class="headerlink" title="多路"></a><strong>多路</strong></h3><p><strong>多个客户端连接(连接就是套接字描述符,即socket或者channel)</strong></p>
+<h3 id="复用"><a href="#复用" class="headerlink" title="复用"></a><strong>复用</strong></h3><p><strong>复用一个或者几个线程</strong></p>
+<h3 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h3><p>也就是说一个或者一组线程处理多个TCP连接,使用单进程就能够实现同时处理多个客户端的连接,<strong>无需创造或者维护过多的进程&#x2F;线程</strong></p>
+<blockquote>
+<p>一个服务端进程可以同时处理多个socket描述符</p>
+<p>实现IO多路复用的模型有三种,可以分为&#x3D;&#x3D;<strong>select-&gt;poll-&gt;epoll</strong>&#x3D;&#x3D;三个阶段来描述</p>
+</blockquote>
+<h2 id="signal-driven-IO-信号驱动IO"><a href="#signal-driven-IO-信号驱动IO" class="headerlink" title="signal driven IO  信号驱动IO"></a>signal driven IO  信号驱动IO</h2><h2 id="asynchronous-IO-异步IO"><a href="#asynchronous-IO-异步IO" class="headerlink" title="asynchronous IO 异步IO"></a>asynchronous IO 异步IO</h2><h2 id="file-descriptor"><a href="#file-descriptor" class="headerlink" title="file descriptor"></a>file descriptor</h2><p>文件描述符 file descriptor 是计算机科学中的一个术语,是一个用于表述指向文件的引用的抽象化概念.文件描述符在形式上是一个非负整数.<strong>实际上,它是一个索引值,指向内核为每一个进程所维护的该进程打开文件的记录表.</strong></p>
+<p><strong>当程序打开一个现有文件或者创建一个新文件时,内核向进程返回一个文件描述符,在程序设计中,文件描述符这一概念往往只适用于Unix,Linux这样的操作系统.</strong></p>
+<p>当socket连接的时候,返回一个fd</p>
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402170350161.png" alt="image-20240402170350161"></p>
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402170557188.png" alt="image-20240402170557188"></p>
+<p>客户端请求服务端时,实际就是在服务端的socket文件中写入客户端对应的文件描述符,如果与多个客户端同时请求服务端,为每次请求分配一个线程,类似于每次来都new一个 如此就会比较耗费服务端的资源</p>
+<p>因此我们只使用一个线程来监听多个文件描述符,这就是IO多路复用</p>
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402171459395.png" alt="image-20240402171459395"> </p>
+<h2 id="Redis6-7"><a href="#Redis6-7" class="headerlink" title="Redis6-7"></a>Redis6-7</h2><p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402171733957.png" alt="image-20240402171733957"></p>
+<p>redis7将所有的数据都放在内存里,内存的响应时长大概是100纳秒,对于小数据包,redis服务器可以处理8W到10W的QPS,这也是redis处理的季羡林,对于80%的公司来说,单线程的redis已经足够使用了.</p>
+<p><strong>多线程默认是关闭的</strong>,如果要使用多线程功能,需要在redis.conf中完成两个设置,</p>
+<img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402172207532.png" alt="image-20240402172207532" style="zoom:25%;" />
+
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402172348792.png" alt="image-20240402172348792"></p>
+<h1 id="BIGKEY"><a href="#BIGKEY" class="headerlink" title="BIGKEY"></a>BIGKEY</h1><p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402172659202.png" alt="image-20240402172659202"></p>
+<h2 id="为什么不能使用key-这个指令"><a href="#为什么不能使用key-这个指令" class="headerlink" title="为什么不能使用key * 这个指令"></a>为什么不能使用key * 这个指令</h2><p>key * 这个指令有致命的弊端,这个指令没有offset,limit参数,是要一次性吐出所有满足条件的key,由于redis是单线程的,其所有操作都是原子的,而keys算法是遍历算法,复杂度是O(n),如果实例中有千万级别以上的key,这个指令i聚会导致redis服务卡顿,所有读写redis的其他的指令都会被延后甚至会超时报错,可能会导致雪崩甚至是数据库宕机</p>
+<blockquote>
+<p>生产上限制keys *&#x2F;fulshdb&#x2F;flushall等危险命令以防止误删误用?</p>
+</blockquote>
+<img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402174418542.png" alt="image-20240402174418542" style="zoom:25%;" />
+
+<img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402174533926.png" alt="image-20240402174533926" style="zoom:33%;" />
+
+<h2 id="不用keys-怎么迭代呢"><a href="#不用keys-怎么迭代呢" class="headerlink" title="不用keys 怎么迭代呢"></a>不用keys 怎么迭代呢</h2><p>scan命令,类似于mysql limit 但是不完全相同</p>
+<p>用于迭代数据库当中的数据库的健</p>
+<img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402175152842.png" alt="image-20240402175152842" style="zoom:33%;" />
+
+<img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402175345171.png" alt="image-20240402175345171" style="zoom:50%;" />
+
+<h2 id="阿里云的开发规范"><a href="#阿里云的开发规范" class="headerlink" title="阿里云的开发规范"></a>阿里云的开发规范</h2><img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402202143721.png" alt="image-20240402202143721" style="zoom:33%;" />
+
+<h2 id="Bigkey定义"><a href="#Bigkey定义" class="headerlink" title="Bigkey定义"></a>Bigkey定义</h2><h3 id="String是value-最大512MB但是≥10kb就是bigkey了"><a href="#String是value-最大512MB但是≥10kb就是bigkey了" class="headerlink" title="&#x3D;&#x3D;String是value,最大512MB但是≥10kb就是bigkey了&#x3D;&#x3D;"></a>&#x3D;&#x3D;String是value,最大512MB但是≥10kb就是bigkey了&#x3D;&#x3D;</h3><h3 id="list-hash-set与zset-个数超过5000就是bigkey"><a href="#list-hash-set与zset-个数超过5000就是bigkey" class="headerlink" title="&#x3D;&#x3D;list\hash\set与zset,个数超过5000就是bigkey&#x3D;&#x3D;"></a>&#x3D;&#x3D;list\hash\set与zset,个数超过5000就是bigkey&#x3D;&#x3D;</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402202430812.png" alt="image-20240402202430812" style="zoom:33%;" /></h3><blockquote>
+<p>按照上述的来看,可存放的大小要大得多,为什么只能存储5000个?</p>
+</blockquote>
+<h2 id="BigKey的危害"><a href="#BigKey的危害" class="headerlink" title="BigKey的危害"></a>BigKey的危害</h2><h3 id="内存不均-集群迁移困难"><a href="#内存不均-集群迁移困难" class="headerlink" title="内存不均,集群迁移困难"></a>内存不均,集群迁移困难</h3><h3 id="超时删除-大key删除作梗"><a href="#超时删除-大key删除作梗" class="headerlink" title="超时删除,大key删除作梗"></a>超时删除,大key删除作梗</h3><h3 id="网络流量阻塞"><a href="#网络流量阻塞" class="headerlink" title="网络流量阻塞"></a>网络流量阻塞</h3><h2 id="BigKey怎么产生的"><a href="#BigKey怎么产生的" class="headerlink" title="BigKey怎么产生的"></a>BigKey怎么产生的</h2><img src="../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402202751172.png" alt="image-20240402202751172" style="zoom:33%;" />
+
+<p>redis-cli-bigkeys</p>
+<p>memory usage 命令 计算所占的每个字节数</p>
+<h2 id="怎么删除"><a href="#怎么删除" class="headerlink" title="怎么删除"></a>怎么删除</h2><p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402203649521.png" alt="image-20240402203649521"></p>
+<p>非字符串的bigkey不要使用del删除,</p>
+<p>渐进式删除就是慢慢删,一点点的把这个field给减小了.最后再删掉</p>
+<h3 id="String-底层优化过-可用del-太大的可以用unlink"><a href="#String-底层优化过-可用del-太大的可以用unlink" class="headerlink" title="String  底层优化过,可用del,太大的可以用unlink"></a>String  底层优化过,可用del,太大的可以用unlink</h3><h3 id="hash-使用hscan-每次获取少量的field-value-再使用hdel删除每个field"><a href="#hash-使用hscan-每次获取少量的field-value-再使用hdel删除每个field" class="headerlink" title="hash 使用hscan 每次获取少量的field-value ,再使用hdel删除每个field"></a>hash 使用hscan 每次获取少量的field-value ,再使用hdel删除每个field</h3><p>hscan与hdel</p>
+<p><img src="/../blog_images/Redis-%E9%AB%98%E7%BA%A7%E7%AF%87/image-20240402205831413.png" alt="image-20240402205831413"></p>
+
     </div>
 
     
@@ -245,6 +377,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/04/11/Redis-%E9%AB%98%E7%BA%A7%E7%AF%870411/" rel="next" title="Redis-高级篇0411">
+                  Redis-高级篇0411 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

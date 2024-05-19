@@ -146,13 +146,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -173,6 +173,711 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/Redis-%E7%AE%A1%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/01/Redis-%E7%AE%A1%E9%81%93/" class="post-title-link" itemprop="url">Redis-管道</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-01 15:09:35 / 修改时间：15:33:59" itemprop="dateCreated datePublished" datetime="2024-04-01T15:09:35+08:00">2024-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="管道pipelining"><a href="#管道pipelining" class="headerlink" title="管道pipelining"></a>管道pipelining</h1><p>redis事一种基于客户端-服务端模型以及请求&#x2F;响应协议的TCP服务，一个请求会遵循一下的步骤：</p>
+<ol>
+<li>客户端向服务端发送命令分四步（发送命令-&gt;命令排队-&gt;命令执行-&gt;返回结果），并监听socket返回，通常以阻塞模式等待服务端的响应。</li>
+<li>服务端处理命令，并将结果返回给客户端</li>
+</ol>
+<p>&#x3D;&#x3D;以上两部称为 Round Trip Time&#x3D;&#x3D;</p>
+<img src="../blog_images/Redis-%E7%AE%A1%E9%81%93/image-20240401151605018.png" alt="image-20240401151605018" style="zoom:33%;" />
+
+ 
+
+<p><img src="/../blog_images/Redis-%E7%AE%A1%E9%81%93/image-20240401151638019.png" alt="image-20240401151638019"></p>
+<p>管道的解决思路： 管<strong>道可以一次性的发送多条命令给服务端，服务端依次处理完毕之后，通过 一条响应一次寻的将结果返回，通过减少客户端与redis的通信次数来实现降低往返延时时间</strong>。</p>
+<p>将几个频繁往返的命令合起来</p>
+<p>pipeline实现的原理是队列，先进先出特性就保证了数据的顺序性。</p>
+<img src="../blog_images/Redis-%E7%AE%A1%E9%81%93/image-20240401151958228.png" alt="image-20240401151958228" style="zoom:33%;" />
+
+<blockquote>
+<p>&#x3D;&#x3D;批处理命令变种的优化措施，类似于Redis的原生批命令（mget和mset）&#x3D;&#x3D;</p>
+</blockquote>
+<img src="../blog_images/Redis-%E7%AE%A1%E9%81%93/image-20240401152633289.png" alt="image-20240401152633289" style="zoom:33%;" />
+
+<img src="../blog_images/Redis-%E7%AE%A1%E9%81%93/image-20240401152656048.png" alt="image-20240401152656048" style="zoom:33%;" />
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h1 id="Pipeline-与原生批量命令对比"><a href="#Pipeline-与原生批量命令对比" class="headerlink" title="Pipeline 与原生批量命令对比"></a>Pipeline 与原生批量命令对比</h1><ul>
+<li>原生命令是原子性的（例如mset、mget） 管道是非原子性的</li>
+<li>原生批量命令只能执行一种命令，pipeline可以执行不同种的命令</li>
+<li>原生批命令是服务端实现的 ，而pipeline需要服务端和客户端一起实现。</li>
+</ul>
+<h1 id="Pipeline与事务对比"><a href="#Pipeline与事务对比" class="headerlink" title="Pipeline与事务对比"></a>Pipeline与事务对比</h1><ul>
+<li>事务具有原子性，管道是不具有原子性的</li>
+<li>管道一次性将多条命令发送给服务器，事务是一条一条法的，事务只有在接收到exec命令之后才会执行</li>
+<li>执行事务时会阻塞其他命令的执行，而执行管道中的命令时不会。</li>
+</ul>
+<h1 id="使用Pipeline的注意事项"><a href="#使用Pipeline的注意事项" class="headerlink" title="使用Pipeline的注意事项"></a>使用Pipeline的注意事项</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/Redis-%E4%BA%8B%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/01/Redis-%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">Redis-事务</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-04-01 13:07:31 / 修改时间：21:32:02" itemprop="dateCreated datePublished" datetime="2024-04-01T13:07:31+08:00">2024-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p> 其实就是同一组指令需要一起执行。</p>
+<p>一个队列中、一次性、顺序性、排他性的执行一系列的命令</p>
+<h2 id="redis与数据库事务的区别"><a href="#redis与数据库事务的区别" class="headerlink" title="redis与数据库事务的区别"></a>redis与数据库事务的区别</h2><img src="../blog_images/Redis-%E4%BA%8B%E5%8A%A1/image-20240401135206539.png" alt="image-20240401135206539" style="zoom: 25%;" />
+
+<h2 id="怎么使用"><a href="#怎么使用" class="headerlink" title="怎么使用"></a>怎么使用</h2><h3 id="case1：正常执行"><a href="#case1：正常执行" class="headerlink" title="case1：正常执行"></a>case1：正常执行</h3><h4 id="MULTI"><a href="#MULTI" class="headerlink" title="MULTI"></a>MULTI</h4><p>开启事务</p>
+<img src="../blog_images/Redis-%E4%BA%8B%E5%8A%A1/image-20240401141119017.png" alt="image-20240401141119017" style="zoom:25%;" />
+
+<p>后续的命令要加入这个是事务当中</p>
+<h4 id="EXEC-结束"><a href="#EXEC-结束" class="headerlink" title="EXEC 结束"></a>EXEC 结束</h4><h3 id="case2：放弃事务"><a href="#case2：放弃事务" class="headerlink" title="case2：放弃事务"></a>case2：放弃事务</h3><h4 id="MULTI-1"><a href="#MULTI-1" class="headerlink" title="MULTI"></a>MULTI</h4><h4 id="DISCARD"><a href="#DISCARD" class="headerlink" title="DISCARD"></a>DISCARD</h4><p>这个输入之后就是全体放弃，之前执行一半的事务全部撤销</p>
+<img src="../blog_images/Redis-%E4%BA%8B%E5%8A%A1/image-20240401141941014.png" alt="image-20240401141941014" style="zoom:33%;" />
+
+<p>相当于一个是编译报错一个是运行时报错</p>
+<h3 id="case3：全体连坐"><a href="#case3：全体连坐" class="headerlink" title="case3：全体连坐"></a>case3：全体连坐</h3><blockquote>
+<p>一条命令出错全部打回去</p>
+<p>语法出错了，直接编译就存在问题，当然执行不了</p>
+</blockquote>
+<img src="../blog_images/Redis-%E4%BA%8B%E5%8A%A1/image-20240401142255133.png" alt="image-20240401142255133" style="zoom:33%;" />
+
+<h3 id="case4：冤有头债有主"><a href="#case4：冤有头债有主" class="headerlink" title="case4：冤有头债有主"></a>case4：冤有头债有主</h3><blockquote>
+<p>对的执行，错的停止，类似于运行时异常，当一个命令失败了，</p>
+<p>类似于语法没有检查出错误</p>
+</blockquote>
+<img src="../blog_images/Redis-%E4%BA%8B%E5%8A%A1/image-20240401142554856.png" alt="image-20240401142554856" style="zoom:33%;" />
+
+<h3 id="case5：watch监控"><a href="#case5：watch监控" class="headerlink" title="case5：watch监控"></a>case5：watch监控</h3><p>redis会使用watch来提供乐观锁定，类似于CAS（check-and-Set）</p>
+<blockquote>
+<p>乐观锁：optimistic lock 顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下再次期间别人有没有去更新这个数据</p>
+<p>乐观锁的策略： 提交版本必须大于记录当前版本才能执行更新</p>
+</blockquote>
+<p>拿一个watch监控一个key，如果这个key在监控期间没有人动过，皆大欢喜，否则，本次执行的操作就会设置成一个null。</p>
+<p>watch 初始化k1 和balance两个key，先监控再开启multi，保证两个key变动在同一个事务当中。</p>
+<img src="../blog_images/Redis-%E4%BA%8B%E5%8A%A1/image-20240401144932380.png" alt="image-20240401144932380" style="zoom:33%;" />
+
+<p><strong>有加塞篡改</strong></p>
+<h3 id="case6：unwatch"><a href="#case6：unwatch" class="headerlink" title="case6：unwatch"></a>case6：unwatch</h3><p><img src="/../blog_images/Redis-%E4%BA%8B%E5%8A%A1/image-20240401145239659.png" alt="image-20240401145239659"></p>
+<p>放弃监控</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>一旦执行了exec之前加的监控锁都会被取消掉，当客户端连接丢失的时候（比如退出连接），所有的东西都会被取消监控</p>
+<ul>
+<li>开启：以MULTI 开启一个事务</li>
+<li>入队：将多个命令入队到事务当中去，接到这些命令并不会立即的执行，而是会放到等待执行的事务队列中</li>
+<li>执行：由EXEC命令触发事务</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/31/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/31/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/" class="post-title-link" itemprop="url">Redis-持久化</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-31 21:15:11" itemprop="dateCreated datePublished" datetime="2024-03-31T21:15:11+08:00">2024-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-01 13:06:29" itemprop="dateModified" datetime="2024-04-01T13:06:29+08:00">2024-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h1><p>就是把数据写到磁盘里面。在实际的应用场景中，会存在服务器突然的宕机，数据全部打到mysql上，这个对于我们来说是灾难性的，所以我们需要让redis可以自己把数据写到服务器中</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331212516033.png" alt="image-20240331212516033"></p>
+<h2 id="RDB-Redis-DataBase"><a href="#RDB-Redis-DataBase" class="headerlink" title="RDB(Redis DataBase)"></a>RDB(Redis DataBase)</h2><p>RDB持久性以指定的时间间隔执行数据集的时间点快照。</p>
+<p>实现类似于照片记录效果的方式，就是把某个时刻的数据与状态以文件的形式写到了磁盘的上面，也就是快照。这样一来，即使是服务器故障宕机，快照文件也不会丢失，数据的可靠性也得到了保证。</p>
+<p>&#x3D;&#x3D;这个快照文件也被称为了RDB文件（dump.rdb),其中，RDB就是Redis Database的缩写&#x3D;&#x3D;</p>
+<p>会直接去读这个dump.rdb文件，重新写回redis的缓存里</p>
+<h3 id="Redis6与Redis7"><a href="#Redis6与Redis7" class="headerlink" title="Redis6与Redis7"></a>Redis6与Redis7</h3><p>在Redis7里面，把持久话RDB的保存规则发生了改变，尤其是时间记录额度的变化</p>
+<p>vim redis7.conf,因为底层做了优化，所以不需要像之前一样记录的那么频繁了</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331213643968.png" alt="image-20240331213643968"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331213709629.png" alt="image-20240331213709629"></p>
+<h3 id="自动触发"><a href="#自动触发" class="headerlink" title="自动触发"></a>自动触发</h3><p>redis 默认使用</p>
+<p>**<img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331230827587.png" alt="image-20240331230827587"><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331231302890.png" alt="image-20240331231302890"> </p>
+<p>执行flashall&#x2F;flushdb命令也会产生dump.rdb文件，但是里里面是空的，没有意义</p>
+<h3 id="手动触发"><a href="#手动触发" class="headerlink" title="手动触发"></a>手动触发</h3><p>满足不了要求，但是希望是立马就备份，产生rdb文件，就需要开启手动的备份</p>
+<p>redis提供了两个命令来生成RDB文件，分别是save喝bdsave</p>
+<p>相当于在后台开启了一个子进程，可以立即的开启备份</p>
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232230372.png" alt="image-20240331232230372" style="zoom: 25%;" />
+
+<p>生产上只能用bgsave，绝对不能用save</p>
+<h4 id="save"><a href="#save" class="headerlink" title="save"></a>save</h4><p>在主程序中执行回阻塞当前的redis服务器，直到持久化工作完成执行save命令期间，redis是不能处理其他命令的，线上是禁止使用的</p>
+<h4 id="bgsave（默认）"><a href="#bgsave（默认）" class="headerlink" title="bgsave（默认）"></a>bgsave（默认）</h4><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232606065.png" alt="image-20240331232606065"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232850986.png" alt="image-20240331232850986"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331232902475.png" alt="image-20240331232902475"></p>
+<p><strong>什么是fork</strong></p>
+<p>在Linux系统中，fork会产生一个与父进程完全向同伴的一个子进程，但是子进程会在此后多会exec系统调用，处于效率考虑，尽量的避免膨胀</p>
+<h4 id="lastsave"><a href="#lastsave" class="headerlink" title="lastsave"></a>lastsave</h4><p>可以通过lastsave命令去获取最后一次成功执行快照的时间</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331233019774.png" alt="image-20240331233019774"></p>
+<h3 id="RDB-优缺点"><a href="#RDB-优缺点" class="headerlink" title="RDB 优缺点"></a>RDB 优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>适合大规模的数据恢复</li>
+<li>按照业务定时进行备份</li>
+<li>对于数据的完整性喝一致性的要求不高</li>
+<li>RDB文件在内存中的加载速度要比AOF快得多</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>如果你需要在redis停止工作时，比如断电之后，把损失降低到最低，那么rdb并不好</p>
+<p>RDB需要经常的fork()以便使用子进程在磁盘上持久话，如果数据集很大，fork()可能会很耗时，并且数据集很大而且CPU性能不是很好的时候，可能会导致Redis停止为客户端服务几毫秒甚至于疫苗</p>
+<p>如何检查并修复我们的RDB文件</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234106128.png" alt="image-20240331234106128"> </p>
+<h3 id="如何禁用快照"><a href="#如何禁用快照" class="headerlink" title="如何禁用快照"></a>如何禁用快照</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234255878.png" alt="image-20240331234255878"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234309380.png" alt="image-20240331234309380"></p>
+<h3 id="RDB优化配置项详解snapshotting模块"><a href="#RDB优化配置项详解snapshotting模块" class="headerlink" title="RDB优化配置项详解snapshotting模块"></a>RDB优化配置项详解snapshotting模块</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234534060.png" alt="image-20240331234534060"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234747105.png" alt="image-20240331234747105"></p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234813084.png" alt="image-20240331234813084"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240331234853713.png" alt="image-20240331234853713"></p>
+<h2 id="AOF-Append-Only-file"><a href="#AOF-Append-Only-file" class="headerlink" title="AOF(Append Only file)"></a>AOF(Append Only file)</h2><p>如果宕掉了，就load 数据 写回实例里。会以日志的形式记录下每个写的操作，然后将Redis执行过的所有写指令记录下来，（读操作不记录），只允许追加文件不允许改写文件，redis在启动之初会读取该文件重新构建数据。</p>
+<p>—&#x3D;&#x3D;redis重启的话就会根据日志文件的内任凭将写指令从前到后执行一次以完成数据的恢复工作&#x3D;&#x3D;</p>
+<p>默认情况下使用的AOF，开启AOF功能需要配置appendonly yes</p>
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095600434.png" alt="image-20240401095600434"></p>
+<h3 id="三种写回策略"><a href="#三种写回策略" class="headerlink" title="三种写回策略"></a>三种写回策略</h3><h4 id="Always"><a href="#Always" class="headerlink" title="Always"></a>Always</h4><h4 id="everysec"><a href="#everysec" class="headerlink" title="everysec"></a>everysec</h4><h4 id="no"><a href="#no" class="headerlink" title="no"></a>no</h4><img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095655676.png" alt="image-20240401095655676" style="zoom:33%;" />
+
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401095950257.png" alt="image-20240401095950257" style="zoom:33%;" />
+
+<h3 id="redis6与redis7"><a href="#redis6与redis7" class="headerlink" title="redis6与redis7"></a>redis6与redis7</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401101931550.png" alt="image-20240401101931550"></p>
+<h3 id="优点缺点"><a href="#优点缺点" class="headerlink" title="优点缺点"></a>优点缺点</h3><h4 id="优点：更好的保护数据不被丢失，性能高，可以做紧急恢复"><a href="#优点：更好的保护数据不被丢失，性能高，可以做紧急恢复" class="headerlink" title="优点：更好的保护数据不被丢失，性能高，可以做紧急恢复"></a>优点：更好的保护数据不被丢失，性能高，可以做紧急恢复</h4><ul>
+<li>使用AOF redis更加的持久，你可以设计不同的fsync策略（三种写回策略），即使是每秒写入，写入的性能依旧是不错的，fsync是使用后台线程执行的，当没有fsync正在进行的时候，主线程会努力的执行写入，只会丢失一秒钟的写入。</li>
+<li>AOF日志是一个仅附加日志，因此不会出现寻道问题，也不会在断电的时候出现损坏的问题，即使由于某种原因，磁盘已经满了或者其他的原因日志以写一般的命令结尾，redis-check-aof也能很轻松的修复。</li>
+<li>当AOF变得太大的时候，redis能够在后台重写AOF，重写是完全安全的，因为当redis继续附加到旧文件时，会创建当前数据集所需的最少操作集生成一个全新的文件，一旦第二个文件准备就绪，redis就会切换两者并开始附加到新的那一个。</li>
+<li>AOF以易于理解喝解析的格式依次包含所有操作的日志，您甚至可以轻松的导出AOF文件，如歌不小心使用了flushall命令刷新了所有的内容，只要在此期间内没有执行日志重写工作，您仍然可以通过停止服务器，删除最新命令并重新启动redis来保存数据集。</li>
+</ul>
+<p>打开appendonly.aof.1.incr.aof里面一定有个flushall，把这个命令删掉</p>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>相同数据集的数据而言aof文件要远大于rdb文件，恢复速度要慢于rdb</li>
+<li>aof运行的效率要慢于rdb，每秒同步策略的效率较好，不同步效率与rdb相同</li>
+</ul>
+<h4 id="AOF重写机制"><a href="#AOF重写机制" class="headerlink" title="AOF重写机制"></a>AOF重写机制</h4><p>由于AOF持久话是redis不断将写命令记录到AOF文件中，随着redis的不断的进行，AOF的文件就会越来越大，占用的服务器内存越大，以及AOF恢复时间要求越长。</p>
+<p>&#x3D;&#x3D;为了解决这个问题，redis新增了重写机制，当AOF的文件的大小超过了所设定的峰值时，redis就会自动的<strong>启动AOF文件内容压缩，只保留恢复数据的最小指令集</strong>，或者<strong>手动使用命令bgrewriteaof</strong>&#x3D;&#x3D;</p>
+<p><strong>峰值</strong></p>
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401104852636.png" alt="image-20240401104852636" style="zoom:33%;" />
+
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401104918329.png" alt="image-20240401104918329" style="zoom:33%;" />
+
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401110224729.png" alt="image-20240401110224729"></p>
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401110249259.png" alt="image-20240401110249259" style="zoom:33%;" />
+
+<h2 id="RDB-AOP混合持久化"><a href="#RDB-AOP混合持久化" class="headerlink" title="RDB-AOP混合持久化"></a>RDB-AOP混合持久化</h2><p>可以同时共存 ， AOF说的算</p>
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401111518010.png" alt="image-20240401111518010" style="zoom:33%;" />
+
+<p>在这种情况下，redis重启的时候会优先载入AOF文件来恢复原始的数据，因为在通常情况下AOF文件保存。</p>
+<p>设置aof-use-rdbpreamble都值为yes，yes表示开启设置no表示禁用</p>
+<p>RDB镜像做全量吃就话，AOF做增量持久化</p>
+<img src="../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401130144683.png" style="zoom:33%;" />
+
+<p><img src="/../blog_images/Redis-%E6%8C%81%E4%B9%85%E5%8C%96/image-20240401130628985.png" alt="image-20240401130628985"></p>
+<h2 id="纯缓存模式"><a href="#纯缓存模式" class="headerlink" title="纯缓存模式"></a>纯缓存模式</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/31/Redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/31/Redis/" class="post-title-link" itemprop="url">Redis</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-31 17:13:55 / 修改时间：21:11:39" itemprop="dateCreated datePublished" datetime="2024-03-31T17:13:55+08:00">2024-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Linux下安装使用Redis"><a href="#Linux下安装使用Redis" class="headerlink" title="Linux下安装使用Redis"></a>Linux下安装使用Redis</h1><p><img src="/../blog_images/Redis/image-20240331183148156.png" alt="image-20240331183148156"></p>
+<p><img src="/../blog_images/Redis/image-20240331183151856.png" alt="image-20240331183151856"></p>
+<h2 id="1-打开-关闭redis命令"><a href="#1-打开-关闭redis命令" class="headerlink" title="1. 打开&#x2F;关闭redis命令"></a>1. 打开&#x2F;关闭redis命令</h2><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -a <span class="number">123456</span> -p <span class="number">6379</span></span><br><span class="line">quit//退出</span><br><span class="line">redis-cli -a <span class="number">123456</span> shutdown//单实例关闭</span><br><span class="line"> redis-cli -a <span class="number">123456</span> shutdown //多实例关闭</span><br></pre></td></tr></table></figure>
+
+<h1 id="Redis的十大数据结构"><a href="#Redis的十大数据结构" class="headerlink" title="Redis的十大数据结构"></a>Redis的十大数据结构</h1><h2 id="1-String-字符串"><a href="#1-String-字符串" class="headerlink" title="1. String 字符串"></a>1. String 字符串</h2><h2 id="2-List-列表"><a href="#2-List-列表" class="headerlink" title="2.List 列表"></a>2.List 列表</h2><h2 id="3-Hash哈希表"><a href="#3-Hash哈希表" class="headerlink" title="3.Hash哈希表"></a>3.Hash哈希表</h2><h2 id="4-Set集合"><a href="#4-Set集合" class="headerlink" title="4.Set集合"></a>4.Set集合</h2><h2 id="5-ZSet-redis有序集合"><a href="#5-ZSet-redis有序集合" class="headerlink" title="5.ZSet redis有序集合"></a>5.ZSet redis有序集合</h2><h2 id="6-GEO-地理空间"><a href="#6-GEO-地理空间" class="headerlink" title="6.GEO 地理空间"></a>6.GEO 地理空间</h2><h2 id="7-HyperLogLog-基数统计"><a href="#7-HyperLogLog-基数统计" class="headerlink" title="7.HyperLogLog 基数统计"></a>7.HyperLogLog 基数统计</h2><h2 id="8-bitmap位图"><a href="#8-bitmap位图" class="headerlink" title="8.bitmap位图"></a>8.bitmap位图</h2><h2 id="9-bitfield位域"><a href="#9-bitfield位域" class="headerlink" title="9.bitfield位域"></a>9.bitfield位域</h2><h2 id="10-Stream流"><a href="#10-Stream流" class="headerlink" title="10.Stream流"></a>10.Stream流</h2><h1 id="Redis基础操作"><a href="#Redis基础操作" class="headerlink" title="Redis基础操作"></a>Redis基础操作</h1><p><img src="/../blog_images/Redis/image-20240331174848465.png" alt="image-20240331174848465"></p>
+<p>del key 是原子的</p>
+<p>unlink key 是非阻塞删除</p>
+<p>redis默认是16个库，默认使用的是0号库</p>
+<p>keepTTL</p>
+<p><img src="/../blog_images/Redis/image-20240331181959700.png" alt="image-20240331181959700"></p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="最常用"><a href="#最常用" class="headerlink" title="最常用"></a>最常用</h3><p>set、get、ttl</p>
+<h3 id="同时设置-获取多个键值"><a href="#同时设置-获取多个键值" class="headerlink" title="同时设置&#x2F;获取多个键值"></a>同时设置&#x2F;获取多个键值</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MSET Key value [key value]</span><br><span class="line">MGET key [key ...]</span><br><span class="line">mset/mget/msetnx</span><br><span class="line">msetnx:不存在的时候才创建，此外，这个命令有点像事务的完整性，只有全部成功才会创建</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Redis/image-20240331182938441.png" alt="image-20240331182938441"></p>
+<p><img src="/../blog_images/Redis/image-20240331183123246.png" alt="image-20240331183123246"></p>
+<h3 id="获取指定区间范围内的值"><a href="#获取指定区间范围内的值" class="headerlink" title="获取指定区间范围内的值"></a>获取指定区间范围内的值</h3><h4 id="GETRANGE-k1-0-1"><a href="#GETRANGE-k1-0-1" class="headerlink" title="GETRANGE k1 0 -1"></a>GETRANGE k1 0 -1</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GETRANGE k1 0 -1</span><br><span class="line">// 对于string就是获得子串 类似于substring</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../blog_images/Redis/image-20240331183849993.png" alt="image-20240331183849993"></p>
+<h4 id="SETRANGE-k1-xxyy"><a href="#SETRANGE-k1-xxyy" class="headerlink" title="SETRANGE k1 xxyy"></a>SETRANGE k1 xxyy</h4><p>从第一位开始， 用‘xxyy’全部覆盖</p>
+<p><img src="/../blog_images/Redis/image-20240331184034033.png" alt="image-20240331184034033"></p>
+<h3 id="数值的增减"><a href="#数值的增减" class="headerlink" title="数值的增减"></a>数值的增减</h3><h4 id="INCR-K1"><a href="#INCR-K1" class="headerlink" title="INCR K1"></a>INCR K1</h4><p>表示自增1</p>
+<h4 id="DECR"><a href="#DECR" class="headerlink" title="DECR"></a>DECR</h4><p>表示自减</p>
+<h4 id="DECRBY-k1-5"><a href="#DECRBY-k1-5" class="headerlink" title="DECRBY k1 5"></a>DECRBY k1 5</h4><p><img src="/../blog_images/Redis/image-20240331194044855.png" alt="image-20240331194044855"></p>
+<p><img src="/../blog_images/Redis/image-20240331194106413.png" alt="image-20240331194106413"></p>
+<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><p><img src="/../blog_images/Redis/image-20240331194142112.png" alt="image-20240331194142112"></p>
+<p>之前的sync&#x2F;lock&#x2F;unlock 只能在<strong>一个jvm</strong>中保证加锁，</p>
+<p><img src="/../blog_images/Redis/image-20240331194937034.png" alt="image-20240331194937034"></p>
+<h4 id="setex-k1-15-hello"><a href="#setex-k1-15-hello" class="headerlink" title="setex k1 15 hello"></a>setex k1 15 hello</h4><p>设置 key 过期时间 value</p>
+<img src="../blog_images/Redis/image-20240331195300058.png" alt="image-20240331195300058" style="zoom:50%;" />
+
+<h3 id="getset"><a href="#getset" class="headerlink" title="getset"></a>getset</h3><p>先get再set</p>
+<h2 id="List-Redis-列表"><a href="#List-Redis-列表" class="headerlink" title="List Redis 列表"></a>List Redis 列表</h2><p>底层是一个&#x3D;&#x3D;双端链表&#x3D;&#x3D;的结构，大概有40多个亿，主要功能有push&#x2F;pop等，一般用在栈、队列、消息队列等场景中。</p>
+<p>left和right都可以加入</p>
+<p>如果键不存在，就创建一个新的连别</p>
+<p>如果键存在，就新增内容</p>
+<p>如果值全部被移除了，对应的键也会消失</p>
+<blockquote>
+<p>对于两端的操作性能是很强的，对于索引下标的操作中间的节点性能就会比较差</p>
+</blockquote>
+<h3 id="lpush-rpush-lrange"><a href="#lpush-rpush-lrange" class="headerlink" title="lpush&#x2F;rpush&#x2F;lrange"></a>lpush&#x2F;rpush&#x2F;lrange</h3><p><img src="/../blog_images/Redis/image-20240331201214038.png" alt="image-20240331201214038"></p>
+<h3 id="lpop-rpop"><a href="#lpop-rpop" class="headerlink" title="lpop&#x2F;rpop"></a>lpop&#x2F;rpop</h3><p><img src="/../blog_images/Redis/image-20240331201351026.png" alt="image-20240331201351026"></p>
+<h3 id="lindex-按照索引的下标获得元素（从上至下）"><a href="#lindex-按照索引的下标获得元素（从上至下）" class="headerlink" title="lindex 按照索引的下标获得元素（从上至下）"></a>lindex 按照索引的下标获得元素（从上至下）</h3><p><img src="/../blog_images/Redis/image-20240331201559339.png" alt="image-20240331201559339"></p>
+<h3 id="llen-获取列表中元素的个数"><a href="#llen-获取列表中元素的个数" class="headerlink" title="llen 获取列表中元素的个数"></a>llen 获取列表中元素的个数</h3><h3 id="lrem-key-数字N给定值v1-（删除N个值等于V1的元素）、"><a href="#lrem-key-数字N给定值v1-（删除N个值等于V1的元素）、" class="headerlink" title="lrem key 数字N给定值v1 （删除N个值等于V1的元素）、"></a>lrem key 数字N给定值v1 （删除N个值等于V1的元素）、</h3><img src="../blog_images/Redis/image-20240331201925609.png" alt="image-20240331201925609" style="zoom:50%;" />
+
+<p>删除list1里面三个值为1的元素</p>
+<h3 id="ltrim-key-开始index-结束index-，截取指定范围内的值再赋值给key"><a href="#ltrim-key-开始index-结束index-，截取指定范围内的值再赋值给key" class="headerlink" title="ltrim key 开始index 结束index ，截取指定范围内的值再赋值给key"></a>ltrim key 开始index 结束index ，截取指定范围内的值再赋值给key</h3><p><img src="/../blog_images/Redis/image-20240331202135633.png" alt="image-20240331202135633"></p>
+<h3 id="rpoplpush-源列表-目的列表"><a href="#rpoplpush-源列表-目的列表" class="headerlink" title="rpoplpush 源列表 目的列表"></a>rpoplpush 源列表 目的列表</h3><p><img src="/../blog_images/Redis/image-20240331202408163.png" alt="image-20240331202408163"></p>
+<h3 id="lset-key-index-value"><a href="#lset-key-index-value" class="headerlink" title="lset key index value"></a>lset key index value</h3><p><img src="/../blog_images/Redis/image-20240331202503414.png" alt="image-20240331202503414"></p>
+<h3 id="linset-key-before-after-已有的值插入新的值"><a href="#linset-key-before-after-已有的值插入新的值" class="headerlink" title="linset key before &#x2F;after 已有的值插入新的值"></a>linset key before &#x2F;after 已有的值插入新的值</h3><p><img src="/../blog_images/Redis/image-20240331202637152.png" alt="image-20240331202637152"></p>
+<h2 id="Hash（）"><a href="#Hash（）" class="headerlink" title="Hash（）"></a>Hash（）</h2><p>kv键值对的结构不变，但是v是一个新的键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String , Map&lt;Object,Object&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="hset-hget-hmset-hmget-hgetall-hdel"><a href="#hset-hget-hmset-hmget-hgetall-hdel" class="headerlink" title="hset&#x2F;hget&#x2F;hmset&#x2F;hmget&#x2F;hgetall&#x2F;hdel"></a>hset&#x2F;hget&#x2F;hmset&#x2F;hmget&#x2F;hgetall&#x2F;hdel</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hset key 字段1 value1 字段2 value2 字段3 value3...</span><br></pre></td></tr></table></figure>
+
+<img src="../blog_images/Redis/image-20240331203248639.png" alt="image-20240331203248639" style="zoom:33%;" />
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">没有什么区别</span><br><span class="line">hmset/hmget</span><br></pre></td></tr></table></figure>
+
+<img src="../blog_images/Redis/image-20240331203424491.png" alt="image-20240331203424491" style="zoom:33%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hgetall/hdel</span><br></pre></td></tr></table></figure>
+
+<p>hgetall类似于遍历，hdel就是删掉</p>
+<img src="../blog_images/Redis/image-20240331203632378.png" alt="image-20240331203632378" style="zoom:50%;" />
+
+<h3 id="hlen-获取某个key中的全部的数量"><a href="#hlen-获取某个key中的全部的数量" class="headerlink" title="hlen 获取某个key中的全部的数量"></a>hlen 获取某个key中的全部的数量</h3><img src="../blog_images/Redis/image-20240331203807798.png" alt="image-20240331203807798" style="zoom:33%;" />
+
+<h3 id="hexists-key-判断在key里面的某个值的key"><a href="#hexists-key-判断在key里面的某个值的key" class="headerlink" title="hexists key 判断在key里面的某个值的key"></a>hexists key 判断在key里面的某个值的key</h3><p><img src="/../blog_images/Redis/image-20240331203900374.png" alt="image-20240331203900374"></p>
+<h3 id="hkeys-hvals"><a href="#hkeys-hvals" class="headerlink" title="hkeys&#x2F;hvals"></a>hkeys&#x2F;hvals</h3><p>罗列key和value</p>
+<img src="../blog_images/Redis/image-20240331204001831.png" alt="image-20240331204001831" style="zoom:33%;" />
+
+<h3 id="hincrby-hincrbyfloat"><a href="#hincrby-hincrbyfloat" class="headerlink" title="hincrby&#x2F;hincrbyfloat"></a>hincrby&#x2F;hincrbyfloat</h3><p>增加</p>
+<p><img src="/../blog_images/Redis/image-20240331204104566.png" alt="image-20240331204104566"></p>
+<p><img src="/../blog_images/Redis/image-20240331204313354.png" alt="image-20240331204313354"></p>
+<h3 id="hsetnx-（就是set的性质"><a href="#hsetnx-（就是set的性质" class="headerlink" title="hsetnx （就是set的性质"></a>hsetnx （就是set的性质</h3><p><img src="/../blog_images/Redis/image-20240331204340967.png" alt="image-20240331204340967"></p>
+<img src="../blog_images/Redis/image-20240331204227917.png" alt="image-20240331204227917" style="zoom:50%;" />
+
+<p>购物车</p>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>单个值可以有多个value ，但是每个值都不能重复</p>
+<p><img src="/../blog_images/Redis/image-20240331204829210.png" alt="image-20240331204829210"></p>
+<h3 id="SADD-自动去重"><a href="#SADD-自动去重" class="headerlink" title="SADD 自动去重"></a>SADD 自动去重</h3><p><img src="/../blog_images/Redis/image-20240331205105464.png" alt="image-20240331205105464"></p>
+<h3 id="SMEMEBERS-set1遍历"><a href="#SMEMEBERS-set1遍历" class="headerlink" title="SMEMEBERS set1遍历"></a>SMEMEBERS set1遍历</h3><img src="../blog_images/Redis/image-20240331205144592.png" alt="image-20240331205144592" style="zoom:33%;" />
+
+
+
+<img src="../blog_images/Redis/image-20240331205332306.png" alt="image-20240331205332306" style="zoom:33%;" />
+
+<h3 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h3><p><img src="/../blog_images/Redis/image-20240331205619186.png" alt="image-20240331205619186"></p>
+<p><img src="/../blog_images/Redis/image-20240331205705964.png" alt="image-20240331205705964"></p>
+<p><img src="/../blog_images/Redis/image-20240331205758175.png" alt="image-20240331205758175"></p>
+<h2 id="Zset（sorted-set-有序集合"><a href="#Zset（sorted-set-有序集合" class="headerlink" title="Zset（sorted set)有序集合"></a>Zset（sorted set)有序集合</h2><h2 id="bitmap"><a href="#bitmap" class="headerlink" title="bitmap"></a>bitmap</h2><h2 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h2><h2 id="GEO"><a href="#GEO" class="headerlink" title="GEO"></a>GEO</h2><h2 id="Stream（redis-版本的MQ）消息中间件"><a href="#Stream（redis-版本的MQ）消息中间件" class="headerlink" title="Stream（redis 版本的MQ）消息中间件"></a>Stream（redis 版本的MQ）消息中间件</h2><blockquote>
+<p>MQ 包含Kafka RabbitMQ rocketmq等</p>
+<p>先去学了MQ</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/18/Docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/18/Docker/" class="post-title-link" itemprop="url">Docker</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-03-18 10:53:35 / 修改时间：11:24:16" itemprop="dateCreated datePublished" datetime="2024-03-18T10:53:35+08:00">2024-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一、容器"><a href="#一、容器" class="headerlink" title="一、容器"></a>一、容器</h1><h2 id="什么是容器"><a href="#什么是容器" class="headerlink" title="什么是容器"></a>什么是容器</h2><p>将软件打包成标准化单元，以用于开发、交付与部署</p>
+<h1 id="二、Docker"><a href="#二、Docker" class="headerlink" title="二、Docker"></a>二、Docker</h1><p><strong>Docker 的镜像提供了除内核外完整的运行时环境，确保了应用运行环境一致性，从而不会再出现 “这段代码在我机器上没问题啊” 这类问题；——一致的运行环境</strong></p>
+<p><strong>可以做到秒级、甚至毫秒级的启动时间。大大的节约了开发、测试、部署的时间。——更快速的启动时间</strong></p>
+<p><strong>避免公用的服务器，资源会容易受到其他用户的影响。——隔离性</strong></p>
+<p><strong>善于处理集中爆发的服务器使用压力；——弹性伸缩，快速扩展</strong></p>
+<p><strong>可以很轻易的将在一个平台上运行的应用，迁移到另一个平台上，而不用担心运行环境的变化导致应用无法正常运行的情况。——迁移方便</strong></p>
+<p>使用 Docker 可以通过定制应用镜像来实现持续集成、持续交付、部署。——持续交付和部署</p>
+<h1 id="三-容器VS虚拟机"><a href="#三-容器VS虚拟机" class="headerlink" title="三 容器VS虚拟机"></a>三 容器VS虚拟机</h1><p>简单来说：容器和虚拟机具有相似的资源隔离和分配优势，但功能有所不同，因为容器虚拟化的是操作系统，而不是硬件，因此容器更容易移植，效率也更高。</p>
+<h2 id="3-1-两者对比图"><a href="#3-1-两者对比图" class="headerlink" title="3.1 两者对比图"></a>3.1 两者对比图</h2><p>传统虚拟机技术是虚拟出一套硬件后，在其上运行一个完整操作系统，在该系统上再运行所需应用进程；而容器内的应用进程直接运行于宿主的内核，容器内没有自己的内核，而且也没有进行硬件虚拟。因此容器要比传统虚拟机更为轻便。</p>
+<hr>
+<p>传统的虚拟机技术是虚拟出一套硬件之后，在其上运行一套完整的操作系统，然后在该操作系统上再运行所需要的应用进程；而容器内的应用进程直接运行于宿主的内核，容器中没有自己的内核，而且也没有进行硬件虚拟，因此容器要比传统虚拟机更加的轻便。</p>
+<p><img src="/../blog_images/Docker/image-20240318111036086.png" alt="image-20240318111036086"></p>
+<h2 id="3-2-容器与虚拟机总结"><a href="#3-2-容器与虚拟机总结" class="headerlink" title="3.2 容器与虚拟机总结"></a>3.2 容器与虚拟机总结</h2><p><img src="/../blog_images/Docker/image-20240318111314460.png" alt="image-20240318111314460"></p>
+<p><strong>容器是一个应用层抽象，用于将代码和依赖资源打包在一起。</strong> <strong>多个容器可以在同一台机器上运行，共享操作系统内核，但各自作为独立的进程在用户空间中运行</strong> 。与虚拟机相比， <strong>容器占用的空间较少</strong>（容器镜像大小通常只有几十兆），<strong>瞬间就能完成启动</strong> 。</p>
+<p><strong>虚拟机 (VM) 是一个物理硬件层抽象，用于将一台服务器变成多台服务器。</strong> 管理程序允许多个 VM 在一台机器上运行。每个 VM 都包含一整套操作系统、一个或多个应用、必要的二进制文件和库资源，因此 <strong>占用大量空间</strong> 。而且 VM <strong>启动也十分缓慢</strong> 。</p>
+<p>通过 Docker 官网，我们知道了这么多 Docker 的优势，但是大家也没有必要完全否定虚拟机技术，因为两者有不同的使用场景。<strong>虚拟机更擅长于彻底隔离整个运行环境</strong>。例如，云服务提供商通常采用虚拟机技术隔离不同的用户。而 <strong>Docker 通常用于隔离不同的应用</strong> ，例如前端，后端以及数据库</p>
+<h2 id="3-3容器与虚拟机两者是可以共存的"><a href="#3-3容器与虚拟机两者是可以共存的" class="headerlink" title="3.3容器与虚拟机两者是可以共存的"></a>3.3容器与虚拟机两者是可以共存的</h2><p><img src="/../blog_images/Docker/image-20240318111806112.png" alt="image-20240318111806112"></p>
+<h1 id="四、Docker基本概念"><a href="#四、Docker基本概念" class="headerlink" title="四、Docker基本概念"></a>四、Docker基本概念</h1><p><strong>Docker 中有非常重要的三个基本概念，理解了这三个概念，就理解了 Docker 的整个生命周期。</strong></p>
+<ul>
+<li><strong>镜像（Image）</strong></li>
+<li><strong>容器（Container）</strong></li>
+<li><strong>仓库（Repository）</strong></li>
+</ul>
+<p>理解了这三个概念，就理解了 Docker 的整个生命周期</p>
+<p><img src="/../blog_images/Docker/image-20240318111954221.png" alt="image-20240318111954221"></p>
+<h2 id="镜像：一个特殊的文件系统"><a href="#镜像：一个特殊的文件系统" class="headerlink" title="镜像：一个特殊的文件系统"></a>镜像：一个特殊的文件系统</h2><p><strong>操作系统分为内核和用户空间</strong>。对于 Linux 而言，内核启动后，会挂载 root 文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 root 文件系统。</p>
+<p><strong>Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。</strong> 镜像不包含任何动态数据，其内容在构建之后也不会被改变。</p>
+<p>Docker 设计时，就充分利用 <strong>Union FS</strong> 的技术，&#x3D;&#x3D;将其设计为<strong>分层存储的架构</strong> 。镜像实际是由多层文件系统联合组成。&#x3D;&#x3D;</p>
+<p><strong>&#x3D;&#x3D;镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。</strong>&#x3D;&#x3D; 比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是&#x3D;&#x3D;仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。&#x3D;&#x3D;因此，在构建镜像的时候，需要额外小心，每一层尽量只包含该层需要添加的东西，任何额外的东西应该在该层构建结束前清理掉。</p>
+<p>分层存储的特征还使得镜像的复用、定制变的更为容易。甚至可以&#x3D;&#x3D;用之前构建好的镜像作为基础层&#x3D;&#x3D;，然后进一步添加新的层，以定制自己所需的内容，构建新的镜像。</p>
+<h2 id="容器-镜像运行时的实体"><a href="#容器-镜像运行时的实体" class="headerlink" title="容器:镜像运行时的实体"></a>容器:镜像运行时的实体</h2><p><strong>Docker Registry 公开服务</strong> 是开放给用户使用、允许用户管理镜像的 Registry 服务。一般这类公开服务允许用户免费上传、下载公开的镜像，并可能提供收费服务供用户管理私有镜像。</p>
+<p>最常使用的 Registry 公开服务是官方的 <strong>Docker Hub</strong> ，这也是默认的 Registry，并拥有大量的高质量的官方镜像，网址为：<a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/open in new window</a> 。官方是这样介绍 Docker Hub 的</p>
+<hr>
+<p>著作权归JavaGuide(javaguide.cn)所有 基于MIT协议 原文链接：<a target="_blank" rel="noopener" href="https://javaguide.cn/tools/docker/docker-intro.html">https://javaguide.cn/tools/docker/docker-intro.html</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1145,1450 +1850,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/11/JavaWeb-Springboot-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/11/JavaWeb-Springboot-2/" class="post-title-link" itemprop="url">JavaWeb-Springboot-2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-03-11 12:38:22 / 修改时间：16:51:24" itemprop="dateCreated datePublished" datetime="2024-03-11T12:38:22+08:00">2024-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/Springboot2/" itemprop="url" rel="index"><span itemprop="name">Springboot2</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h1><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131236747.png" alt="image-20240311131236747"></p>
-<p>从上至下优先级</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311131859933.png" alt="image-20240311131859933"></p>
-<p>命令行参数&gt;java系统属性</p>
-<h1 id="Bean管理"><a href="#Bean管理" class="headerlink" title="Bean管理"></a>Bean管理</h1><p>Spring项目启动时，会把bean都创建好放到IOC容器当中，如果想要主动获取这些bean：</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311133629292.png" alt="image-20240311133629292"></p>
-<img src="../blog_images/JavaWeb-Springboot-2/image-20240311134105870.png" alt="image-20240311134105870" style="zoom:33%;" />
-
-
-
-<h2 id="bean的获取"><a href="#bean的获取" class="headerlink" title="bean的获取"></a>bean的获取</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311134034393.png" alt="image-20240311134034393"></p>
-<p>在spring容器中，bean默认是单例的</p>
-<table>
-<thead>
-<tr>
-<th><strong>作用域</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>singleton</td>
-<td>容器内同  名称 的 bean 只有一个实例（单例）（默认）</td>
-</tr>
-<tr>
-<td>prototype</td>
-<td>每次使用该  bean 时会创建新的实例（非单例）</td>
-</tr>
-<tr>
-<td>request</td>
-<td>每个请求范围内会创建新的实例（web环境中，了解）</td>
-</tr>
-<tr>
-<td>session</td>
-<td>每个会话范围内会创建新的实例（web环境中，了解）</td>
-</tr>
-<tr>
-<td>application</td>
-<td>每个应用范围内会创建新的实例（web环境中，了解）</td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/depts&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>默认singleton的bean，在容器启动时被创建，可以使用@Lazy注解来延迟初始化（延迟到第一次使用时）。</p>
-<p>prototype的bean，每一次使用该bean的时候都会创建一个新的实例。</p>
-<p>实际开发当中，绝大部分的Bean是单例的，也就是说绝大部分Bean不需要配置scope属性。</p>
-<h2 id="第三方bean"><a href="#第三方bean" class="headerlink" title="第三方bean"></a>第三方bean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>如果要管理的bean对象来自于第三方（不是自定义的，是无法用@Component以及衍生注解声明bean的，就是需要用到@Bean注解）</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311141158692.png" alt="image-20240311141158692"></p>
-<p>一、用启动类，不建议</p>
-<p>二、用第三方bean对象</p>
-<p>用配置类声明第三方bean对象</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311142532205.png" alt="image-20240311142532205"></p>
-<p>通过 @Bean注解的name&#x2F;value属性指定bean名称，如果没有指定，默认是方法名</p>
-<h1 id="SpringBoot原理"><a href="#SpringBoot原理" class="headerlink" title="SpringBoot原理"></a>SpringBoot原理</h1><h2 id="起步依赖"><a href="#起步依赖" class="headerlink" title="起步依赖"></a>起步依赖</h2><p>Maven存在一个依赖传递，只要提供一个起步依赖</p>
-<h2 id="自动配置"><a href="#自动配置" class="headerlink" title="自动配置"></a>自动配置</h2><p>SpringBoot的自动配置就是当spring容器启动之后，一些配置类，bean对象就自动的存入了IOC容器中，不需要我们手动去声明</p>
-<p>当想要实现从另外一个项目引入</p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145118080.png" alt="image-20240311145118080"></p>
-<p>springboot只能扫描到启动类及其子包，扫描不到其他的包</p>
-<h3 id="方案一：ComponentScan（使用繁琐，效率低）"><a href="#方案一：ComponentScan（使用繁琐，效率低）" class="headerlink" title="方案一：ComponentScan（使用繁琐，效率低）"></a>方案一：ComponentScan（使用繁琐，效率低）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ComponentScan(&#123;&quot;com.example&quot;,&quot;com.itheima&quot;&#125;)</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringbootWebConfig2Application</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311145621804.png" alt="image-20240311145621804"></p>
-<h3 id="方案二：-Import-导入。"><a href="#方案二：-Import-导入。" class="headerlink" title="方案二：@Import 导入。"></a>方案二：@Import 导入。</h3><p><strong>使用@Import导入的类会被Spring加载到IOC容器中，导入形式主要有以下几种</strong>：</p>
-<ul>
-<li>导入 普通类</li>
-<li>导入 配置类</li>
-<li>导入 ImportSelector 接口实现类</li>
-</ul>
-<p>@EnableXxxx注解，封装@Import注解 </p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150440558.png" alt="image-20240311150440558"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150642205.png" alt="image-20240311150642205"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311150707450.png" alt="image-20240311150707450"></p>
-<h3 id="源码跟踪"><a href="#源码跟踪" class="headerlink" title="源码跟踪"></a>源码跟踪</h3><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h4><p>——-&gt; </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfigration</span></span><br><span class="line">这个注解只是封装了一个注解<span class="meta">@Configuration</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line">用来scan子包之类的;组件扫描，默认扫描当前引导类所在包及其子包。</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line">自动配置的核心注解--》底层封装的<span class="meta">@import</span>注解</span><br><span class="line">--》<span class="meta">@Import(AutoConfigurationTmportSelector.class)</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155050608.png" alt="image-20240311155050608"></p>
-<h4 id="Conditional"><a href="#Conditional" class="headerlink" title="@Conditional"></a><strong>@Conditional</strong></h4><blockquote>
-<p> 以conditional开头的注解都是条件装配的注解</p>
-</blockquote>
-<p><strong>作用：</strong>按照一定的条件进行判断，在满足给定条件后才会注册对应的bean对象到Spring IOC容器中。</p>
-<p><strong>位置：</strong>方法、类</p>
-<p>@Conditional 本身是一个父注解，派生出大量的子注解：</p>
-<ul>
-<li><strong>@ConditionalOnClass：</strong>判断环境中是否有对应字节码文件，才注册bean到IOC容器。</li>
-<li><strong>@ConditionalOnMissingBean：</strong>判断环境中没有对应的bean（类型 或 名称） ，才注册bean到IOC容器。</li>
-<li><strong>@ConditionalOnProperty：</strong>判断配置文件中有对应属性和值，才注册bean到IOC容器。</li>
-</ul>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155517846.png" alt="image-20240311155517846"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311155831161.png" alt="image-20240311155831161"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(name = &quot;io.jsonwebtoken.Jwts&quot;)</span> <span class="comment">//当前环境存在指定的这个类时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span> <span class="comment">//当不存在当前类型的bean时，才声明该bean </span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//指定的类型（value属性）或者 名称（name属性）</span></span><br><span class="line"><span class="comment">//通常用来设置一个默认的bean对象</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(name = &quot;name&quot;,havingValue = &quot;itheima&quot;)</span> <span class="comment">//配置文件中存在对应的属性和值，才注册bean到IOC容器。</span></span><br><span class="line"><span class="keyword">public</span> HeaderParser <span class="title function_">headerParser</span><span class="params">()</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//name表示配置项的名字，havingValue表示配置项的值</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160715872.png" alt="image-20240311160715872"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311160922672.png" alt="image-20240311160922672"></p>
-<h2 id="自定义starter"><a href="#自定义starter" class="headerlink" title="自定义starter"></a>自定义starter</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162501274.png" alt="image-20240311162501274"></p>
-<p><strong>需求：自定义aliyun-oss-spring-boot-starter，完成阿里云OSS操作工具类 AliyunOSSUtils 的自动配置。</strong></p>
-<p><strong>目标：引入起步依赖引入之后，要想使用阿里云OSS，注入 AliyunOSSUtils直接使用即可。</strong></p>
-<img src="../blog_images/JavaWeb-Springboot-2/image-20240311162756249.png" alt="image-20240311162756249" style="zoom:33%;" />
-
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311162942568.png" alt="image-20240311162942568"></p>
-<p>不想听了</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h2><p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164359672.png" alt="image-20240311164359672"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164625979.png" alt="image-20240311164625979"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164645808.png" alt="image-20240311164645808"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot-2/image-20240311164810304.png" alt="image-20240311164810304"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/09/JavaWeb-Springboot/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/09/JavaWeb-Springboot/" class="post-title-link" itemprop="url">JavaWeb-Springboot</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-09 15:58:00" itemprop="dateCreated datePublished" datetime="2024-03-09T15:58:00+08:00">2024-03-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-11 16:51:27" itemprop="dateModified" datetime="2024-03-11T16:51:27+08:00">2024-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/%E8%A1%A8%E5%8D%95%E6%8B%A6%E6%88%AA/" itemprop="url" rel="index"><span itemprop="name">表单拦截</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="表单校验、拦截"><a href="#表单校验、拦截" class="headerlink" title="表单校验、拦截"></a>表单校验、拦截</h1><p><img src="/../blog_images/JavaWeb-Springboot/image-20240309155641073.png" alt="image-20240309155641073"></p>
-<h2 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h2><h3 id="会话："><a href="#会话：" class="headerlink" title="会话："></a><strong>会话：</strong></h3><p><strong>用户打开浏览器，访问web服务器的资源，会话建立，直到有一方断开连接，会话结束。在一次会话中可以包含多次请求和响应。</strong></p>
-<h3 id="会话跟踪："><a href="#会话跟踪：" class="headerlink" title="会话跟踪："></a>会话跟踪：</h3><p>一种维护浏览器状态的方法，<strong>服务器需要识别多次请求是否来自于同一浏览器，以便在同一次会话的多次请求间共享数据。</strong></p>
-<h3 id="会话跟踪方案："><a href="#会话跟踪方案：" class="headerlink" title="会话跟踪方案："></a>会话跟踪方案：</h3><h4 id="客户端会话跟踪技术：Cookie"><a href="#客户端会话跟踪技术：Cookie" class="headerlink" title="客户端会话跟踪技术：Cookie"></a>客户端会话跟踪技术：Cookie</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240309172423138.png" alt="image-20240309172423138"></p>
-<p>优点：HTTP协议中支持的技术</p>
-<p>缺点：<br> 移动端APP无法使用Cookie<br> 不安全，用户可以自己禁用Cookie<br> Cookie不能跨域</p>
-<h4 id="服务端会话跟踪技术：Session"><a href="#服务端会话跟踪技术：Session" class="headerlink" title="服务端会话跟踪技术：Session"></a>服务端会话跟踪技术：Session</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240309174401554.png" alt="image-20240309174401554"></p>
-<p>优点：存储在服务端，安全</p>
-<p>缺点：</p>
-<p>​	服务器集群环境下无法直接使用Session</p>
-<p>​	Cookie的缺点</p>
-<h3 id="令牌技术"><a href="#令牌技术" class="headerlink" title="令牌技术"></a>令牌技术</h3><p><img src="/../blog_images/JavaWeb-Springboot/image-20240309180204979.png" alt="image-20240309180204979"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240309160120522.png" alt="image-20240309160120522"></p>
-<h2 id="JWT令牌"><a href="#JWT令牌" class="headerlink" title="JWT令牌"></a>JWT令牌</h2><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310131306339.png" alt="image-20240310131306339"></p>
-<h2 id="过滤器Filter"><a href="#过滤器Filter" class="headerlink" title="过滤器Filter"></a>过滤器Filter</h2><p>概念：filter 过滤器，是javaweb三大组件(Servlet,filter,listener)之一；</p>
-<p>过滤器可以把一些对于资源的请求拦截下来，从而实现一些特殊的功能。</p>
-<p>过滤器一般完成一些通用的操作，比如：登录校验、统一编码处理，敏感字符处理等</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310140809867.png" alt="image-20240310140809867"></p>
-<blockquote>
-<p>1.定义Filter：定义一个类，实现 Filter 接口，并重写其所有方法。</p>
-<p>2.配置Filter：Filter类上加 @WebFilter 注解，配置拦截资源的路径。引导类上加 @ServletComponentScan 开启Servlet组件支持。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@WebFilter(urlPatterns = &quot;/*&quot;)</span><br><span class="line">表示全部的请求都被拦截</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310142852164.png" alt="image-20240310142852164"></p>
-<p>doFilter</p>
-<p>Filter快速入门<br>定义：实现Filter接口<br>配置：@WebFilter(urlPatterns&#x3D;”&#x2F;*”)<br>        @ServletComponentScan</p>
-<h3 id="详解（执行流程、拦截路径，过滤器链）"><a href="#详解（执行流程、拦截路径，过滤器链）" class="headerlink" title="详解（执行流程、拦截路径，过滤器链）"></a>详解（执行流程、拦截路径，过滤器链）</h3><h4 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chain.doFilter(request,response);</span><br></pre></td></tr></table></figure>
-
-<p>l放行后访问对应资源，资源访问完成后，还会回到Filter中吗？&#x3D;&#x3D;会&#x3D;&#x3D;</p>
-<p>l如果回到Filter中，是重新执行还是执行放行后的逻辑呢？&#x3D;&#x3D;执行放行后逻辑&#x3D;&#x3D;</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310151225803.png" alt="image-20240310151225803"></p>
-<h4 id="拦截路径"><a href="#拦截路径" class="headerlink" title="拦截路径"></a>拦截路径</h4><p>Filter 可以根据需求，配置不同的拦截资源路径：</p>
-<table>
-<thead>
-<tr>
-<th>拦截路径</th>
-<th>urlPatterns值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>拦截具体路径</td>
-<td>&#x2F;login</td>
-<td>只有访问 &#x2F;login 路径时，才会被拦截</td>
-</tr>
-<tr>
-<td>目录拦截</td>
-<td>&#x2F;emps&#x2F;*</td>
-<td>访问&#x2F;emps下的所有资源，都会被拦截</td>
-</tr>
-<tr>
-<td>拦截所有</td>
-<td>&#x2F;*</td>
-<td>访问所有资源，都会被拦截</td>
-</tr>
-</tbody></table>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310151718949.png" alt="image-20240310151718949"></p>
-<h4 id="过滤器链"><a href="#过滤器链" class="headerlink" title="过滤器链"></a>过滤器链</h4><p>介绍：一个web应用中，可以配置多个过滤器，这多个过滤器酒形成了一个过滤器链。</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310152048450.png" alt="image-20240310152048450"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310152242361.png" alt="image-20240310152242361"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310152925112.png" alt="image-20240310152925112"></p>
-<h4 id="登录校验filter"><a href="#登录校验filter" class="headerlink" title="登录校验filter"></a>登录校验filter</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310153719014.png" alt="image-20240310153719014"></p>
-<p>请求头中携带令牌（token）</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310154635261.png" alt="image-20240310154635261"> </p>
-<h5 id="1-获取请求url"><a href="#1-获取请求url" class="headerlink" title="1. 获取请求url"></a>1. 获取请求url</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> req.getRequestURL().toString();</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="拦截器Interceptor"><a href="#拦截器Interceptor" class="headerlink" title="拦截器Interceptor"></a>拦截器Interceptor</h2><h3 id="简介和快速入门"><a href="#简介和快速入门" class="headerlink" title="简介和快速入门"></a>简介和快速入门</h3><p><strong>概念：</strong>是一种动态拦截方法调用的机制，类似于过滤器。Spring框架中提供的，用来动态拦截控制器方法的执行。</p>
-<p><strong>作用：</strong>拦截请求，在指定的方法调用前后，根据业务需要执行预先设定的代码。</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310161305917.png" alt="image-20240310161305917"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310161913186.png" alt="image-20240310161913186"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310162622454.png" alt="image-20240310162622454"></p>
-<h3 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h3><h4 id="拦截器-拦截路径"><a href="#拦截器-拦截路径" class="headerlink" title="拦截器-拦截路径"></a>拦截器-拦截路径</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310162758884.png" alt="image-20240310162758884"></p>
-<table>
-<thead>
-<tr>
-<th>拦截路径</th>
-<th>含义</th>
-<th>举例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&#x2F;*</td>
-<td>一级路径</td>
-<td>能匹配&#x2F;depts，&#x2F;emps，&#x2F;login，不能匹配 &#x2F;depts&#x2F;1</td>
-</tr>
-<tr>
-<td>&#x2F;**</td>
-<td>任意级路径</td>
-<td>能匹配&#x2F;depts，&#x2F;depts&#x2F;1，&#x2F;depts&#x2F;1&#x2F;2</td>
-</tr>
-<tr>
-<td>&#x2F;depts&#x2F;*</td>
-<td>&#x2F;depts下的一级路径</td>
-<td>能匹配&#x2F;depts&#x2F;1，不能匹配&#x2F;depts&#x2F;1&#x2F;2，&#x2F;depts</td>
-</tr>
-<tr>
-<td>&#x2F;depts&#x2F;**</td>
-<td>&#x2F;depts下的任意级路径</td>
-<td>能匹配&#x2F;depts，&#x2F;depts&#x2F;1，&#x2F;depts&#x2F;1&#x2F;2，不能匹配&#x2F;emps&#x2F;1</td>
-</tr>
-</tbody></table>
-<h4 id="执行流程-1"><a href="#执行流程-1" class="headerlink" title="执行流程"></a>执行流程</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310162921714.png" alt="image-20240310162921714"></p>
-<h3 id="登录校验-Interceptor"><a href="#登录校验-Interceptor" class="headerlink" title="登录校验- Interceptor"></a>登录校验- Interceptor</h3><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310162943382.png" alt="image-20240310162943382"></p>
-<p>出现异常，该如何处理?</p>
-<h4 id="方案一：在Controller的方法中进行try…catch处理"><a href="#方案一：在Controller的方法中进行try…catch处理" class="headerlink" title="方案一：在Controller的方法中进行try…catch处理"></a>方案一：在Controller的方法中进行try…catch处理</h4><h4 id="方案二：全局异常处理器"><a href="#方案二：全局异常处理器" class="headerlink" title="方案二：全局异常处理器"></a>方案二：全局异常处理器</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310163515596.png" alt="image-20240310163515596"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310163945488.png" alt="image-20240310163945488"></p>
-<h1 id="事务管理和AOP"><a href="#事务管理和AOP" class="headerlink" title="事务管理和AOP"></a>事务管理和AOP</h1><h2 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>事务时一组操作的集合，它是一个不可分割的工作单位，这些操作&#x3D;&#x3D;要么同时成功，要么同时失败&#x3D;&#x3D;</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><p>开启事务（一组操作开始前，开启事务）：start transaction &#x2F; begin；</p>
-<p>提交事务 （这组操作全部成功后，提交事务）：commit;</p>
-<p>回滚事务（中间任何一个操作出现异常，回滚事务）：rollback；</p>
-<h3 id="Spring事务管理"><a href="#Spring事务管理" class="headerlink" title="Spring事务管理"></a>Spring事务管理</h3><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310183459564.png" alt="image-20240310183459564"></p>
-<h4 id="Transactional"><a href="#Transactional" class="headerlink" title="@Transactional"></a>@Transactional</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240310183634814.png" alt="image-20240310183634814"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310183751109.png" alt="image-20240310183751109"></p>
-<h3 id="事务进阶"><a href="#事务进阶" class="headerlink" title="事务进阶"></a>事务进阶</h3><h4 id="rollbackFor–回滚"><a href="#rollbackFor–回滚" class="headerlink" title="rollbackFor–回滚"></a>rollbackFor–回滚</h4><p>默认情况下，只有出现 RuntimeException 才回滚异常。<strong>rollbackFor属性用于控制出现何种异常类型，回滚事务。</strong></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310184253693.png" alt="image-20240310184253693"></p>
-<h4 id="propagation–传播"><a href="#propagation–传播" class="headerlink" title="propagation–传播"></a>propagation–传播</h4><blockquote>
-<p>事务传播行为：指的就是当一个事务方法被另一个事务方法调用时，这个事务方法应该如何进行事务控制。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310185655780.png" alt="image-20240310185655780"></p>
-<table>
-<thead>
-<tr>
-<th><strong>属性值</strong></th>
-<th><strong>含义</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>REQUIRED</td>
-<td>【默认值】需要事务，有则加入，无则创建新事务</td>
-</tr>
-<tr>
-<td>REQUIRES_NEW</td>
-<td>需要新事务，无论有无，总是创建新事务</td>
-</tr>
-<tr>
-<td>SUPPORTS</td>
-<td>支持事务，有则加入，无则在无事务状态中运行</td>
-</tr>
-<tr>
-<td>NOT_SUPPORTED</td>
-<td>不支持事务，在无事务状态下运行,如果当前存在已有事务,则挂起当前事务</td>
-</tr>
-<tr>
-<td>MANDATORY</td>
-<td>必须有事务，否则抛异常</td>
-</tr>
-<tr>
-<td>NEVER</td>
-<td>必须没事务，否则抛异常</td>
-</tr>
-<tr>
-<td>…</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><h3 id="AOP概述-Aspect-Oriented-Programming"><a href="#AOP概述-Aspect-Oriented-Programming" class="headerlink" title="AOP概述(Aspect Oriented Programming)"></a>AOP概述(Aspect Oriented Programming)</h3><p>面向切面编程，面向方向编程，面向特定方法编程</p>
-<p><strong>动态代理技术是实现面向切面编程最主流的方法</strong></p>
-<p>场景：案例部分功能运行较慢，定位执行耗时较长的业务方法，此时需要统计每一个业务方法的执行耗时。</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310192516869.png" alt="image-20240310192516869"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310192644685.png" alt="image-20240310192644685"></p>
-<p>实现：动态代理是面向切面编程最主流的实现，而springAOP是Spring框架的高级技术， 旨在管理bean对象的过程中，主要通过底层的动态代理机制，对特定的方法进行编程。</p>
-<p>优点：</p>
-<ul>
-<li><ol>
-<li>在没有对于原始方法进行修改的同时，代码无侵入</li>
-<li>减少重复代码</li>
-<li>提高开发效率</li>
-<li>维护比较方便</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311093129040.png" alt="image-20240311093129040"></p>
-<p>理解来说，就是把原始的方法进行包装，在这个AOP类中就可以定义在运行原始方法前运行什么操作。</p>
-<h3 id="AOP快速入门"><a href="#AOP快速入门" class="headerlink" title="AOP快速入门"></a>AOP快速入门</h3><h3 id="AOP核心概念"><a href="#AOP核心概念" class="headerlink" title="AOP核心概念"></a>AOP核心概念</h3><ul>
-<li>连接点：JoinPoint，可以被AOP控制的方法（暗含方法执行时的相关信息）</li>
-<li>通知：Advice，指哪些重复的逻辑，也就是共性功能（最终体现为一个方法）</li>
-<li>切入点：PointCut，匹配连接点的条件，通知仅会在切入点方法执行时被应用</li>
-<li>切面：Aspect，描述通知与切入点的对应关系（通知+切入点）</li>
-<li>目标对象：Target，通知所应用的对象</li>
-</ul>
-<p>一旦执行了AOP流程，执行对象的目标不是原来的对象，而是代理对象</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240310205017770.png" alt="image-20240310205017770"></p>
-<h4 id="通知类型"><a href="#通知类型" class="headerlink" title="通知类型"></a>通知类型</h4><p><img src="../blog_images/JavaWeb-Springboot/image-20240310205142244.png" alt="image-20240310205142244" style="zoom: 25%;" />以上也是切入点表达式，存在重复问题，需要将其抽取。</p>
-<img src="../blog_images/JavaWeb-Springboot/image-20240311100357714.png" alt="image-20240311100357714" style="zoom:25%;" />
-
-<blockquote>
-<p>public :表示在其他外部的切面类中也可以应用该表达式</p>
-<p>private：在其他外部的切面类红也可以引用该表达式</p>
-</blockquote>
-<img src="../blog_images/JavaWeb-Springboot/image-20240311100628539.png" alt="image-20240311100628539" style="zoom:25%;" />
-
-<h4 id="通知顺序"><a href="#通知顺序" class="headerlink" title="通知顺序"></a>通知顺序</h4><p>当有多个切面的切入点都匹配到了目标方法，目标方法运行时，多个通知方法都会被执行。</p>
-<h5 id="1-不同切面类中，默认按照切面类的类名字母排序："><a href="#1-不同切面类中，默认按照切面类的类名字母排序：" class="headerlink" title="1.不同切面类中，默认按照切面类的类名字母排序："></a>1.不同切面类中，默认按照切面类的类名字母排序：</h5><p>​	目标方法前的通知方法：字母排名靠前的先执行</p>
-<p>​	目标方法后的通知方法：字母排名靠前的后执行</p>
-<h5 id="2-在切面类上添加order注解"><a href="#2-在切面类上添加order注解" class="headerlink" title="2.在切面类上添加order注解"></a>2.在切面类上添加order注解</h5><p><img src="/../blog_images/JavaWeb-Springboot/image-20240311101259010.png" alt="image-20240311101259010"></p>
-<h4 id="切入点表达式"><a href="#切入点表达式" class="headerlink" title="切入点表达式"></a>切入点表达式</h4><h5 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h5><p>切入点表达式：描述切入点方法的一种表达式</p>
-<p>作用：主要用来决定项目中的哪些方法需要加入通知</p>
-<p>常见形式：</p>
-<blockquote>
-<p>1.execution(……)：根据方法的签名来匹配</p>
-<p>2.@annotation(……) ：根据注解匹配</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(访问修饰符?  返回值  包名.类名.?方法名(方法参数) <span class="keyword">throws</span> 异常?)</span><br></pre></td></tr></table></figure>
-
-<p>其中带 ? 的表示可以省略的部分</p>
-<p>访问修饰符：可省略（比如: public、protected）</p>
-<p>包名.类名： 可省略</p>
-<blockquote>
-<p>可以省略但是不建议，不然会使得匹配的范围过大</p>
-</blockquote>
-<p>throws 异常：可省略（注意是方法上声明抛出的异常，不是实际抛出的异常）</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311101845730.png" alt="image-20240311101845730"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311102223113.png" alt="image-20240311102223113"></p>
-<h5 id="annotation-……"><a href="#annotation-……" class="headerlink" title="@annotation(……)"></a>@annotation(……)</h5><blockquote>
-<p>定义注解，这个注解起到一个标识的作用</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311105248945.png" alt="image-20240311105248945"></p>
-<p>@annotation 切入点表达式，用于匹配标识有特定注解的方法。</p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311105423424.png" alt="image-20240311105423424"></p>
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311105605500.png" alt="image-20240311105605500"></p>
-<h4 id="连接点"><a href="#连接点" class="headerlink" title="连接点"></a>连接点</h4><p>可以被AOP控制的方法</p>
-<p>在Spring中用JoinPoint抽象了连接点，用它可以获得方法执行时的相关信息，比如目标类名，方法名。</p>
-<blockquote>
-<p>就是把之前的那些给抽象了</p>
-</blockquote>
-<blockquote>
-<p>对于 @Around 通知，获取连接点信息只能使用 ProceedingJoinPoint</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;execution(* com.itheima.service.DeptService.*(..))&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    </span><br><span class="line">	<span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> joinPoint.getTarget().getClass().getName(); <span class="comment">//获取目标类名</span></span><br><span class="line">    <span class="type">Signature</span> <span class="variable">signature</span> <span class="operator">=</span> joinPoint.getSignature(); <span class="comment">//获取目标方法签名	</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName(); <span class="comment">//获取目标方法名</span></span><br><span class="line">    Object[] args = joinPoint.getArgs(); <span class="comment">//获取目标方法运行参数</span></span><br><span class="line">    <span class="type">Object</span> <span class="variable">res</span> <span class="operator">=</span> joinPoint.proceed(); <span class="comment">//执行原始方法,获取返回值（环绕通知）</span></span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311110305088.png" alt="image-20240311110305088"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before(&quot;execution(* com.itheima.service.DeptService.*(..))&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> joinPoint.getTarget().getClass().getName(); <span class="comment">//获取目标类名</span></span><br><span class="line">    <span class="type">Signature</span> <span class="variable">signature</span> <span class="operator">=</span> joinPoint.getSignature(); <span class="comment">//获取目标方法签名</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName(); <span class="comment">//获取目标方法名</span></span><br><span class="line">    Object[] args = joinPoint.getArgs(); <span class="comment">//获取目标方法运行参数 </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="AOP案例"><a href="#AOP案例" class="headerlink" title="AOP案例"></a>AOP案例</h3><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240311111119459.png" alt="image-20240311111119459"></p>
-<h4 id="step1：自定义注解"><a href="#step1：自定义注解" class="headerlink" title="step1：自定义注解"></a>step1：自定义注解</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240311111347779.png" alt="image-20240311111347779"></p>
-<h4 id="step2-编写切面类"><a href="#step2-编写切面类" class="headerlink" title="step2:编写切面类"></a>step2:编写切面类</h4><p><img src="/../blog_images/JavaWeb-Springboot/image-20240311111641547.png" alt="image-20240311111641547"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//LogAspect.java</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span> <span class="comment">//切面类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> HttpServletRequest request;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OperateLogMapper operateLogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(&quot;@annotation(com.itheima.anno.Log)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">recordLog</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">//操作人ID - 当前登录员工ID</span></span><br><span class="line">        <span class="comment">//获取请求头中的jwt令牌, 解析令牌</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">jwt</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line">        <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> JwtUtils.parseJWT(jwt);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">operateUser</span> <span class="operator">=</span> (Integer) claims.get(<span class="string">&quot;id&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//操作时间</span></span><br><span class="line">        <span class="type">LocalDateTime</span> <span class="variable">operateTime</span> <span class="operator">=</span> LocalDateTime.now();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//操作类名</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">className</span> <span class="operator">=</span> joinPoint.getTarget().getClass().getName();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//操作方法名</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">methodName</span> <span class="operator">=</span> joinPoint.getSignature().getName();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//操作方法参数</span></span><br><span class="line">        Object[] args = joinPoint.getArgs();</span><br><span class="line">        <span class="type">String</span> <span class="variable">methodParams</span> <span class="operator">=</span> Arrays.toString(args);</span><br><span class="line"></span><br><span class="line">        <span class="type">long</span> <span class="variable">begin</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">//调用原始目标方法运行</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> joinPoint.proceed();</span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//方法返回值</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">returnValue</span> <span class="operator">=</span> JSONObject.toJSONString(result);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//操作耗时</span></span><br><span class="line">        <span class="type">Long</span> <span class="variable">costTime</span> <span class="operator">=</span> end - begin;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//记录操作日志</span></span><br><span class="line">        <span class="type">OperateLog</span> <span class="variable">operateLog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OperateLog</span>(<span class="literal">null</span>,operateUser,operateTime,className,methodName,methodParams,returnValue,costTime);</span><br><span class="line">        operateLogMapper.insert(operateLog);</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;AOP记录操作日志: &#123;&#125;&quot;</span> , operateLog);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Springboot/image-20240311112626488.png" alt="image-20240311112626488"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/07/JavaWeb-Mybatis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/07/JavaWeb-Mybatis/" class="post-title-link" itemprop="url">JavaWeb-Mybatis</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-07 15:26:11" itemprop="dateCreated datePublished" datetime="2024-03-07T15:26:11+08:00">2024-03-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-11 16:51:16" itemprop="dateModified" datetime="2024-03-11T16:51:16+08:00">2024-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/Mybatis/" itemprop="url" rel="index"><span itemprop="name">Mybatis</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="什么是Mybatis"><a href="#什么是Mybatis" class="headerlink" title="什么是Mybatis?"></a>什么是Mybatis?</h1><p>数据层又叫做持久层</p>
-<p>MyBatis是一款优秀的 <strong>持久层</strong> 框架，用于简化JDBC的开发。</p>
-<h1 id="Mybatis入门"><a href="#Mybatis入门" class="headerlink" title="Mybatis入门"></a>Mybatis入门</h1><h2 id="mybatis快速入门"><a href="#mybatis快速入门" class="headerlink" title="mybatis快速入门"></a>mybatis快速入门</h2><p>使用Mybatis查询所有用户数据</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307163841670.png" alt="image-20240307163841670"></p>
-<p>Mapper层：mybatis的接口层。加mapper注释，数据访问层dao层的接口，</p>
-<blockquote>
-<p>要执行语句那句select语句时，只需要使用list方法，就会默认的调用这个语句，sql语句的访问结果就会默认的封装到这个方法里</p>
-</blockquote>
-<h3 id="step1：准备数据库"><a href="#step1：准备数据库" class="headerlink" title="step1：准备数据库"></a>step1：准备数据库</h3><p>运行sql语句创建数据库</p>
-<h3 id="step2：创建springboot项目，点上mybatis之类的tool"><a href="#step2：创建springboot项目，点上mybatis之类的tool" class="headerlink" title="step2：创建springboot项目，点上mybatis之类的tool"></a>step2：创建springboot项目，点上mybatis之类的tool</h3><h3 id="step3：连接数据库"><a href="#step3：连接数据库" class="headerlink" title="step3：连接数据库"></a>step3：连接数据库</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307171742192.png" alt="image-20240307171742192"></p>
-<h3 id="step4：创建实体类pojo"><a href="#step4：创建实体类pojo" class="headerlink" title="step4：创建实体类pojo"></a>step4：创建实体类pojo</h3><p>可以直接用mybatis-generator生成</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173829357.png" alt="image-20240307173829357"></p>
-<h3 id="step5：创建mapper接口层"><a href="#step5：创建mapper接口层" class="headerlink" title="step5：创建mapper接口层"></a>step5：创建mapper接口层</h3><p>@Mapper&#x2F;&#x2F;在运行时，会自动生成该接口的实现类对象（代理对象），并且将该对象交给IOC容器管理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ljy.demo5.mapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.ljy.demo5.Pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Select;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span><span class="comment">//在运行时，会自动生成该接口的实现类对象（代理对象），并且将该对象交给IOC容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部的用户信息</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from user&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">list</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173836328.png" alt="image-20240307173836328"></p>
-<h3 id="step6：测试"><a href="#step6：测试" class="headerlink" title="step6：测试"></a>step6：测试</h3><p>在test项目里测试</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span><span class="comment">//springboot整合单元测试的注解</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Demo5ApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testListUser</span><span class="params">()</span>&#123;</span><br><span class="line">       List&lt;User&gt; list = userMapper.list();</span><br><span class="line">       list.stream().forEach(user -&gt; &#123;</span><br><span class="line">          System.out.println(user);</span><br><span class="line">       &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307173935097.png" alt="image-20240307173935097"></p>
-<h2 id="JDBC介绍"><a href="#JDBC介绍" class="headerlink" title="JDBC介绍"></a>JDBC介绍</h2><p>java database connectivity，就是使用java语言操作关系型数据库的一套API，这是一套规范，sun公司提供的</p>
-<p>各个厂商提供jdbc的实现，这个叫做jdbc的驱动、数据库的驱动</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307174626361.png" alt="image-20240307174626361"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175035561.png" alt="image-20240307175035561"></p>
-<h3 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h3><blockquote>
-<p>数据库连接池是一个容器，负责分配、管理数据库连接（connection）</p>
-</blockquote>
-<p>它允许应用程序重复使用一个现有的数据库连接，而不是再重新创建一个新的</p>
-<p>释放空闲时间超过最大空闲时间的连接，来避免因为没有释放连接而引起的数据库连接遗漏。</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175453352.png" alt="image-20240307175453352"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175644217.png" alt="image-20240307175644217"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175738544.png" alt="image-20240307175738544"></p>
-<h4 id="切换Druid数据库连接池"><a href="#切换Druid数据库连接池" class="headerlink" title="切换Druid数据库连接池"></a>切换Druid数据库连接池</h4><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307175836059.png" alt="image-20240307175836059"></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">pom.xml</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.datasource.druid.driver-class-name</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">spring.datasource.druid.url</span>=<span class="string">jdbc:mysql://localhost:3306/mybatis</span></span><br><span class="line"><span class="attr">spring.datasource.druid.username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">spring.datasource.druid.password</span>=<span class="string">1234</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>1.数据库连接池</p>
-<p>l是一个容器，负责分配、管理数据库连接(Connection)</p>
-<p>l优势：资源复用、提升系统响应速度</p>
-<p>l接口：DataSource</p>
-<p>l产品：C3P0、DBCP、Druid、Hikari</p>
-<h2 id="Lombok"><a href="#Lombok" class="headerlink" title="Lombok"></a>Lombok</h2><blockquote>
-<p><strong>Lombok是一个实用的Java类库，能通过注解的形式自动生成构造器、getter&#x2F;setter、equals、hashcode、toString等方法，并可以自动化生成日志变量，简化java开发、提高效率。</strong></p>
-</blockquote>
-<p><strong><img src="/../blog_images/JavaWeb-Mybatis/image-20240307180112001.png" alt="image-20240307180112001"></strong></p>
-<table>
-<thead>
-<tr>
-<th><strong>注解</strong></th>
-<th><strong>作用</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@Getter&#x2F;@Setter</td>
-<td>为所有的属性提供get&#x2F;set方法</td>
-</tr>
-<tr>
-<td>@ToString</td>
-<td>会给类自动生成易阅读的  toString 方法</td>
-</tr>
-<tr>
-<td>@EqualsAndHashCode</td>
-<td>根据类所拥有的非静态字段自动重写 equals 方法和  hashCode 方法</td>
-</tr>
-<tr>
-<td>@Data</td>
-<td>提供了更综合的生成代码功能（@Getter  + @Setter + @ToString + @EqualsAndHashCode）</td>
-</tr>
-<tr>
-<td>@NoArgsConstructor</td>
-<td>为实体类生成无参的构造器方法</td>
-</tr>
-<tr>
-<td>@AllArgsConstructor</td>
-<td>为实体类生成除了static修饰的字段之外带有各参数的构造器方法。</td>
-</tr>
-</tbody></table>
-<p>Lombok会在编译时，自动生成对应的java代码。我们使用lombok时，还需要安装一个lombok的插件(idea自带)。</p>
-<h1 id="Mybatis基础增删改查"><a href="#Mybatis基础增删改查" class="headerlink" title="Mybatis基础增删改查"></a><strong>M</strong>ybatis基础增删改查</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>按照之前的准备</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307201152408.png" alt="image-20240307201152408"></p>
-<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>按照ID删除数据</p>
-<p>@Delete注释</p>
-<h3 id="占位符-id"><a href="#占位符-id" class="headerlink" title="占位符 #{id}"></a>占位符 #{id}</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Delete(&quot;delete from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;    </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202608039.png" alt="image-20240307202608039"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202628672.png" alt="image-20240307202628672"></p>
-<h3 id="预编译sql语句"><a href="#预编译sql语句" class="headerlink" title="预编译sql语句"></a>预编译sql语句</h3><ul>
-<li>性能更高</li>
-<li>更安全(防止SQL注入)</li>
-</ul>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307202803149.png" alt="image-20240307202803149"></p>
-<h4 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h4><p>通过操作输入的数据来修改事先定义好的SQL语句，以达到执行代码对服务器进行攻击的方法。</p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307203932583.png" alt="image-20240307203932583"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307204228284.png" alt="image-20240307204228284"></p>
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新增员工</span></span><br><span class="line"><span class="meta">@Insert(&quot;insert into emp(username,name ,gender,image,job,entrydate,dept_id,create_time,update_time)&quot;+</span></span><br><span class="line"><span class="meta">        &quot; values (#&#123;username&#125;,#&#123;name&#125;,#&#123;gender&#125;,#&#123;image&#125;,#&#123;job&#125;,#&#123;entrydate&#125;,#&#123;deptId&#125;,#&#123;createTime&#125;,#&#123;updateTime&#125;)&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insert</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testInsert</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Emp</span>();</span><br><span class="line">    emp.setUsername(<span class="string">&quot;Tom&quot;</span>);</span><br><span class="line">    emp.setName(<span class="string">&quot;汤姆&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="主键返回-Options-keyProperty-”id”"><a href="#主键返回-Options-keyProperty-”id”" class="headerlink" title="主键返回@Options(keyProperty&#x3D;”id”)"></a>主键返回@Options(keyProperty&#x3D;”id”)</h3><blockquote>
-<p> 描述：在数据添加成功后，需要获取插入数据库数据的主键。如：添加套餐数据时，还需要维护套餐菜品关系表数据。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307205557662.png" alt="image-20240307205557662"></p>
-<h2 id="更新-修改"><a href="#更新-修改" class="headerlink" title="更新(修改)"></a>更新(修改)</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//更新员工</span></span><br><span class="line"><span class="meta">@Update(&quot;update emp set username = #&#123;username&#125;, name = #&#123;name&#125;, gender = #&#123;gender&#125;, image = #&#123;image&#125;,&quot; +</span></span><br><span class="line"><span class="meta">        &quot; job = #&#123;job&#125;, entrydate = #&#123;entrydate&#125;, dept_id = #&#123;deptId&#125;,update_time = #&#123;updateTime&#125; where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//构造员工对象</span></span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Emp</span>();</span><br><span class="line">    emp.setId(<span class="number">18</span>);</span><br><span class="line">    emp.setUsername(<span class="string">&quot;Tom1&quot;</span>);</span><br><span class="line">    emp.setName(<span class="string">&quot;汤姆1&quot;</span>);</span><br><span class="line">    emp.setImage(<span class="string">&quot;1.jpg&quot;</span>);</span><br><span class="line">    emp.setGender((<span class="type">short</span>)<span class="number">1</span>);</span><br><span class="line">    emp.setJob((<span class="type">short</span>)<span class="number">1</span>);</span><br><span class="line">    emp.setEntrydate(LocalDate.of(<span class="number">2000</span>,<span class="number">1</span>,<span class="number">1</span>));</span><br><span class="line">    emp.setUpdateTime(LocalDateTime.now());</span><br><span class="line">    emp.setDeptId(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行更新员工操作</span></span><br><span class="line">    empMapper.update(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;select * from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetById</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> empMapper.getById(<span class="number">18</span>);</span><br><span class="line">    System.out.println(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307210950229.png" alt="image-20240307210950229"></p>
-<h3 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307211215522.png" alt="image-20240307211215522"></p>
-<h3 id="解决一"><a href="#解决一" class="headerlink" title="解决一"></a>解决一</h3><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307213019502.png" alt="image-20240307213019502"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方案三: 开启mybatis的驼峰命名自动映射开关 --- a_cloumn ------&gt; aColumn</span></span><br><span class="line"><span class="comment">//根据ID查询员工</span></span><br><span class="line"><span class="meta">@Select(&quot;select * from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="MybatisXML映射文件"><a href="#MybatisXML映射文件" class="headerlink" title="MybatisXML映射文件"></a>MybatisXML映射文件</h1><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240307215655415.png" alt="image-20240307215655415"></p>
-<p>xml映射文件</p>
-<h1 id="Mybatis动态SQL"><a href="#Mybatis动态SQL" class="headerlink" title="Mybatis动态SQL"></a>Mybatis动态SQL</h1><p>随着用户的输入或者外部的变化而变化SQL语句，我们称为动态SQL</p>
-<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;if&gt;：用于判断条件是否成立。使用test属性进行条件判断，如果条件为true，则拼接SQL。</span><br><span class="line"></span><br><span class="line">&lt;where&gt;：where 元素只会在子元素有内容的情况下才插入where子句。而且会自动去除子句的开头的AND 或OR。</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240308165208370.png" alt="image-20240308165208370"></p>
-<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><h1 id="Springboot案例"><a href="#Springboot案例" class="headerlink" title="Springboot案例"></a>Springboot案例</h1><p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309135242851.png" alt="image-20240309135242851"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309135953209.png" alt="image-20240309135953209"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309140016098.png" alt="image-20240309140016098"></p>
-<p><img src="/../blog_images/JavaWeb-Mybatis/image-20240309140549167.png" alt="image-20240309140549167"></p>
-<h1 id="分页参数"><a href="#分页参数" class="headerlink" title="分页参数"></a>分页参数</h1><h1 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h1><h2 id="表单项"><a href="#表单项" class="headerlink" title="表单项"></a>表单项</h2><p>文件上传</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/07/JavaWeb-mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/07/JavaWeb-mysql/" class="post-title-link" itemprop="url">JavaWeb-mysql</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-07 12:19:10" itemprop="dateCreated datePublished" datetime="2024-03-07T12:19:10+08:00">2024-03-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-11 16:51:19" itemprop="dateModified" datetime="2024-03-11T16:51:19+08:00">2024-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/" itemprop="url" rel="index"><span itemprop="name">JavaWeb</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaWeb/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><h2 id="Mysql概述"><a href="#Mysql概述" class="headerlink" title="Mysql概述"></a>Mysql概述</h2><table>
-<thead>
-<tr>
-<th><strong>分类</strong></th>
-<th><strong>全称</strong></th>
-<th><strong>说明</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DDL</td>
-<td>Data Definition  Language</td>
-<td>数据定义语言，用来定义数据库对象(数据库，表，字段)</td>
-</tr>
-<tr>
-<td>DML</td>
-<td>Data Manipulation  Language</td>
-<td>数据操作语言，用来对数据库表中的数据进行增删改</td>
-</tr>
-<tr>
-<td>DQL</td>
-<td>Data Query Language</td>
-<td>数据查询语言，用来查询数据库中表的记录</td>
-</tr>
-<tr>
-<td>DCL</td>
-<td>Data Control  Language</td>
-<td>数据控制语言，用来创建数据库用户、控制数据库的访问权限</td>
-</tr>
-</tbody></table>
-<p><img src="/../blog_images/JavaWeb-mysql/image-20240307132823507.png" alt="image-20240307132823507"></p>
-<h2 id="数据库设计-DDL"><a href="#数据库设计-DDL" class="headerlink" title="数据库设计-DDL"></a>数据库设计-DDL</h2><table>
-<thead>
-<tr>
-<th><strong>约束</strong></th>
-<th><strong>描述</strong></th>
-<th><strong>关键字</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>非空约束</td>
-<td>限制该字段值不能为null</td>
-<td>not null</td>
-</tr>
-<tr>
-<td>唯一约束</td>
-<td>保证字段的所有数据都是唯一、不重复的</td>
-<td>unique</td>
-</tr>
-<tr>
-<td>主键约束</td>
-<td>主键是一行数据的唯一标识，要求非空且唯一</td>
-<td>primary key</td>
-</tr>
-<tr>
-<td>默认约束</td>
-<td>保存数据时，如果未指定该字段值，则采用默认值</td>
-<td>default</td>
-</tr>
-<tr>
-<td>外键约束</td>
-<td>让两张表的数据建立连接，保证数据的一致性和完整性</td>
-<td>foreign key</td>
-</tr>
-</tbody></table>
-<p>MySQL中的数据类型有很多，主要分为三类：数值类型、字符串类型、日期时间类型。</p>
-<h2 id="数据表"><a href="#数据表" class="headerlink" title="数据表"></a>数据表</h2><p><img src="/../blog_images/JavaWeb-mysql/image-20240307135013214.png" alt="image-20240307135013214"></p>
-<p>create_time：记录的是当前这条数据插入的时间。 update_time：记录当前这条数据最后更新的时间</p>
-<p><img src="/../blog_images/JavaWeb-mysql/image-20240307135215533.png" alt="image-20240307135215533"></p>
-<h2 id="表（创建、查询、修改、删除）"><a href="#表（创建、查询、修改、删除）" class="headerlink" title="表（创建、查询、修改、删除）"></a>表（创建、查询、修改、删除）</h2><h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><h2 id="数据库操作-DML"><a href="#数据库操作-DML" class="headerlink" title="数据库操作-DML"></a>数据库操作-DML</h2><p>DML的英文全称是data Manipulation Language(数据操作语言)，用来对数据库中表的数据记录进行增删改查操作</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">添加数据(INSERT)</span><br><span class="line">修改数据(UPDATE)</span><br><span class="line">删除数据(DELETE)</span><br></pre></td></tr></table></figure>
-
-<h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h3><p>指定字段添加数据：insert into 表名 (字段名1, 字段名2) values (值1, 值2);</p>
-<p>全部字段添加数据：insert into 表名 values (值1, 值2, …);</p>
-<p>批量添加数据（指定字段）：insert into 表名 (字段名1, 字段名2) values (值1, 值2), (值1, 值2);</p>
-<p>批量添加数据（全部字段）：insert into 表名 values (值1, 值2, …), (值1, 值2, …);</p>
-<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>修改数据：update 表名 set 字段名1 &#x3D; 值1 , 字段名2 &#x3D; 值2 , …. [ where 条件 ] ;</p>
-<blockquote>
-<p>修改语句的条件可以有，也可以没有，如果没有条件，则会修改整张表的所有数据。</p>
-</blockquote>
-<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>删除数据：delete from 表名 [ where 条件 ];</p>
-<blockquote>
-<p>1.DELETE 语句的条件可以有，也可以没有，如果没有条件，则会删除整张表的所有数据。</p>
-<p>2.DELETE 语句不能删除某一个字段的值(如果要操作，可以使用UPDATE，将该字段的值置为NULL)。</p>
-</blockquote>
-<h2 id="数据库操作-DQL-SELECT"><a href="#数据库操作-DQL-SELECT" class="headerlink" title="数据库操作-DQL SELECT"></a>数据库操作-DQL SELECT</h2><p>DQL英文全称是Data Query Language(数据查询语言)，用来查询数据库表中的记录。</p>
-<p>查询多个字段：select 字段1, 字段2, 字段3 from  表名;</p>
-<p>查询所有字段（通配符）：select *  from  表名;</p>
-<p>设置别名：select 字段1 [ as 别名1 ] , 字段2 [ as 别名2 ]  from  表名;</p>
-<p>去除重复记录：select distinct 字段列表 from  表名;</p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>事务</strong> 是一组操作的集合，它是一个不可分割的工作单位。事务会把所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作 要么同时成功，要么同时失败。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">开启事务：start transaction; / begin ;</span><br><span class="line">提交事务：commit;</span><br><span class="line">回滚事务：rollback;</span><br></pre></td></tr></table></figure>
-
-<h3 id="四大特性-ACID"><a href="#四大特性-ACID" class="headerlink" title="四大特性(ACID)"></a>四大特性(ACID)</h3><p><img src="/../blog_images/JavaWeb-mysql/image-20240307152341854.png" alt="image-20240307152341854"></p>
-<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p>一对一</p>
-<p>一对多</p>
-<p>多对对</p>
-<h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/05/JavaWeb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/05/JavaWeb/" class="post-title-link" itemprop="url">JavaWeb</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-05 14:27:47" itemprop="dateCreated datePublished" datetime="2024-03-05T14:27:47+08:00">2024-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-11 16:51:31" itemprop="dateModified" datetime="2024-03-11T16:51:31+08:00">2024-03-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/../blog_images/JavaWeb/image-20240305150715516.png" alt="image-20240305150715516"></p>
-<h1 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h1><h2 id="1-JS引入方式"><a href="#1-JS引入方式" class="headerlink" title="1.JS引入方式"></a>1.JS引入方式</h2><h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><p>JavaScript 中用 <strong>var</strong> 关键字（variable 的缩写）来声明变量 。</p>
-<p>JavaScript 是一门弱类型语言，变量可以存放不同类型的值 。</p>
-<p>变量名需要遵循如下规则：</p>
-<p>​	Ø组成字符可以是任何字母、数字、下划线（_）或美元符号（$）</p>
-<p>​	Ø数字不能开头</p>
-<p>​	Ø建议使用驼峰命名</p>
-<blockquote>
-<p>ECMAScript 6 新增了 let 关键字来定义变量。它的用法类似于 var，但是所声明的变量，只在 let 关键字所在的代码块内有效，且不允许重复声明。</p>
-</blockquote>
-<blockquote>
-<p>ECMAScript 6 新增了 const 关键字，用来声明一个只读的常量。一旦声明，常量的值就不能改变。</p>
-</blockquote>
-<p><strong>•var：声明变量，全局作用域&#x2F;函数作用域，允许重复声明</strong></p>
-<p><strong>• let：声明变量，块级作用域，不允许重复声明</strong></p>
-<p><strong>• const：声明常量，一旦声明，常量的值不能改变</strong></p>
-<h2 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3.数据类型"></a>3.数据类型</h2><p>JavaScript中分为：<strong>原始类型 和 引用类型</strong>。</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306105949534.png" alt="image-20240306105949534"></p>
-<p>var 变量名 &#x3D; new Array(元素列表); </p>
-<p><img src="/../blog_images/JavaWeb/image-20240306110748714.png" alt="image-20240306110748714"></p>
-<h2 id="4-BOW"><a href="#4-BOW" class="headerlink" title="4.BOW"></a>4.BOW</h2><p>Browser Object Model 浏览器对象模型，允许JavaScript与浏览器对话， JavaScript 将浏览器的各个组成部分封装为对象。</p>
-<p>location地址对象：就是那个框</p>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>history：对 History 对象的只读引用。请参阅 <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_history.asp">History </a><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_history.asp">对象</a>。</p>
-<p>location：用于窗口或框架的 Location 对象。请参阅 <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_location.asp">Location </a><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_location.asp">对象</a>。</p>
-<p>navigator：对 Navigator 对象的只读引用。请参阅 <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_navigator.asp">Navigator </a><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/dom_obj_navigator.asp">对象</a>。</p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>alert()：显示带有一段消息和一个确认按钮的警告框。</p>
-<p>confirm()：显示带有一段消息以及确认按钮和取消按钮的对话框。</p>
-<p>setInterval()：按照指定的周期（以毫秒计）来调用函数或计算表达式。</p>
-<p>setTimeout()：在指定的毫秒数后调用函数或计算表达式。</p>
-<h2 id="5-DOM（概念：Document-Object-Model-，文档对象模型）"><a href="#5-DOM（概念：Document-Object-Model-，文档对象模型）" class="headerlink" title="5.DOM（概念：Document Object Model ，文档对象模型）"></a>5.DOM（概念：Document Object Model ，文档对象模型）</h2><p><img src="/../blog_images/JavaWeb/image-20240306111613344.png" alt="image-20240306111613344"></p>
-<h2 id="6-事件监听"><a href="#6-事件监听" class="headerlink" title="6.事件监听"></a>6.事件监听</h2><p>事件：HTML事件是发生在HTML元素上的 “事情”。比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">按钮被点击</span><br><span class="line"></span><br><span class="line">鼠标移动到元素上</span><br><span class="line"></span><br><span class="line">按下键盘按键</span><br></pre></td></tr></table></figure>
-
-<p>事件监听：JavaScript可以在事件被侦测到时 执行代码。</p>
-<h3 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h3><h4 id="方式一：通过-HTML标签中的事件属性进行绑定"><a href="#方式一：通过-HTML标签中的事件属性进行绑定" class="headerlink" title="方式一：通过 HTML标签中的事件属性进行绑定"></a>方式一：通过 HTML标签中的事件属性进行绑定</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;button&quot;</span> onclick=<span class="string">&quot;on()&quot;</span> value=<span class="string">&quot;按钮1&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function <span class="title function_">on</span><span class="params">()</span>&#123;</span><br><span class="line">        alert(<span class="string">&#x27;我被点击了!&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="方式二：通过-DOM-元素属性绑定"><a href="#方式二：通过-DOM-元素属性绑定" class="headerlink" title="方式二：通过 DOM 元素属性绑定"></a>方式二：通过 DOM 元素属性绑定</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;按钮2&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">  document.getElementById(&#x27;btn&#x27;).onclick=function()&#123;</span><br><span class="line"></span><br><span class="line">    alert(&#x27;我被点击了!&#x27;);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="常见事件"><a href="#常见事件" class="headerlink" title="常见事件"></a>常见事件</h3><p><img src="/../blog_images/JavaWeb/image-20240306112610533.png" alt="image-20240306112610533"></p>
-<h2 id="7-Vue"><a href="#7-Vue" class="headerlink" title="7.Vue"></a>7.Vue</h2><p>Vue 是一套前端框架，免除原生JavaScript中的DOM操作，简化书写。</p>
-<p>基于MVVM(Model-View-ViewModel)思想，实现数据的双向绑定，将编程的关注点放在数据上。</p>
-<p>官网： <a target="_blank" rel="noopener" href="https://v2.cn.vuejs.org/">https://v2.cn.vuejs.org/</a></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306112707334.png" alt="image-20240306112707334"></p>
-<h3 id="Vue快速入门"><a href="#Vue快速入门" class="headerlink" title="Vue快速入门"></a>Vue快速入门</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="/../blog_images/JavaWeb/image-20240306112754269.png" alt="image-20240306112754269"></h3><h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><p>指令：HTML 标签上带有 v- 前缀 的特殊属性，不同指令具有不同含义。例如：v-if，v-for…</p>
-<p>常用指令</p>
-<table>
-<thead>
-<tr>
-<th><strong>指令</strong></th>
-<th><strong>作用</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>v-bind</td>
-<td>为HTML标签绑定属性值，如设置 href , css样式等</td>
-</tr>
-<tr>
-<td>v-model</td>
-<td>在表单元素上创建双向数据绑定</td>
-</tr>
-<tr>
-<td>v-on</td>
-<td>为HTML标签绑定事件</td>
-</tr>
-<tr>
-<td>v-if</td>
-<td>条件性的渲染某元素，判定为true时渲染,否则不渲染</td>
-</tr>
-<tr>
-<td>v-else-if</td>
-<td></td>
-</tr>
-<tr>
-<td>v-else</td>
-<td></td>
-</tr>
-<tr>
-<td>v-show</td>
-<td>根据条件展示某元素，区别在于切换的是display属性的值</td>
-</tr>
-<tr>
-<td>v-for</td>
-<td>列表渲染，遍历容器的元素或者对象的属性</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th><strong>指令</strong></th>
-<th><strong>作用</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>v-bind</td>
-<td>为HTML标签绑定属性值，如设置 href , css样式等</td>
-</tr>
-<tr>
-<td>v-model</td>
-<td>在表单元素上创建双向数据绑定</td>
-</tr>
-</tbody></table>
-<p>通过v-bind或者v-model绑定的变量，必须在数据模型中声明。</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306113353512.png" alt="image-20240306113353512"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306113419926.png" alt="image-20240306113419926"></p>
-<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>生命周期：指一个对象从创建到销毁的整个过程。</p>
-<p>生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法(钩子)。</p>
-<table>
-<thead>
-<tr>
-<th><strong>状态</strong></th>
-<th><strong>阶段周期</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>beforeCreate</td>
-<td>创建前</td>
-</tr>
-<tr>
-<td>created</td>
-<td>创建后</td>
-</tr>
-<tr>
-<td>beforeMount</td>
-<td>挂载前</td>
-</tr>
-<tr>
-<td>mounted</td>
-<td>挂载完成</td>
-</tr>
-<tr>
-<td>beforeUpdate</td>
-<td>更新前</td>
-</tr>
-<tr>
-<td>updated</td>
-<td>更新后</td>
-</tr>
-<tr>
-<td>beforeDestroy</td>
-<td>销毁前</td>
-</tr>
-<tr>
-<td>destroyed</td>
-<td>销毁后</td>
-</tr>
-</tbody></table>
-<p><img src="/../blog_images/JavaWeb/image-20240306114312596.png" alt="image-20240306114312596"></p>
-<p><strong>生命周期的八个阶段：每触发一个生命周期事件，会自动执行一个生命周期方法(钩子)</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">        el: <span class="string">&quot;#app&quot;</span>,</span><br><span class="line">        data: &#123;</span><br><span class="line">            </span><br><span class="line">        &#125;,</span><br><span class="line">        mounted() &#123;</span><br><span class="line">            console.log(<span class="string">&quot;Vue挂载完毕,发送请求获取数据&quot;</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">           </span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>mounted：挂载完成，Vue初始化成功，HTML页面渲染成功。（发送请求到服务端，加载数据）</p>
-<h1 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h1><p>Maven是apache旗下的一个开源项目，是一款用于管理和构建java项目的工具。</p>
-<blockquote>
-<p>基于项目对象模型(POM)的概念，通过一小段描述信息来管理项目的构建。</p>
-</blockquote>
-<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>  <strong>依赖管理</strong>：方便快捷的管理项目依赖的资源(jar包)，避免版本冲突问题</p>
-<p>  <strong>统一项目结构</strong>：提供标准、统一的项目结构</p>
-<p>  <strong>项目构建</strong>：标准跨平台（Linux、Windows、MacOS）的自动化项目构建方式</p>
-<p>清理、编译、测试、打包、发布</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306132942342.png" alt="image-20240306132942342"></p>
-<h2 id="Maven概述"><a href="#Maven概述" class="headerlink" title="Maven概述"></a>Maven概述</h2><p><img src="/../blog_images/JavaWeb/image-20240306134710518.png" alt="image-20240306134710518"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306134742641.png" alt="image-20240306134742641"></p>
-<h3 id="Maven坐标"><a href="#Maven坐标" class="headerlink" title="Maven坐标"></a>Maven坐标</h3><p>Maven 中的坐标是资源的唯一标识，通过该坐标可以唯一定位资源位置。</p>
-<p>使用坐标来定义项目或引入项目中需要的依赖。</p>
-<h4 id="Maven-坐标主要组成"><a href="#Maven-坐标主要组成" class="headerlink" title="Maven 坐标主要组成"></a>Maven 坐标主要组成</h4><p>groupId：定义当前Maven项目隶属组织名称（通常是域名反写，例如：com.itheima）</p>
-<p>artifactId：定义当前Maven项目名称（通常是模块名称，例如 order-service、goods-service）</p>
-<p>version：定义当前项目版本号</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306135618173.png" alt="image-20240306135618173"></p>
-<h4 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h4><p>依赖：指当前项目运行所需要的jar包，一个项目中可以引入多个依赖。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.在 pom.xml 中编写 &lt;dependencies&gt; 标签</span><br><span class="line"></span><br><span class="line">2.在 &lt;dependencies&gt; 标签中 使用 &lt;dependency&gt; 引入坐标</span><br><span class="line"></span><br><span class="line">3.定义坐标的 groupId，artifactId，version</span><br><span class="line"></span><br><span class="line">4.点击刷新按钮，引入最新加入的坐标</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;        </span><br><span class="line">    	&lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;        </span><br><span class="line">    	&lt;artifactId&gt;logback-classic&lt;/artifactId&gt;      </span><br><span class="line">    	&lt;version&gt;1.2.3&lt;/version&gt;    </span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-
-<h5 id="依赖具有传递性"><a href="#依赖具有传递性" class="headerlink" title="依赖具有传递性"></a>依赖具有传递性</h5><blockquote>
-<p>直接依赖：在当前项目中通过依赖配置建立的依赖关系</p>
-<p>间接依赖：被依赖的资源如果依赖其他资源，当前项目间接依赖其他资源</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306140113368.png" alt="image-20240306140113368"></p>
-<h5 id="排除依赖"><a href="#排除依赖" class="headerlink" title="排除依赖"></a>排除依赖</h5><blockquote>
-<p>排除依赖指主动断开依赖的资源，被排除的资源无需指定版本。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306140209596.png" alt="image-20240306140209596"></p>
-<h4 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h4><p>依赖的jar包，默认情况下，可以在任何地方使用。可以通过</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scope&gt;…&lt;/ scope &gt; </span><br></pre></td></tr></table></figure>
-
-<p>设置其作用范围。</p>
-<p><strong>作用范围：</strong></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306140857607.png" alt="image-20240306140857607"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306140907131.png" alt="image-20240306140907131"></p>
-<table>
-<thead>
-<tr>
-<th><strong>scope****值</strong></th>
-<th><strong>主程序</strong></th>
-<th><strong>测试程序</strong></th>
-<th><strong>打包（运行）</strong></th>
-<th><strong>范例</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>compile（默认）</td>
-<td>Y</td>
-<td>Y</td>
-<td>Y</td>
-<td>log4j</td>
-</tr>
-<tr>
-<td>test</td>
-<td>-</td>
-<td>Y</td>
-<td>-</td>
-<td>junit</td>
-</tr>
-<tr>
-<td>provided</td>
-<td>Y</td>
-<td>Y</td>
-<td>-</td>
-<td>servlet-api</td>
-</tr>
-<tr>
-<td>runtime</td>
-<td>-</td>
-<td>Y</td>
-<td>Y</td>
-<td>jdbc驱动</td>
-</tr>
-</tbody></table>
-<h4 id="生命周期-1"><a href="#生命周期-1" class="headerlink" title="生命周期"></a>生命周期</h4><blockquote>
-<p>Maven的生命周期就是为了对所有的maven项目构建过程进行抽象和统一。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306141128223.png" alt="image-20240306141128223"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306141920091.png" alt="image-20240306141920091"></p>
-<p>Maven中有3套相互独立的生命周期：</p>
-<blockquote>
-<p>在同一套生命周期中，当运行后面的阶段时，前面的阶段都会运行。</p>
-</blockquote>
-<ul>
-<li>clean：清理工作。</li>
-<li>default：核心工作，如：编译、测试、打包、安装、部署等。</li>
-<li>site：生成报告、发布站点等。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clean：移除上一次构建生成的文件</span><br><span class="line">compile：编译项目源代码</span><br><span class="line">test：使用合适的单元测试框架运行测试(junit)</span><br><span class="line">package：将编译后的文件打包，如：jar、war等</span><br><span class="line">install：安装项目到本地仓库</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb/image-20240306142550365.png" alt="image-20240306142550365"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306142605065.png" alt="image-20240306142605065"></p>
-<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><p><img src="/../blog_images/JavaWeb/image-20240306142800941.png" alt="image-20240306142800941"></p>
-<blockquote>
-<p>Spring Framework配置比较繁琐，入门的难度比较大</p>
-<p>Sprint Boot简化配置，快速入门</p>
-</blockquote>
-<h2 id="SpringBootWeb入门"><a href="#SpringBootWeb入门" class="headerlink" title="SpringBootWeb入门"></a>SpringBootWeb入门</h2><h3 id="Controller类"><a href="#Controller类" class="headerlink" title="Controller类"></a>Controller类</h3><p><img src="/../blog_images/JavaWeb/image-20240306143624478.png" alt="image-20240306143624478"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306143813629.png" alt="image-20240306143813629"></p>
-<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><h4 id="HTTP-概述"><a href="#HTTP-概述" class="headerlink" title="HTTP-概述"></a>HTTP-概述</h4><p>基于请求-响应模型：一次请求对应一次响应</p>
-<p>基于TCP协议：面向连接、安全</p>
-<p>HTTP协议是无状态的协议：对于事务处理没有记忆能力。每次请求-响应都是独立的。</p>
-<p>​	缺点：多次请求间不能共享数据</p>
-<p>​	优点：速度快</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306143950651.png" alt="image-20240306143950651"></p>
-<blockquote>
-<p>Hyper Text Transfer Protocol，超文本传输协议，规定了浏览器和服务器之间数据传输的规则。 </p>
-</blockquote>
-<h4 id="HTTP-请求协议"><a href="#HTTP-请求协议" class="headerlink" title="HTTP-请求协议"></a>HTTP-请求协议</h4><p>get</p>
-<p>post</p>
-<p><img src="/../blog_images/JavaWeb/image-20240306214453971.png" alt="image-20240306214453971"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306144631222.png" alt="image-20240306144631222"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306144652867.png" alt="image-20240306144652867"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306144754893.png" alt="image-20240306144754893"></p>
-<h4 id="HTTP-响应协议"><a href="#HTTP-响应协议" class="headerlink" title="HTTP-响应协议"></a>HTTP-响应协议</h4><p><img src="/../blog_images/JavaWeb/image-20240306144904417.png" alt="image-20240306144904417"></p>
-<table>
-<thead>
-<tr>
-<th>200</th>
-<th>客户端请求成功。</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>404</td>
-<td>请求资源不存在，般是URL输入有误，或者网站资源被删除了。</td>
-</tr>
-<tr>
-<td>500</td>
-<td>服务器发生不可预期的错误。</td>
-</tr>
-</tbody></table>
-<h4 id="HTTP-协议解析"><a href="#HTTP-协议解析" class="headerlink" title="HTTP-协议解析"></a>HTTP-协议解析</h4><h1 id="Web服务器-Tomcat"><a href="#Web服务器-Tomcat" class="headerlink" title="Web服务器-Tomcat"></a>Web服务器-Tomcat</h1><blockquote>
-<p>Web服务器 对HTTP协议操作进行封装，简化web程序开发</p>
-<p>部署web项目，对外提供网上信息浏览服务。</p>
-</blockquote>
-<h2 id="Tomcat简介"><a href="#Tomcat简介" class="headerlink" title="Tomcat简介"></a>Tomcat简介</h2><blockquote>
-<p>一个轻量级的web服务器，支持servlet、jsp等少量javaEE规范。</p>
-<p>也被称为web容器、servlet容器。</p>
-</blockquote>
-<ul>
-<li>概念： Tomcat是Apache 软件基金会一个核心项目，是一个开源免费的轻量级Web服务器，支持Servlet&#x2F;JSP少量JavaEE规范。</li>
-<li>JavaEE：Java Enterprise Edition，Java企业版。指Java企业级开发的技术规范总和。包<strong>含13项技术规范：JDBC、JNDI、EJB、RMI、JSP、Servlet、XML、JMS、Java IDL、JTS、JTA、JavaMail、JAF</strong></li>
-<li><strong>Tomcat 也被称为 Web容器、Servlet容器。Servlet程序需要依赖于 Tomcat才能运行</strong> </li>
-<li>官网：<a target="_blank" rel="noopener" href="https://tomcat.apache.org/">https://tomcat.apache.org/</a></li>
-</ul>
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/../blog_images/JavaWeb/image-20240306150115020.png" alt="image-20240306150115020"></h3><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
-<li>起步依赖</li>
-</ol>
-<p><img src="/../blog_images/JavaWeb/image-20240306150153737.png" alt="image-20240306150153737"></p>
-<ol start="2">
-<li>内嵌Tomcat服务器</li>
-</ol>
-<p><img src="/../blog_images/JavaWeb/image-20240306150215953.png" alt="image-20240306150215953"></p>
-<h1 id="Web后端开发-请求响应"><a href="#Web后端开发-请求响应" class="headerlink" title="Web后端开发-请求响应"></a>Web后端开发-请求响应</h1><p><img src="/../blog_images/JavaWeb/image-20240306150713034.png" alt="image-20240306150713034"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306150724281.png" alt="image-20240306150724281"></p>
-<p><img src="/../blog_images/JavaWeb/image-20240306150855385.png" alt="image-20240306150855385"></p>
-<h2 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h2><h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><h4 id="前后端分离开发"><a href="#前后端分离开发" class="headerlink" title="前后端分离开发"></a>前后端分离开发</h4><blockquote>
-<p>当前最为流行的开发模式：前后端分离</p>
-</blockquote>
-<img src="../blog_images/JavaWeb/image-20240306151151217.png" alt="image-20240306151151217" style="zoom:50%;" />
-
-<h4 id="Postman-1"><a href="#Postman-1" class="headerlink" title="Postman"></a>Postman</h4><p>postman是一款功能强大的网页调试与发送网页HTTP请求的Chrome插件。</p>
-<p>作用：常用于进行接口测试</p>
-<h3 id="简单参数"><a href="#简单参数" class="headerlink" title="简单参数"></a>简单参数</h3><h4 id="原始方式"><a href="#原始方式" class="headerlink" title="原始方式"></a>原始方式</h4><blockquote>
-<p>获取请求参数，需要HttpServletRequest 对象手动获取</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306151429294.png" alt="image-20240306151429294"></p>
-<h4 id="SpringBoot方式"><a href="#SpringBoot方式" class="headerlink" title="SpringBoot方式"></a>SpringBoot方式</h4><blockquote>
-<p>简单参数：参数名与形参变量名相同，定义形参即可接收参数。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(String name , Integer age)</span>&#123;</span><br><span class="line">    System.out.println(name+<span class="string">&quot;  :  &quot;</span>+age);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>简单参数：如果方法形参名称与请求参数名称不匹配，可以使用 @RequestParam 完成映射。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(<span class="meta">@RequestParam(name = &quot;name&quot;)</span> String username , Integer age)</span>&#123;</span><br><span class="line">	System.out.println(username + <span class="string">&quot; : &quot;</span> + age);</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>@RequestParam中的required属性默认为true，代表该请求参数必须传递，如果不传递将报错。 如果该参数是可选的，可以将required属性设置为false。</p>
-<h3 id="实体参数"><a href="#实体参数" class="headerlink" title="实体参数"></a>实体参数</h3><blockquote>
-<p>简单实体对象：请求参数名与形参对象属性名相同，定义POJO接收即可</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306152052414.png" alt="image-20240306152052414"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simplePojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simplePojo</span><span class="params">(User user)</span>&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个放在Pojo文件夹里</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>复杂实体对象：请求参数名与形参对象属性名相同，按照对象层次结构关系即可接收嵌套POJO属性参数。</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306152643855.png" alt="image-20240306152643855"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/complexPojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">complexPojo</span><span class="params">(User user)</span>&#123;</span><br><span class="line">	System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String province;</span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="数组集合参数"><a href="#数组集合参数" class="headerlink" title="数组集合参数"></a>数组集合参数</h3><h4 id="数组参数"><a href="#数组参数" class="headerlink" title="数组参数"></a>数组参数</h4><blockquote>
-<p>数组参数：请求参数名与形参数组名称相同且请求参数为多个，定义数组类型形参即可接收参数</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306153107242.png" alt="image-20240306153107242"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam</span><span class="params">(String[] hobby)</span>&#123;</span><br><span class="line">    System.out.println(Arrays.toString(hobby));</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="集合参数-RequestParam"><a href="#集合参数-RequestParam" class="headerlink" title="集合参数@RequestParam"></a>集合参数@RequestParam</h4><blockquote>
-<p>集合参数：<strong>请求参数名与形参集合名称相同且请求参数为多个，@RequestParam 绑定参数关系</strong> </p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306153320104.png" alt="image-20240306153320104"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/listParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">listParam</span><span class="params">(<span class="meta">@RequestParam</span> List&lt;String&gt; hobby)</span>&#123;</span><br><span class="line">    System.out.println(hobby);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>&#x3D;&#x3D;<strong>数组：请求参数名与形参中数组变量名相同，可以直接使用数组封装</strong>&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;<strong>集合：请求参数名与形参中集合变量名相同，通过@RequestParam绑定参数关系</strong>&#x3D;&#x3D;</p>
-<h3 id="日期参数-DateTimeFormat"><a href="#日期参数-DateTimeFormat" class="headerlink" title="日期参数@DateTimeFormat"></a>日期参数@DateTimeFormat</h3><blockquote>
-<p>日期参数：使用 @DateTimeFormat 注解完成日期参数格式转换 </p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306153733135.png" alt="image-20240306153733135"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/dateParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">dateParam</span><span class="params">(<span class="meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span> LocalDateTime updateTime)</span>&#123;</span><br><span class="line">    System.out.println(updateTime);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="Json参数"><a href="#Json参数" class="headerlink" title="Json参数"></a>Json参数</h3><blockquote>
-<p>JSON参数：JSON数据键名与形参对象属性名相同，定义POJO类型形参即可接收参数，需要使用 @RequestBody 标识</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306154922588.png" alt="image-20240306154922588"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/jsonParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">jsonParam</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span>&#123;</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> Address address;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Address</span> &#123;    </span><br><span class="line">    <span class="keyword">private</span> String province;    </span><br><span class="line">    <span class="keyword">private</span> String city;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h3><blockquote>
-<p>路径参数：通过请求URL直接传递参数，使用{…}来标识该路径参数，需要使用 @PathVariable 获取路径参数</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/path/&#123;id&#125;/&#123;name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">pathParam2</span><span class="params">(<span class="meta">@PathVariable</span> Integer id, <span class="meta">@PathVariable</span> String name)</span>&#123;</span><br><span class="line">    System.out.println(id+ <span class="string">&quot; : &quot;</span> +name);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb/image-20240306202824520.png" alt="image-20240306202824520"></p>
-<h2 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h2><h3 id="ResponseBody"><a href="#ResponseBody" class="headerlink" title="@ResponseBody"></a>@ResponseBody</h3><blockquote>
-<p>位置：Controller类上&#x2F;方法上</p>
-<p>作用：将方法返回值直接响应，若返回值类型是 实体对象&#x2F;集合 ，转JSON格式响应</p>
-<p>说明：@RestController &#x3D; @Controller + @ResponseBody ;</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306204830544.png" alt="image-20240306204830544"></p>
-<h3 id="统一响应结果"><a href="#统一响应结果" class="headerlink" title="统一响应结果"></a>统一响应结果</h3><blockquote>
-<p>如果一个个的响应，不方便管理和维护</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306204605470.png" alt="image-20240306204605470"></p>
-<h2 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h2><blockquote>
-<p>三层架构</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306205013500.png" alt="image-20240306205013500"></p>
-<blockquote>
-<p>controller：控制层，接收前端发送的请求，对请求进行处理，并响应数据。</p>
-<p>service：业务逻辑层，处理具体的业务逻辑。</p>
-<p>dao：数据访问层(Data Access Object)（持久层），负责数据访问操作，包括数据的增、删、改、查。</p>
-<p>可能有很多类型的数据，比如是xml的、数据库的、或者是别人给的</p>
-</blockquote>
-<p><img src="/../blog_images/JavaWeb/image-20240306205150673.png" alt="image-20240306205150673"></p>
-<h3 id="定义Dao层的接口，增强扩展性"><a href="#定义Dao层的接口，增强扩展性" class="headerlink" title="定义Dao层的接口，增强扩展性"></a>定义Dao层的接口，增强扩展性</h3><p><img src="/../blog_images/JavaWeb/image-20240307112932230.png" alt="image-20240307112932230"></p>
-<h3 id="控制反转："><a href="#控制反转：" class="headerlink" title="控制反转："></a>控制反转：</h3><p> Inversion Of Control，简称IOC。对象的创建控制权由程序自身转移到外部（容器），这种思想称为控制反转。</p>
-<h3 id="依赖注入："><a href="#依赖注入：" class="headerlink" title="依赖注入："></a>依赖注入：</h3><p> Dependency Injection，简称DI。容器为应用程序提供运行时，所依赖的资源，称之为依赖注入。</p>
-<p>Bean对象：IOC容器中创建、管理的对象，称之为bean。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1: Service层和Dao层的实现类，交给IOC容器管理</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../blog_images/JavaWeb/image-20240307113836905.png" alt="image-20240307113836905"></p>
-<p>如果要切换service，只需要把component修改了就行</p>
-<p><img src="/../blog_images/JavaWeb/image-20240307113929291.png" alt="image-20240307113929291"></p>
-<h2 id="IOC详解"><a href="#IOC详解" class="headerlink" title="IOC详解"></a>IOC详解</h2><blockquote>
-<p>IOC对象 又称为bean对象</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>注解</th>
-<th>说明</th>
-<th>位置</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>@Component</td>
-<td>声明bean的基础注解</td>
-<td>不属于以下三类时，用此注解</td>
-</tr>
-<tr>
-<td>@Controller</td>
-<td>@Component的衍生注解</td>
-<td>标注在控制器类上</td>
-</tr>
-<tr>
-<td>@Service</td>
-<td>@Component的衍生注解</td>
-<td>标注在业务类上</td>
-</tr>
-<tr>
-<td>@Repository</td>
-<td>@Component的衍生注解</td>
-<td>标注在数据访问类上（由于与mybatis整合，用的少）</td>
-</tr>
-</tbody></table>
-<p>声明bean的时候，可以通过value属性指定bean的名字，如果没有指定，默认为类名首字母小写。</p>
-<p>使用以上四个注解都可以声明bean，但是在springboot集成web开发中，声明控制器bean只能用@Controller。</p>
-<h3 id="Bean组件扫描"><a href="#Bean组件扫描" class="headerlink" title="Bean组件扫描"></a>Bean组件扫描</h3><p>前面声明bean的四大注解，要想生效，还需要被组件扫描注解@ComponentScan扫描。</p>
-<p>@ComponentScan注解虽然没有显式配置，但是实际上已经包含在了启动类声明注解 @SpringBootApplication 中，默认扫描的范围是启动类所在包及其子包。</p>
-<p><img src="/../blog_images/JavaWeb/image-20240307115056516.png" alt="image-20240307115056516"></p>
-<h3 id="Bean注入"><a href="#Bean注入" class="headerlink" title="Bean注入"></a>Bean注入</h3><p>@Autowired注解，默认是按照<strong>类型</strong>进行，如果存在多个相同类型的bean，将会报出如下错误：</p>
-<p><img src="/../blog_images/JavaWeb/image-20240307115609120.png" alt="image-20240307115609120"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

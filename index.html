@@ -146,17 +146,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -173,6 +173,288 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E7%BD%91%E5%85%B3-gateway/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E7%BD%91%E5%85%B3-gateway/" class="post-title-link" itemprop="url">项目-网盘-网关-gateway</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-19 19:29:12 / 修改时间：19:51:13" itemprop="dateCreated datePublished" datetime="2024-05-19T19:29:12+08:00">2024-05-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="一-file-gateway-Tokenfilter"><a href="#一-file-gateway-Tokenfilter" class="headerlink" title="一 file-gateway&#x2F;Tokenfilter"></a>一 file-gateway&#x2F;Tokenfilter</h1><blockquote>
+<p>这个是定义了一个pring Cloud Gateway 应用中的全局过滤器</p>
+</blockquote>
+<p><strong>用于拦截请求并验证请求中的 JWT 令牌。</strong></p>
+<p>逐行注释下面的代码,一个token验证拦截器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> top.quhailong.pan.file.gateway.filter;</span><br><span class="line"><span class="meta">@Component</span><span class="comment">//将这个类注册成Spring bean</span></span><br><span class="line"><span class="meta">@RefreshScope</span><span class="comment">// 允许在允许的时候刷新这个bean,通常用于动态更新配置属性</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenFilter</span> <span class="keyword">implements</span> <span class="title class_">GlobalFilter</span>, Ordered &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;filter-url&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String filterUrl;<span class="comment">// 从nacos读取</span></span><br><span class="line">    <span class="comment">//包含需要进行令牌验证的 URL 列表，从配置中注入</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line">        <span class="type">ServerHttpRequest</span> <span class="variable">request</span> <span class="operator">=</span> exchange.getRequest();<span class="comment">//从exchange中获得当前请求的request</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">uri</span> <span class="operator">=</span> request.getURI().getPath();<span class="comment">//从request中获得uri</span></span><br><span class="line">        List&lt;String&gt; uriList = Arrays.asList(filterUrl.split(<span class="string">&quot;,&quot;</span>));<span class="comment">//分割这个filterUrl，获取全部需要拦截的url列表</span></span><br><span class="line">        <span class="keyword">for</span> (String filterUrl:uriList) &#123;<span class="comment">///如果当前这个url需要被拦截，就拦截下来，验证token，如果有token，且正确，就可以放行</span></span><br><span class="line">            <span class="keyword">if</span>(uri.contains(filterUrl))&#123;</span><br><span class="line">                <span class="keyword">return</span> verifyToken(exchange, chain);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">// 这里就是验证token方法</span></span><br><span class="line">    <span class="keyword">private</span> Mono&lt;Void&gt; <span class="title function_">verifyToken</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ServerHttpRequest request;<span class="comment">//尝试从请求的 Cookies 中获取名为 token 的令牌。</span></span><br><span class="line">            <span class="type">HttpCookie</span> <span class="variable">cookie</span> <span class="operator">=</span> exchange.getRequest().getCookies().getFirst(<span class="string">&quot;token&quot;</span>);<span class="comment">//获得token，返回类型是cookie类型</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> cookie.getValue();</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//解析token（JWT）令牌，获得claim对象，这个对象是个啥。如果令牌失效就会返回错误的响应</span></span><br><span class="line">            <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> JWTUtils.parseJWT(token, <span class="string">&quot;nimadetou&quot;</span>.getBytes());</span><br><span class="line">            <span class="comment">//从 Claims 中提取 subject 并将其转换为 UserInfoDTO 对象。</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">subject</span> <span class="operator">=</span> claims.getSubject();</span><br><span class="line">            <span class="type">UserInfoDTO</span> <span class="variable">userinfo</span> <span class="operator">=</span> JSONUtils.parseObject(subject, UserInfoDTO.class);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            <span class="comment">//将编码后的用户信息添加到请求头中，继续处理请求。</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">operationInfo</span> <span class="operator">=</span> URLEncoder.encode(JSONUtils.toJSONString(userinfo), StandardCharsets.UTF_8.toString());</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 把这个请求头放到request里面，然后继续向后面传递</span></span><br><span class="line">            request = exchange.getRequest().mutate().header(<span class="string">&quot;operationInfo&quot;</span>, operationInfo).build();</span><br><span class="line">            <span class="keyword">return</span> chain.filter(exchange.mutate().request(request).build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="type">ServerHttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> exchange.getResponse();</span><br><span class="line">            response.getHeaders().add(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json;charset=UTF-8&quot;</span>);</span><br><span class="line">            <span class="type">DataBuffer</span> <span class="variable">dataBuffer</span> <span class="operator">=</span> response.bufferFactory().wrap(JSON.toJSONString(RestAPIResultDTO.Error(<span class="string">&quot;token验证失败&quot;</span>)).getBytes());</span><br><span class="line">            <span class="keyword">return</span> response.writeWith(Flux.just(dataBuffer));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//返回过滤器的顺序，数值越小优先级越高。这里返回 0 表示最高优先级。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二-JWT"><a href="#二-JWT" class="headerlink" title="二 JWT"></a>二 JWT</h1><p>JWT（JSON Web Token）是一种用于在各方之间作为 JSON 对象安全传输信息的紧凑且自包含的方式。JWT 的使用场景包括身份验证、信息交换等。</p>
+<h2 id="（1）JWT结构"><a href="#（1）JWT结构" class="headerlink" title="（1）JWT结构"></a>（1）JWT结构</h2><p>包含三个部分：Header（头部）、Payload（负载）、Signature（签名）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Header.Payload.Signature</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-头部"><a href="#1-头部" class="headerlink" title="1. 头部"></a>1. 头部</h3><blockquote>
+<p>header通常包含两个部分，一个是令牌的类型（JWT）和签名算法（RSA,HMAC SH256）</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;alg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;HS256&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;typ&quot;</span><span class="punctuation">:</span> <span class="string">&quot;JWT&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Payload负载"><a href="#2-Payload负载" class="headerlink" title="2.Payload负载"></a>2.Payload负载</h3>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/" class="post-title-link" itemprop="url">项目-网盘-远程调用-Feign</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-19 17:21:16 / 修改时间：18:52:04" itemprop="dateCreated datePublished" datetime="2024-05-19T17:21:16+08:00">2024-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">Java项目</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/%E7%BD%91%E7%9B%98/" itemprop="url" rel="index"><span itemprop="name">网盘</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/%E7%BD%91%E7%9B%98/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8Feign/" itemprop="url" rel="index"><span itemprop="name">远程调用Feign</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="远程调用理论"><a href="#远程调用理论" class="headerlink" title="远程调用理论"></a>远程调用理论</h1><h2 id="一、远程调用方客户端"><a href="#一、远程调用方客户端" class="headerlink" title="一、远程调用方客户端"></a>一、远程调用方客户端</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(name = &quot;some-service&quot;)</span><span class="comment">// 这个指定了远程调用的服务名，一般是在服务注册中心中注册的服务吗</span></span><br><span class="line"><span class="comment">// 这个注释说明spring cloud feign要创建一个这个接口的代理实例，并将其用于名&quot;some-service&quot;发送远程服务的请求</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">SomeServiceClient</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span><span class="comment">//定义了一个get请求，目标是远程服务some-service的/some-endpoint 端点</span></span><br><span class="line">    ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 这个是feign客户端接口的方法的定义，也就是说，如果这个方法被调用了，那么就会把相应的请求转发到这个远程服务的端点上，、</span></span><br><span class="line">    <span class="comment">// 此外还定义了这个方法的响应，也就是ResponseEntity&lt;String&gt;，接受响应的结果</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、使用这个feign客户端的服务"><a href="#二、使用这个feign客户端的服务" class="headerlink" title="二、使用这个feign客户端的服务"></a>二、使用这个feign客户端的服务</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeOtherServiceController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SomeServiceClient someServiceClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/use-some-service&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">useSomeService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 调用远程服务的端点</span></span><br><span class="line">        <span class="comment">//这里就调用了一里面的客户端</span></span><br><span class="line">        <span class="keyword">return</span> someServiceClient.getSomeData();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、被远程调用的服务名"><a href="#三、被远程调用的服务名" class="headerlink" title="三、被远程调用的服务名"></a>三、被远程调用的服务名</h2><p>按照上述的，远程调用的服务名“<strong>远程服务 <code>some-service</code></strong>:”</p>
+<ul>
+<li>这是注册在服务发现系统（如 Eureka）中的服务，<code>name = &quot;some-service&quot;</code> 对应它的服务名。</li>
+<li><strong>它有一个暴露的 RESTful 端点 <code>/some-endpoint</code>，这个端点被 Feign 客户端所调用。</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeServiceController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 服务逻辑处理</span></span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(<span class="string">&quot;Some data from some-service&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><ul>
+<li><code>SomeServiceClient</code> 是远程调用的客户端接口，通过 Feign 创建。</li>
+<li><code>SomeServiceController</code> 中的 <code>/some-endpoint</code> 是被远程调用的端点。</li>
+<li><code>useSomeService</code> 方法使用 Feign 客户端 <code>someServiceClient</code> 调用远程服务 <code>some-service</code> 的 <code>/some-endpoint</code>。</li>
+</ul>
+<p>在调用方法具体流程，浏览器在调用&#x2F;use-some-service的时候，被这个服务的消费者，也就是这个SomeOtherServiceController捕捉到，</p>
+<p>在这个方法中，注入了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SomeServiceClient someServiceClient;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在具体这个<code>@GetMappping</code>方法中，会调用这个远程调用的客户端接口的对象，使用里面的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> someServiceClient.getSomeData();</span><br></pre></td></tr></table></figure>
+
+<p>这个客户端方法里，会把这个方法的请求，转移发送到远程调用的服务端点那边去，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span><span class="comment">//定义了一个get请求，目标是远程服务some-service的/some-endpoint 端点</span></span><br><span class="line">   ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+<p>发送到服务的some-endpoint端点上去</p>
+<p>然后远程调用的服务提供者提供服务，返回数据</p>
+<p>消费者得到返回的响应，形成一个对象</p>
+<h1 id="openfeign的具体实现和理论"><a href="#openfeign的具体实现和理论" class="headerlink" title="openfeign的具体实现和理论"></a>openfeign的具体实现和理论</h1><h2 id="一、实现"><a href="#一、实现" class="headerlink" title="一、实现"></a>一、实现</h2><h3 id="1-pom-xml中添加依赖"><a href="#1-pom-xml中添加依赖" class="headerlink" title="1. pom.xml中添加依赖"></a>1. pom.xml中添加依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-启动feign客户端，在启动类上使用-EnableFeignClients注释"><a href="#2-启动feign客户端，在启动类上使用-EnableFeignClients注释" class="headerlink" title="2.启动feign客户端，在启动类上使用@EnableFeignClients注释"></a>2.启动feign客户端，在启动类上使用<code>@EnableFeignClients</code>注释</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-定义Feign客户端接口"><a href="#3-定义Feign客户端接口" class="headerlink" title="3.定义Feign客户端接口"></a>3.定义Feign客户端接口</h3><p>使用 <code>@FeignClient</code> 注解定义一个接口来描述远程服务的 API。注解的 <code>name</code> 属性指定服务的名称，这个名称应该和服务注册中心（例如 Eureka）中的服务名一致。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(name = &quot;some-service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">SomeServiceClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span></span><br><span class="line">    ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/another-endpoint&quot;)</span></span><br><span class="line">    ResponseEntity&lt;String&gt; <span class="title function_">getAnotherData</span><span class="params">(<span class="meta">@RequestParam(&quot;param&quot;)</span> String param)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-使用这个feign客户端接口"><a href="#4-使用这个feign客户端接口" class="headerlink" title="4.使用这个feign客户端接口"></a>4.使用这个feign客户端接口</h3><p>就是在controller中调用这个feign客户端中的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeOtherServiceController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SomeServiceClient someServiceClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/use-some-service&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">useSomeService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 调用远程服务的端点</span></span><br><span class="line">        <span class="keyword">return</span> someServiceClient.getSomeData();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/use-another-service&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">useAnotherService</span><span class="params">(<span class="meta">@RequestParam(&quot;param&quot;)</span> String param)</span> &#123;</span><br><span class="line">        <span class="comment">// 调用另一个远程服务的端点</span></span><br><span class="line">        <span class="keyword">return</span> someServiceClient.getAnotherData(param);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.配置feign客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">feign:</span><br><span class="line">  client:</span><br><span class="line">    config:</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        connectTimeout: <span class="number">5000</span></span><br><span class="line">        readTimeout: <span class="number">5000</span></span><br><span class="line">        loggerLevel: full</span><br></pre></td></tr></table></figure>
+
+<p><strong>假设有一个名为 <code>some-service</code> 的微服务，它有两个端点 <code>/some-endpoint</code> 和 <code>/another-endpoint</code>，定义如下</strong></p>
+<p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519175609772.png" alt="image-20240519175609772"></p>
+<h2 id="二、原理"><a href="#二、原理" class="headerlink" title="二、原理"></a>二、原理</h2><ul>
+<li><strong>Feign Client</strong>：<code>@FeignClient</code> 注解用于定义 Feign 客户端，Spring Cloud Feign 会自动创建该接口的实现。</li>
+<li><strong>负载均衡</strong>：如果启用了 Ribbon（默认情况），Feign 客户端将通过 Ribbon 实现负载均衡，选择合适的实例进行调用。</li>
+<li><strong>Hystrix</strong>：Feign 还可以与 Hystrix 配合使用，实现熔断和回退机制。</li>
+<li><strong>日志</strong>：通过配置 Feign 日志级别，可以记录详细的 HTTP 请求和响应。</li>
+</ul>
+<p>openfeign是一个声明式的HTTP客户端，简化了REST API的调用，底层涉及了非常多的组件，包括：</p>
+<ul>
+<li>动态代理</li>
+<li>负载均衡</li>
+<li>拦截器</li>
+<li>……</li>
+</ul>
+<h3 id="1-动态代理"><a href="#1-动态代理" class="headerlink" title="1. 动态代理"></a>1. 动态代理</h3><p>按照之前介绍的,可以看到,声明的feign客户端其实是一个接口类,并不是一个实现类,</p>
+<p><strong>所以,当定义一个feign客户端接口的时候,openfeign会创建这个接口的代理对象,在调用方法的时候,代理对象会拦截方法调用,然后将这个转化为HTTP请求</strong></p>
+<p>a. 创建这个接口的代理对象,应该是cglib,</p>
+<p>b.在调用方法的时候,这个代理对象会把这个方法的调用给拦截下来,</p>
+<p>c.然后将这个方法转化为http的请求发送出去,到远程调用的远程服务提供者暴露的服务端点处</p>
+<h3 id="2-核心组件"><a href="#2-核心组件" class="headerlink" title="2.核心组件"></a>2.核心组件</h3><h4 id="1-Feign-Builder-后续还需要学"><a href="#1-Feign-Builder-后续还需要学" class="headerlink" title="(1)Feign.Builder&#x2F;&#x2F; 后续还需要学"></a>(1)Feign.Builder&#x2F;&#x2F; 后续还需要学</h4><p>这个是创建feign客户端的核心类,是负责构造feign客户端实例,可以配置各种的选项,包括编码器,解码器,日志记录器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Feign.<span class="type">Builder</span> <span class="variable">builder</span> <span class="operator">=</span> Feign.builder()</span><br><span class="line">                             .decoder(<span class="keyword">new</span> <span class="title class_">JacksonDecoder</span>())<span class="comment">//将 HTTP 响应解码为响应对象</span></span><br><span class="line">                             .encoder(<span class="keyword">new</span> <span class="title class_">JacksonEncoder</span>());<span class="comment">//将请求对象编码为 HTTP 请求</span></span><br><span class="line"><span class="type">SomeServiceClient</span> <span class="variable">client</span> <span class="operator">=</span> builder.target(SomeServiceClient.class, <span class="string">&quot;http://some-service&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>spring cloud feign默认使用spring的消息转换器(jackson)来处理编解码</p>
+<h4 id="2-Contract"><a href="#2-Contract" class="headerlink" title="(2)Contract"></a>(2)Contract</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Contract 负责解析 Feign 客户端接口的注解。Spring Cloud Feign 使用 SpringMvcContract 来解析 Spring MVC 的注解，如 @RequestMapping、@GetMapping 等。</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-Client-是一个接口-负责执行HTTP请求"><a href="#3-Client-是一个接口-负责执行HTTP请求" class="headerlink" title="(3)Client&#x2F;&#x2F;是一个接口,负责执行HTTP请求."></a>(3)Client&#x2F;&#x2F;是一个接口,负责执行HTTP请求.</h4><p>就是一个HTTP的客户端,feign在builder的时候,可以选择使用Apache HttpClient 或 OkHttp\或者其他,然后利用这个客户端来实现执行HTTP的请求.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Client</span> <span class="variable">client</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OkHttpClient</span>();</span><br><span class="line">Feign.<span class="type">Builder</span> <span class="variable">builder</span> <span class="operator">=</span> Feign.builder().client(client);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-Logger-用于记录请求和响应的日志"><a href="#4-Logger-用于记录请求和响应的日志" class="headerlink" title="(4)Logger,用于记录请求和响应的日志"></a>(4)Logger,用于记录请求和响应的日志</h4><p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519182131701.png" alt="image-20240519182131701"></p>
+<h3 id="三springcloud的组件"><a href="#三springcloud的组件" class="headerlink" title="三springcloud的组件"></a>三springcloud的组件</h3><h4 id="1-EnableFeignClients"><a href="#1-EnableFeignClients" class="headerlink" title="1. @EnableFeignClients"></a>1. @EnableFeignClients</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@EnableFeignClients</span><br><span class="line">这个注解启用了 Feign 客户端的自动配置。它会扫描指定包下的所有接口，并为每个接口创建一个 Feign 客户端代理。</span><br></pre></td></tr></table></figure>
+
+<p>这个注释启用了feign的自动化配置,它会扫描指定包下面的所有的接口,为每个接口都创建一个feign的客户端代理,</p>
+<h4 id="2-自动配置类"><a href="#2-自动配置类" class="headerlink" title="2.自动配置类"></a>2.自动配置类</h4><p>spring cloud feign提供了一些自动配置类,如 <code>FeignAutoConfiguration</code>、<code>FeignClientsConfiguration</code>.</p>
+<p>这些配置类会自动的配置feign客户端所需要的各项组件.</p>
+<h4 id="3-load-balance"><a href="#3-load-balance" class="headerlink" title="3.load balance"></a>3.load balance</h4><p>这个feign是默认集成了ribbon,用于客户端的负载均衡</p>
+<p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183020401.png" alt="image-20240519183020401"></p>
+<h4 id="4-Hystrix-整合"><a href="#4-Hystrix-整合" class="headerlink" title="4.Hystrix 整合"></a>4.Hystrix 整合</h4><p>Feign 与 Hystrix 整合，可以实现熔断和回退机制。通过在配置中启用 Hystrix，Feign 客户端在调用失败时可以自动进行回退。</p>
+<p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183310894.png" alt="image-20240519183310894"></p>
+<h4 id="5-扩展"><a href="#5-扩展" class="headerlink" title="5.扩展"></a>5.扩展</h4><p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183321748.png" alt="image-20240519183321748"></p>
+<h1 id="EnableFeignClients"><a href="#EnableFeignClients" class="headerlink" title="@EnableFeignClients"></a>@<code>EnableFeignClients</code></h1><h2 id="1-注释的声明"><a href="#1-注释的声明" class="headerlink" title="1.注释的声明"></a>1.注释的声明</h2><p><code>@EnableFeignClients</code> 注解定义在 <code>org.springframework.cloud.openfeign</code> 包中。它的主要功能是通过 <code>FeignClientsRegistrar</code> 来注册 Feign 客户端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Import(FeignClientsRegistrar.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableFeignClients &#123;</span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">    String[] basePackages() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定要扫描的包。</span></span><br><span class="line">    Class&lt;?&gt;[] basePackageClasses() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">    Class&lt;?&gt;[] defaultConfiguration() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定默认的配置类。</span></span><br><span class="line">    Class&lt;?&gt;[] clients() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定具体的 Feign 客户端类。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-FeignClientsRegistrar-的工作原理"><a href="#2-FeignClientsRegistrar-的工作原理" class="headerlink" title="2.FeignClientsRegistrar 的工作原理"></a>2.<code>FeignClientsRegistrar</code> 的工作原理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FeignClientsRegistrar` 是一个 `ImportBeanDefinitionRegistrar</span><br></pre></td></tr></table></figure>
+
+<p>作用是在spring的bean的定义注册阶段注册Feign客户端的相关Bean</p>
+<h3 id="注册过程"><a href="#注册过程" class="headerlink" title="注册过程"></a>注册过程</h3><p>a. <strong>扫描Feign客户端接口</strong>:FeignClientsRegistrar会根据@<code>EnableFeignClients</code> 注释的属性,比如basePackages,扫描指定包中的所有接口</p>
+<p>‘’这个basePackages中的接口是怎么定义的?</p>
+<p>b.<strong>注册Feign客户端Bean</strong>:对于每一个扫描到的接口,<code>FeignClientsRegistrar</code> 会注册一个 <code>FeignClientFactoryBean</code>，它是一个工厂 Bean，负责创建 Feign 客户端的代理对象。</p>
+<h1 id="自动配置类"><a href="#自动配置类" class="headerlink" title="自动配置类"></a>自动配置类</h1><blockquote>
+<p>FeignAutoConfiguration<code>和</code>FeignClientsConfiguration</p>
+</blockquote>
+<h2 id="1-FeignAutoConfiguration"><a href="#1-FeignAutoConfiguration" class="headerlink" title="1.FeignAutoConfiguration"></a>1.FeignAutoConfiguration</h2><p><code>FeignAutoConfiguration</code> 负责配置 Feign 的核心组件，如 <code>Feign.Builder</code>、<code>Decoder</code>、<code>Encoder</code>、<code>Contract</code> 等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(Feign.class)</span></span><br><span class="line"><span class="meta">@Import(FeignClientsConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FeignAutoConfiguration</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Feign.Builder <span class="title function_">feignBuilder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Feign.builder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Decoder <span class="title function_">feignDecoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">OptionalDecoder</span>(<span class="keyword">new</span> <span class="title class_">ResponseEntityDecoder</span>(<span class="keyword">new</span> <span class="title class_">SpringDecoder</span>(<span class="built_in">this</span>.messageConverters)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Encoder <span class="title function_">feignEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringEncoder</span>(<span class="built_in">this</span>.messageConverters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Contract <span class="title function_">feignContract</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringMvcContract</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">feignLogger</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Slf4jLogger</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-FeignClientsConfiguration"><a href="#2-FeignClientsConfiguration" class="headerlink" title="2.FeignClientsConfiguration"></a>2.FeignClientsConfiguration</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FeignClientsConfiguration</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Decoder <span class="title function_">feignDecoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntityDecoder</span>(<span class="keyword">new</span> <span class="title class_">SpringDecoder</span>(messageConverters));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Encoder <span class="title function_">feignEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringEncoder</span>(messageConverters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Contract <span class="title function_">feignContract</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringMvcContract</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">feignLogger</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Slf4jLogger</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Feign客户端的创建"><a href="#3-Feign客户端的创建" class="headerlink" title="3.Feign客户端的创建"></a>3.Feign客户端的创建</h2><p>当Feign的客户端创建后,</p>
+<ol>
+<li>Spring会使用<code>FeignClientFacatoryBean</code>来创建代理对象.</li>
+<li>把接口的方法调用,转发到feign生成的HTTP请求</li>
+</ol>
+<p><code>FeignClientFactoryBean</code> 是一个工厂 Bean，用于创建 Feign 客户端代理对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FeignClientFactoryBean</span> <span class="keyword">implements</span> <span class="title class_">FactoryBean</span>&lt;Object&gt;, InitializingBean &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> feignContext.getInstance(<span class="built_in">this</span>.name, Feign.Builder.class)</span><br><span class="line">                           .target(<span class="built_in">this</span>.targetType, <span class="built_in">this</span>.url);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 初始化配置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1072,213 +1354,6 @@
 <li>如果哨兵节点部署在Docker等容器里面,尤其是注意端口的正确映射</li>
 <li>哨兵集群+主从复制,并不能保证数据的零丢失</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/Redis-%E5%A4%8D%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/01/Redis-%E5%A4%8D%E5%88%B6/" class="post-title-link" itemprop="url">Redis-复制</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-04-01 15:39:45 / 修改时间：16:57:36" itemprop="dateCreated datePublished" datetime="2024-04-01T15:39:45+08:00">2024-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Redis复制（replica）"><a href="#Redis复制（replica）" class="headerlink" title="Redis复制（replica）"></a>Redis复制（replica）</h1><img src="../blog_images/Redis-%E5%A4%8D%E5%88%B6/image-20240401155246193.png" alt="image-20240401155246193" style="zoom:33%;" />
-
-<blockquote>
-<p>就是主从复制，master以写为主，Slave以读为主</p>
-<p>当master数据变化的时候，自动iang新的数据异步同步到其他的slave数据库</p>
-</blockquote>
-<h2 id="能干什么"><a href="#能干什么" class="headerlink" title="能干什么"></a>能干什么</h2><h3 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h3><p>写找master 读找slave</p>
-<h3 id="容灾恢复"><a href="#容灾恢复" class="headerlink" title="容灾恢复"></a>容灾恢复</h3><h3 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h3><h3 id="水平扩容支持高并发"><a href="#水平扩容支持高并发" class="headerlink" title="水平扩容支持高并发"></a>水平扩容支持高并发</h3><h2 id="怎么操作"><a href="#怎么操作" class="headerlink" title="怎么操作"></a>怎么操作</h2><blockquote>
-<p>配置从库不配置主库</p>
-</blockquote>
-<img src="../blog_images/Redis-%E5%A4%8D%E5%88%B6/image-20240401155846349.png" alt="image-20240401155846349" style="zoom:25%;" />
-
-<p>master 如果配置了requirepass参数，需要密码登录</p>
-<p>那么slave就要配置masterauth来设置校验密码，否则master就会拒绝slave的访问请求。</p>
-<h3 id="info-replication"><a href="#info-replication" class="headerlink" title="info replication"></a>info replication</h3><blockquote>
-<p>建立了主从关系之后可以查看复制节点的主从关系和配置信息 </p>
-</blockquote>
-<h3 id="replicaof-主库IP-主库端口"><a href="#replicaof-主库IP-主库端口" class="headerlink" title="replicaof 主库IP 主库端口"></a>replicaof 主库IP 主库端口</h3><blockquote>
-<p>在从机上写清楚,找哪个为主机,一般写入redis.conf配置文件内的</p>
-</blockquote>
-<h3 id="slaveof-主库IP-主库端口"><a href="#slaveof-主库IP-主库端口" class="headerlink" title="slaveof 主库IP 主库端口"></a>slaveof 主库IP 主库端口</h3><blockquote>
-<p>有些类似于上一个指令(写进配置文件的) 的命令版本</p>
-</blockquote>
-<p>每次与master断开之后,都要重新连接,除非你配置进redis,conf文件</p>
-<p><strong>&#x3D;&#x3D;在运行期间修改slave节点的消息,如果该数据库已经是某个主数据库的从数据库,那么就会停止和原主数据库的同步关系转而和新的数据库同步,重新设置主数据库&#x3D;&#x3D;</strong></p>
-<h3 id="slaveof-no-one"><a href="#slaveof-no-one" class="headerlink" title="slaveof no one"></a>slaveof no one</h3><img src="../blog_images/Redis-%E5%A4%8D%E5%88%B6/image-20240401160806518.png" alt="image-20240401160806518" style="zoom:25%;" />
-
-<p>使当前数据库停止与其他数据库的同步,转为主数据库</p>
-<h3 id="复制的原理和工作流程"><a href="#复制的原理和工作流程" class="headerlink" title="复制的原理和工作流程"></a>复制的原理和工作流程</h3><p>1 slave 启动成功连接到master后会发送一个syncm’l</p>
-<p>​    slave首次全新连接master,一次完全同步,(全量复制)将会被自动的执行,slave自身原有数据会被master数据覆盖</p>
-<p><img src="/../blog_images/Redis-%E5%A4%8D%E5%88%B6/image-20240401163543131.png" alt="image-20240401163543131"></p>
-<img src="../blog_images/Redis-%E5%A4%8D%E5%88%B6/image-20240401163830466.png" alt="image-20240401163830466" style="zoom:25%;" />
-
-<h3 id="复制的缺点"><a href="#复制的缺点" class="headerlink" title="复制的缺点"></a>复制的缺点</h3><p>复制延时,信号衰减</p>
-<p>master挂了怎么办?</p>
-<p><img src="/../blog_images/Redis-%E5%A4%8D%E5%88%B6/image-20240401165735857.png" alt="image-20240401165735857"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/01/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lolo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Loloooo">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/04/01/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/" class="post-title-link" itemprop="url">Redis-发布订阅</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-04-01 15:36:37 / 修改时间：15:40:00" itemprop="dateCreated datePublished" datetime="2024-04-01T15:36:37+08:00">2024-04-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153705166.png" alt="image-20240401153705166"></p>
-<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153751361.png" alt="image-20240401153751361"></p>
-<img src="../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153845316.png" alt="image-20240401153845316" style="zoom:33%;" />
-
-<img src="../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153902782.png" alt="image-20240401153902782" style="zoom:33%;" />
-
-<p><img src="/../blog_images/Redis-%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85/image-20240401153920432.png" alt="image-20240401153920432"></p>
 
       
     </div>

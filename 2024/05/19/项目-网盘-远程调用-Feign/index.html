@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="远程调用理论一、远程调用方客户端123456789@FeignClient(name &#x3D; &quot;some-service&quot;)&#x2F;&#x2F; 这个指定了远程调用的服务名，一般是在服务注册中心中注册的服务吗&#x2F;&#x2F; 这个注释说明spring cloud feign要创建一个这个接口的代理实例，并将其用于名&quot;some-service&quot;发送远程服务的请求public interfac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目-网盘-远程调用-Feign">
+<meta property="og:url" content="http://example.com/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/index.html">
+<meta property="og:site_name" content="Loloooo">
+<meta property="og:description" content="远程调用理论一、远程调用方客户端123456789@FeignClient(name &#x3D; &quot;some-service&quot;)&#x2F;&#x2F; 这个指定了远程调用的服务名，一般是在服务注册中心中注册的服务吗&#x2F;&#x2F; 这个注释说明spring cloud feign要创建一个这个接口的代理实例，并将其用于名&quot;some-service&quot;发送远程服务的请求public interfac">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519175609772.png">
+<meta property="og:image" content="http://example.com/blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519182131701.png">
+<meta property="og:image" content="http://example.com/blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183020401.png">
+<meta property="og:image" content="http://example.com/blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183310894.png">
+<meta property="og:image" content="http://example.com/blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183321748.png">
+<meta property="article:published_time" content="2024-05-19T09:21:16.000Z">
+<meta property="article:modified_time" content="2024-05-19T10:52:04.709Z">
+<meta property="article:author" content="lolo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519175609772.png">
+
+
+<link rel="canonical" href="http://example.com/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/","path":"2024/05/19/项目-网盘-远程调用-Feign/","title":"项目-网盘-远程调用-Feign"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>项目-网盘-远程调用-Feign | Loloooo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Loloooo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E7%90%86%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">远程调用理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E6%96%B9%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.1.</span> <span class="nav-text">一、远程调用方客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AAfeign%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.2.</span> <span class="nav-text">二、使用这个feign客户端的服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%A2%AB%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%90%8D"><span class="nav-number">1.3.</span> <span class="nav-text">三、被远程调用的服务名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">四、总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#openfeign%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0%E5%92%8C%E7%90%86%E8%AE%BA"><span class="nav-number">2.</span> <span class="nav-text">openfeign的具体实现和理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">一、实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pom-xml%E4%B8%AD%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. pom.xml中添加依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%90%AF%E5%8A%A8feign%E5%AE%A2%E6%88%B7%E7%AB%AF%EF%BC%8C%E5%9C%A8%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E4%BD%BF%E7%94%A8-EnableFeignClients%E6%B3%A8%E9%87%8A"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.启动feign客户端，在启动类上使用@EnableFeignClients注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%9A%E4%B9%89Feign%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.定义Feign客户端接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8%E8%BF%99%E4%B8%AAfeign%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.1.4.</span> <span class="nav-text">4.使用这个feign客户端接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">二、原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 动态代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Feign-Builder-%E5%90%8E%E7%BB%AD%E8%BF%98%E9%9C%80%E8%A6%81%E5%AD%A6"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">(1)Feign.Builder&#x2F;&#x2F; 后续还需要学</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Contract"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">(2)Contract</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Client-%E6%98%AF%E4%B8%80%E4%B8%AA%E6%8E%A5%E5%8F%A3-%E8%B4%9F%E8%B4%A3%E6%89%A7%E8%A1%8CHTTP%E8%AF%B7%E6%B1%82"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">(3)Client&#x2F;&#x2F;是一个接口,负责执行HTTP请求.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Logger-%E7%94%A8%E4%BA%8E%E8%AE%B0%E5%BD%95%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94%E7%9A%84%E6%97%A5%E5%BF%97"><span class="nav-number">2.2.2.4.</span> <span class="nav-text">(4)Logger,用于记录请求和响应的日志</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89springcloud%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="nav-number">2.2.3.</span> <span class="nav-text">三springcloud的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-EnableFeignClients"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">1. @EnableFeignClients</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">2.自动配置类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-load-balance"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">3.load balance</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Hystrix-%E6%95%B4%E5%90%88"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">4.Hystrix 整合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%89%A9%E5%B1%95"><span class="nav-number">2.2.3.5.</span> <span class="nav-text">5.扩展</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EnableFeignClients"><span class="nav-number">3.</span> <span class="nav-text">@EnableFeignClients</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B3%A8%E9%87%8A%E7%9A%84%E5%A3%B0%E6%98%8E"><span class="nav-number">3.1.</span> <span class="nav-text">1.注释的声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-FeignClientsRegistrar-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">2.FeignClientsRegistrar 的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">注册过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">自动配置类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-FeignAutoConfiguration"><span class="nav-number">4.1.</span> <span class="nav-text">1.FeignAutoConfiguration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-FeignClientsConfiguration"><span class="nav-number">4.2.</span> <span class="nav-text">2.FeignClientsConfiguration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Feign%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">4.3.</span> <span class="nav-text">3.Feign客户端的创建</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lolo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lolo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="项目-网盘-远程调用-Feign | Loloooo">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          项目-网盘-远程调用-Feign
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-19 17:21:16 / 修改时间：18:52:04" itemprop="dateCreated datePublished" datetime="2024-05-19T17:21:16+08:00">2024-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">Java项目</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/%E7%BD%91%E7%9B%98/" itemprop="url" rel="index"><span itemprop="name">网盘</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E9%A1%B9%E7%9B%AE/%E7%BD%91%E7%9B%98/%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8Feign/" itemprop="url" rel="index"><span itemprop="name">远程调用Feign</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="远程调用理论"><a href="#远程调用理论" class="headerlink" title="远程调用理论"></a>远程调用理论</h1><h2 id="一、远程调用方客户端"><a href="#一、远程调用方客户端" class="headerlink" title="一、远程调用方客户端"></a>一、远程调用方客户端</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(name = &quot;some-service&quot;)</span><span class="comment">// 这个指定了远程调用的服务名，一般是在服务注册中心中注册的服务吗</span></span><br><span class="line"><span class="comment">// 这个注释说明spring cloud feign要创建一个这个接口的代理实例，并将其用于名&quot;some-service&quot;发送远程服务的请求</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">SomeServiceClient</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span><span class="comment">//定义了一个get请求，目标是远程服务some-service的/some-endpoint 端点</span></span><br><span class="line">    ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">// 这个是feign客户端接口的方法的定义，也就是说，如果这个方法被调用了，那么就会把相应的请求转发到这个远程服务的端点上，、</span></span><br><span class="line">    <span class="comment">// 此外还定义了这个方法的响应，也就是ResponseEntity&lt;String&gt;，接受响应的结果</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、使用这个feign客户端的服务"><a href="#二、使用这个feign客户端的服务" class="headerlink" title="二、使用这个feign客户端的服务"></a>二、使用这个feign客户端的服务</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeOtherServiceController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SomeServiceClient someServiceClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/use-some-service&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">useSomeService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 调用远程服务的端点</span></span><br><span class="line">        <span class="comment">//这里就调用了一里面的客户端</span></span><br><span class="line">        <span class="keyword">return</span> someServiceClient.getSomeData();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、被远程调用的服务名"><a href="#三、被远程调用的服务名" class="headerlink" title="三、被远程调用的服务名"></a>三、被远程调用的服务名</h2><p>按照上述的，远程调用的服务名“<strong>远程服务 <code>some-service</code></strong>:”</p>
+<ul>
+<li>这是注册在服务发现系统（如 Eureka）中的服务，<code>name = &quot;some-service&quot;</code> 对应它的服务名。</li>
+<li><strong>它有一个暴露的 RESTful 端点 <code>/some-endpoint</code>，这个端点被 Feign 客户端所调用。</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeServiceController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 服务逻辑处理</span></span><br><span class="line">        <span class="keyword">return</span> ResponseEntity.ok(<span class="string">&quot;Some data from some-service&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><ul>
+<li><code>SomeServiceClient</code> 是远程调用的客户端接口，通过 Feign 创建。</li>
+<li><code>SomeServiceController</code> 中的 <code>/some-endpoint</code> 是被远程调用的端点。</li>
+<li><code>useSomeService</code> 方法使用 Feign 客户端 <code>someServiceClient</code> 调用远程服务 <code>some-service</code> 的 <code>/some-endpoint</code>。</li>
+</ul>
+<p>在调用方法具体流程，浏览器在调用&#x2F;use-some-service的时候，被这个服务的消费者，也就是这个SomeOtherServiceController捕捉到，</p>
+<p>在这个方法中，注入了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SomeServiceClient someServiceClient;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在具体这个<code>@GetMappping</code>方法中，会调用这个远程调用的客户端接口的对象，使用里面的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> someServiceClient.getSomeData();</span><br></pre></td></tr></table></figure>
+
+<p>这个客户端方法里，会把这个方法的请求，转移发送到远程调用的服务端点那边去，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span><span class="comment">//定义了一个get请求，目标是远程服务some-service的/some-endpoint 端点</span></span><br><span class="line">   ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+
+<p>发送到服务的some-endpoint端点上去</p>
+<p>然后远程调用的服务提供者提供服务，返回数据</p>
+<p>消费者得到返回的响应，形成一个对象</p>
+<h1 id="openfeign的具体实现和理论"><a href="#openfeign的具体实现和理论" class="headerlink" title="openfeign的具体实现和理论"></a>openfeign的具体实现和理论</h1><h2 id="一、实现"><a href="#一、实现" class="headerlink" title="一、实现"></a>一、实现</h2><h3 id="1-pom-xml中添加依赖"><a href="#1-pom-xml中添加依赖" class="headerlink" title="1. pom.xml中添加依赖"></a>1. pom.xml中添加依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-启动feign客户端，在启动类上使用-EnableFeignClients注释"><a href="#2-启动feign客户端，在启动类上使用-EnableFeignClients注释" class="headerlink" title="2.启动feign客户端，在启动类上使用@EnableFeignClients注释"></a>2.启动feign客户端，在启动类上使用<code>@EnableFeignClients</code>注释</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-定义Feign客户端接口"><a href="#3-定义Feign客户端接口" class="headerlink" title="3.定义Feign客户端接口"></a>3.定义Feign客户端接口</h3><p>使用 <code>@FeignClient</code> 注解定义一个接口来描述远程服务的 API。注解的 <code>name</code> 属性指定服务的名称，这个名称应该和服务注册中心（例如 Eureka）中的服务名一致。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient(name = &quot;some-service&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">SomeServiceClient</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/some-endpoint&quot;)</span></span><br><span class="line">    ResponseEntity&lt;String&gt; <span class="title function_">getSomeData</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/another-endpoint&quot;)</span></span><br><span class="line">    ResponseEntity&lt;String&gt; <span class="title function_">getAnotherData</span><span class="params">(<span class="meta">@RequestParam(&quot;param&quot;)</span> String param)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-使用这个feign客户端接口"><a href="#4-使用这个feign客户端接口" class="headerlink" title="4.使用这个feign客户端接口"></a>4.使用这个feign客户端接口</h3><p>就是在controller中调用这个feign客户端中的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SomeOtherServiceController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SomeServiceClient someServiceClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/use-some-service&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">useSomeService</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 调用远程服务的端点</span></span><br><span class="line">        <span class="keyword">return</span> someServiceClient.getSomeData();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/use-another-service&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;String&gt; <span class="title function_">useAnotherService</span><span class="params">(<span class="meta">@RequestParam(&quot;param&quot;)</span> String param)</span> &#123;</span><br><span class="line">        <span class="comment">// 调用另一个远程服务的端点</span></span><br><span class="line">        <span class="keyword">return</span> someServiceClient.getAnotherData(param);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.配置feign客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">feign:</span><br><span class="line">  client:</span><br><span class="line">    config:</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        connectTimeout: <span class="number">5000</span></span><br><span class="line">        readTimeout: <span class="number">5000</span></span><br><span class="line">        loggerLevel: full</span><br></pre></td></tr></table></figure>
+
+<p><strong>假设有一个名为 <code>some-service</code> 的微服务，它有两个端点 <code>/some-endpoint</code> 和 <code>/another-endpoint</code>，定义如下</strong></p>
+<p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519175609772.png" alt="image-20240519175609772"></p>
+<h2 id="二、原理"><a href="#二、原理" class="headerlink" title="二、原理"></a>二、原理</h2><ul>
+<li><strong>Feign Client</strong>：<code>@FeignClient</code> 注解用于定义 Feign 客户端，Spring Cloud Feign 会自动创建该接口的实现。</li>
+<li><strong>负载均衡</strong>：如果启用了 Ribbon（默认情况），Feign 客户端将通过 Ribbon 实现负载均衡，选择合适的实例进行调用。</li>
+<li><strong>Hystrix</strong>：Feign 还可以与 Hystrix 配合使用，实现熔断和回退机制。</li>
+<li><strong>日志</strong>：通过配置 Feign 日志级别，可以记录详细的 HTTP 请求和响应。</li>
+</ul>
+<p>openfeign是一个声明式的HTTP客户端，简化了REST API的调用，底层涉及了非常多的组件，包括：</p>
+<ul>
+<li>动态代理</li>
+<li>负载均衡</li>
+<li>拦截器</li>
+<li>……</li>
+</ul>
+<h3 id="1-动态代理"><a href="#1-动态代理" class="headerlink" title="1. 动态代理"></a>1. 动态代理</h3><p>按照之前介绍的,可以看到,声明的feign客户端其实是一个接口类,并不是一个实现类,</p>
+<p><strong>所以,当定义一个feign客户端接口的时候,openfeign会创建这个接口的代理对象,在调用方法的时候,代理对象会拦截方法调用,然后将这个转化为HTTP请求</strong></p>
+<p>a. 创建这个接口的代理对象,应该是cglib,</p>
+<p>b.在调用方法的时候,这个代理对象会把这个方法的调用给拦截下来,</p>
+<p>c.然后将这个方法转化为http的请求发送出去,到远程调用的远程服务提供者暴露的服务端点处</p>
+<h3 id="2-核心组件"><a href="#2-核心组件" class="headerlink" title="2.核心组件"></a>2.核心组件</h3><h4 id="1-Feign-Builder-后续还需要学"><a href="#1-Feign-Builder-后续还需要学" class="headerlink" title="(1)Feign.Builder&#x2F;&#x2F; 后续还需要学"></a>(1)Feign.Builder&#x2F;&#x2F; 后续还需要学</h4><p>这个是创建feign客户端的核心类,是负责构造feign客户端实例,可以配置各种的选项,包括编码器,解码器,日志记录器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Feign.<span class="type">Builder</span> <span class="variable">builder</span> <span class="operator">=</span> Feign.builder()</span><br><span class="line">                             .decoder(<span class="keyword">new</span> <span class="title class_">JacksonDecoder</span>())<span class="comment">//将 HTTP 响应解码为响应对象</span></span><br><span class="line">                             .encoder(<span class="keyword">new</span> <span class="title class_">JacksonEncoder</span>());<span class="comment">//将请求对象编码为 HTTP 请求</span></span><br><span class="line"><span class="type">SomeServiceClient</span> <span class="variable">client</span> <span class="operator">=</span> builder.target(SomeServiceClient.class, <span class="string">&quot;http://some-service&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>spring cloud feign默认使用spring的消息转换器(jackson)来处理编解码</p>
+<h4 id="2-Contract"><a href="#2-Contract" class="headerlink" title="(2)Contract"></a>(2)Contract</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Contract 负责解析 Feign 客户端接口的注解。Spring Cloud Feign 使用 SpringMvcContract 来解析 Spring MVC 的注解，如 @RequestMapping、@GetMapping 等。</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-Client-是一个接口-负责执行HTTP请求"><a href="#3-Client-是一个接口-负责执行HTTP请求" class="headerlink" title="(3)Client&#x2F;&#x2F;是一个接口,负责执行HTTP请求."></a>(3)Client&#x2F;&#x2F;是一个接口,负责执行HTTP请求.</h4><p>就是一个HTTP的客户端,feign在builder的时候,可以选择使用Apache HttpClient 或 OkHttp\或者其他,然后利用这个客户端来实现执行HTTP的请求.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Client</span> <span class="variable">client</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OkHttpClient</span>();</span><br><span class="line">Feign.<span class="type">Builder</span> <span class="variable">builder</span> <span class="operator">=</span> Feign.builder().client(client);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-Logger-用于记录请求和响应的日志"><a href="#4-Logger-用于记录请求和响应的日志" class="headerlink" title="(4)Logger,用于记录请求和响应的日志"></a>(4)Logger,用于记录请求和响应的日志</h4><p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519182131701.png" alt="image-20240519182131701"></p>
+<h3 id="三springcloud的组件"><a href="#三springcloud的组件" class="headerlink" title="三springcloud的组件"></a>三springcloud的组件</h3><h4 id="1-EnableFeignClients"><a href="#1-EnableFeignClients" class="headerlink" title="1. @EnableFeignClients"></a>1. @EnableFeignClients</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@EnableFeignClients</span><br><span class="line">这个注解启用了 Feign 客户端的自动配置。它会扫描指定包下的所有接口，并为每个接口创建一个 Feign 客户端代理。</span><br></pre></td></tr></table></figure>
+
+<p>这个注释启用了feign的自动化配置,它会扫描指定包下面的所有的接口,为每个接口都创建一个feign的客户端代理,</p>
+<h4 id="2-自动配置类"><a href="#2-自动配置类" class="headerlink" title="2.自动配置类"></a>2.自动配置类</h4><p>spring cloud feign提供了一些自动配置类,如 <code>FeignAutoConfiguration</code>、<code>FeignClientsConfiguration</code>.</p>
+<p>这些配置类会自动的配置feign客户端所需要的各项组件.</p>
+<h4 id="3-load-balance"><a href="#3-load-balance" class="headerlink" title="3.load balance"></a>3.load balance</h4><p>这个feign是默认集成了ribbon,用于客户端的负载均衡</p>
+<p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183020401.png" alt="image-20240519183020401"></p>
+<h4 id="4-Hystrix-整合"><a href="#4-Hystrix-整合" class="headerlink" title="4.Hystrix 整合"></a>4.Hystrix 整合</h4><p>Feign 与 Hystrix 整合，可以实现熔断和回退机制。通过在配置中启用 Hystrix，Feign 客户端在调用失败时可以自动进行回退。</p>
+<p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183310894.png" alt="image-20240519183310894"></p>
+<h4 id="5-扩展"><a href="#5-扩展" class="headerlink" title="5.扩展"></a>5.扩展</h4><p><img src="/../blog_images/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8-Feign/image-20240519183321748.png" alt="image-20240519183321748"></p>
+<h1 id="EnableFeignClients"><a href="#EnableFeignClients" class="headerlink" title="@EnableFeignClients"></a>@<code>EnableFeignClients</code></h1><h2 id="1-注释的声明"><a href="#1-注释的声明" class="headerlink" title="1.注释的声明"></a>1.注释的声明</h2><p><code>@EnableFeignClients</code> 注解定义在 <code>org.springframework.cloud.openfeign</code> 包中。它的主要功能是通过 <code>FeignClientsRegistrar</code> 来注册 Feign 客户端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.TYPE)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Import(FeignClientsRegistrar.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableFeignClients &#123;</span><br><span class="line">    String[] value() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">    String[] basePackages() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定要扫描的包。</span></span><br><span class="line">    Class&lt;?&gt;[] basePackageClasses() <span class="keyword">default</span> &#123;&#125;;</span><br><span class="line">    Class&lt;?&gt;[] defaultConfiguration() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定默认的配置类。</span></span><br><span class="line">    Class&lt;?&gt;[] clients() <span class="keyword">default</span> &#123;&#125;;<span class="comment">//指定具体的 Feign 客户端类。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-FeignClientsRegistrar-的工作原理"><a href="#2-FeignClientsRegistrar-的工作原理" class="headerlink" title="2.FeignClientsRegistrar 的工作原理"></a>2.<code>FeignClientsRegistrar</code> 的工作原理</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FeignClientsRegistrar` 是一个 `ImportBeanDefinitionRegistrar</span><br></pre></td></tr></table></figure>
+
+<p>作用是在spring的bean的定义注册阶段注册Feign客户端的相关Bean</p>
+<h3 id="注册过程"><a href="#注册过程" class="headerlink" title="注册过程"></a>注册过程</h3><p>a. <strong>扫描Feign客户端接口</strong>:FeignClientsRegistrar会根据@<code>EnableFeignClients</code> 注释的属性,比如basePackages,扫描指定包中的所有接口</p>
+<p>‘’这个basePackages中的接口是怎么定义的?</p>
+<p>b.<strong>注册Feign客户端Bean</strong>:对于每一个扫描到的接口,<code>FeignClientsRegistrar</code> 会注册一个 <code>FeignClientFactoryBean</code>，它是一个工厂 Bean，负责创建 Feign 客户端的代理对象。</p>
+<h1 id="自动配置类"><a href="#自动配置类" class="headerlink" title="自动配置类"></a>自动配置类</h1><blockquote>
+<p>FeignAutoConfiguration<code>和</code>FeignClientsConfiguration</p>
+</blockquote>
+<h2 id="1-FeignAutoConfiguration"><a href="#1-FeignAutoConfiguration" class="headerlink" title="1.FeignAutoConfiguration"></a>1.FeignAutoConfiguration</h2><p><code>FeignAutoConfiguration</code> 负责配置 Feign 的核心组件，如 <code>Feign.Builder</code>、<code>Decoder</code>、<code>Encoder</code>、<code>Contract</code> 等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(Feign.class)</span></span><br><span class="line"><span class="meta">@Import(FeignClientsConfiguration.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FeignAutoConfiguration</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Feign.Builder <span class="title function_">feignBuilder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Feign.builder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Decoder <span class="title function_">feignDecoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">OptionalDecoder</span>(<span class="keyword">new</span> <span class="title class_">ResponseEntityDecoder</span>(<span class="keyword">new</span> <span class="title class_">SpringDecoder</span>(<span class="built_in">this</span>.messageConverters)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Encoder <span class="title function_">feignEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringEncoder</span>(<span class="built_in">this</span>.messageConverters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Contract <span class="title function_">feignContract</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringMvcContract</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">feignLogger</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Slf4jLogger</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-FeignClientsConfiguration"><a href="#2-FeignClientsConfiguration" class="headerlink" title="2.FeignClientsConfiguration"></a>2.FeignClientsConfiguration</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FeignClientsConfiguration</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Decoder <span class="title function_">feignDecoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntityDecoder</span>(<span class="keyword">new</span> <span class="title class_">SpringDecoder</span>(messageConverters));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Encoder <span class="title function_">feignEncoder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringEncoder</span>(messageConverters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Contract <span class="title function_">feignContract</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SpringMvcContract</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Logger <span class="title function_">feignLogger</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Slf4jLogger</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Feign客户端的创建"><a href="#3-Feign客户端的创建" class="headerlink" title="3.Feign客户端的创建"></a>3.Feign客户端的创建</h2><p>当Feign的客户端创建后,</p>
+<ol>
+<li>Spring会使用<code>FeignClientFacatoryBean</code>来创建代理对象.</li>
+<li>把接口的方法调用,转发到feign生成的HTTP请求</li>
+</ol>
+<p><code>FeignClientFactoryBean</code> 是一个工厂 Bean，用于创建 Feign 客户端代理对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">FeignClientFactoryBean</span> <span class="keyword">implements</span> <span class="title class_">FactoryBean</span>&lt;Object&gt;, InitializingBean &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getObject</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">return</span> feignContext.getInstance(<span class="built_in">this</span>.name, Feign.Builder.class)</span><br><span class="line">                           .target(<span class="built_in">this</span>.targetType, <span class="built_in">this</span>.url);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">// 初始化配置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/19/Feign/" rel="prev" title="Feign">
+                  <i class="fa fa-angle-left"></i> Feign
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/05/19/%E9%A1%B9%E7%9B%AE-%E7%BD%91%E7%9B%98-%E7%BD%91%E5%85%B3-gateway/" rel="next" title="项目-网盘-网关-gateway">
+                  项目-网盘-网关-gateway <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">lolo</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
